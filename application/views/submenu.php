@@ -32,9 +32,9 @@
                           <span class="emp_name text-truncate">Carter Woods</span><small class="emp_post text-truncate text-muted">SD525</small></div></div></td>
                           <td><i></i> <strong>Admin</strong></td>
                       <td><i></i>carter@gmail.com</td>
-                      <td class="" style="">02/13/2021</td>
+                      <td class="" >02/13/2021</td>
                       <td><span class="badge bg-label-success me-1">Enable</span></td>
-                      <td class="" style=""><div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                      <td class="" ><div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded"></i></a><ul class="dropdown-menu dropdown-menu-end"><li><a href="javascript:;" class="dropdown-item">Details</a>
                       </li><li><a href="javascript:;" class="dropdown-item">Archive</a></li><div class="dropdown-divider"></div><li><a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>
                     </li></ul></div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">

@@ -1,30 +1,5 @@
 
-
-
-function showdropdown() {
-    var url = API_URL + "Manage_account/show_drop_down";      
-    $.ajax({
-        method: "get",
-        url: base_url("ManageAccount/callApi?url=" + url),
-        dataType: 'Json',
-        success: (response) => {
-            console.log(response.permission);
-            var permis = response.permission
-            var plant = response.plantcode
-            for (let i = 0; i < permis.length; i++) {
-                const data = permis[i];
-                    $('.selPermissionAdd').append(`<option value="${data.spg_id}">${data.spg_name}</option>`)
-            }
-            for (let i = 0; i < plant.length; i++) {
-                const data = plant[i];
-                    $('.selPlantAdd').append(`<option value="${data.mpc_id}">${data.mpc_name}</option>`)
-            }
-        },
-        error: (err) => {
-            console.log(err);
-        },
-    });
-};$(() => {
+$(() => {
     showdropdown()
     $('#mdlAdd').on('hidden.bs.modal', function () {
         $('#errMegadd').css('display', 'none');
@@ -119,6 +94,111 @@ function showdropdown() {
     //         });
     //     }
 
+
+    // function InputAddEmpcode(inputElement) {
+	// 		var inputValue = inputElement.value;
+	// 		var pattern = /^(?:[a-zA-Z0-9\s]+|)$/;
+	// 		var errorMessage = document.getElementById("errAddempcode");
+			
+	// 		if (!pattern.test(inputValue)) {
+	// 			errorMessage.style.display = "block";
+	// 		} else {
+	// 			errorMessage.style.display = "none";
+	// 		}
+	// 	}
+	
+	// 	function InputAddpersonal(inputElement) {
+	// 		var inputValue = inputElement.value;
+	// 		var pattern = /^(?:[a-zA-Z\s]+|)$/;
+	// 		var errorMessage = document.getElementById("errAddpersonal");
+			
+	// 		if (!pattern.test(inputValue)) {
+	// 			errorMessage.style.display = "block";
+	// 		} else {
+	// 			errorMessage.style.display = "none";
+	// 		}
+	// 	}
+	
+	// 	function InputEditpersonal(inputElement) {
+	// 		var inputValue = inputElement.value;
+	// 		var pattern = /^(?:[a-zA-Z\s]+|)$/;
+	// 		var errorMessage = document.getElementById("errEditpersonal");
+			
+	// 		if (!pattern.test(inputValue)) {
+	// 			errorMessage.style.display = "block";
+	// 		} else {
+	// 			errorMessage.style.display = "none";
+	// 		}
+	// 	}
+
+		function chkAddEmpcode(text) {
+			// ตรวจสอบว่า text เป็น null หรือไม่
+			if (text === null) {
+				return false;
+			}
+			// ตรวจสอบว่า text เป็นช่องว่างหรือไม่
+			var trimmedText = text.trim();
+			if (trimmedText === '') {
+				return false;
+			}
+			var Pattern = /^(?:[a-zA-Z0-9\s]+|)$/;
+			return Pattern.test(text);
+		}
+
+		function chkAddpersonal(text) {
+			// ตรวจสอบว่า text เป็น null หรือไม่
+			if (text === null) {
+				return false;
+			}
+			// ตรวจสอบว่า text เป็นช่องว่างหรือไม่
+			var trimmedText = text.trim();
+			if (trimmedText === '') {
+				return false;
+			}
+			var Pattern = /^(?:[a-zA-Z0-9\s]+|)$/;
+			return Pattern.test(text);
+		}
+
+		function chkEditpersonal(text) {
+			// ตรวจสอบว่า text เป็น null หรือไม่
+			if (text === null) {
+				return false;
+			}
+			// ตรวจสอบว่า text เป็นช่องว่างหรือไม่
+			var trimmedText = text.trim();
+			if (trimmedText === '') {
+				return false;
+			}
+			var Pattern = /^(?:[a-zA-Z\s]+|)$/;
+			return Pattern.test(text);
+		}
+
+    function showdropdown() {
+        var url = API_URL + "Manage_account/show_drop_down";      
+        $.ajax({
+            method: "get",
+            url: base_url("ManageAccount/callApi?url=" + url),
+            dataType: 'Json',
+            success: (response) => {
+                console.log(response.permission);
+                var permis = response.permission
+                var plant = response.plantcode
+                for (let i = 0; i < permis.length; i++) {
+                    const data = permis[i];
+                        $('.selPermissionAdd').append(`<option value="${data.spg_id}">${data.spg_name}</option>`)
+                        $('.edtPermission').append(`<option value="${data.spg_id}">${data.spg_name}</option>`)
+                }
+                for (let i = 0; i < plant.length; i++) {
+                    const data = plant[i];
+                        $('.selPlantAdd').append(`<option value="${data.mpc_id}">${data.mpc_name}</option>`)
+                        $('.edtPlantEdit').append(`<option value="${data.mpc_id}">${data.mpc_name}</option>`)
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    };
     function handleMenuItemSelection() {
         // Remove 'selected' class from all menu items
         $('.sidebar li').removeClass('active');
@@ -151,14 +231,14 @@ function showdropdown() {
                 for (var i = 0; i < data.length; i++) {
                     var TableHtml = `
                         <tr>
-                            <td><i></i> <strong>${i + 1}</strong></td>
+                            <td><i></i> <strong>${i+1}</strong></td>
                             
                             <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
                           <span class="emp_name text-truncate">${data[i].sa_fristname} ${data[i].sa_lastname}</span><small class="emp_post text-truncate text-muted">${data[i].sa_emp_code}</small></div></div></td>
                             <td><i></i> <strong>${data[i].spg_name}</strong></td>
                             <td><i></i>${data[i].sa_email}</td>
                             <td><i></i>${data[i].sa_created_date}</td>
-                            <td><span class="btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus">${data[i].sa_status_flg == 1 ? 'Enable' : 'Disable'}</span></td>
+                            <td><span class="btnStatus btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus">${data[i].sa_status_flg == 1 ? 'Enable' : 'Disable'}</span></td>
                             <td class="" style="">
                                 <div class="d-inline-block">
                                     <a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -171,7 +251,7 @@ function showdropdown() {
                                         <li><a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a></li>
                                     </ul>
                                 </div>
-                                <a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit">
+                                <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].sa_id}">
                                     <i class="bx bxs-edit"></i>
                                 </a>
                             </td>
@@ -218,7 +298,7 @@ function showdropdown() {
             confirmButtonText: 'Yes, change!'
         }).then((result) => {
             if (result.isConfirmed) {
-                var url = API_URL + "Manage_account/upd__status_User?user_id=" + id;
+                var url = API_URL + "Manage_account/update_status";
                 $.ajax({
                     url: base_url('ManageAccount/callApiUpdateStatus'),
                     type: 'POST',
@@ -345,9 +425,6 @@ function showdropdown() {
                     formData.append('EmpPermission', Permission);
                     formData.append('EmpPlantCode', Plant);
                     // formData.append('url', url);
-
-
-                    
                     // arrDataAdd.push({
                     //     EmpCode: EmpCode,
                     //     EmpPassword: EmpPassword,
@@ -364,18 +441,12 @@ function showdropdown() {
                         type: 'POST',
                         data: formData,
                         processData: false,
-    contentType: false,
+ contentType: false,
     cache: false,
                         dataType: 'json',
                         success: function(res) {
                             if (res.result == 1) {
-                                // $('#inpEmpCode').val('');
-                                // $('#inpFirstName').val('');
-                                // $('#inpEmpPassword').val('');
-                                // $('#inpLastName').val('');
-                                // $('#inpEmail').val('');
-                                // $('#selPermissionAdd').val('');
-                                // $('#selPlantAdd').val('');
+
                                 $('#add')[0].reset()
                                 Swal.fire({
                                     icon: 'success',
@@ -413,34 +484,38 @@ function showdropdown() {
 
 
     //-------------------------- Update Account ----------------------------------
-		var data_acc
-	    var accId
-	    $(document).on('click', '.tblDelBtn', function() {
+		
+	    $(document).on('click', '.tblEditBtn', function() {
 
+            var data_acc
+	        var accId
 	        let id = $(this).attr('data-id');
 	        accId = id
-	        var url = API_URL + "Manage_account/show_upd_User?user_id=" + id;
+	        var url = API_URL + "Manage_account/show_show_acc";
 	        $.ajax({
-	            url: base_url('ManageAccount/callApiEditAccount?url=' + url),
+	            // url: base_url('ManageAccount/callApiEditAccount'),
+	            url: API_URL + "Manage_account/show_show_acc",
 	            type: 'POST',
 	            data: {
 	                id: id,
 	            },
-	            dataType: 'Json',
+	            dataType: 'json',
 	            success: (response) => {
-					data_acc = response
-	                for (let i = 0; i < response.length; i++) {
-	                    const data = response[i];
-	                    $('#edtEmpCode').val(data.emp_code).trigger("change")
-	                    $('#edtFirstName').val(data.firstname).trigger("change")
-	                    $('#edtLastName').val(data.lastname).trigger("change")
-	                    $('#edtEmail').val(data.email).trigger("change")
-	                    $('#edtPermissionEdit').val(data.permis_id).trigger("change")
-	                    $('#edtPlantEdit').val(data.plant).trigger("change")
-	                }
+					// accId = response
+	                // for (let i = 0; i < response.length; i++) {
+	                //     const data = response[i];
+	                    $('#edtEmpCode').val(response.data.sa_emp_code)
+                        $('#edtEmpPassword').val(response.data.sa_emp_password)
+	                    $('#edtFirstName').val(response.data.sa_fristname)
+	                    $('#edtLastName').val(response.data.sa_lastname)
+	                    $('#edtEmail').val(response.data.sa_email)
+	                    $('#edtPermissionEdit').val(response.data.spg_id).trigger("change")
+	                    $('#edtPlantEdit').val(response.data.mpc_id).trigger("change")
+	                // }
 	            }
 	        });
 	    })
+
 
 
 	    //-------------------------- Save Edit ----------------------------------
@@ -582,3 +657,4 @@ function showdropdown() {
 
         
 })
+

@@ -72,7 +72,9 @@ class ManageAccount extends CI_Controller {
     }
     public function callApiEditAccount()
     {
-        $result = $this->curPostRequest('Manage_account/show_upd_User', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        // echo json_encode($_POST);
+        // exit;
+        $result = $this->curPostRequest('Manage_account/show_show_acc', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
@@ -84,7 +86,7 @@ class ManageAccount extends CI_Controller {
     }
     public function callApiUpdateStatus()
     {
-        $result = $this->curPostRequest('Manage_account/upd_status_User', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_account/update_status', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
