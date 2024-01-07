@@ -80,13 +80,13 @@ class ManageAccount extends CI_Controller {
     }
     public function callApiUpdateAccount()
     {
-        $result = $this->curPostRequest('Manage_account/upd_User', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_account/update_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
     public function callApiUpdateStatus()
     {
-        $result = $this->curPostRequest('Manage_account/update_status', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_account/upstatus', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
         echo json_encode($result);
 
     }

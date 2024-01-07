@@ -157,11 +157,11 @@
             <div class="row g-2">
               <div class="col mb-0">
                 <label class="form-label">Employee Code</label>
-                <input type="text" id="edtEmpCode" class="form-control" placeholder="Emp Code" oninput="InputAddEmpcode(this)">
+                <input type="text" id="edtEmpCode" class="form-control" placeholder="Emp Code" oninput="InputAddEmpcode(this)" readonly>
               </div>
               <div class="col mb-0">
                 <label class="form-label">Employee Password</label>
-                <input type="password" id="edtEmpPassword" class="form-control" placeholder="Password">
+                <input type="password" id="edtEmpPassword" class="form-control" placeholder="Password" readonly>
               </div>
             </div>
             <div class="row g-2">
@@ -186,7 +186,7 @@
             <div class="row">
               <div class="col mb-3">
                 <label class="form-label">Permission group</label>
-                <select id="edtPermissionEdit" class="edtPermission select2 form-select" data-allow-clear="true">
+                <select id="edtPermission" class="edtPermission select2 form-select" data-allow-clear="true">
                   <option value="">Choose Permission Group</option>
                 </select>
               </div>
@@ -215,129 +215,5 @@
       </div>
     </div>
     <!-- End Edit Modal -->
-
-
-
-    <button type="button" class="btn btn-circle btn-primary" id="callmodelAdd" data-bs-toggle="modal" data-bs-target="#mdlAdd22">Add Account <i class="fa fa-plus"></i></button>
-    <!-- Add Modal -->
-    <div class="modal fade" id="mdlAdd22" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-        <div class="modal-content modal-addAcc">
-          <div class="modal-header">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body ">
-            <p class="fs-3 text-center text-uppercase fw-bold head-modal">Add Account</p>
-            <form>
-              <div class="row container">
-                <div class="col">
-                  <div class="row ">
-                    <div class="col-lg-5 p-t-20">
-                      <span>Employee Code</span><span class="red-text">*</span>
-                    </div>
-                    <div class="col-lg-7">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                        <input class="mdl-textfield__input" type="text" id="inpEmpCode" oninput="InputAddEmpcode(this)">
-                        <label class="mdl-textfield__label">Employee Code</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-5 p-t-20">
-                      <span class="text-middle">First name</span><span class="red-text">*</span>
-                    </div>
-                    <div class="col-lg-7">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                        <input class="mdl-textfield__input" type="text" id="inpFirstName" oninput="InputAddpersonal(this)">
-                        <label class="mdl-textfield__label">First name</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="row">
-                    <div class="col-lg-4 p-t-20">
-                      <span>Password</span><span class="red-text">*</span>
-                    </div>
-                    <div class="col-lg-8">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                        <input class="mdl-textfield__input" type="password" id="inpEmpPassword">
-                        <label class="mdl-textfield__label">Password</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4 p-t-20">
-                      <span>Last name</span><span class="red-text">*</span>
-                    </div>
-                    <div class="col-lg-8">
-                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                        <input class="mdl-textfield__input" type="text" id="inpLastName" oninput="InputAddpersonal(this)">
-                        <label class="mdl-textfield__label">Last name</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-2 p-t-20">
-                    <span>Email</span><span class="red-text">*</span>
-                  </div>
-                  <div class="col-lg-10">
-                    <div class="row">
-                      <div class="col-lg">
-
-                      </div>
-                      <div class="col-lg-11">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                          <input class="mdl-textfield__input" type="text" id="inpEmail" oninput="InputAdd(this)">
-                          <label class="mdl-textfield__label">Email</label>
-                          <span class="mdl-textfield__error">Enter Valid Email Address!</span>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-4 p-t-20">
-                    <span>Permission Group</span><span class="red-text">*</span>
-                  </div>
-                  <div class="col-lg-8">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                      <select class="form-control selPermission" name="selPermission" id="selPermissionAdd">
-                        <option value="">Choose Permission Group</option>
-                      </select>
-                    </div>
-
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-4">
-                    <span>Plant</span><span class="red-text">*</span>
-                  </div>
-                  <div class="col-lg-8">
-                    <select class="form-control selPlant" name="selPlant" id="selPlantAdd">
-                      <option value="">Choose Plant</option>
-                    </select>
-
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <div class="container col justify-content-start">
-              <div id="errMegadd" style="display: none; color: red; ">Please enter in English only.</div>
-              <div id="errAddempcode" style="display: none; color: red; ">Please enter Employee Code as (a-z ,A-Z ,0-9) only.</div>
-              <div id="errAddpersonal" style="display: none; color: red; ">Please enter Firstname or Lastname as (a-z ,A-Z) only.</div>
-            </div>
-            <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
-            <button type="button" class="btn btn-circle btn-danger" id="btnBackAdd" data-bs-dismiss="modal">Cancel</button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Add Modal -->
 
 

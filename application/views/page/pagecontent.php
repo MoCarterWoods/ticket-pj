@@ -39,9 +39,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+	
 
 
     <!-- Icons. Uncomment required icon fonts -->
@@ -223,7 +221,8 @@
 	<script src="<?php echo base_url() ?>/assets/js/submenu.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/logout.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/manageAccount.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <!-- Vendors JS -->
     <script src="<?php echo base_url() ?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
@@ -239,152 +238,3 @@
     {another_js}
   </body>
 </html>
-<script>
-   $(document).ready(function() {
-  'use strict';
-
-  var dt_basic_table = $('#tblManageAccount');
-
-  if (dt_basic_table.length) {
-    var dt_basic = dt_basic_table.DataTable({
-      columns: [
-        { data: '' }, // No.
-        { data: 'employee_details' }, // Employee Details
-        { data: 'permis_group' }, // Permis Group
-        { data: 'email' }, // Email
-        { data: 'create_date' }, // CREATE DATE
-        { data: 'status' }, // Status
-        { data: '' } // Edit
-      ],
-      columnDefs: [
-        {
-          // For Responsive
-          className: 'control',
-          orderable: false,
-          responsivePriority: 2,
-          searchable: false,
-          targets: 0,
-          render: function(data, type, full, meta) {
-            return '';
-          }
-        },
-        {
-          // Avatar image/badge, Name and post
-          targets: 1,
-          responsivePriority: 4,
-          render: function(data, type, full, meta) {
-            var $user_img = full['avatar'],
-              $name = full['emp_name'],
-              $post = full['emp_post'];
-
-            if ($user_img) {
-              // For Avatar image
-              var $output =
-                '<img src="' + $user_img + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
-
-            var $row_output =
-              '<div class="d-flex justify-content-start align-items-center">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar me-2">' +
-              $output +
-              '</div>' +
-              '</div>' +
-              '<div class="d-flex flex-column">' +
-              '<span class="emp_name text-truncate">' +
-              $name +
-              '</span>' +
-              '<small class="emp_post text-truncate text-muted">' +
-              $post +
-              '</small>' +
-              '</div>' +
-              '</div>';
-
-            return $row_output;
-          }
-        },
-        {
-          // Status
-          targets: 5,
-          render: function(data, type, full, meta) {
-            var $status = full['flgStatus'];
-            var $statusClass = $status === 'Enable' ? 'bg-label-success' : 'bg-label-danger';
-            return '<span class="btn badge ' + $statusClass + ' me-1">' + $status + '</span>';
-          }
-        },
-        {
-          // Actions
-          targets: -1,
-          title: 'Edit',
-          orderable: false,
-          searchable: false,
-          render: function(data, type, full, meta) {
-            return (
-              '<div class="d-inline-block">' +
-              '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></a>' +
-              '<ul class="dropdown-menu dropdown-menu-end">' +
-              '<li><a href="javascript:;" class="dropdown-item">Details</a></li>' +
-              '<li><a href="javascript:;" class="dropdown-item">Archive</a></li>' +
-              '<div class="dropdown-divider"></div>' +
-              '<li><a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a></li>' +
-              '</ul>' +
-              '</div>' +
-              '<a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit"><i class="bx bxs-edit"></i></a>'
-            );
-          }
-        }
-      ],
-      order: [[4, 'desc']], // Order by CREATE DATE column in descending order
-      dom:
-        '<"card-header"<"head-label text-center"><"dt-action-buttons text-end"B>><"d-flex justify-content-between align-items-center row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
-      lengthMenu: [7, 10, 25, 50, 75, 100],
-      buttons: [
-        // Your export buttons here
-      ],
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function(row) {
-              var data = row.data();
-              return 'Details of ' + data['emp_name'];
-            }
-          }),
-          type: 'column',
-          renderer: function(api, rowIdx, columns) {
-            var data = $.map(columns, function(col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
-
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      }
-    });
-    $('div.head-label').html('<h5 class="card-title mb-0">DataTable with Buttons</h5>');
-  }
-});
-
-  </script>
