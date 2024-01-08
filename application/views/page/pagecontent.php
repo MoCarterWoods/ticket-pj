@@ -37,7 +37,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
 	
 
@@ -54,15 +53,22 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <link rel="stylesheet" href="<?php echo base_url() ?>/assets/vendor/libs/apex-charts/apex-charts.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
     <!-- Page CSS -->
-
+	<!-- <style>
+        /* ตัวอย่าง CSS ที่ใช้กับ DataTable */
+        .dataTables_scrollBody {
+            overflow: hidden !important; /* ซ่อน scrollbar */
+        }
+    </style> -->
     <!-- Helpers -->
     <script src="<?php echo base_url() ?>/assets/vendor/js/helpers.js"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?php echo base_url() ?>/assets/js/config.js"></script>
+	
   </head>
 
   <body>
@@ -181,7 +187,7 @@
 		if (text === null) {
 			return false;
 		}
-		// ตรวจสอบว่า text เป็นช่องว่างหรือไม่
+		// ตรวจสอบว่า text เป็นช่องว่างหรือไม่.
 		var trimmedText = text.trim();
 		if (trimmedText === '') {
 			return false;
@@ -217,12 +223,13 @@
 
     <script src="<?php echo base_url() ?>/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
+	
+
 	<script src="<?php echo base_url() ?>/assets/js/login.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/submenu.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/logout.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/manageAccount.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
     <!-- Vendors JS -->
     <script src="<?php echo base_url() ?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
@@ -236,5 +243,8 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     {another_js}
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   </body>
 </html>

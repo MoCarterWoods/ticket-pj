@@ -45,7 +45,7 @@ class MainMenu extends CI_Controller
     }
     public function mainmenu()
     {
-        // $this->another_js = "<script src='" . base_url() . "assets/js/mngSubmenu.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/mngSubmenu.js'></script>";
         $this->render_view('mainmenu');
     }
 
@@ -64,6 +64,31 @@ class MainMenu extends CI_Controller
         echo json_encode($data);
     }
     
+    public function callApiAddMainMenu()
+    {
+        $result = $this->curPostRequest('Manage_mainmenu/show_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiShowEdit()
+    {
+        $result = $this->curPostRequest('Manage_mainmenu/show_upd_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiSaveEdit()
+    {
+        $result = $this->curPostRequest('Manage_mainmenu/upd_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiUpdateStatus()
+    {
+        $result = $this->curPostRequest('Manage_mainmenu/upd_status_main_menu', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
     
 
     function curPostRequest($enpoint, $param_data, $is_array = true, $associative = false){

@@ -35,7 +35,7 @@ $(document).ready(function () {
                   } else {
                       Swal.fire({
                           icon: 'error',
-                          title: 'Your computer shutting down',
+                          title: 'The something incorrect. ',
                           html: response.message // Assuming the error message is in the 'message' property
                       });
                   }

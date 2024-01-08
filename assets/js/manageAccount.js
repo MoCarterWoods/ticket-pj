@@ -214,8 +214,9 @@ $(() => {
         return emailPattern.test(email);
     }
     shDataTable()
-    function shDataTable() {
-    $(document).ready(function () {
+    function shDataTable()  {
+ 
+        $(document).ready(function () {
         // URL of the API
         var apiUrl = 'http://127.0.0.1/api/Manage_account/show_user';
     
@@ -226,11 +227,12 @@ $(() => {
             dataType: 'json',
             success: function (data) {
                 // Get the menu container
-                var DataTable = $('#tbody');
+
     
+                var html = "";
                 // Loop through the data and append menu items
                 for (var i = 0; i < data.length; i++) {
-                    var TableHtml = `
+                    html += `
                         <tr>
                             <td><i></i> <strong>${i+1}</strong></td>
                             
@@ -239,14 +241,14 @@ $(() => {
                             <td><i></i> <strong>${data[i].spg_name}</strong></td>
                             <td><i></i>${data[i].sa_email}</td>
                             <td><i></i>${data[i].sa_created_date}</td>
-                            <td><span class="btnStatus btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].sa_id}" value="${data[i].sa_status_flg}">${data[i].sa_status_flg == 1 ? 'Enable' : 'Disable'}</span></td>
+                            <td><button class="btnStatus btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].sa_id}" value="${data[i].sa_status_flg}">${data[i].sa_status_flg == 1 ? 'Enable' : 'Disable'}</button></td>
                             <td class="" style="">
                                 <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].sa_id}">
                                     <i class="bx bxs-edit"></i>
                                 </a>
                             </td>
                         </tr>`;
-                    DataTable.append(TableHtml);
+                   
                 }
                 $('#tblManageAccount').dataTable().fnDestroy()
 	                    $("#tbody")
@@ -262,15 +264,14 @@ $(() => {
                 console.error('Error:', error);
             }
         });
-    });
-    }
-
+    
+});
 
     //-------------------------- Update flg status ----------------------------------
 
     $(document).on('click', '.btnStatus', function () {
         const saId = $(this).data('sa-id');
-        var newStatus = $(this).val();
+        var newStatus = $(this).closest('td').find('.btnStatus').val();
 
         if (newStatus == 1) {
             newStatus = 0
@@ -301,18 +302,20 @@ $(() => {
                         if (response == true) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Changed Status Success!',
-                                html: 'Success',
+                                title: 'Success!',
+                                html: 'Changed Status Success!',
                                 timer: 2500,
                             }).then(() => {
-                                    location.reload();
+                                shDataTable()
+                                    // location.reload();
                             })
                         } else if (response == false) {
-                            Swal.fire(
-                                'Changed Status False!',
-                                'Your status has been Changed.',
-                                'Error'
-                            )
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Warning!',
+                                html: 'Change status Fail',
+                                timer: 2500,
+                            })
                         }
 
 
@@ -326,7 +329,7 @@ $(() => {
         })
 
     });
-
+    }
 
     //-------------------------- add Account ----------------------------------
 
@@ -442,7 +445,7 @@ $(() => {
                                 }).then(() => {
                                     // $('#btnBack').trigger('click');
                                     $('#mdlAdd').modal('hide') //show
-                                    location.reload();
+                                    shDataTable()
                                     
                                 });
                             } else if (res.result == 9) {
@@ -452,7 +455,7 @@ $(() => {
                                     title: 'Ooops...',
                                     html: 'This employee code already exists.',
                                 }).then(() => {
-                                    $('#btnBack').trigger('click');
+                                    
                                 });
                             } else {
                                 Swal.fire({
@@ -472,11 +475,11 @@ $(() => {
 
 
     //-------------------------- Update Account ----------------------------------
-		
+    var data_acc
+	        var accId
 	    $(document).on('click', '.tblEditBtn', function() {
 
-            var data_acc
-	        var accId
+            
 	        let id = $(this).attr('data-id');
 	        accId = id
 	        var url = API_URL + "Manage_account/show_show_acc";
@@ -489,12 +492,15 @@ $(() => {
 	            },
 	            dataType: 'json',
 	            success: (response) => {
-                    data_acc = response
+
+                   
+                    data_acc = response.data
+                   
 					// accId = response
 	                // for (let i = 0; i < response.length; i++) {
 	                //     const data = response[i];
 	                    $('#edtEmpCode').val(response.data.sa_emp_code)
-                        $('#edtEmpPassword').val(response.data.sa_emp_password)
+                        // $('#edtEmpPassword').val(response.data.sa_emp_password)
 	                    $('#edtFirstName').val(response.data.sa_fristname)
 	                    $('#edtLastName').val(response.data.sa_lastname)
 	                    $('#edtEmail').val(response.data.sa_email)
@@ -512,25 +518,33 @@ $(() => {
             $('#btnSaveEdit').on('click', function () {
                 var arrDataAdd = [];
                 var EmpCode = $('#edtEmpCode').val();
-                var EmpPassword = $('#edtEmpPassword').val();
+                var FirstName = $('#edtEmpPassword').val();
+                var EmpPassword = ($('#edtEmpPassword').val().trim() == '') ? '' : $('#edtEmpPassword').val();
                 var FirstName = $('#edtFirstName').val();
                 var LastName = $('#edtLastName').val();
                 var Email = $('#edtEmail').val();
                 var Permission = $('#edtPermission').val();
                 var Plant = $('#edtPlantEdit').val();
-        
-                if (EmpCode == '') {
+
+                
+                if (
+                    ( data_acc.sa_emp_password == EmpPassword || EmpPassword == '') &&
+                    data_acc.sa_fristname == FirstName &&
+                    data_acc.sa_lastname == LastName &&
+                    data_acc.sa_email == Email &&
+                    data_acc.spg_id == Permission &&
+                    data_acc.mpc_id == Plant
+                ) {
                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Please enter employee code',
-                    })
-                } else if (EmpPassword == '') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Please enter password',
-                    })
+                        icon: 'success',
+                        title: 'Not changed !',
+                        html: 'The information has not changed.',
+                        timer: 2500,
+                    }).then(() => {
+                        $('#mdlEdit').modal('hide');
+                        $('#btnBack').trigger('click');
+                    });
+                
                 } else if (FirstName == '') {
                     Swal.fire({
                         icon: 'warning',
@@ -573,13 +587,14 @@ $(() => {
                         title: 'Oops...',
                         text: 'Please enter your Email correctly.',
                     })
-                } else if (!isThaiLanguage(EmpCode) || !isThaiLanguage(EmpPassword) || !isThaiLanguage(Email)) {
+                } else if (!(isThaiLanguage(EmpPassword) || EmpPassword == '') || !isThaiLanguage(Email)) {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
                         text: 'Please enter in English only.',
                     })
                 } else {
+
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do you want to add Account",
@@ -620,16 +635,15 @@ $(() => {
                                         }).then(() => {
 
                                             $('#mdlEdit').modal('hide') //show
-                                            location.reload();
+                                            shDataTable()
                                         });
                                     } else if (res.result == 9) {
                                         Swal.fire({
-                    
-                                            icon: 'warning',
-                                            title: 'Ooops...',
-                                            html: 'This employee code already exists.',
+                                            icon: 'success',
+                                            title: 'Success!',
+                                            html: 'The information has not changed.',
                                         }).then(() => {
-                                            $('#btnBack').trigger('click');
+                                            
                                         });
                                     } else {
                                         Swal.fire({

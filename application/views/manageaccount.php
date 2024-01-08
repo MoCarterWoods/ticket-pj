@@ -1,69 +1,44 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
-  <!-- Content -->
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Bordered Table -->
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administrator /</span> Manage Account</h4>
 
-  <div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Bordered Table -->
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administrator /</span> Manage Account</h4>
-
-    <div class="d-flex justify-content-end mt-3 py-2">
-      <button type="button" class="btn btn-circle btn-primary" id="callmodelAdd" data-bs-toggle="modal" data-bs-target="#mdlAdd">Add Account <i class="fa fa-plus"></i></button>
-    </div>
-    <div class="card">
-      <h5 class="card-header">SYS_Account</h5>
-      <div class="card-body">
-        <div class="table-responsive text-nowrap">
-          <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-basic table border-top" id="tblManageAccount">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Employee Details</th>
-                  <th>Permis Group</th>
-                  <th>Email</th>
-                  <th>CREATE DATE</th>
-                  <th>Status</th>
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody class="table-border-bottom-0" id="tbody">
-                <!-- <tr>
-                  <td><i></i> <strong>1</strong></td>
-                  <td>
-                    <div class="d-flex justify-content-start align-items-center">
-                      <div class="avatar-wrapper">
-                        <div class="avatar me-2"><img src="<?php echo base_url() ?>assets/assets/img/avatars/sek.jpg" alt="Avatar" class="rounded-circle"></div>
-                      </div>
-                      <div class="d-flex flex-column">
-                        <span class="emp_name text-truncate">Carter Woods</span><small class="emp_post text-truncate text-muted">SD525</small>
-                      </div>
-                    </div>
-                  </td>
-                  <td><i></i> <strong>Admin</strong></td>
-                  <td><i></i>carter@gmail.com</td>
-                  <td><span class="badge bg-label-success me-1">Enable</span></td>
-                  <td class="">
-                    <div class="d-inline-block"><a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i></a>
-                      <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="javascript:;" class="dropdown-item">Details</a>
-                        </li>
-                        <li><a href="javascript:;" class="dropdown-item">Archive</a></li>
-                        <div class="dropdown-divider"></div>
-                        <li><a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>
-                        </li>
-                      </ul>
-                    </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit">
-                      <i class="bx bxs-edit"></i>
-                    </a>
-                  </td>
-                </tr> -->
-              </tbody>
-            </table>
-          </div>
+        
+        <div class="card">
+        <div class="d-flex justify-content-end mt-2 pr-2">
+            <button type="button" class="btn btn-circle btn-primary" id="callmodelAdd" data-bs-toggle="modal"
+                data-bs-target="#mdlAdd">Add Account <i class="fa fa-plus"></i></button>
         </div>
-      </div>
+            <h5 class="card-header">SYS_Account</h5>
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <!-- Removed scrollBody -->
+                    <div class="card-datatable table-responsive pt-0">
+                        <table class="table card-table" id="tblManageAccount">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Employee Details</th>
+                                    <th>Permis Group</th>
+                                    <th>Email</th>
+                                    <th>CREATE DATE</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0" id="tbody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
     <!--/ Bordered Table -->
 
 
@@ -161,7 +136,7 @@
               </div>
               <div class="col mb-0">
                 <label class="form-label">Employee Password</label>
-                <input type="password" id="edtEmpPassword" class="form-control" placeholder="Password" readonly>
+                <input type="password" id="edtEmpPassword" class="form-control" placeholder="Password" >
               </div>
             </div>
             <div class="row g-2">
