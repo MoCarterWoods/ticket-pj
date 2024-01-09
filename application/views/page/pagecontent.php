@@ -228,7 +228,7 @@
 	<script src="<?php echo base_url() ?>/assets/js/login.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/submenu.js"></script>
 	<script src="<?php echo base_url() ?>/assets/js/logout.js"></script>
-	<script src="<?php echo base_url() ?>/assets/js/manageAccount.js"></script>
+	
 
     <!-- Vendors JS -->
     <script src="<?php echo base_url() ?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>

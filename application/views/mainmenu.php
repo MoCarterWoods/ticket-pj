@@ -7,6 +7,44 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administrator /</span> Manage Account</h4>
 
     <div class="card">
+      <div class="row py-2 mt-2">
+        <span class="fs-5 fw-bold text-primary-emphasis">Register Main Menu</span>
+        <div class="col-md-6 col-sm-10 col-5">
+          <div class="row ">
+            <div class="col-lg-3 p-t-20">
+              <span>Main Menu</span><span class="red-text">*</span>
+            </div>
+            <div class="col">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                <input class="mdl-textfield__input" type="text" id="inpMainMenuName" oninput="InputAdd(this)">
+                <label class="mdl-textfield__label">Enter Main Menu</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-2 col-5">
+          <div class="row container">
+            <div class="col-lg-5 p-t-20">
+              <span>Main Menu Icon</span><span class="red-text">*</span>
+            </div>
+            <div class="col-lg-6">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                <input class="mdl-textfield__input" type="text" id="inpMainMenuIcon" oninput="InputAdd(this)">
+                <label class="mdl-textfield__label">Enter icon</label>
+              </div>
+            </div>
+            <div class="col-lg-1 p-t-20" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <i class="fa fa-question-circle-o"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md col-sm-2 col-2 p-t-20">
+          <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
+        </div>
+        <div class="col justify-content-start ms-1">
+          <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
+        </div>
+      </div>
       <h5 class="card-header">SYS_Account</h5>
       <div class="card-body">
         <div class="table-responsive text-nowrap">
@@ -24,8 +62,8 @@
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody class="table-border-bottom-0">
-                <tr>
+              <tbody class="table-border-bottom-0" id="tbody">
+                <!-- <tr>
                   <td><i></i> <strong>1</strong></td>
                   <td><i></i> <strong>Dash</strong></td>
                   <td>
@@ -42,49 +80,50 @@
           </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">
             <i class="bx bxs-edit"></i>
           </a></td>
-          </tr>
-          </tbody>
-          </table>
+          </tr> -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!--/ Bordered Table -->
+    <!--/ Bordered Table -->
 
 
+    <!-- Button trigger modal -->
 
-  <!-- Button trigger modal -->
-
-  <!-- Modal -->
-  <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="mdlEdit" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col mb-3">
-              <label for="nameBasic" class="form-label">Name</label>
-              <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          </div>
-          <div class="row g-2">
-            <div class="col mb-0">
-              <label for="emailBasic" class="form-label">Email</label>
-              <input type="email" id="emailBasic" class="form-control" placeholder="xxxx@xxx.xx">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="edtMainMenu" class="form-label">Main Menu</label>
+                        <input type="text" id="edtMainMenu" class="form-control" placeholder="Enter Main Menu">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="edtMainIcon" class="form-label">Main Menu Icon</label>
+                        <input type="text" id="edtMainIcon" class="form-control" placeholder="Enter Main Menu Icon">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label for="edtOrderNo" class="form-label">Order No.</label>
+                        <input type="text" id="edtOrderNo" class="form-control" placeholder="Enter Order No.">
+                    </div>
+                </div>
             </div>
-            <div class="col mb-0">
-              <label for="dobBasic" class="form-label">DOB</label>
-              <input type="date" id="dobBasic" class="form-control">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
             </div>
-          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>

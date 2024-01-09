@@ -45,7 +45,7 @@ class MainMenu extends CI_Controller
     }
     public function mainmenu()
     {
-        $this->another_js = "<script src='" . base_url() . "assets/js/mngSubmenu.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/mainMenu.js'></script>";
         $this->render_view('mainmenu');
     }
 
@@ -66,7 +66,7 @@ class MainMenu extends CI_Controller
     
     public function callApiAddMainMenu()
     {
-        $result = $this->curPostRequest('Manage_mainmenu/show_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_mainmenu/insert_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
