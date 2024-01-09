@@ -262,9 +262,9 @@ $.ajax({
         $(document).ready(function () {
             $('#btnSaveEdit').on('click', function () {
                 var arrDataAdd = [];
-                var Email = $('#edtMainMenu').val();
-                var Permission = $('#edtMainIcon').val();
-                var Plant = $('#edtOrderNo').val();
+                var MainMenuName = $('#edtMainMenu').val();
+                var MainMenuIcon = $('#edtMainIcon').val();
+                var OrderNo = $('#edtOrderNo').val();
 
                 
                 if (
@@ -347,13 +347,9 @@ $.ajax({
                         if (result.isConfirmed) {
                             var url = API_URL + 'Manage_account/update_user';
                             const formData = new FormData()
-                            formData.append('EmpCode', EmpCode);
-                            formData.append('EmpPassword', EmpPassword);
-                            formData.append('EmpFirstName', FirstName);
-                            formData.append('EmpLastName', LastName);
-                            formData.append('EmpEmail', Email);
-                            formData.append('EmpPermission', Permission);
-                            formData.append('EmpPlantCode', Plant);
+                            formData.append('MainMenuName', MainMenuName);
+                            formData.append('MainMenuIcon', MainMenuIcon);
+                            formData.append('OrderNo', OrderNo);
                             
                             $.ajax({
                                 url: base_url('ManageAccount/callApiUpdateAccount'),
