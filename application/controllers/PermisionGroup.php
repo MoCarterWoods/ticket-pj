@@ -1,9 +1,9 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MainMenu extends CI_Controller
-{
-    private $another_css;
+class PermisionGroup extends CI_Controller {
+
+	private $another_css;
     public $another_js;
     private $data;
 
@@ -43,10 +43,11 @@ class MainMenu extends CI_Controller
         $this->data['page_content'] = $this->parser->parse($path, $this->data, TRUE);
         $this->parser->parse('page/pagecontent', $this->data);
     }
-    public function mainmenu()
-    {
-        $this->another_js = "<script src='" . base_url() . "assets/js/mainMenu.js'></script>";
-        $this->render_view('mainmenu');
+	
+	public function permisGroup() {
+        $this->another_js = "<script src='" . base_url() . "assets/js/PermisGroup.js'></script>";
+        $this->render_view('permision_group');
+
     }
 
     public function callApi()
@@ -63,34 +64,38 @@ class MainMenu extends CI_Controller
         }
         echo json_encode($data);
     }
-    
-    public function callApiAddMainMenu()
+	public function callApiAddAccount()
     {
-        $result = $this->curPostRequest('Manage_mainmenu/insert_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        
+        $result = $this->curPostRequest('Manage_account/insert_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
-    public function callApiShowEdit()
+    public function callApiEditAccount()
     {
-        $result = $this->curPostRequest('Manage_mainmenu/show_upd_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        // echo json_encode($_POST);
+        // exit;
+        $result = $this->curPostRequest('Manage_account/show_show_acc', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
     public function callApiSaveEdit()
     {
-        $result = $this->curPostRequest('Manage_mainmenu/update_mmn', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_permis_group/update_mpg_name', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
     public function callApiUpdateStatus()
     {
-        $result = $this->curPostRequest('Manage_mainmenu/upd_status_main_menu', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_permis_group/update_flg', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
-
-    
-
+    public function test()
+    {
+           echo $this->session->userdata('userName');
+            // $this->session->set_userdata('perMissionGroup', $login->permis_id);
+    }
     function curPostRequest($enpoint, $param_data, $is_array = true, $associative = false){
         /* Endpoint */
         $url = 'http://127.0.0.1/api/' . $enpoint;
@@ -125,5 +130,5 @@ class MainMenu extends CI_Controller
     
         return $is_array ? json_decode($result, $associative) : $result;
     }
-
 }
+

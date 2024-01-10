@@ -15,7 +15,7 @@ shDataTable()
             success: function (data) {
                 // Get the menu container
 
-    
+                
                 var html = "";
                 // Loop through the data and append menu items
                 for (var i = 0; i < data.length; i++) {
@@ -25,7 +25,7 @@ shDataTable()
                             <td><i></i> <strong>${i+1}</strong></td>
                             <td><i></i> <strong>${data[i].smm_name}</strong></td>
                             <td>
-                            <i class="bx ${data[i].smm_icon} bx-md me-3" ></i>
+                            <i class="bx bx-${data[i].smm_icon} bx-md me-3" ></i>
                             <p class="icon-name text-capitalize text-truncate mb-0"></p>
                             </td>
                             <td><i></i>${data[i].smm_order_no}</td>
@@ -267,92 +267,50 @@ $.ajax({
                 var OrderNo = $('#edtOrderNo').val();
 
                 
-                if (
-                    ( data_acc.sa_emp_password == EmpPassword || EmpPassword == '') &&
-                    data_acc.sa_fristname == FirstName &&
-                    data_acc.sa_lastname == LastName &&
-                    data_acc.sa_email == Email &&
-                    data_acc.spg_id == Permission &&
-                    data_acc.mpc_id == Plant
-                ) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Not changed !',
-                        html: 'The information has not changed.',
-                        timer: 2500,
-                    }).then(() => {
-                        $('#mdlEdit').modal('hide');
-                        $('#btnBack').trigger('click');
-                    });
-                
-                } else if (FirstName == '') {
+                if (MainMenuName == '') {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'Please enter FirstName',
+                        text: 'Plese enter Main Menu name',
                     })
-                } else if (LastName == '') {
+                } else if (MainMenuIcon == '') {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'Please enter LastName',
+                        text: 'Plese enter Main Menu icon',
                     })
-                } else if (Permission == '') {
+                } else if (OrderNo == '') {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'Please choose Permission',
+                        text: 'Plese enter Order No.',
                     })
-                } else if (Plant == '') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Please choose Plant',
-                    })
-                } else if (!chkAddEmpcode(EmpCode)) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Please enter Employee Code as (a-z ,A-Z ,0-9) only.',
-                    })
-                } else if (!chkAddpersonal(FirstName) || !chkAddpersonal(LastName)) {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Please enter Firstname or Lastname as (a-z ,A-Z) only.',
-                    })
-                } else if(!isValidEmail(Email)){
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Oops...',
-                        text: 'Please enter your Email correctly.',
-                    })
-                } else if (!(isThaiLanguage(EmpPassword) || EmpPassword == '') || !isThaiLanguage(Email)) {
+                } else if (!isThaiLanguage(MainMenuName) || !isThaiLanguage(MainMenuIcon) || !isThaiLanguage(OrderNo)) {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
                         text: 'Please enter in English only.',
                     })
                 } else {
-
                     Swal.fire({
                         title: 'Are you sure?',
-                        text: "Do you want to add Account",
+                        text: "Do you want to save edit",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, add account!'
+                        confirmButtonText: 'Yes,save!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            var url = API_URL + 'Manage_account/update_user';
+                            var url = API_URL + 'Manage_mainmenu/update_mmn';
                             const formData = new FormData()
                             formData.append('MainMenuName', MainMenuName);
                             formData.append('MainMenuIcon', MainMenuIcon);
                             formData.append('OrderNo', OrderNo);
+                            formData.append('mmnId', mmnId);
                             
                             $.ajax({
-                                url: base_url('ManageAccount/callApiUpdateAccount'),
+                                url: base_url('MainMenu/callApiSaveEdit'),
                                 type: 'POST',
                                 data: formData,
                                 processData: false,
@@ -360,6 +318,7 @@ $.ajax({
             cache: false,
                                 dataType: 'json',
                                 success: function(res) {
+                                    console.log("sssssjd=>>",res);
                                     if (res.result == 1) {
 
                                         $('#add')[0].reset()
