@@ -12,7 +12,7 @@
       </div>
       <div class="col">
         <select class="form-control selMainMenu" id="selMainMenu">
-          <option value="">Choose main menu</option>
+          <option value="" >Choose main menu</option>
         </select>
       </div>
       <div class="col">

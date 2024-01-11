@@ -73,6 +73,12 @@ class SubMenu extends CI_Controller
         echo json_encode($result);
 
     }
+    public function callApiUpdateStatus()
+    {
+        $result = $this->curPostRequest('Manage_submenu/update_flg', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
     public function callApiPermis()
     {
         $result = $this->curPostRequest('Login/show_menu', array('data' => serialize($this->session->userdata('perMissionGroup'))));
@@ -102,12 +108,7 @@ class SubMenu extends CI_Controller
         echo json_encode($result);
 
     }
-    public function callApiUpdateStatus()
-    {
-        $result = $this->curPostRequest('Manage_submenu/upd_status_sub_menu', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
-        echo json_encode($result);
-
-    }
+    
     
     
 

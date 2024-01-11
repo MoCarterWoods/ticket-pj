@@ -3,8 +3,8 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Bordered Table -->
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Administrator /</span> Manage Account</h4>
 
+        <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Account</h5>
         
         <div class="card">
         <div class="d-flex justify-content-end mt-2 pr-2">
