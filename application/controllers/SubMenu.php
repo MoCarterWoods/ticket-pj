@@ -45,7 +45,7 @@ class SubMenu extends CI_Controller
     }
     public function subMenu()
     {
-        // $this->another_js = "<script src='" . base_url() . "assets/js/mngSubmenu.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/manageSubmenu.js'></script>";
         $this->render_view('submenu');
     }
 
@@ -62,6 +62,51 @@ class SubMenu extends CI_Controller
             echo "NO DATA";
         }
         echo json_encode($data);
+    }
+
+
+
+
+    public function callApiShowData()
+    {
+        $result = $this->curPostRequest('Manage_submenu/show_submenu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiPermis()
+    {
+        $result = $this->curPostRequest('Login/show_menu', array('data' => serialize($this->session->userdata('perMissionGroup'))));
+        echo json_encode($result);
+    }
+    public function callApiDetail()
+    {
+        $result = $this->curPostRequest('Manage_submenu/show_submenu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiAddSubMenu()
+    {
+        $result = $this->curPostRequest('Manage_submenu/ins_mmenu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiShowEdit()
+    {
+        $result = $this->curPostRequest('Manage_submenu/upd_show_sub_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiSaveEdit()
+    {
+        $result = $this->curPostRequest('Manage_submenu/upd_sub_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiUpdateStatus()
+    {
+        $result = $this->curPostRequest('Manage_submenu/upd_status_sub_menu', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
     }
     
     

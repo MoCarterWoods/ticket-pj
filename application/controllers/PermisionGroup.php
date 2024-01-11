@@ -64,18 +64,10 @@ class PermisionGroup extends CI_Controller {
         }
         echo json_encode($data);
     }
-	public function callApiAddAccount()
+	public function callApiAddPermisGroup()
     {
         
-        $result = $this->curPostRequest('Manage_account/insert_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
-
-    }
-    public function callApiEditAccount()
-    {
-        // echo json_encode($_POST);
-        // exit;
-        $result = $this->curPostRequest('Manage_account/show_show_acc', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_permis_group/insert_permis_group', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
