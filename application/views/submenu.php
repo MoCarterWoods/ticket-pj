@@ -22,7 +22,49 @@
     <br>
 
 
+
+                
+
+
     <div class="card" style="display: none;" id="content">
+    <div class="col-sm-12 mt-3">
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="card container">
+                                <div class="row py-2 mt-2">
+                                    <span class="fs-5 fw-bold text-primary-emphasis">Register Sub Menu</span>
+                                    <div class="col-md-5 col-sm-10 col-5">
+                                        <div class="row ">
+                                            <div class="col-lg-3 p-t-20">
+                                                <span>Sub Menu</span><span class="red-text">*</span>
+                                            </div>
+                                            <div class="col-lg">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                    <input class="mdl-textfield__input" type="text" id="inpSubMenuName" oninput="InputAdd(this)">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-2 col-5">
+                                        <div class="row ">
+                                            <div class="col-lg-5 p-t-20">
+                                                <span>Sub Menu controller</span><span class="red-text">*</span>
+                                            </div>
+                                            <div class="col-lg">
+                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                                    <input class="mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md col-sm-2 col-2 p-t-20">
+                                        <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Add</button>
+                                    </div>
+                                    <div class="col-12 col-sm-12 justify-content-start">
+                                        <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
+                                    </div>
       <h5 class="card-header">SYS_Account</h5>
       <div class="card-body">
         <div class="table-responsive text-nowrap">
@@ -66,34 +108,36 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="mdlEdit" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+            <h5 class="modal-title" id="staticBackdropEdit">Modal title</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col mb-3">
-                <label for="nameBasic" class="form-label">Name</label>
-                <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name">
+                <label for="edtSubMenu" class="form-label">Main Menu</label>
+                <input type="text" id="edtSubMenu" class="form-control" placeholder="Enter Main Menu">
               </div>
             </div>
-            <div class="row g-2">
-              <div class="col mb-0">
-                <label for="emailBasic" class="form-label">Email</label>
-                <input type="email" id="emailBasic" class="form-control" placeholder="xxxx@xxx.xx">
+            <div class="row">
+              <div class="col mb-3">
+                <label for="edtController" class="form-label">Main Menu Icon</label>
+                <input type="text" id="edtController" class="form-control" placeholder="Enter Main Menu Icon">
               </div>
-              <div class="col mb-0">
-                <label for="dobBasic" class="form-label">DOB</label>
-                <input type="date" id="dobBasic" class="form-control">
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="edtOrderNo" class="form-label">Order No.</label>
+                <input type="text" id="edtOrderNo" class="form-control" placeholder="Enter Order No.">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
           </div>
         </div>
       </div>

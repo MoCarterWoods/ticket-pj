@@ -65,7 +65,7 @@
                   <td><i></i> <strong>Dash</strong></td>
                   <td>
                   <i class='bx bx-dock-top' ></i>
-                    <p class="icon-name text-capitalize text-truncate mb-0"></p>
+                    <p class="icon-name text-truncate mb-0"></p>
                   </td>
                   <td><i></i>1</td>
                   <td class="">02/13/2021</td>
@@ -126,9 +126,7 @@
     </div>
 
 
-
-
-    <!-- Modal -->
+    <!-- Modal Icon -->
     <div class="modal fade" id="mdlIcon" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -138,171 +136,20 @@
           </div>
           <div class="modal-body">
             <!-- Icon container -->
-            <div class="d-flex flex-wrap" id="icons-container">
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-adobe mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">adobe</p>
+            <div class="row row-cols-3 g-4" id="icons-container">
+
+            
+              <div class="col">
+                <div class="card icon-card cursor-pointer text-center mb-4">
+                  <div class="card-body">
+                  <i class='bx bx-home mb-2'></i>
+                    <p class="icon-name text-truncate mb-0">bx-home</p>
+                  </div>
                 </div>
               </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-algolia mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">algolia</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-audible mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">audible</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-figma mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">figma</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-redbubble mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">redbubble</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-etsy mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">etsy</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-gitlab mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">gitlab</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-patreon mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">patreon</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-facebook-circle mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">facebook-circle</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-imdb mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">imdb</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-jquery mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">jquery</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-pinterest-alt mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">pinterest-alt</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-500px mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">500px</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-airbnb mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">airbnb</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-amazon mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">amazon</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-android mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">android</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-angular mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">angular</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-apple mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">apple</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-baidu mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">baidu</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-behance mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">behance</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-bing mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">bing</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-bitcoin mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">bitcoin</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-blogger mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">blogger</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class="bx bxl-bootstrap mb-2"></i>
-                  <p class="icon-name text-capitalize text-truncate mb-0">bootstrap</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class='bx bx-menu'></i>
-                  <p class="icon-name mb-0">bx bx-menu</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class='<i class="bx bx-child"></i>'></i>
-                  <p class="icon-name mb-0">bx bx-menu</p>
-                </div>
-              </div>
-              <div class="card icon-card cursor-pointer text-center mb-4 mx-2">
-                <div class="card-body">
-                  <i class='<i class="bx bxs-balloon"></i>'></i>
-                  <p class="icon-name mb-0">bx bx-menu</p>
-                </div>
-              </div>
-                
-              </div>
+
+
+              <!-- เพิ่มไอคอนเพิ่มเติมตามต้องการ -->
             </div>
           </div>
           <div class="modal-footer">
@@ -312,3 +159,43 @@
         </div>
       </div>
     </div>
+
+
+
+    <?php
+$jsonPath = 'path/to/icons.json'; 
+$json_url = 'https://example.com/path/to/your/json/file.json';
+
+// อ่านเนื้อหาของไฟล์ JSON
+$jsonContent = file_get_contents($jsonPath);
+
+// แปลง JSON เป็น array
+$iconsData = json_decode($jsonContent, true);
+
+// ตรวจสอบว่ามีข้อมูลไอคอนหรือไม่
+if (isset($iconsData['regularIcons'])) {
+    // แสดงรายการไอคอน
+    displayIconsInHTML($iconsData['regularIcons']);
+} else {
+    echo 'ไม่พบข้อมูลไอคอน';
+}
+
+// ฟังก์ชันสำหรับแสดงรายการไอคอนในรูปแบบ HTML
+function displayIconsInHTML($icons) {
+    foreach ($icons as $icon) {
+        echo '<div class="col">
+               <div class="card icon-card cursor-pointer text-center mb-4">
+                 <div class="card-body">
+                   <i class=\'bx ' . $icon . ' mb-2\'></i>
+                   <p class="icon-name text-truncate mb-0">' . $icon . '</p>
+                 </div>
+               </div>
+             </div>';
+    }
+}
+?>
+
+
+
+
+    

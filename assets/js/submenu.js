@@ -137,7 +137,7 @@ $(document).ready(function () {
               var menuItemHtml = `         
               <li class="menu-item">
                 <a href="" class="menu-link menu-toggle">
-                  <i class="menu-icon tf-icons bx bx-${menuItem.smm_icon}"></i>
+                  <i class="menu-icon tf-icons bx ${menuItem.smm_icon}"></i>
                   <div data-i18n="${menuItem.smm_name}">${menuItem.smm_name}</div>
                 </a>
                 <ul class="menu-sub">

@@ -26,13 +26,13 @@ function shDataTable() {
                 for (let i = 0; i < data.length; i++) {
                     html += `
                         <tr>
-                            <td> <strong>${i + 1}</strong></td>
-                            <td> <strong>${data[i].ssm_name}</strong></td>
-                            <td> <strong>${data[i].ssm_controller}</strong></td>
+                            <td><strong>${i + 1}</strong></td>
+                            <td><strong>${data[i].ssm_name}</strong></td>
+                            <td><strong>${data[i].ssm_controller}</strong></td>
                             <td class="">${data[i].ssm_updated_date}</td>
                             <td class="">${data[i].ssm_updated_by}</td>
                             <td>
-                                <button class="btnStatus btn badge bg-label-${data[i].ssm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].ssm_id}" value="${data[i].ssm_status_flg}"> ${data[i].ssm_status_flg == 1 ? 'Enable' : 'Disable'}</button>
+                                <button class="btnStatus btn badge bg-label-${data[i].ssm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].ssm_id}" value="${data[i].ssm_status_flg}">${data[i].ssm_status_flg == 1 ? 'Enable' : 'Disable'}</button>
                             </td>
                             <td class="">
                                 <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].ssm_id}">
@@ -90,9 +90,6 @@ $(() => {
         shDataTable();
     });
 
-    
-
-    
     //-------------------------- Update flg status ----------------------------------
 
     $(document).on('click', '.btnStatus', function () {
@@ -149,5 +146,224 @@ $(() => {
                 });
             }
         });
+    });
+});
+
+//-------------------------- add Submenu ----------------------------------
+
+$(document).ready(function () {
+    $('#btnSaveAdd').on('click', function () {
+        var mainId = $('#selMainMenu').val()
+        var SunMenuName = $('#inpSubMenuName').val()
+        var SubMenuCon = $('#inpSubMenuCon').val()
+
+        if (SunMenuName == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter main menu',
+            })
+        } else if (SubMenuCon == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter main menu icon',
+            })
+        } else if (!isThaiLanguage(SunMenuName) || !isThaiLanguage(SubMenuCon)) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter in English only.',
+            })
+        } else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to add Main Menu",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, add!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'Manage_submenu/insert_sub_menu';
+                    const formData = new FormData()
+                    formData.append('SunMenuName', SunMenuName);
+                    formData.append('SubMenuCon', SubMenuCon);
+                    formData.append('mainId', mainId);
+
+                    $.ajax({
+                        url: base_url('SubMenu/callApiAddSubMenu'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        dataType: 'json',
+                        success: function (res) {
+                            console.log('Response from the server:', res); // Log the response to the console
+                            if (res && res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    html: 'Add SubMenu success',
+                                    timer: 2500,
+                                }).then(() => {
+                                    // $('#btnBack').trigger('click');
+                                    $('#inpSubMenuName').val('')
+                                    $('#inpSubMenuCon').val('')
+                                    shDataTable()
+                                });
+                            } else if (res && res.result == 9) {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Ooops...',
+                                    html: 'This SubMenu already exists.',
+                                }).then(() => {
+
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Ooops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('AJAX request failed:', status, error);
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
+//-------------------------- Update Sub ----------------------------------
+var data_mmn;
+var subId;
+
+$(document).on('click', '.tblEditBtn', function () {
+
+
+let id = $(this).attr('data-id');
+subId = id
+var url = API_URL + "Manage_submenu/show_show_smm";
+$.ajax({
+// url: base_url('ManageAccount/callApiEditAccount'),
+url: API_URL + "Manage_submenu/show_show_smm",
+type: 'POST',
+data: {
+    id: id,
+},
+dataType: 'json',
+success: (response) => {
+
+   
+    data_mmn = response.data
+   
+    // accId = response
+    // for (let i = 0; i < response.length; i++) {
+    //     const data = response[i];
+        $('#edtSubMenu').val(response.data.ssm_name)
+        // $('#edtEmpPassword').val(response.data.sa_emp_password)
+        $('#edtController').val(response.data.ssm_controller)
+        $('#edtOrderNo').val(response.data.ssm_order_no)
+
+    // }
+}
+});
+});
+
+
+//-------------------------- Save Edit ----------------------------------
+
+$(document).ready(function () {
+    $('#btnSaveEdit').on('click', function () {
+        var SubName = $('#edtSubMenu').val();
+        var SubCon = $('#edtController').val();
+        var OrderNo = $('#edtOrderNo').val();
+
+        if (data_mmn && data_mmn.ssm_name && data_mmn.ssm_controller == SubCon && data_mmn.ssm_order_no == OrderNo) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Not changed!',
+                html: 'The information has not changed.',
+                timer: 2500,
+            }).then(() => {
+                $('#mdlEdit').modal('hide');
+                $('#btnBack').trigger('click');
+            });
+        } else if (SubName == '' || SubCon == '' || OrderNo == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please fill in all the required fields.',
+            });
+        } else if (!isThaiLanguage(SubName) || !isThaiLanguage(SubCon) || !isThaiLanguage(OrderNo)) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter in English only.',
+            });
+        } else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to save edit?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'Manage_submenu/edit_sub_menu';
+                    const formData = new FormData()
+                    formData.append('SubName', SubName);
+                    formData.append('SubCon', SubCon);
+                    formData.append('OrderNo', OrderNo);
+                    formData.append('subId', subId);
+
+                    $.ajax({
+                        url: base_url('SubMenu/callApiSaveEdit'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        dataType: 'json',
+                        success: function (res) {
+                            console.log("sssssjd=>>", res);
+                            if (res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    html: 'Edit main menu success',
+                                    timer: 2500,
+                                }).then(() => {
+                                    $('#mdlEdit').modal('hide');
+                                    shDataTable();
+                                });
+                            } else if (res.result == 2) {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Oops...',
+                                    text: 'Duplicate value!!',
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
     });
 });

@@ -78,7 +78,7 @@ class MainMenu extends CI_Controller
     }
     public function callApiSaveEdit()
     {
-        $result = $this->curPostRequest('Manage_mainmenu/update_mmn', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_mainmenu/edit_main_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }

@@ -92,7 +92,7 @@ class SubMenu extends CI_Controller
     }
     public function callApiAddSubMenu()
     {
-        $result = $this->curPostRequest('Manage_submenu/ins_mmenu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_submenu/insert_sub_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
@@ -104,7 +104,7 @@ class SubMenu extends CI_Controller
     }
     public function callApiSaveEdit()
     {
-        $result = $this->curPostRequest('Manage_submenu/upd_sub_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $result = $this->curPostRequest('Manage_submenu/edit_sub_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
