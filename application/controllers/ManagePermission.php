@@ -1,9 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class EditAccount extends CI_Controller {
-
-	private $another_css;
+class ManagePermission extends CI_Controller
+{
+    private $another_css;
     public $another_js;
     private $data;
 
@@ -14,18 +14,12 @@ class EditAccount extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('parser');
         $this->load->library('session');
-        
-        // $this->load->model('Dashboard_model', 'Dashboard');
+
 		
 		$this->data["base_url"] = base_url();
 
 		$result['base_url'] = base_url();
 		$result['site_url'] = site_url();
-		// $data['csrf_token_name'] = $this->security->get_csrf_token_name();
-		// $data['csrf_cookie_name'] = $this->config->item('csrf_cookie_name');
-
-
-		
 
         $this->data = $result;
 		$this->top_navbar_data = $result;
@@ -49,29 +43,52 @@ class EditAccount extends CI_Controller {
         $this->data['page_content'] = $this->parser->parse($path, $this->data, TRUE);
         $this->parser->parse('page/pagecontent', $this->data);
     }
-	
-	public function editAccount() {
-        $this->another_js = "<script src='" . base_url() . "assets/js/editAccount.js'></script>";
-        $this->render_view('editaccount');
-
+    public function mngPermis()
+    {
+        $this->another_js = "<script src='" . base_url() . "assets/js/managePermisDetail.js'></script>";
+        $this->render_view('manage_permis_detail');
     }
 
-    
-    public function callApiShowedit()
-{
-    $result = $this->curPostRequest('Edit_Account/show_Edit_Ac', array('session' => serialize($this->session->userdata('userId'))));
-
-    echo json_encode($result);
-}
-
-public function callApiUpdateAccount()
+    public function callApi()
     {
-        $result = $this->curPostRequest('Edit_Account/update_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        $url = $_GET["url"];
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        $data = json_decode($output, true);
+        // $data = $output;
+        // print_r($output);
+        if (empty($data)) {
+            echo "NO DATA";
+        }
+        echo json_encode($data);
+    }
+
+
+
+
+    public function callApiShowData()
+    {
+        $result = $this->curPostRequest('Manage_permis_detail/show_group', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
 
+    public function callApiShowTable()
+    {
+        $result = $this->curPostRequest('Manage_permis_detail/show_tb', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
 
+    }
+
+    public function callApiUpdateStatus()
+    {
+        $result = $this->curPostRequest('Manage_permis_detail/update_flg', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    
+    
 
     function curPostRequest($enpoint, $param_data, $is_array = true, $associative = false){
         /* Endpoint */

@@ -1,5 +1,6 @@
 <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account Settings /</span> Account</h4>
+              
+              <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Account Settings /</span> Account</h5>
 
                   <div class="card mb-4">
                   <h5 class="card-header text-center">Profile Details</h5>
@@ -17,55 +18,47 @@
                         />
                       </div>
                     </div>
-                    <p class="card-header text-center">SD525</p>
                     <hr class="my-0" />
                     <div class="card-body">
                     <form id="formAccountSettings" method="POST" onsubmit="return false">
                       <div class="row">
+                      <div class="mb-3 col-md-6">
+                            <label for="empCode" class="form-label">empcode</label>
+                            <input type="text" class="form-control" id="empCode" name="empCode" value="" placeholder="" readonly />
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="edtPass" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="edtPass" name="edtPass" value="" />
+                          </div>
                         
                         <div class="mb-3 col-md-6">
-                          <label for="lastName" class="form-label">Last Name</label>
-                          <input class="form-control" type="text" name="lastName" id="edtfName" value="Doe" readonly />
+                          <label for="edtfName" class="form-label">First Name</label>
+                          <input class="form-control" type="text" name="edtfName" id="edtfName" value="" />
                         </div>
                         <div class="mb-3 col-md-6">
-                          <label for="firstName" class="form-label">First Name</label>
+                          <label for="edtlName" class="form-label">Last Name</label>
                           <input
                             class="form-control"
                             type="text"
-                            id="firstName"
-                            name="firstName"
-                            value="John"
-                            autofocus
-                            readonly =""
+                            id="edtlName"
+                            name="edtlName"
+                            value=""
+
                           />
                         </div>
-                        <div class="mb-3 col-md-6">
-                          <label for="lastName" class="form-label">Last Name</label>
-                          <input class="form-control" type="text" name="lastName" id="edtlName" value="Doe" readonly />
-                        </div>
                           <div class="mb-3 col-md-6">
-                            <label for="email" class="form-label">E-mail</label>
+                            <label for="edtEmail" class="form-label">E-mail</label>
                             <input
                               class="form-control"
                               type="text"
-                              id="email"
-                              name="email"
-                              value="john.doe@example.com"
-                              placeholder="john.doe@example.com"
-                              readonly
+                              id="edtEmail"
+                              name="edtEmail"
+                              value=""
                             />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="edtEmail" name="address" placeholder="Address" readonly />
-                          </div>
 
-                          <div class="mb-3 col-md-6">
-                            <label for="state" class="form-label">State</label>
-                            <input class="form-control" type="text" id="state" name="state" placeholder="California" />
-                          </div>
                         <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                          <button type="submit" class="btn btn-primary me-2" id="btnSaveEdit">Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                         </div>
                       </form>

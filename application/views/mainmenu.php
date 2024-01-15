@@ -7,11 +7,14 @@
     <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Account</h5>
 
     <div class="card">
+      
+      
+      <div class="card-body">
       <div class="row py-2 mt-2">
         <span class="fs-5 fw-bold text-primary-emphasis">Register Main Menu</span>
         <div class="col-md-6 col-sm-10 col-5">
           <div class="row ">
-            <div class="col-lg-3 p-t-20">
+            <div class="col-lg-3">
               <span>Main Menu</span><span class="red-text">*</span>
             </div>
             <div class="col">
@@ -43,7 +46,6 @@
         </div>
       </div>
       <h5 class="card-header">SYS_Account</h5>
-      <div class="card-body">
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
             <table class="datatables-basic table border-top" id="tblMainMenu">
@@ -159,42 +161,6 @@
         </div>
       </div>
     </div>
-
-
-
-    <?php
-$jsonPath = 'path/to/icons.json'; 
-$json_url = 'https://example.com/path/to/your/json/file.json';
-
-// อ่านเนื้อหาของไฟล์ JSON
-$jsonContent = file_get_contents($jsonPath);
-
-// แปลง JSON เป็น array
-$iconsData = json_decode($jsonContent, true);
-
-// ตรวจสอบว่ามีข้อมูลไอคอนหรือไม่
-if (isset($iconsData['regularIcons'])) {
-    // แสดงรายการไอคอน
-    displayIconsInHTML($iconsData['regularIcons']);
-} else {
-    echo 'ไม่พบข้อมูลไอคอน';
-}
-
-// ฟังก์ชันสำหรับแสดงรายการไอคอนในรูปแบบ HTML
-function displayIconsInHTML($icons) {
-    foreach ($icons as $icon) {
-        echo '<div class="col">
-               <div class="card icon-card cursor-pointer text-center mb-4">
-                 <div class="card-body">
-                   <i class=\'bx ' . $icon . ' mb-2\'></i>
-                   <p class="icon-name text-truncate mb-0">' . $icon . '</p>
-                 </div>
-               </div>
-             </div>';
-    }
-}
-?>
-
 
 
 

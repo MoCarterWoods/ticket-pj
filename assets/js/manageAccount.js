@@ -474,42 +474,42 @@ $(() => {
     
 
 
-    //-------------------------- Update Account ----------------------------------
-    var data_acc
-	        var accId
-	    $(document).on('click', '.tblEditBtn', function() {
+            //-------------------------- Update Account ----------------------------------
+            var data_acc
+            var accId
+            $(document).on('click', '.tblEditBtn', function() {
 
-            
-	        let id = $(this).attr('data-id');
-	        accId = id
-	        var url = API_URL + "Manage_account/show_show_acc";
-	        $.ajax({
-	            // url: base_url('ManageAccount/callApiEditAccount'),
-	            url: API_URL + "Manage_account/show_show_acc",
-	            type: 'POST',
-	            data: {
-	                id: id,
-	            },
-	            dataType: 'json',
-	            success: (response) => {
 
-                   
+            let id = $(this).attr('data-id');
+            accId = id
+            var url = API_URL + "Manage_account/show_show_acc";
+            $.ajax({
+                // url: base_url('ManageAccount/callApiEditAccount'),
+                url: API_URL + "Manage_account/show_show_acc",
+                type: 'POST',
+                data: {
+                    id: id,
+                },
+                dataType: 'json',
+                success: (response) => {
+
+                
                     data_acc = response.data
-                   
-					// accId = response
-	                // for (let i = 0; i < response.length; i++) {
-	                //     const data = response[i];
-	                    $('#edtEmpCode').val(response.data.sa_emp_code)
+                
+                    // accId = response
+                    // for (let i = 0; i < response.length; i++) {
+                    //     const data = response[i];
+                        $('#edtEmpCode').val(response.data.sa_emp_code)
                         // $('#edtEmpPassword').val(response.data.sa_emp_password)
-	                    $('#edtFirstName').val(response.data.sa_fristname)
-	                    $('#edtLastName').val(response.data.sa_lastname)
-	                    $('#edtEmail').val(response.data.sa_email)
-	                    $('#edtPermission').val(response.data.spg_id)
-	                    $('#edtPlantEdit').val(response.data.mpc_id)
-	                // }
-	            }
-	        });
-	    })
+                        $('#edtFirstName').val(response.data.sa_fristname)
+                        $('#edtLastName').val(response.data.sa_lastname)
+                        $('#edtEmail').val(response.data.sa_email)
+                        $('#edtPermission').val(response.data.spg_id)
+                        $('#edtPlantEdit').val(response.data.mpc_id)
+                    // }
+                }
+            });
+            })
 
 
 

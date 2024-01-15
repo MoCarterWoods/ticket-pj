@@ -1,184 +1,150 @@
-var emp_data
 $(document).ready(async function() {
 
-    function isValidEmail(email) {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailPattern.test(email);
-    }
 
     await $.ajax({
-        url: base_url('EditProfile/callApiShowedit'),
-        success: function (response) {
-            response = JSON.parse(response);
-            emp_data = response;
-            for (let index in response) {
-                $('#edtEmpcode').val(response[index].emp_code);
-                $('#edtfName').val(response[index].firstname);
-                $('#edtlName').val(response[index].lastname);
-                $('#edtEmail').val(response[index].email);
+        url: base_url('EditAccount/callApiShowedit'),
+        type: 'POST',
+        dataType: 'json',
+        success: (response) => {
+            if (response.length > 0) {
+                emp_data = response[0];
+                $('#empCode').val(emp_data.sa_emp_code);
+                // $('#edtPass').val(emp_data.sa_emp_password);
+                $('#edtfName').val(emp_data.sa_fristname);
+                $('#edtlName').val(emp_data.sa_lastname);
+                $('#edtEmail').val(emp_data.sa_email);
+            } else {
+                console.error("API response is empty or does not have the expected structure.");
             }
-            $('#edtPassword').val('')
         }
     });
+});
+
+
+
+function isValidEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
     
 
-    $('#btnSaveEdit').click(function() {
-        var emp_code = $('#edtEmpcode').val()
-        var password = ($('#edtPassword').val() == '')? $('#edtPassword').val(): MD5($('#edtPassword').val())
-        var fName = $('#edtfName').val()
-        var lName = $('#edtlName').val()
-        var Email = $('#edtEmail').val()
+$('#btnSaveEdit').on('click', function () {
+    var arrDataAdd = [];
+    var EmpCode = $('#empCode').val();
+    var EmpPassword = ($('#edtPass').val().trim() == '') ? '' : $('#edtPass').val();
+    var FirstName = $('#edtfName').val();
+    var LastName = $('#edtlName').val();
+    var Email = $('#edtEmail').val();
 
+    
+    if (
+        ( emp_data.sa_emp_password == EmpPassword || EmpPassword == '') &&
+        emp_data.sa_fristname == FirstName &&
+        emp_data.sa_lastname == LastName &&
+        emp_data.sa_email == Email 
 
-        if((emp_data[0].emp_password == password || password == '') && $('#edtfName').val() == emp_data[0].firstname && $('#edtlName').val() == emp_data[0].lastname && $('#edtEmail').val() == emp_data[0].email ){
-            Swal.fire({
-                icon: 'success',
-                title: 'Not changed !',
-                html: 'The information has not changed.',
-                timer: 2500,
-            }).then(() => {
+    ) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Not changed !',
+            html: 'The information has not changed.',
+            timer: 2500,
+        }).then(() => {
+
+        });
+    
+    } else if (FirstName == '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter FirstName',
+        })
+    } else if (LastName == '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter LastName',
+        })
+    } else if (!chkAddpersonal(FirstName) || !chkAddpersonal(LastName)) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter Firstname or Lastname as (a-z ,A-Z) only.',
+        })
+    } else if(!isValidEmail(Email)){
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter your Email correctly.',
+        })
+    } else if (!(isThaiLanguage(EmpPassword) || EmpPassword == '') || !isThaiLanguage(Email)) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter in English only.',
+        })
+    } else {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to add Account",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, add account!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var url = API_URL + 'Edit_Account/update_user';
+                const formData = new FormData()
+                formData.append('EmpCode', EmpCode);
+                formData.append('EmpPassword', EmpPassword);
+                formData.append('EmpFirstName', FirstName);
+                formData.append('EmpLastName', LastName);
+                formData.append('EmpEmail', Email);
+
+                
                 $.ajax({
-                    url: base_url('EditProfile/callApiShowedit'),
-                    success: function (response) {
-                        response = JSON.parse(response);
-                        emp_data = response;
-                        for (let index in response) {
-                            $('#edtEmpcode').val(response[index].emp_code);
-                            $('#edtfName').val(response[index].firstname);
-                            $('#edtlName').val(response[index].lastname);
-                            $('#edtEmail').val(response[index].email);
+                    url: base_url('EditAccount/callApiUpdateAccount'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+contentType: false,
+cache: false,
+                    dataType: 'json',
+                    success: function(res) {
+                        if (res.result == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success !',
+                                html: 'Add account success',
+                                timer: 2500,
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else if (res.result == 9) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                html: 'The information has not changed.',
+                            }).then(() => {
+                                
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Ooops...',
+                                html: 'A system error has occurred.',
+                            });
                         }
-                        $('#edtPassword').val('')
                     }
                 });
-            })
-        } else if (fName == '') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Plese enter Firstname.',
-            })
-        } else if (lName == '') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Plese enter LastName.',
-            })
-        } else if (Email == '') {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Plese enter Email.',
-            })
-        } else if (!chkEditpersonal(FirstName) || !chkEditpersonal(LastName)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Please enter Firstname or Lastname as (a-z ,A-Z) only.',
-            })
-        } else if (!isValidEmail(Email)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Plese enter your Email correctly.',
-            })
-        } else if (!(isThaiLanguage(password) || password == '') || !isThaiLanguage(Email)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Please enter in English only.',
-            })
-        } else {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to save edit.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes,save!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    let arrDataEdit = []
-                    arrDataEdit.push({
-                        accId: emp_data[0].su_id,
-                        EmpPassword: password,
-                        FirstName: fName,
-                        LastName: lName,
-                        Email: Email,
-                        Permission: emp_data[0].permis_id,
-                        Plant: emp_data[0].plant,
-                    })
-                    
-                    $.ajax({
-                        url: base_url("ManageAccount/callApiUpdateAccount"),
-                        type: 'POST',
-                        data: {
-                            arrDataEdit: arrDataEdit
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            if (res.result == 1) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success !',
-                                    html: 'Update account success.',
-                                    timer: 2000,
-                                }).then(() => {
-                                    // window.location.href = base_url("EditProfile/editProfile")
-                                    $.ajax({
-                                        url: base_url('EditProfile/callApiShowedit'),
-                                        success: function (response) {
-                                            response = JSON.parse(response);
-                                            emp_data = response;
-                                            for (let index in response) {
-                                                $('#edtEmpcode').val(response[index].emp_code);
-                                                $('#edtfName').val(response[index].firstname);
-                                                $('#edtlName').val(response[index].lastname);
-                                                $('#edtEmail').val(response[index].email);
-                                            }
-                                            $('#edtPassword').val('')
-                                        }
-                                    });
-                                })
-                            } else if (res.result == 9) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
-                                    html: 'The information has not changed.',
-                                    timer: 2500,
-                                }).then(() => {
-                                    // window.location.href = base_url("EditProfile/editProfile")
-                                    $.ajax({
-                                        url: base_url('EditProfile/callApiShowedit'),
-                                        success: function (response) {
-                                            response = JSON.parse(response);
-                                            emp_data = response;
-                                            for (let index in response) {
-                                                $('#edtEmpcode').val(response[index].emp_code);
-                                                $('#edtfName').val(response[index].firstname);
-                                                $('#edtlName').val(response[index].lastname);
-                                                $('#edtEmail').val(response[index].email);
-                                            }
-                                            $('#edtPassword').val('')
-                                        }
-                                    });
-                                })
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Ooops...',
-                                    html: 'A system error has occurred.',
-                                })
-                            }
-                        }
-                    })
-                }
-            })
-        }
+            }
+        });
+    }
+});
 
-    })
-})
 
 // function show_edit_DrpDw() {
 //     $('#edtPermission').val(emp_data[0].permis_id).trigger("change")
