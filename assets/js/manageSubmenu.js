@@ -65,7 +65,7 @@ $(() => {
 
     // Function to show Main Menu
     function showMainMenu() {
-        var url = API_URL + "Manage_mainmenu/show_main_menu";
+        var url = API_URL + "Manage_submenu/show_main_menu";
         $.ajax({
             method: "get",
             url: base_url("SubMenu/callApi?url=" + url),

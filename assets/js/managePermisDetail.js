@@ -1,3 +1,43 @@
+
+$(() => {
+
+
+    // Function to show Main Menu
+    function showGroupDetail() {
+        var url = API_URL + "Manage_permis_detail/show_group";
+        $.ajax({
+            method: "get",
+            url: base_url("ManagePermission/callApiShowData?url=" + url),
+            dataType: 'Json',
+
+            success: (response) => {
+                for (let i = 0; i < response.length; i++) {
+                    const data = response[i];
+                    $('.selGroup').append(`<option value="${data.spg_id}">${data.spg_name}</option>`);
+                }
+            },
+            error: (err) => {
+                console.log(err);
+            },
+        });
+    }
+
+    // Show Main Menu on page load
+    showGroupDetail();
+
+    // Event handler for clicking the search button
+    $(document).on('click', '#btnSerchMain', function () {
+        loadData();
+    });
+})
+
+
+function loadData() {
+    MainmenuDropdown();
+    SubmenuDropdown();
+    shDataTable(); // เรียกเพื่อโหลดข้อมูลในตารางเมื่อหน้าเว็บโหลด
+}
+
 function shDataTable() {
     var permisId = $('#selGroup').val();
 
@@ -57,60 +97,60 @@ function shDataTable() {
     }
 }
 
-$(() => {
 
+function MainmenuDropdown() {
+    var dropdown = $('.selMenuGroupName');
 
-    // Function to show Main Menu
-    function showGroupDetail() {
-        var url = API_URL + "Manage_permis_detail/show_group";
-        $.ajax({
-            method: "get",
-            url: base_url("ManagePermission/callApiShowData?url=" + url),
-            dataType: 'Json',
-            success: (response) => {
-                for (let i = 0; i < response.length; i++) {
-                    const data = response[i];
-                    $('.selGroup').append(`<option value="${data.spg_id}">${data.spg_name}</option>`);
-                }
-            },
-            error: (err) => {
-                console.log(err);
-            },
-        });
-    }
+    // เรียก API
+    $.ajax({
+        method: "get",
+        url: "http://127.0.0.1/api/Manage_permis_detail/drop_main",
+        dataType: 'json',
+        success: (response) => {
+            console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
 
-    // Show Main Menu on page load
-    showGroupDetail();
+            // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
+            dropdown.empty();
 
-    // Event handler for clicking the search button
-    $(document).on('click', '#btnSerchMain', function () {
-        shDataTable();
+            // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
+            for (let i = 0; i < response.length; i++) {
+                const menu = response[i];
+                dropdown.append(`<option value="${menu.smm_id}">${menu.smm_name}</option>`);
+            }
+        },
+        error: (err) => {
+            console.log(err);
+        },
     });
-})
+}
 
 
-$('#selMenuGroupName').on('change', function () {
-    let id = $('#selMenuGroupName').val();
-    $('#selSubMenuName option').remove();
-    $('#selSubMenuName').append(`<option value="">Choose Sub Menu Name</option>`)
-       for (let i = 0; i < arrSub.subMenu.length; i++) {
-            const data = arrSub.subMenu[i];
-            if(data.smm_id == id && data.ssm_status == 1){
-                $('#selSubMenuName').append(`<option value="${data.ssm_id}">${data.ssm_name}</option>`)
+function SubmenuDropdown() {
+    var dropdown = $('.selSubMenuName');
+
+    // เรียก API
+    $.ajax({
+        method: "get",
+        url: "http://127.0.0.1/api/Manage_permis_detail/drop_sub",
+        dataType: 'json',
+        success: (response) => {
+            console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
+
+            // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
+            dropdown.empty();
+
+            // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
+            for (let i = 0; i < response.length; i++) {
+                const menu = response[i];
+                dropdown.append(`<option value="${menu.ssm_id}">${menu.ssm_name}</option>`);
             }
-        }
-})
-$('#selMenuGroupName').on('change', function () {
-    let id = $('#selMenuGroupName').val();
-    $('#selSubMenuName option').remove();
-    $('#selSubMenuName').append(`<option value="">Choose Sub Menu Name</option>`)
-       for (let i = 0; i < arrSub.subMenu.length; i++) {
-            const data = arrSub.subMenu[i];
-            if(data.smm_id == id && data.ssm_status == 1){
-                $('#selSubMenuName').append(`<option value="${data.ssm_id}">${data.ssm_name}</option>`)
-            }
-        }
-})
+        },
+        error: (err) => {
+            console.log(err);
+        },
+    });
+}
+
 
 //-------------------------- Update flg status ----------------------------------
 
@@ -164,6 +204,92 @@ $(document).on('click', '.btnStatus', function () {
                 },
                 error: function (error) {
                     console.log(error);
+                }
+            });
+        }
+    });
+});
+
+
+
+//-------------------------- add Permiss ----------------------------------
+
+$(document).ready(function () {
+    $('#btnSaveAddPer').on('click', function () {
+        var arrDataAdd = [];
+        var PermisID = $('#selGroup').val();
+        var MenuGroup = $('#selMenuGroupName').val();
+        var SubMenu = $('#selSubMenuName').val();
+
+
+        if (MenuGroup == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please choose MenuGroup code',
+            })
+        } else if (SubMenu == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please choose SubMenu',
+            })
+        }  else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to add Permission",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, add Permission!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'Manage_permis_detail/insert_permiss';
+                    const formData = new FormData()
+                    formData.append('PermisID', PermisID);
+                    formData.append('MenuGroup', MenuGroup);
+                    formData.append('SubMenu', SubMenu);
+
+                    
+                    $.ajax({
+                        url: base_url('ManagePermission/callApiAddPermiss'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+ contentType: false,
+    cache: false,
+                        dataType: 'json',
+                        success: function(res) {
+                            if (res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success !',
+                                    html: 'Add Permission success',
+                                    timer: 2500,
+                                }).then(() => {
+                                    // $('#btnBack').trigger('click');
+                                    shDataTable()
+                                    
+                                });
+                            } else if (res.result == 9) {
+                                Swal.fire({
+            
+                                    icon: 'warning',
+                                    title: 'Ooops...',
+                                    html: 'This permission already exists.',
+                                }).then(() => {
+                                    
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Ooops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        }
+                    });
                 }
             });
         }

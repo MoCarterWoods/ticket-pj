@@ -87,6 +87,20 @@ class ManagePermission extends CI_Controller
         echo json_encode($result);
 
     }
+    public function callApiShowdrop_main()
+    {
+        $result = $this->curPostRequest('Manage_permis_detail/drop_main', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+    public function callApiAddPermiss()
+    {
+        $result = $this->curPostRequest('Manage_permis_detail/insert_permiss', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    
     
     
 

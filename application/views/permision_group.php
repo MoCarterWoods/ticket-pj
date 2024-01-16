@@ -32,7 +32,7 @@
       <div class="card-body">
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-basic table border-top" id="tblPermisGP">
+            <table class="table card-table w-100" id="tblPermisGP">
               <thead>
                 <tr>
                   <th>No.</th>

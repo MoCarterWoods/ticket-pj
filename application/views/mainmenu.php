@@ -1,91 +1,79 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
-  <!-- Content -->
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Bordered Table -->
+        <h5 class="fw-bold py-3 mb-4" align="right">
+            <span class="text-muted fw-light">Administrator /</span> Manage Account
+        </h5>
 
-  <div class="container-xxl flex-grow-1 container-p-y">
-    <!-- Bordered Table -->
-    <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Account</h5>
+        <div class="card">
+            <div class="card-body">
+                <div class="row py-2 mt-2">
+                    <div class="col-md-6 col-sm-10 col-12">
+                        <span class="fs-5 fw-bold text-primary-emphasis">Register Main Menu</span>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <span>Main Menu</span><span class="red-text">*</span>
+                            </div>
+                            <div class="col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                    <input class="mdl-textfield__input" type="text" id="inpMainMenuName" oninput="InputAdd(this)">
+                                </div>
+                            </div>
+                        </div>
 
-    <div class="card">
-      
-      
-      <div class="card-body">
-      <div class="row py-2 mt-2">
-        <span class="fs-5 fw-bold text-primary-emphasis">Register Main Menu</span>
-        <div class="col-md-6 col-sm-10 col-5">
-          <div class="row ">
-            <div class="col-lg-3">
-              <span>Main Menu</span><span class="red-text">*</span>
-            </div>
-            <div class="col">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                <input class="mdl-textfield__input" type="text" id="inpMainMenuName" oninput="InputAdd(this)">
+                        <div class="row container mt-2">
+                            <div class="col-lg-5 p-t-20">
+                                <span>Main Menu Icon</span><span class="red-text">*</span>
+                            </div>
+                            <div class="col-lg-6" style="display: grid; grid-template-columns: auto auto;">
+                                <input class="mdl-textfield__input" type="text" id="inpMainMenuIcon" oninput="InputAdd(this)">
+                                <span style="margin-left: -15px;" data-bs-toggle="modal" data-bs-target="#mdlIcon">
+                                    <button class='bx bx-filter'></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
 
-              </div>
+                    <div class="col-md-6 col-sm-2 col-12 mt-2">
+                        <div class="row">
+                            <div class="col-md col-sm-12 col-12">
+                                <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
+                            </div>
+                            <div class="col justify-content-start ms-1 mt-2">
+                                <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="card-header mt-4">SYS_Account</h5>
+                <div class="table-responsive text-nowrap">
+                    <div class="card-datatable table-responsive pt-0">
+                        <table class="table card-table w-100" id="tblMainMenu">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Main Menu Name</th>
+                                    <th>Main Menu Icon</th>
+                                    <th>Order No.</th>
+                                    <th>Update Date</th>
+                                    <th>Update By</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0" id="tbody">
+                                <!-- Table body content goes here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-5 col-sm-2 col-5">
-          <div class="row container">
-            <div class="col-lg-5 p-t-20">
-              <span>Main Menu Icon</span><span class="red-text">*</span>
-            </div>
-            <div class="col-lg-6" style="display: grid; grid-template-columns: auto auto;">
-              <input class="mdl-textfield__input" type="text" id="inpMainMenuIcon" oninput="InputAdd(this)">
-              <span style="margin-left: -30px;" data-bs-toggle="modal" data-bs-target="#mdlIcon">
-                <i class='bx bx-filter'></i>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md col-sm-2 col-2 p-t-20">
-          <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
-        </div>
-        <div class="col justify-content-start ms-1">
-          <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
-        </div>
-      </div>
-      <h5 class="card-header">SYS_Account</h5>
-        <div class="table-responsive text-nowrap">
-          <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-basic table border-top" id="tblMainMenu">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>Main Menu Name</th>
-                  <th>Main Menu Icon</th>
-                  <th>Order No.</th>
-                  <th>Update Date</th>
-                  <th>Update By</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody class="table-border-bottom-0" id="tbody">
-                <!-- <tr>
-                  <td><i></i> <strong>1</strong></td>
-                  <td><i></i> <strong>Dash</strong></td>
-                  <td>
-                  <i class='bx bx-dock-top' ></i>
-                    <p class="icon-name text-truncate mb-0"></p>
-                  </td>
-                  <td><i></i>1</td>
-                  <td class="">02/13/2021</td>
-                  <td class="">SD525</td>
-                  <td><span class="badge bg-label-success me-1">Enable</span></td>
-                  <td class="">
-                    </li>
-                    </ul>
-          </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">
-            <i class="bx bxs-edit"></i>
-          </a></td>
-          </tr> -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
+</div>
     <!--/ Bordered Table -->
 
 
@@ -156,7 +144,6 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
           </div>
         </div>
       </div>

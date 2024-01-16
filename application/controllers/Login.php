@@ -50,7 +50,8 @@ class Login extends CI_Controller
 
     public function callApiDropDown()
     {
-        $result = $this->curPostRequest('Api_Controller/show_Menu', array('data' => serialize($_POST)));
+        $result = $this->curPostRequest('Api_Controller/show_Menu',  array('data' => serialize($_POST),'session' => serialize($this->session->userdata('perMissionGroup'))));
+        echo json_encode($result);
         echo json_encode($result);
     }
     

@@ -1,5 +1,5 @@
 {
-    "regular": [
+    "icon": [
         "bx-accessibility",
         "bx-add-to-queue",
         "bx-adjust",
@@ -546,9 +546,7 @@
         "bx-x-circle",
         "bx-x",
         "bx-zoom-in",
-        "bx-zoom-out"
-    ],
-    "logos": [
+        "bx-zoom-out",
         "bxl-500px",
         "bxl-airbnb",
         "bxl-amazon",
@@ -648,9 +646,7 @@
         "bxl-wordpress",
         "bxl-yahoo",
         "bxl-yelp",
-        "bxl-youtube"
-    ],
-    "solid": [
+        "bxl-youtube",
         "bxs-add-to-queue",
         "bxs-adjust-alt",
         "bxs-adjust",

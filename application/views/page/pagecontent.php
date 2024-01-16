@@ -73,7 +73,7 @@
   </head>
 
   <body>
-    
+ 
   {left_sidebar}
   {topbar}
 {page_content}

@@ -3,20 +3,21 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Bordered Table -->
+        <h5 class="fw-bold py-3 mb-4" align="right">
+            <span class="text-muted fw-light">Administrator /</span> Manage Account
+        </h5>
 
-        <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Account</h5>
-        
         <div class="card">
-        <div class="d-flex justify-content-end mt-2 pr-2">
-            <button type="button" class="btn btn-circle btn-primary" id="callmodelAdd" data-bs-toggle="modal"
-                data-bs-target="#mdlAdd">Add Account <i class="fa fa-plus"></i></button>
-        </div>
+            <div class="d-flex justify-content-end mt-2 pr-2">
+                <button type="button" class="btn btn-circle btn-primary" id="callmodelAdd" data-bs-toggle="modal"
+                    data-bs-target="#mdlAdd">Add Account <i class="fa fa-plus"></i></button>
+            </div>
             <h5 class="card-header">SYS_Account</h5>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <!-- Removed scrollBody -->
                     <div class="card-datatable table-responsive pt-0">
-                        <table class="table card-table" id="tblManageAccount">
+                        <table class="table card-table w-100" id="tblManageAccount">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -29,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0" id="tbody">
-
+                                <!-- Table body content goes here -->
                             </tbody>
                         </table>
                     </div>
@@ -38,6 +39,7 @@
         </div>
     </div>
 </div>
+
 
     <!--/ Bordered Table -->
 
