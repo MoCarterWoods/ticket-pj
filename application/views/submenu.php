@@ -6,14 +6,19 @@
   <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Bordered Table -->
     <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Sub Menu</h5>
+
     <div class="row py-1">
+
+
       <div class="col-1">
         Main Menu
       </div>
       <div class="col">
-        <select class="form-control selMainMenu" id="selMainMenu">
+
+        <select class="form-control selMainMenu form-select" id="selMainMenu">
           <option value="">Choose main menu</option>
         </select>
+        
       </div>
       <div class="col">
         <button type="button" class="btn btn-circle btn-primary" id="btnSerchMain">Search</button>
@@ -63,7 +68,7 @@
                 <div class="card-body">
                   <div class="table-responsive text-nowrap">
                     <div class="card-datatable table-responsive pt-0">
-                      <table class="datatables-basic table border-top" id="tblSubMenu">
+                      <table class="datatables-basic table table-striped table-bordered table-hover table-checkable order-column border-top " id="tblSubMenu">
                         <thead>
                           <tr>
                             <th>No.</th>
@@ -76,25 +81,15 @@
                           </tr>
                         </thead>
                         <tbody class="table-border-bottom-0" id="tbody">
-                          <!-- <tr>
-                  <td><i></i> <strong>1</strong></td>
-                  <td><i></i> <strong>Dashboard</strong></td>
-                  <td><i></i> <strong>Admin</strong></td>
-                  <td class="">2024-01-10 14:45:04</td>
-                  <td class="">SD525</td>
-                  <td><span class="badge bg-label-success me-1">Enable</span></td>
-                  <td class="">
-                    </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">
-                      <i class="bx bxs-edit"></i>
-                    </a>
-                  </td>
-                </tr> -->
+                          <!-- Table body content goes here -->
                         </tbody>
                       </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div></div></div></div></div>
               <!--/ Bordered Table -->
 
 

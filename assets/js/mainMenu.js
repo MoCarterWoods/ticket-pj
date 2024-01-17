@@ -1,4 +1,25 @@
 $(() => {
+
+    function showLoader() {
+        document.getElementById('pageLoader').style.display = 'flex';
+    }
+    
+    function hideLoader() {
+        document.getElementById('pageLoader').style.display = 'none';
+    }
+    
+    // ตัวอย่างการใช้ setTimeout เพื่อแสดง "page loader" เป็นเวลา 2 วินาที
+    setTimeout(function () {
+        showLoader();
+    
+        // เรียกใช้ฟังก์ชันหลังจากฟังก์ชันหนึ่งเสร็จสิ้น
+        fetchAndDisplayIcons(); // แทน yourFunction ด้วยฟังก์ชันที่คุณต้องการรอ
+    
+        hideLoader();
+    }, 10000);
+    
+
+
     shDataTable();
 
     function shDataTable() {
@@ -20,24 +41,33 @@ $(() => {
                 for (var i = 0; i < data.length; i++) {
                     
                     html += `
-                            <tr>
-                            <td><i></i> <strong>${i+1}</strong></td>
-                            <td><i></i> <strong>${data[i].smm_name}</strong></td>
-                            <td>
-                            <i class="bx ${data[i].smm_icon} bx-md me-3" ></i>
-                            <p class="icon-name text-capitalize text-truncate mb-0"></p>
-                            </td>
-                            <td><i></i>${data[i].smm_order_no}</td>
-                            <td class="">${data[i].smm_updated_date}</td>
-                            <td class="">${data[i].smm_updated_by}</td>
-                            <td><button class="btnStatus btn badge bg-label-${data[i].smm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].smm_id}" value="${data[i].smm_status_flg}">${data[i].smm_status_flg == 1 ? 'Enable' : 'Disable'}</button></td>
-                            <td class="">
-                            </li>
-                            </ul>
-                    </div><a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].smm_id}">
-                    <i class="bx bxs-edit"></i>
-                    </a></td>
-                    </tr>`;
+                    <tr>
+                    <td class="text-center"><i></i> <strong>${i+1}</strong></td>
+                    <td class="text-center"><i></i> <strong>${data[i].smm_name}</strong></td>
+                    <td class="text-center">
+                      <i class="bx ${data[i].smm_icon} bx-md me-3"></i>
+                      <p class="icon-name text-capitalize text-truncate mb-0"></p>
+                    </td>
+                    <td class="text-center"><i></i>${data[i].smm_order_no}</td>
+                    <td class="text-center">${data[i].smm_updated_date}</td>
+                    <td class="text-center">${data[i].smm_updated_by}</td>
+                    <td class="text-center">
+                      <button class="btnStatus btn badge bg-label-${data[i].smm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].smm_id}" value="${data[i].smm_status_flg}">
+                        ${data[i].smm_status_flg == 1 ? 'Enable' : 'Disable'}
+                      </button>
+                    </td>
+                    <td class="text-center">
+                      <div>
+                        <ul>
+                          <!-- ตรงนี้เป็นส่วนของ List Item -->
+                        </ul>
+                      </div>
+                      <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].smm_id}">
+                        <i class="bx bxs-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  `;
                    
                 }
                 $('#tblMainMenu').dataTable().fnDestroy();
@@ -59,16 +89,18 @@ $(() => {
 
     // ---------------------------------------------------Icon---------------------------------------
 
-const iconsContainer = document.getElementById('icons-container');
+// สร้างฟังก์ชันเพื่อดึงและแสดง icons
+function fetchAndDisplayIcons() {
+  const iconsContainer = document.getElementById('icons-container');
 
-// ใช้ fetch API เพื่อดึงข้อมูล icons จากไฟล์ JSON
-fetch('http://127.0.0.1/ticket/assets/fonts/boxicon.json')
-  .then(response => response.json())
-  .then(data => {
-    const icons = data.icon;
+  // ใช้ fetch API เพื่อดึงข้อมูล icons จากไฟล์ JSON
+  fetch('http://127.0.0.1/ticket/assets/fonts/boxicon.json')
+    .then(response => response.json())
+    .then(data => {
+      const icons = data.icon;
 
-    // สร้าง HTML สำหรับแต่ละ icon และแทรกลงใน #icons-container
-    icons.forEach(iconClass => {
+      // สร้าง HTML สำหรับแต่ละ icon และแทรกลงใน #icons-container
+      icons.forEach(iconClass => {
         const iconHTML = `
           <div class="col">
             <div class="card icon-card cursor-pointer text-center mb-4">
@@ -80,11 +112,15 @@ fetch('http://127.0.0.1/ticket/assets/fonts/boxicon.json')
           </div>
         `;
 
-      // แทรก HTML ลงใน #icons-container
-      iconsContainer.innerHTML += iconHTML;
-    });
-  })
-  .catch(error => console.error('Error fetching icons:', error));
+        // แทรก HTML ลงใน #icons-container
+        iconsContainer.innerHTML += iconHTML;
+      });
+    })
+    .catch(error => console.error('Error fetching icons:', error));
+}
+
+// เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', fetchAndDisplayIcons);
 
 
 
@@ -291,7 +327,7 @@ $.ajax({
             var MainMenuIcon = $('#edtMainIcon').val();
             var OrderNo = $('#edtOrderNo').val();
     
-            if (data_mmn && data_mmn.smm_name && data_mmn.smm_icon == MainMenuIcon && data_mmn.smm_order_no == OrderNo) {
+            if (data_mmn && data_mmn.smm_name == MainMenuName && data_mmn.smm_icon == MainMenuIcon && data_mmn.smm_order_no == OrderNo) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Not changed!',
@@ -340,7 +376,6 @@ $.ajax({
                             cache: false,
                             dataType: 'json',
                             success: function (res) {
-                                console.log("sssssjd=>>", res);
                                 if (res.result == 1) {
                                     Swal.fire({
                                         icon: 'success',

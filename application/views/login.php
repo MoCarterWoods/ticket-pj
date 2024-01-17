@@ -52,7 +52,23 @@
 }
 .light-style .authentication-wrapper .authentication-bg {
   background-color: #fff;
-}</style>
+}
+
+
+.authentication-wrapper.authentication-basic .authentication-inner .app-brand {
+  margin-bottom: 2.5rem;
+}
+
+.authentication-wrapper.authentication-basic .authentication-inner img {
+  max-width: 50%; /* ขนาดรูปภาพจะไม่เกินขนาดของ div */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* จัดตำแหน่งตรงกลางของ div */
+}
+
+
+
+</style>
 <!DOCTYPE html>
 <html
   lang="en"
@@ -74,7 +90,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>/assets/img/favicon/under-maintenance.png" />
+    <link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>/assets/img/favicon/icon_mn.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -118,9 +134,11 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html">
-                </a>
-              </div>
+  <a href="index.html">
+    <!-- เพิ่มรูปภาพที่นี่ -->
+    <img src="<?php echo base_url() ?>/assets/img/favicon/icon_mn.png" alt="Logo Image">
+  </a>
+</div>
               <!-- /Logo -->
               <h4 class="mb-2">Ticket Maintenance!</h4>
               <p class="mb-4"></p>

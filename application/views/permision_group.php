@@ -32,7 +32,7 @@
       <div class="card-body">
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
-            <table class="table card-table w-100" id="tblPermisGP">
+            <table class="table card-table table-striped table-bordered table-hover table-checkable order-column w-100" id="tblPermisGP">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -64,6 +64,9 @@
         </div>
       </div>
     </div>
+    </div>
+      </div>
+
     <!--/ Bordered Table -->
 
 

@@ -44,10 +44,11 @@ class MainMenu extends CI_Controller
         $this->parser->parse('page/pagecontent', $this->data);
     }
     public function mainmenu()
-    {
-        $this->another_js = "<script src='" . base_url() . "assets/js/mainMenu.js'></script>";
-        $this->render_view('mainmenu');
-    }
+{
+    $this->another_js = "<script src='" . base_url() . "assets/js/mainMenu.js' defer></script>";
+    $this->render_view('mainmenu');
+}
+
 
     public function callApi()
     {

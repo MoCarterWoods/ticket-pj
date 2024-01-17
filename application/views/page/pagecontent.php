@@ -19,7 +19,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>/assets/img/favicon/under-maintenance.png" />
+    <link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>/assets/img/favicon/icon_mn.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

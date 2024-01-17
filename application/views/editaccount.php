@@ -14,13 +14,12 @@
     <hr class="my-0" />
     <div class="card-body">
       <form id="formAccountSettings" method="POST" onsubmit="return false">
-      <div class="row">
-  <div class="mb-3 col-md-2 mx-auto align-items-center text-center">
-    <label for="empCode" class="form-label">empcode</label>
-    <input type="text" class="form-control text-center" id="empCode" name="empCode" value="" placeholder="" readonly />
-  </div>
-</div>
-
+        <div class="row">
+          <div class="mb-3 col-md-6 text-start">
+            <label for="empCode" class="form-label">empcode</label>
+            <input type="text" class="form-control text-center" id="empCode" name="empCode" value="" placeholder="" readonly />
+          </div>
+        </div>
 
         <div class="row">
           <!-- <div class="mb-3 col-md-6">
@@ -42,12 +41,13 @@
           </div>
 
           <div class="mt-2">
-          <div class="mt-2 d-flex justify-content-center">
-  <button type="submit" class="btn btn-primary me-2" id="btnSaveEdit">Save changes</button>
-</div>
-
+            <div class="mt-2 d-flex justify-content-start">
+              <button type="reset" class="btn btn-outline-secondary me-2">Changes Password</button>
+              <button type="submit" class="btn btn-primary me-2" id="btnSaveEdit">Save changes</button>
+            </div>
           </div>
       </form>
     </div>
   </div>
+</div>
 </div>

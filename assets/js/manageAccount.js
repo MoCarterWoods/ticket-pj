@@ -233,21 +233,25 @@ $(() => {
                 // Loop through the data and append menu items
                 for (var i = 0; i < data.length; i++) {
                     html += `
-                        <tr>
-                            <td><i></i> <strong>${i+1}</strong></td>
-                            
-                            <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
+                    <tr>
+                    <td class="text-center"><i></i> <strong>${i+1}</strong></td>
+                    <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
                             <span class="emp_name text-truncate">${data[i].sa_fristname} ${data[i].sa_lastname}</span><small class="emp_post text-truncate text-muted">${data[i].sa_emp_code}</small></div></div></td>
-                            <td><i></i> <strong>${data[i].spg_name}</strong></td>
-                            <td><i></i>${data[i].sa_email}</td>
-                            <td><i></i>${data[i].sa_created_date}</td>
-                            <td><button class="btnStatus btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].sa_id}" value="${data[i].sa_status_flg}">${data[i].sa_status_flg == 1 ? 'Enable' : 'Disable'}</button></td>
-                            <td class="" style="">
-                                <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].sa_id}">
-                                    <i class="bx bxs-edit"></i>
-                                </a>
-                            </td>
-                        </tr>`;
+                    <td class="text-center"><i></i> <strong>${data[i].spg_name}</strong></td>
+                    <td class="text-center"><i></i>${data[i].sa_email}</td>
+                    <td class="text-center"><i></i>${data[i].sa_created_date}</td>
+                    <td class="text-center">
+                      <button class="btnStatus btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].sa_id}" value="${data[i].sa_status_flg}">
+                        ${data[i].sa_status_flg == 1 ? 'Enable' : 'Disable'}
+                      </button>
+                    </td>
+                    <td class="text-center" style="">
+                      <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].sa_id}">
+                        <i class="bx bxs-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  `;
                    
                 }
                 $('#tblManageAccount').dataTable().fnDestroy()

@@ -8,10 +8,10 @@
     <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Sub Menu</h5>
     <div class="row py-1">
       <div class="col-1">
-        Main Menu
+      Premission Group
       </div>
       <div class="col">
-        <select class="form-control selGroup" id="selGroup">
+        <select class="form-control selGroup form-select" id="selGroup">
           <option value="" >Choose main menu</option>
         </select>
       </div>
@@ -20,11 +20,6 @@
       </div>
     </div>
     <br>
-
-
-
-                
-
 
     <div class="card" style="display: none;" id="content">
     <div class="col-sm-12 mt-3">
@@ -40,8 +35,8 @@
                                             </div>
                                             <div class="col-lg">
                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                <select class="form-control selMenuGroupName" id="selMenuGroupName">
-          <option value="" >Choose main menu</option>
+                                                <select class="form-control selMenuGroupName form-select" id="selMenuGroupName">
+          <option value="" >Choose Main menu</option>
         </select>
                                                     
                                                 </div>
@@ -55,8 +50,8 @@
                                             </div>
                                             <div class="col-lg">
                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                                <select class="form-control selSubMenuName" id="selSubMenuName">
-          <option value="" >Choose main menu</option>
+                                                <select class="form-control selSubMenuName form-select" id="selSubMenuName">
+          <option value="" >Choose Sub Menu</option>
         </select>
                                                     
                                                 </div>
@@ -73,7 +68,7 @@
       <div class="card-body">
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-basic table border-top" id="tblPermis">
+            <table class="datatables-basic table table-striped table-bordered table-hover table-checkable order-column border-top w-100" id="tblPermis">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -86,7 +81,7 @@
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0" id="tbody">
-                <!-- <tr>
+                <tr>
                   <td><i></i> <strong>1</strong></td>
                   <td><i></i> <strong>Dashboard</strong></td>
                   <td><i></i> <strong>Admin</strong></td>
@@ -98,13 +93,13 @@
                       <i class="bx bxs-edit"></i>
                     </a>
                   </td>
-                </tr> -->
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div>
+    </div></div></div></div></div></div></div>
     <!--/ Bordered Table -->
 
 
@@ -121,24 +116,22 @@
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col mb-3">
-                <label for="edtSubMenu" class="form-label">Main Menu</label>
-                <input type="text" id="edtSubMenu" class="form-control" placeholder="Enter Main Menu">
+            <div class="col mb-3">
+                <label class="form-label">Main menu</label>
+                <select id="edtMainmenu" class="edtMainmenu select2 form-select" data-allow-clear="true">
+                  <option value="">Choose Main menu</option>
+                </select>
               </div>
             </div>
+
             <div class="row">
               <div class="col mb-3">
-                <label for="edtController" class="form-label">Main Menu Icon</label>
-                <input type="text" id="edtController" class="form-control" placeholder="Enter Main Menu Icon">
+                <label class="form-label">Sub Menu</label>
+                <select id="edtSubEdit" class="edtSubEdit select2 form-select" data-allow-clear="true">
+                  <option value="">Choose Sub Menu</option>
+                </select>
               </div>
             </div>
-            <div class="row">
-              <div class="col mb-3">
-                <label for="edtOrderNo" class="form-label">Order No.</label>
-                <input type="text" id="edtOrderNo" class="form-control" placeholder="Enter Order No.">
-              </div>
-            </div>
-          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
@@ -146,3 +139,6 @@
         </div>
       </div>
     </div>
+    </div>
+
+              

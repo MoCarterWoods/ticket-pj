@@ -25,21 +25,24 @@ function shDataTable() {
                 var html = "";
                 for (let i = 0; i < data.length; i++) {
                     html += `
-                        <tr>
-                            <td><strong>${i + 1}</strong></td>
-                            <td><strong>${data[i].ssm_name}</strong></td>
-                            <td><strong>${data[i].ssm_controller}</strong></td>
-                            <td class="">${data[i].ssm_updated_date}</td>
-                            <td class="">${data[i].ssm_updated_by}</td>
-                            <td>
-                                <button class="btnStatus btn badge bg-label-${data[i].ssm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].ssm_id}" value="${data[i].ssm_status_flg}">${data[i].ssm_status_flg == 1 ? 'Enable' : 'Disable'}</button>
-                            </td>
-                            <td class="">
-                                <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].ssm_id}">
-                                    <i class="bx bxs-edit"></i>
-                                </a>
-                            </td>
-                        </tr>`;
+                    <tr>
+                    <td class="text-center"><strong>${i + 1}</strong></td>
+                    <td class="text-center"><strong>${data[i].ssm_name}</strong></td>
+                    <td class="text-center"><strong>${data[i].ssm_controller}</strong></td>
+                    <td class="text-center">${data[i].ssm_updated_date}</td>
+                    <td class="text-center">${data[i].ssm_updated_by}</td>
+                    <td class="text-center">
+                      <button class="btnStatus btn badge bg-label-${data[i].ssm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].ssm_id}" value="${data[i].ssm_status_flg}">
+                        ${data[i].ssm_status_flg == 1 ? 'Enable' : 'Disable'}
+                      </button>
+                    </td>
+                    <td class="text-center">
+                      <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].ssm_id}">
+                        <i class="bx bxs-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  `;
                 }
                 $('#tblSubMenu').dataTable().fnDestroy();
                 $("#tbody")

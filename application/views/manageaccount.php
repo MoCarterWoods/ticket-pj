@@ -17,16 +17,16 @@
                 <div class="table-responsive text-nowrap">
                     <!-- Removed scrollBody -->
                     <div class="card-datatable table-responsive pt-0">
-                        <table class="table card-table w-100" id="tblManageAccount">
+                        <table class="table card-table table-striped table-bordered table-hover table-checkable order-column w-100" id="tblManageAccount">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Employee Details</th>
-                                    <th>Permis Group</th>
-                                    <th>Email</th>
-                                    <th>CREATE DATE</th>
-                                    <th>Status</th>
-                                    <th>Edit</th>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Employee Details</th>
+                                    <th class="text-center">Permis Group</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">CREATE DATE</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Edit</th>
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0" id="tbody">

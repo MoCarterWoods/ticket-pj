@@ -32,14 +32,13 @@ function isValidEmail(email) {
 $('#btnSaveEdit').on('click', function () {
     var arrDataAdd = [];
     var EmpCode = $('#empCode').val();
-    var EmpPassword = ($('#edtPass').val().trim() == '') ? '' : $('#edtPass').val();
+
     var FirstName = $('#edtfName').val();
     var LastName = $('#edtlName').val();
     var Email = $('#edtEmail').val();
 
     
     if (
-        ( emp_data.sa_emp_password == EmpPassword || EmpPassword == '') &&
         emp_data.sa_fristname == FirstName &&
         emp_data.sa_lastname == LastName &&
         emp_data.sa_email == Email 
@@ -78,7 +77,7 @@ $('#btnSaveEdit').on('click', function () {
             title: 'Oops...',
             text: 'Please enter your Email correctly.',
         })
-    } else if (!(isThaiLanguage(EmpPassword) || EmpPassword == '') || !isThaiLanguage(Email)) {
+    } else if (!isThaiLanguage(Email)) {
         Swal.fire({
             icon: 'warning',
             title: 'Oops...',
@@ -99,7 +98,6 @@ $('#btnSaveEdit').on('click', function () {
                 var url = API_URL + 'Edit_Account/update_user';
                 const formData = new FormData()
                 formData.append('EmpCode', EmpCode);
-                formData.append('EmpPassword', EmpPassword);
                 formData.append('EmpFirstName', FirstName);
                 formData.append('EmpLastName', LastName);
                 formData.append('EmpEmail', Email);

@@ -18,24 +18,28 @@ $(() => {
                     // Loop through the data and append menu items
                     for (var i = 0; i < data.length; i++) {
                         html += `
-                            <tr>
-                                <td><i></i> <strong>${i + 1}</strong></td>
-                                <td><i></i> <strong>${data[i].spg_name}</strong></td>
-                                <td class="">${data[i].spg_updated_date}</td>
-                                <td class="">${data[i].spg_updated_by}</td>
-                                <td>
-                                    <button class="btnStatus btn badge bg-label-${data[i].spg_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].spg_id}" value="${data[i].spg_status_flg}">
-                                        ${data[i].spg_status_flg == 1 ? 'Enable' : 'Disable'}
-                                    </button>
-                                </td>
-                                <td class="">
-                                    </li>
-                                </ul>
-                                </div>
-                                <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spg_id}">
-                                    <i class="bx bxs-edit"></i>
-                                </a>
-                                </td>`;
+                        <tr>
+                        <td class="text-center"><i></i> <strong>${i + 1}</strong></td>
+                        <td class="text-center"><i></i> <strong>${data[i].spg_name}</strong></td>
+                        <td class="text-center">${data[i].spg_updated_date}</td>
+                        <td class="text-center">${data[i].spg_updated_by}</td>
+                        <td class="text-center">
+                          <button class="btnStatus btn badge bg-label-${data[i].spg_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].spg_id}" value="${data[i].spg_status_flg}">
+                            ${data[i].spg_status_flg == 1 ? 'Enable' : 'Disable'}
+                          </button>
+                        </td>
+                        <td class="text-center">
+                          <div>
+                            <ul>
+                              <!-- ตรงนี้เป็นส่วนของ List Item -->
+                            </ul>
+                          </div>
+                          <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spg_id}">
+                            <i class="bx bxs-edit"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      `;
                     }
 
                     $('#tblPermisGP').dataTable().fnDestroy();

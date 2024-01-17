@@ -64,21 +64,25 @@ function shDataTable() {
                 var html = "";
                 for (let i = 0; i < data.length; i++) {
                     html += `
-                        <tr>
-                            <td><strong>${i + 1}</strong></td>
-                            <td><strong>${data[i].smm_name}</strong></td>
-                            <td><strong>${data[i].ssm_name}</strong></td>
-                            <td class="">${data[i].spd_updated_date}</td>
-                            <td class="">${data[i].spd_updated_by}</td>
-                            <td>
-                                <button class="btnStatus btn badge bg-label-${data[i].spd_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].spd_id}" value="${data[i].spd_status_flg}">${data[i].spd_status_flg == 1 ? 'Enable' : 'Disable'}</button>
-                            </td>
-                            <td class="">
-                                <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
-                                    <i class="bx bxs-edit"></i>
-                                </a>
-                            </td>
-                        </tr>`;
+                    <tr>
+  <td class="text-center"><strong>${i + 1}</strong></td>
+  <td class="text-center"><strong>${data[i].smm_name}</strong></td>
+  <td class="text-center"><strong>${data[i].ssm_name}</strong></td>
+  <td class="text-center">${data[i].spd_updated_date}</td>
+  <td class="text-center">${data[i].spd_updated_by}</td>
+  <td class="text-center">
+    <button class="btnStatus btn badge bg-label-${data[i].spd_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].spd_id}" value="${data[i].spd_status_flg}">
+      ${data[i].spd_status_flg == 1 ? 'Enable' : 'Disable'}
+    </button>
+  </td>
+  <td class="text-center">
+    <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
+      <i class="bx bxs-edit"></i>
+    </a>
+  </td>
+</tr>
+
+                  `;
                 }
                 $('#tblPermis').dataTable().fnDestroy();
                 $("#tbody")
@@ -110,19 +114,21 @@ function MainmenuDropdown() {
             console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
 
             // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
-            dropdown.empty();
+
 
             // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
             for (let i = 0; i < response.length; i++) {
                 const menu = response[i];
                 dropdown.append(`<option value="${menu.smm_id}">${menu.smm_name}</option>`);
             }
+            
         },
         error: (err) => {
             console.log(err);
         },
     });
 }
+
 
 
 function SubmenuDropdown() {
@@ -137,7 +143,6 @@ function SubmenuDropdown() {
             console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
 
             // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
-            dropdown.empty();
 
             // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
             for (let i = 0; i < response.length; i++) {
@@ -151,6 +156,32 @@ function SubmenuDropdown() {
     });
 }
 
+
+
+var dropdown = $('.edtMainmenu');
+
+    // เรียก API
+    $.ajax({
+        method: "get",
+        url: "http://127.0.0.1/api/Manage_permis_detail/drop_main",
+        dataType: 'json',
+        success: (response) => {
+            console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
+
+            // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
+
+
+            // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
+            for (let i = 0; i < response.length; i++) {
+                const menu = response[i];
+                dropdown.append(`<option value="${menu.smm_id}">${menu.smm_name}</option>`);
+            }
+            
+        },
+        error: (err) => {
+            console.log(err);
+        },
+    });
 
 //-------------------------- Update flg status ----------------------------------
 
@@ -294,4 +325,42 @@ $(document).ready(function () {
             });
         }
     });
+});
+
+
+    //-------------------------- Update Account ----------------------------------
+    var data_mmn;
+    var mmnId;
+
+    $(document).on('click', '.tblEditBtn', function () {
+
+
+let id = $(this).attr('data-id');
+mmnId = id
+var url = API_URL + "Manage_permis_detail/show_show_edit";
+$.ajax({
+    // url: base_url('ManageAccount/callApiEditAccount'),
+    url: API_URL + "Manage_permis_detail/show_show_edit",
+    type: 'POST',
+    data: {
+        id: id,
+    },
+    dataType: 'json',
+    success: (response) => {
+
+       
+        data_mmn = response.data
+       
+        // accId = response
+        // for (let i = 0; i < response.length; i++) {
+        //     const data = response[i];
+        
+            $('#edtMainmenu').val(response.data.smm_name)
+           
+            $('#edtSubEdit').val(response.data.ssm_name)
+
+
+        // }
+    }
+});
 });
