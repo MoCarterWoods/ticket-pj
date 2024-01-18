@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ManageAccount extends CI_Controller {
+class AppPermissionGroup extends CI_Controller {
 
 	private $another_css;
     public $another_js;
@@ -44,9 +44,9 @@ class ManageAccount extends CI_Controller {
         $this->parser->parse('page/pagecontent', $this->data);
     }
 	
-	public function mngAccount() {
-        $this->another_js = "<script src='" . base_url() . "assets/js/manageAccount.js'></script>";
-        $this->render_view('view_manageAccount');
+	public function appPermisGroup() {
+        $this->another_js = "<script src='" . base_url() . "assets/js/AppPermisGroup.js'></script>";
+        $this->render_view('app_mng_Pergroup');
 
     }
 
@@ -64,33 +64,32 @@ class ManageAccount extends CI_Controller {
         }
         echo json_encode($data);
     }
-	public function callApiAddAccount()
-    {
-        
-        $result = $this->curPostRequest('Manage_account/insert_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
 
-    }
-    public function callApiEditAccount()
-    {
-        // echo json_encode($_POST);
-        // exit;
-        $result = $this->curPostRequest('Manage_account/show_show_acc', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
-
-    }
-    public function callApiUpdateAccount()
-    {
-        $result = $this->curPostRequest('Manage_account/update_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
-
-    }
     public function callApiUpdateStatus()
     {
-        $result = $this->curPostRequest('Manage_account/upstatus', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        $result = $this->curPostRequest('App_Manage_permis_group/update_flg', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
+
+    public function callApiAddPermisGroup()
+    {
+        
+        $result = $this->curPostRequest('App_Manage_permis_group/insert_permis_group', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+    public function callApiSaveEdit()
+    {
+        $result = $this->curPostRequest('App_Manage_permis_group/update_mpg_name', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+
+
+
     public function test()
     {
            echo $this->session->userdata('userName');

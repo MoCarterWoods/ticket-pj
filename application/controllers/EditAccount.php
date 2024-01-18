@@ -52,7 +52,7 @@ class EditAccount extends CI_Controller {
 	
 	public function editAccount() {
         $this->another_js = "<script src='" . base_url() . "assets/js/editAccount.js'></script>";
-        $this->render_view('editaccount');
+        $this->render_view('view_editAccount');
 
     }
 

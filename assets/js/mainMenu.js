@@ -1,23 +1,5 @@
 $(() => {
 
-    function showLoader() {
-        document.getElementById('pageLoader').style.display = 'flex';
-    }
-    
-    function hideLoader() {
-        document.getElementById('pageLoader').style.display = 'none';
-    }
-    
-    // ตัวอย่างการใช้ setTimeout เพื่อแสดง "page loader" เป็นเวลา 2 วินาที
-    setTimeout(function () {
-        showLoader();
-    
-        // เรียกใช้ฟังก์ชันหลังจากฟังก์ชันหนึ่งเสร็จสิ้น
-        fetchAndDisplayIcons(); // แทน yourFunction ด้วยฟังก์ชันที่คุณต้องการรอ
-    
-        hideLoader();
-    }, 10000);
-    
 
 
     shDataTable();

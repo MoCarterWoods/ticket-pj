@@ -46,7 +46,7 @@ class ManagePermission extends CI_Controller
     public function mngPermis()
     {
         $this->another_js = "<script src='" . base_url() . "assets/js/managePermisDetail.js'></script>";
-        $this->render_view('manage_permis_detail');
+        $this->render_view('view_manage_Permis_Detail');
     }
 
     public function callApi()

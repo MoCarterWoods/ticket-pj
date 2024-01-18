@@ -715,7 +715,8 @@ progress {
 
 .col-1 {
   flex: 0 0 auto;
-  width: 8.33333333%;
+  width: auto;
+  margin: 8px 0px 0px 0px;
 }
 
 .col-2 {
@@ -1093,6 +1094,7 @@ progress {
 @media (min-width: 768px) {
   .col-md {
     flex: 1 0 0%;
+    margin: 40px 0px 0px 0px;
   }
 
   .row-cols-md-auto > * {
@@ -1144,20 +1146,31 @@ progress {
     flex: 0 0 auto;
     width: 16.66666667%;
   }
+  .col-md-2-add {
+    margin: 22px 0px 0px 0px;
+  }
 
   .col-md-3 {
     flex: 0 0 auto;
     width: 25%;
+    margin: 17px 20px 30px 0px;
+  }
+  .col-md-3-main {
+    margin: 40px 0px 0px 0px;
   }
 
   .col-md-4 {
     flex: 0 0 auto;
     width: 33.33333333%;
   }
+  .col-md-1888 {
+    margin: 15.888888px 0px 0px 0px;
+  }
 
   .col-md-5 {
     flex: 0 0 auto;
     width: 41.66666667%;
+    margin-top: 1rem !important;
   }
 
   .col-md-6 {
@@ -1168,6 +1181,7 @@ progress {
   .col-md-7 {
     flex: 0 0 auto;
     width: 58.33333333%;
+    margin: 10px 0px 0px 0px;
   }
 
   .col-md-8 {
@@ -1360,7 +1374,8 @@ progress {
 
   .col-lg-3 {
     flex: 0 0 auto;
-    width: 25%;
+    width: 35%;
+    margin: 0px -20px 10px 10px;
   }
 
   .col-lg-4 {
@@ -1371,6 +1386,8 @@ progress {
   .col-lg-5 {
     flex: 0 0 auto;
     width: 41.66666667%;
+    margin: 0px -60px 10px 10px;
+
   }
 
   .col-lg-6 {
@@ -7432,6 +7449,11 @@ button:focus {
 .page-link.btn-primary {
   box-shadow: none !important;
 }
+.btn-edt-add {
+  flex: 0 0 auto;
+  width: 41.66666667%;
+  margin-top: 1rem !important;
+}
 
 .pagination-lg .page-link,
 .pagination-lg > li > a:not(.page-link) {
@@ -13380,6 +13402,9 @@ button.list-group-item-gray.active {
 
   .pb-xxl-5 {
     padding-bottom: 3rem !important;
+  }
+  .red-text {
+    color: red;
   }
 }
 @media (min-width: 1200px) {

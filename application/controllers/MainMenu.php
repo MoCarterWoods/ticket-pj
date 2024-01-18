@@ -46,7 +46,7 @@ class MainMenu extends CI_Controller
     public function mainmenu()
 {
     $this->another_js = "<script src='" . base_url() . "assets/js/mainMenu.js' defer></script>";
-    $this->render_view('mainmenu');
+    $this->render_view('view_mainMenu');
 }
 
 

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ManageAccount extends CI_Controller {
+class AppManageMenu extends CI_Controller {
 
 	private $another_css;
     public $another_js;
@@ -44,9 +44,9 @@ class ManageAccount extends CI_Controller {
         $this->parser->parse('page/pagecontent', $this->data);
     }
 	
-	public function mngAccount() {
-        $this->another_js = "<script src='" . base_url() . "assets/js/manageAccount.js'></script>";
-        $this->render_view('view_manageAccount');
+	public function appManageMenu() {
+        $this->another_js = "<script src='" . base_url() . "assets/js/AppManageMenu.js'></script>";
+        $this->render_view('app_manage_Menu');
 
     }
 
@@ -64,38 +64,33 @@ class ManageAccount extends CI_Controller {
         }
         echo json_encode($data);
     }
-	public function callApiAddAccount()
-    {
-        
-        $result = $this->curPostRequest('Manage_account/insert_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
 
-    }
-    public function callApiEditAccount()
-    {
-        // echo json_encode($_POST);
-        // exit;
-        $result = $this->curPostRequest('Manage_account/show_show_acc', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
 
-    }
-    public function callApiUpdateAccount()
-    {
-        $result = $this->curPostRequest('Manage_account/update_user', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
-        echo json_encode($result);
-
-    }
     public function callApiUpdateStatus()
     {
-        $result = $this->curPostRequest('Manage_account/upstatus', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        $result = $this->curPostRequest('App_Manage_menu/upstatus', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
-    public function test()
+
+    public function callApiAddMenu()
     {
-           echo $this->session->userdata('userName');
-            // $this->session->set_userdata('perMissionGroup', $login->permis_id);
+        
+        $result = $this->curPostRequest('App_Manage_menu/insert_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
     }
+
+    public function callApiUpdateMenu()
+    {
+        $result = $this->curPostRequest('App_Manage_menu/update_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+
+
+
     function curPostRequest($enpoint, $param_data, $is_array = true, $associative = false){
         /* Endpoint */
         $url = 'http://127.0.0.1/api/' . $enpoint;

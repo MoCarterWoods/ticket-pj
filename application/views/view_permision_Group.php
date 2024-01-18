@@ -6,30 +6,29 @@
     <!-- Bordered Table -->
     <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Permission Group</h5>
 
-    <div class="card">
+    <div class="card">      
+      <div class="card-body">
       <div class="row py-2 mt-2">
+
+
         <span class="fs-5 fw-bold text-primary-emphasis">Add Permission Group</span>
-        <div class="col-md-6 col-sm-10 col-5">
-          <div class="row ">
-            <div class="col-lg-3 p-t-20">
-              <span>Permission Group Name</span><span class="red-text"></span>
+            <div class="row">
+            <div class="mb-3 col-md-5">
+            <span>Permission Group Name</span><span class="red-text">*</span>
+            <input class="form-control" type="text" id="inpPermisGroup" oninput="InputAdd(this)">
             </div>
-            <div class="col">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                <input class="mdl-textfield__input" type="text" id="inpPermisGroup" oninput="InputAdd(this)">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md col-sm-2 col-2 p-t-20">
+
+            <div class="col-md col-sm-2 col-2 p-t-20">
           <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
         </div>
+        </div>
+        
+        
         <div class="col justify-content-start ms-1">
           <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
         </div>
       </div>
-      <h5 class="card-header">SYS_Account</h5>
-      <div class="card-body">
+      <h5 class="card-header">Permission Group</h5>
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
             <table class="table card-table table-striped table-bordered table-hover table-checkable order-column w-100" id="tblPermisGP">

@@ -15,7 +15,7 @@
     <div class="card-body">
       <form id="formAccountSettings" method="POST" onsubmit="return false">
         <div class="row">
-          <div class="mb-3 col-md-6 text-start">
+          <div class="mb-3 col-md-3 text-start">
             <label for="empCode" class="form-label">empcode</label>
             <input type="text" class="form-control text-center" id="empCode" name="empCode" value="" placeholder="" readonly />
           </div>

@@ -1,38 +1,4 @@
-<style>
-  .page-loader {
-   display: none;
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(255, 255, 255, 0.8);
-   z-index: 1000;
-}
 
-.loader {
-   border: 16px solid #f3f3f3;
-   border-top: 16px solid #3498db;
-   border-radius: 50%;
-   width: 80px;
-   height: 80px;
-   animation: spin 1s linear infinite;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   margin: -40px 0 0 -40px;
-}
-
-@keyframes spin {
-   0% { transform: rotate(0deg); }
-   100% { transform: rotate(360deg); }
-}
-
-</style>
-
-<div id="pageLoader" class="page-loader">
-   <div class="loader"></div>
-</div>
 
 <div class="content-wrapper">
   <!-- Content -->
@@ -42,6 +8,7 @@
       <span class="text-muted fw-light">Administrator /</span> Manage Account
     </h5>
 
+    
     <div class="card">
       <div class="card-body">
         <div class="row py-2 mt-2">
@@ -56,24 +23,23 @@
                 <span>Main Menu Icon</span><span class="red-text">*</span>
                 <input class="form-control mdl-textfield__input" type="text" id="inpMainMenuIcon" oninput="InputAdd(this)" value="" />
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 col-md-3-main">
                 <button class="btn btn-outline-primary" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#mdlIcon">Find ICON</button>
+                <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Add</button>
+
               </div>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md col-sm-12 col-12">
-            <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
-          </div>
           <div class="col justify-content-start ms-1 mt-2">
             <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
           </div>
         </div>
 
 
-        <h5 class="card-header mt-4">SYS_Account</h5>
+        <h5 class="card-header mt-4">Table_MainMenu</h5>
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
             <table class="table card-table table-striped table-bordered table-hover table-checkable order-column w-100" id="tblMainMenu">
