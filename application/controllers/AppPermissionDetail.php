@@ -45,7 +45,7 @@ class AppPermissionDetail extends CI_Controller {
     }
 	
 	public function appPermisDetail() {
-        // $this->another_js = "<script src='" . base_url() . "assets/js/AppPermisGroup.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/AppManagePermisDetail.js'></script>";
         $this->render_view('app_per_Detail');
 
     }
@@ -65,6 +65,27 @@ class AppPermissionDetail extends CI_Controller {
         echo json_encode($data);
     }
 
+
+    public function callApiShowPerGroup()
+    {
+        $result = $this->curPostRequest('App_Manage_permis_detail/show_group', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+    public function callApiShowTable()
+    {
+        $result = $this->curPostRequest('App_Manage_permis_detail/show_tb', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+    public function callApiShowMenuDrop()
+    {
+        $result = $this->curPostRequest('App_Manage_permis_detail/drop_menu', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
 

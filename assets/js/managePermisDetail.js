@@ -28,11 +28,14 @@ $(() => {
     // Event handler for clicking the search button
     $(document).on('click', '#btnSerchMain', function () {
         loadData();
+
+        
     });
 })
 
 
 function loadData() {
+   
     MainmenuDropdown();
     SubmenuDropdown();
     shDataTable(); // เรียกเพื่อโหลดข้อมูลในตารางเมื่อหน้าเว็บโหลด
@@ -104,24 +107,34 @@ function shDataTable() {
 
 function MainmenuDropdown() {
     var dropdown = $('.selMenuGroupName');
+    var permisId = $('#selGroup').val();
 
     // เรียก API
+    var url = API_URL + "Manage_permis_detail/drop_main?permisId=" + permisId;
     $.ajax({
-        method: "get",
-        url: "http://127.0.0.1/api/Manage_permis_detail/drop_main",
+        method: "POST",
+        url: base_url("ManagePermission/callApiShowMenuDrop?url=" + url),
+        data: {
+            permisId: permisId,
+        },
         dataType: 'json',
         success: (response) => {
-            console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
+            console.log(response);
 
-            // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
+            // เคลียร์ค่า value และลบ option ทั้งหมดใน dropdown
+            dropdown.val('').empty();
 
+            // เพิ่ม option แรก
+            dropdown.append('<option value="">Choose Group Name</option>');
 
             // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
             for (let i = 0; i < response.length; i++) {
                 const menu = response[i];
                 dropdown.append(`<option value="${menu.smm_id}">${menu.smm_name}</option>`);
             }
-            
+
+            // Trigger the change event of selSubMenuName after updating options
+            $('.selSubMenuName').trigger('change');
         },
         error: (err) => {
             console.log(err);
@@ -131,18 +144,31 @@ function MainmenuDropdown() {
 
 
 
+
+
+
 function SubmenuDropdown() {
     var dropdown = $('.selSubMenuName');
+    var permisId = $('#selGroup').val();
+
 
     // เรียก API
+    var url = API_URL + "Manage_permis_detail/drop_sub?permisId=" + permisId;
     $.ajax({
-        method: "get",
-        url: "http://127.0.0.1/api/Manage_permis_detail/drop_sub",
+        method: "POST",
+        url: base_url("ManagePermission/callApiShowSubDrop?url=" + url),
+        data: {
+            permisId: permisId,
+
+        },
         dataType: 'json',
         success: (response) => {
             console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
 
-            // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
+            dropdown.val('').empty();
+
+            // เพิ่ม option แรก
+            dropdown.append('<option value="">Choose Sub Name</option>');
 
             // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
             for (let i = 0; i < response.length; i++) {
@@ -158,30 +184,6 @@ function SubmenuDropdown() {
 
 
 
-var dropdown = $('.edtMainmenu');
-
-    // เรียก API
-    $.ajax({
-        method: "get",
-        url: "http://127.0.0.1/api/Manage_permis_detail/drop_main",
-        dataType: 'json',
-        success: (response) => {
-            console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
-
-            // ล้างค่าเดิมทั้งหมดใน dropdown ก่อน
-
-
-            // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
-            for (let i = 0; i < response.length; i++) {
-                const menu = response[i];
-                dropdown.append(`<option value="${menu.smm_id}">${menu.smm_name}</option>`);
-            }
-            
-        },
-        error: (err) => {
-            console.log(err);
-        },
-    });
 
 //-------------------------- Update flg status ----------------------------------
 
@@ -300,7 +302,7 @@ $(document).ready(function () {
                                     timer: 2500,
                                 }).then(() => {
                                     // $('#btnBack').trigger('click');
-                                    shDataTable()
+                                    loadData()
                                     
                                 });
                             } else if (res.result == 9) {
@@ -309,6 +311,15 @@ $(document).ready(function () {
                                     icon: 'warning',
                                     title: 'Ooops...',
                                     html: 'This permission already exists.',
+                                }).then(() => {
+                                    
+                                });
+                            } else if (res.result == 2) {
+                                Swal.fire({
+            
+                                    icon: 'warning',
+                                    title: 'Ooops...',
+                                    html: 'Group and Sub do not match.',
                                 }).then(() => {
                                     
                                 });

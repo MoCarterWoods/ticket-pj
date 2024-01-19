@@ -12,7 +12,7 @@
       </div>
       <div class="col">
         <select class="form-control selGroup form-select" id="selGroup">
-          <option value="">Choose main menu</option>
+          <option value="">Choose Gropp Name</option>
         </select>
       </div>
       <div class="col">
@@ -35,23 +35,14 @@
                 <div class="col-lg">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                     <select class="form-control selMenuGroupName form-select" id="selMenuGroupName">
-                      <option value="">Choose Main menu</option>
+                      <!-- <option value="">Choose Main menu</option> -->
                     </select>
                   </div>
                 </div>
               </div>
 
 
-              <div class="mb-3 col-md-5">
-                <span>Sub Menu Name</span><span class="red-text">*</span>
-                <div class="col-lg">
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                    <select class="form-control selSubMenuName form-select" id="selSubMenuName">
-                      <option value="">Choose Sub Menu</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+             
 
 
               <div class="col-md-2 col-md-2-main col-md-2-add">
@@ -74,7 +65,6 @@
                   <tr>
                     <th>No.</th>
                     <th>Main Menu</th>
-                    <th>Sub Menu</th>
                     <th>Update Date</th>
                     <th>Update By</th>
                     <th>Stasus</th>
@@ -82,19 +72,7 @@
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="tbody">
-                  <tr>
-                    <td><i></i> <strong>1</strong></td>
-                    <td><i></i> <strong>Dashboard</strong></td>
-                    <td><i></i> <strong>Admin</strong></td>
-                    <td class="">2024-01-10 14:45:04</td>
-                    <td class="">SD525</td>
-                    <td><span class="badge bg-label-success me-1">Enable</span></td>
-                    <td class="">
-            </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">
-              <i class="bx bxs-edit"></i>
-            </a>
-            </td>
-            </tr>
+                 
             </tbody>
             </table>
           </div>

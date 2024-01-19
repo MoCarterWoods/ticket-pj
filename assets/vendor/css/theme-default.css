@@ -11,6 +11,9 @@
 .bg-menu-theme .menu-header {
   position: relative;
 }
+.menu-theme-888{
+  display: none;
+}
 .bg-menu-theme .menu-header:before {
   content: "";
   position: absolute;
