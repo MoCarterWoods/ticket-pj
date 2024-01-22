@@ -133,10 +133,17 @@ function MainmenuDropdown() {
                 dropdown.append(`<option value="${menu.smm_id}">${menu.smm_name}</option>`);
             }
 
-            // Trigger the change event of selSubMenuName after updating options
-            $('.selSubMenuName').trigger('change');
+            // บันทึกค่าที่เลือกไว้ในตัวแปร data-main-menu
+            var selectedMainMenu = dropdown.val();
+            dropdown.data('main-menu', selectedMainMenu);
+
+            // เรียกใช้ SubmenuDropdown หลังจากที่ MainmenuDropdown ได้ค่ามาแล้ว
+            // ตรงนี้คือส่วนที่เราเพิ่มเข้ามา
+            $('.selMenuGroupName').change(function () {
+                SubmenuDropdown();
+            });
         },
-        error: (err) => {
+        error: (err) => {ผ
             console.log(err);
         },
     });
@@ -144,13 +151,11 @@ function MainmenuDropdown() {
 
 
 
-
-
-
 function SubmenuDropdown() {
-    var dropdown = $('.selSubMenuName');
+    var mainMenuDropdown = $('.selMenuGroupName');
+    var submenuDropdown = $('.selSubMenuName');
     var permisId = $('#selGroup').val();
-
+    var mainId = mainMenuDropdown.val();
 
     // เรียก API
     var url = API_URL + "Manage_permis_detail/drop_sub?permisId=" + permisId;
@@ -159,21 +164,21 @@ function SubmenuDropdown() {
         url: base_url("ManagePermission/callApiShowSubDrop?url=" + url),
         data: {
             permisId: permisId,
-
+            mainId: mainId,
         },
         dataType: 'json',
         success: (response) => {
             console.log(response); // ดูข้อมูลที่ได้รับจาก API ใน Console Log
 
-            dropdown.val('').empty();
+            submenuDropdown.val('').empty();
 
             // เพิ่ม option แรก
-            dropdown.append('<option value="">Choose Sub Name</option>');
+            submenuDropdown.append('<option value="">Choose Sub Name</option>');
 
             // วนลูปเพื่อเพิ่ม options เข้าไปใน dropdown
             for (let i = 0; i < response.length; i++) {
                 const menu = response[i];
-                dropdown.append(`<option value="${menu.ssm_id}">${menu.ssm_name}</option>`);
+                submenuDropdown.append(`<option value="${menu.ssm_id}">${menu.ssm_name}</option>`);
             }
         },
         error: (err) => {
@@ -181,6 +186,7 @@ function SubmenuDropdown() {
         },
     });
 }
+
 
 
 
@@ -344,34 +350,40 @@ $(document).ready(function () {
     var mmnId;
 
     $(document).on('click', '.tblEditBtn', function () {
-
-
-let id = $(this).attr('data-id');
-mmnId = id
-var url = API_URL + "Manage_permis_detail/show_show_edit";
-$.ajax({
-    // url: base_url('ManageAccount/callApiEditAccount'),
-    url: API_URL + "Manage_permis_detail/show_show_edit",
-    type: 'POST',
-    data: {
-        id: id,
-    },
-    dataType: 'json',
-    success: (response) => {
-
-       
-        data_mmn = response.data
-       
-        // accId = response
-        // for (let i = 0; i < response.length; i++) {
-        //     const data = response[i];
+        let id = $(this).attr('data-id');
+        mmnId = id;
+    
+        var url = API_URL + "Manage_permis_detail/show_show_edit";
         
-            $('#edtMainmenu').val(response.data.smm_name)
-           
-            $('#edtSubEdit').val(response.data.ssm_name)
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id,
+            },
+            dataType: 'json',
+            success: (response) => {
+                console.log(response.data);
+                
+                // ตรวจสอบให้แน่ใจว่า response.result เป็น true
+                if (response.result) {
+                    // ดึงค่า smm_name และ ssm_name จาก response.data
+                    const smmName = response.data.smm_name;
+                    const ssmName = response.data.ssm_name;
+    
+                    // ตั้งค่าให้กับ element ที่มี id ตามที่ระบุ
+                    $('#edtMainmenu').val(smmName);
+                    $('#edtSubEdit').val(ssmName).trigger("change");
+                } else {
+                    // กรณีที่ไม่พบข้อมูลหรือเกิดข้อผิดพลาด
+                    console.error("Error in API response:", response);
+                }
+            },
+            error: (err) => {
+                // กรณีที่มีข้อผิดพลาดในการเรียก API
+                console.error("Error calling API:", err);
+            }
+        });
 
-
-        // }
-    }
-});
+    
 });

@@ -69,42 +69,6 @@ $(() => {
         });
     }
 
-    // ---------------------------------------------------Icon---------------------------------------
-
-// สร้างฟังก์ชันเพื่อดึงและแสดง icons
-function fetchAndDisplayIcons() {
-  const iconsContainer = document.getElementById('icons-container');
-
-  // ใช้ fetch API เพื่อดึงข้อมูล icons จากไฟล์ JSON
-  fetch('http://127.0.0.1/ticket/assets/fonts/boxicon.json')
-    .then(response => response.json())
-    .then(data => {
-      const icons = data.icon;
-
-      // สร้าง HTML สำหรับแต่ละ icon และแทรกลงใน #icons-container
-      icons.forEach(iconClass => {
-        const iconHTML = `
-          <div class="col">
-            <div class="card icon-card cursor-pointer text-center mb-4">
-              <div class="card-body">
-                <i class='bx ${iconClass} mb-2'></i>
-                <p class="icon-name text-truncate mb-0">${iconClass}</p>
-              </div>
-            </div>
-          </div>
-        `;
-
-        // แทรก HTML ลงใน #icons-container
-        iconsContainer.innerHTML += iconHTML;
-      });
-    })
-    .catch(error => console.error('Error fetching icons:', error));
-}
-
-// เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
-document.addEventListener('DOMContentLoaded', fetchAndDisplayIcons);
-
-
 
         //-------------------------- add Menu ----------------------------------
 
