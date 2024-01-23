@@ -9,48 +9,381 @@
         height: 105px;
         width: 175px;
         margin-bottom: -30px;
+        margin-left: 40px;
 
     }
 
     .p-1 {
         margin-bottom: 0px;
-        margin-left: 20px;
+        margin-left: 50px;
     }
 
     .h3-top {
-        width: 500px;
+        margin-bottom: 0px;
+    }
+
+    .div-h3 {
+        margin-top: 30px;
+    }
+
+    .ch-left-mr {
+        margin-left: 20px;
+    }
+
+    .form-a {
+        width: 80%;
+        padding: 0.4375rem 0.875rem;
+        font-size: 0.9375rem;
+        font-weight: 400;
+        line-height: 1.53;
+        color: #697a8d;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d9dee3;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.375rem;
+    }
+
+    .col-lg-4-a label {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .pd-line-sel {
+        margin-left: 50px;
+        margin-right: -13px;
+        margin-top: 10px;
+    }
+
+    .other-sel {
+        margin: auto;
+        margin-top: 15px;
+    }
+
+    .area-mr {
+        margin-left: 15px;
+        margin-right: -15px;
+
+    }
+
+    .tool-mr {
+        margin-left: -15px;
+    }
+
+    #image-preview {
+        max-width: 100%;
+        max-height: 300px;
     }
 </style>
+
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card">
+
+
             <div class="row align-items-center ">
                 <div class="col-lg-4">
+
                     <div class="row">
                         <img class="img-logo" id="ContentPlaceHolder1_Image1" src="<?php echo base_url() ?>/assets/img/elements/tbklogo.png">
-
                     </div>
+
                     <div class="row">
                         <p class="p-1">บริษัท ทีบีเคเค (ประเทศไทย) จำกัด</p>
                         <p class="p-1">TBKK (THAILAND) CO., LTD.</p>
                     </div>
 
                 </div>
-                <div class="col-lg text-center">
+
+                <div class="col-lg text-center div-h3">
                     <div style="display: inline-block;">
-                        <p class="fs-3 fw-bold">MAINTENANCE WORKSHEET</p>
-                        <p class="fs-3 fw-bold">ใบงานบำรุงรักษา</p>
+                        <p class="fs-3 fw-bold h3-top">MAINTENANCE WORKSHEET</p>
+                        <p class="fs-3 fw-bold h3-top">ใบงานบำรุงรักษา</p>
                     </div>
                 </div>
 
                 <div class="col">
-                    <p>Jod No.</p>
-                    <p>Date :</p>
-                    <p>MN รับเรื่องโดย</p>
+                    <p>Jod No. <input name="sub" type="text" value="Auto Generate" id="datesub" disabled="disabled" class="text-center" autocomplete style="width:150px;"></p>
+                    <p>Date : <input name="datesub" type="text" value="" id="ContentPlaceHolder1_txtDateSubject" disabled="disabled" class="text-center" autocomplete style="width:150px;"></p>
+
                 </div>
             </div>
+            <hr style="border: 1px solid #ccc; margin: 20px 0; ">
+
+
+
+            <div class="row ">
+                <div class="col-lg-4 area-mr">
+
+                    <div class="row ">
+                        <div class="input-group">
+                            <label class="input-group-text" for="inputGroupSelect01">Area</label>
+                            <select class="form-select" id="inputGroupSelect01">
+                                <option value="">Choose...</option>
+                                <option value="pdarea">Product Area</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row pd-line-sel" style="display: none;" id="selpd">
+                        <label for="droppd">PD :
+                            <select class="form-select" id="droppd">
+
+                            </select>
+
+                        </label>
+                        <label for="dropline">Line :
+                            <select class="form-select" id="dropline">
+                                <option value="1">Product Area</option>
+                                <option value="2">Other Area</option>
+                            </select></label>
+                    </div>
+
+
+                    <div class="row other-sel" style="display: none;" id="selother">
+                        <label for="textother" class="form-label">Other</label>
+                        <textarea class="form-control" id="textother" rows="3"></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4">
+                    <div>
+                        <label for="processf" class="">Process / Function</label>
+                        <textarea class="form-control" id="processf" rows="2"></textarea>
+
+                        <div>
+                            <label for="inputGroupSelect01">Tooling System
+                                <select class="form-select" id="inputGroupSelect01">
+                                    <option value="">Choose...</option>
+                                    <option value="pdarea">Product Area</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-left: 25px;margin-right: 40px;">
+                        <label for="addMenuPart" class="form">Maker/Brand</label>
+                        <input type="text" id="addMenuPart" class="form-control" value="Woods1" readonly>
+
+
+                        <label for="addMenuPart" class="form">Model</label>
+                        <input type="text" id="addMenuPart" class="form-control" value="Woods2" readonly>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="col-lg-4 tool-mr">
+                    <div class="row ">
+                        <div style="margin-left: 20px;">
+                            <label class="">Job Type</label>
+                            <div class="form-check mt-3">
+                                <input name="default-radio-1" class="form-check-input" type="radio" value="1" id="defaultRadio1">
+                                <label class="form-check-label" for="defaultRadio1"> ซ่อมแซม [BM] Breakdown Maintenance</label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input name="default-radio-1" class="form-check-input" type="radio" value="2" id="defaultRadio2">
+                                <label class="form-check-label" for="defaultRadio2"> บำรุงรักษาตามแผน [PM] Planned Maintenance</label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input name="default-radio-1" class="form-check-input" type="radio" value="3" id="defaultRadio3">
+                                <label class="form-check-label" for="defaultRadio3"> ปรับปรุง [KM] Kaizen / Improvement</label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input name="default-radio-1" class="form-check-input" type="radio" value="4" id="defaultRadio4">
+                                <label class="form-check-label" for="defaultRadio4"> ติดตั้ง [IM] Installation / Set Up</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+            <hr>
+
+            <!-- ----------------------------- -->
+            <div class="row ">
+                <div class="col-lg-3 area-mr">
+
+                    <div class="row ">
+                        <label for="SelProblem">Problem Condition
+                            <select class="form-select" id="SelProblem">
+                                <option value="">Choose...</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="processf" class="form-label">Process / Function</label>
+                        <textarea class="form-control" id="processf" rows="4"></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-3">
+                    <div>
+                    <input type="file" id="file-input1" class="file-input" accept="image/*">
+                        <br>
+                        <img id="image-preview1" class="preview" src="#" alt="Image Preview 1">
+                    </div>
+
+                </div>
+                <div class="col-lg-3">
+                    <div>
+                    <input type="file" id="file-input2" class="file-input" accept="image/*">
+                        <br>
+                        <img id="image-preview2" class="preview" src="#" alt="Image Preview 2">
+                    </div>
+
+                </div>
+                <div class="col-lg-3">
+                    <div>
+                    <input type="file" id="file-input3" class="file-input" accept="image/*">
+            <br>
+            <img id="image-preview3" class="preview" src="#" alt="Image Preview 3">
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+            <!-- --------------------------------------- -->
+
+
+
+
+
+
+            <div class="col-lg-4 ">
+                <p>ประเภทงาน</p>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">การออกแบบ</label>
+                </div>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">การติดตั้ง / ชิ้นส่วน</label>
+                </div>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">การดัดแปลง / ซ่อมแซม</label>
+                </div>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">การใช้งาน / ผิดวิธี</label>
+                </div>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">การบำรุงรักษาเบื้องต้น</label>
+                </div>
+                <div class="ch-left-mr">
+                    <input id="" type="checkbox" name="">
+                    <label for="">การขันยึดแน่น</label>
+                </div>
+                <div class="ch-left-mr">
+                    <input id="" type="checkbox" name="">
+                    <label for="">การหล่อลื่น</label>
+                </div>
+                <div class="ch-left-mr">
+                    <input id="" type="checkbox" name="">
+                    <label for="">การทำความสะอาด</label>
+                </div>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">ปัจจัยภายนอก / ไฟฟ้า</label>
+                </div>
+                <div>
+                    <input id="" type="checkbox" name="">
+                    <label for="">อายุการใช้งาน</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="yourCheckboxId" name="yourCheckboxName">
+                    <label for="yourCheckboxId">อื่นๆ</label>
+                    <input class="form-a" type="text" id="yourTextInputId" name="yourTextInputName" placeholder="กรอกข้อความ">
+                </div>
+
+
+            </div>11111111111111111111111111111111111111111111112222222222222
+
+
+
+
+
+
+
+            <div class="col-lg-5">
+
+                <div class="row ">
+                    <div class="input-group">
+                        <label class="input-group-text" for="inputGroupSelect01">Area</label>
+                        <select class="form-select" id="inputGroupSelect01">
+                            <option selected="">Choose...</option>
+                            <option value="pdarea">Product Area</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row pd-line-sel" style="display: none;" id="selpd">
+                    <label for="droppd">PD :
+                        <select class="form-select" id="droppd">
+
+                        </select>
+
+                    </label>
+                    <label for="dropline">Line :
+                        <select class="form-select" id="dropline">
+                            <option value="1">Product Area</option>
+                            <option value="2">Other Area</option>
+                        </select></label>
+                </div>
+
+
+                <div class="row other-sel" style="display: none;" id="selother">
+                    <label for="textother" class="form-label">Other</label>
+                    <textarea class="form-control" id="textother" rows="3"></textarea>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+            <div class="row align-items-center ">
+                <div class="col-lg-6 ">
+                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
 
             <table>
                 <tbody>
@@ -79,7 +412,8 @@
                         <td colspan="4" class="auto-style12">&nbsp;&nbsp;&nbsp;&nbsp; เรื่อง (Subject) :
                             <input name="ctl00$ContentPlaceHolder1$txtSubject" type="text" id="ContentPlaceHolder1_txtSubject" autocomplete="off" style="width:480px;">
                         </td>
-                        <td colspan="2">ว-ด-ป ที่เขียน (Issued D-M-Y):<script>
+                        <td colspan="2">ว-ด-ป ที่เขียน (Issued D-M-Y):
+                            <script>
                                 $('#ContentPlaceHolder1_txtDateSubject').change(function() {
 
 
@@ -212,6 +546,7 @@
                                 <tbody>
                                     <tr>
                                         <td style="border-left: none; border-right: none">1.สภาพปัจจุบันและปัญหา (Current status and Problem)lem))</td>
+
                                         <td>2.รายละเอียดการแก้ไขปรับปรุง (Improvement details)</td>
                                     </tr>
                                     <tr>
@@ -396,6 +731,23 @@
                 </tbody>
 
             </table>
+
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        // Initialize the date picker
+        $('#datesub').datepicker({
+            dateFormat: 'dd/mm/yy', // Set the date format
+            showButtonPanel: true, // Show the button panel for today and done buttons
+            beforeShow: function(input, inst) {
+                // Disable the input field if it's disabled
+                if ($(input).prop('disabled')) {
+                    inst.dpDiv.find('.ui-datepicker-current').hide(); // Hide today button
+                    inst.dpDiv.find('.ui-datepicker-close').hide(); // Hide done button
+                }
+            }
+        });
+    });
+</script>

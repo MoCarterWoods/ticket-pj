@@ -107,6 +107,7 @@ function shDataTable() {
 
 function MainmenuDropdown() {
     var dropdown = $('.selMenuGroupName');
+    
     var permisId = $('#selGroup').val();
 
     // เรียก API
@@ -370,7 +371,12 @@ $(document).ready(function () {
                     // ดึงค่า smm_name และ ssm_name จาก response.data
                     const smmName = response.data.smm_name;
                     const ssmName = response.data.ssm_name;
-    
+                    const smmId = response.data.smm_id;
+                    const ssmId = response.data.ssm_id;
+            
+                    // Log ค่าทั้งหมดเพื่อตรวจสอบว่าถูกต้อง
+                    console.log(`smm_id: ${smmId}, smm_name: ${smmName}, ssm_id: ${ssmId}, ssm_name: ${ssmName}`);
+            
                     // ตั้งค่าให้กับ element ที่มี id ตามที่ระบุ
                     $('#edtMainmenu').val(smmName);
                     $('#edtSubEdit').val(ssmName).trigger("change");
@@ -379,10 +385,7 @@ $(document).ready(function () {
                     console.error("Error in API response:", response);
                 }
             },
-            error: (err) => {
-                // กรณีที่มีข้อผิดพลาดในการเรียก API
-                console.error("Error calling API:", err);
-            }
+            
         });
 
     

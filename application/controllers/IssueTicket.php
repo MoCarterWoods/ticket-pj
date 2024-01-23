@@ -45,7 +45,7 @@ class IssueTicket extends CI_Controller {
     }
 	
 	public function issTicket() {
-        // $this->another_js = "<script src='" . base_url() . "assets/js/manageAccount.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/issueTicket.js'></script>";
         $this->render_view('view_issueTicket');
 
     }
