@@ -65,11 +65,50 @@ class IssueTicket extends CI_Controller {
         echo json_encode($data);
     }
 	
+    public function callApiSearchLineCd()
+    {
+        // $result = $this->curPostRequest('LogTag_information/search_DataTable', array('data' => serialize($_POST)));
+        $result = $this->curPostRequest_1('LogTag_information/show_LineFormPD', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+    }
 
 
 
 
-
+    function curPostRequest_1($enpoint, $param_data, $is_array = true, $associative = false){
+        /* Endpoint */
+        $url = 'http://192.168.161.219/APIReprint/' . $enpoint;
+    
+        /* eCurl */
+        $curl = curl_init($url);
+    
+        /* Data */
+        $data = (array) $param_data;
+    
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    
+        /* Set JSON data to POST */
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    
+        /* Define content type */
+        // curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    
+        /* Return json */
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    
+        /* make request */
+        $result = curl_exec($curl);
+        if (curl_errno($curl)) {
+            echo 'cURL error: ' . curl_error($curl);
+            exit;
+        }
+    
+        /* close curl */
+        curl_close($curl);
+    
+        return $is_array ? json_decode($result, $associative) : $result;
+    }
 
 
     public function test()
