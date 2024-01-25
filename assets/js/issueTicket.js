@@ -26,24 +26,24 @@ $(document).ready(function () {
     populateDropdown();
 
     function populateDropdown() {
-        const apiUrl = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineMst';
+        const apiUrlDroppd = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineMst';
         const droppd = $('#droppd');
     
         $.ajax({
-            url: apiUrl,
+            url: apiUrlDroppd,
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                // Clear all existing options in the dropdown
-                $('#droppd').empty();
+                // Clear all existing options in the droppd dropdown
+                droppd.empty();
     
                 // Add a default option
-                $('#droppd').append('<option value="">Choose Production Code</option>');
+                droppd.append('<option value="">Choose Production Code</option>');
     
                 // Loop through the response and add new options
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
-                    $('#droppd').append(`<option value="${data.dep_cd}">${data.dep_cd}</option>`);
+                    droppd.append(`<option value="${data.dep_cd}">${data.dep_cd}</option>`);
                 }
             },
             error: function (error) {
@@ -52,30 +52,72 @@ $(document).ready(function () {
         });
     }
     
-
-
-
     $('#droppd').on('change', function () {
-        $('#dropline').empty();
+        const dropline = $('#dropline');
+        dropline.empty();
         let getPD = $('#droppd').val();
-        var url = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineFormPD';
+        const apiUrlDropline = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineFormPD';
+    
         $.ajax({
             method: "POST",
-            url: base_url("IssueTicket/callApiSearchLineCd?url=" + url),
+            url: base_url("IssueTicket/callApiSearchLineCd?url=" + apiUrlDropline),
             dataType: 'Json',
             data: {
                 getPD: getPD,
             },
             success: (response) => {
-                $('#dropline').empty();
-                $('#dropline').append('<option value="">Choose Line Code</option>');
+                dropline.empty();
+                dropline.append('<option value="">Choose Line Code</option>');
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
-                    $('#dropline').append(`<option value="${data.line_cd}">${data.line_cd}</option>`);
+                    dropline.append(`<option value="${data.line_cd}">${data.line_cd}</option>`);
                 }
             }
         });
     });
+    
+
+     // ------------------------------------------- Job Type ----------------------------------------
+
+     $(document).ready(function () {
+        // สร้างตัวแปร response ในขอบเขตของ document.ready
+        let response;
+    
+       JobtypeDropdown();
+    
+        function JobtypeDropdown() {
+            const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_job_type';
+    
+            $.ajax({
+                url: apiUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                    response = res;
+    
+                    // Clear existing options in the dropdown
+                    $('#SelJobtype').empty();
+    
+                    // Add a default option
+                    $('#SelJobtype').append('<option value="">Choose...</option>');
+    
+                    // Loop through the API response and add options to the dropdown
+                    for (let i = 0; i < response.length; i++) {
+                        const jobtypeData = response[i];
+                        $('#SelJobtype').append(`<option value="${jobtypeData.mjt_id}">${jobtypeData.mjt_name_eng} / ${jobtypeData.mjt_name_thai}</option>`);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching data from the API:', error);
+                }
+            });
+        }
+    
+       
+    });
+
+
 
     // ------------------------------------------- ToolSystem ----------------------------------------
 
@@ -190,8 +232,8 @@ $(document).ready(function () {
     
                     // Loop through the API response and add options to the dropdown
                     for (let i = 0; i < response.length; i++) {
-                        const problemData = response[i];
-                        $('#SelInspec').append(`<option value="${problemData.mim_id}">${problemData.mim_name_eng} / ${problemData.mim_name_thai}</option>`);
+                        const inspecData = response[i];
+                        $('#SelInspec').append(`<option value="${inspecData.mim_id}">${inspecData.mim_name_eng} / ${inspecData.mim_name_thai}</option>`);
                     }
                 },
                 error: function (error) {
@@ -203,7 +245,7 @@ $(document).ready(function () {
         });
     
 
-                // -------------------------------- Trouble -------------------------------
+     // -------------------------------- Trouble -------------------------------
                 $(document).ready(function () {
                     TroubleDropdown();
                 
@@ -226,8 +268,8 @@ $(document).ready(function () {
             
                             // Loop through the API response and add options to the dropdown
                             for (let i = 0; i < response.length; i++) {
-                                const problemData = response[i];
-                                $('#SelTbAc').append(`<option value="${problemData.mt_id}">${problemData.mt_name_eng} / ${problemData.mt_name_thai}</option>`);
+                                const troubleData = response[i];
+                                $('#SelTbAc').append(`<option value="${troubleData.mt_id}">${troubleData.mt_name_eng} / ${troubleData.mt_name_thai}</option>`);
                             }
                         },
                         error: function (error) {
@@ -236,7 +278,7 @@ $(document).ready(function () {
                     });
                 }
             
-                });
+            });
             
 
 
@@ -290,65 +332,270 @@ $(document).ready(function () {
 
 
 
-
+// ------------------------ Image Uoload ---------------------
 
 jQuery(document).ready(function () {
     ImgUpload();
-  });
-  
-  function ImgUpload() {
+});
+
+function ImgUpload() {
     var imgWrap = "";
     var imgArray = [];
-  
+
     $('.upload__inputfile').each(function () {
-      $(this).on('change', function (e) {
-        imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
-        var maxLength = $(this).attr('data-max_length');
-  
-        var files = e.target.files;
-        var filesArr = Array.prototype.slice.call(files);
-        var iterator = 0;
-        filesArr.forEach(function (f, index) {
-  
-          if (!f.type.match('image.*')) {
-            return;
-          }
-  
-          if (imgArray.length > maxLength) {
-            return false
-          } else {
-            var len = 0;
-            for (var i = 0; i < imgArray.length; i++) {
-              if (imgArray[i] !== undefined) {
-                len++;
-              }
-            }
-            if (len > maxLength) {
-              return false;
-            } else {
-              imgArray.push(f);
-  
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
-                imgWrap.append(html);
-                iterator++;
-              }
-              reader.readAsDataURL(f);
-            }
-          }
+        $(this).on('change', function (e) {
+            imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+            var maxLength = 3; // กำหนดจำนวนไฟล์สูงสุดที่ต้องการ
+
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+            var iterator = 0;
+
+            filesArr.forEach(function (f, index) {
+                if (!f.type.match('image.*')) {
+                    return;
+                }
+            
+                if (imgArray.length >= maxLength) {
+                    return false;
+                } else {
+                    imgArray.push(f);
+            
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var imgId = "img-" + (iterator + 1); // สร้าง ID โดยใช้ iterator
+                        var html = "<div class='upload__img-box' id='" + imgId + "'><div class='file-name img-" + (iterator + 1) + "'>" + f.name + "</div><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+                        imgWrap.append(html);
+                        iterator++;
+                    }
+                    reader.readAsDataURL(f);
+                }
+            });
         });
-      });
     });
-  
+
     $('body').on('click', ".upload__img-close", function (e) {
-      var file = $(this).parent().data("file");
-      for (var i = 0; i < imgArray.length; i++) {
-        if (imgArray[i].name === file) {
-          imgArray.splice(i, 1);
-          break;
+        var file = $(this).parent().data("file");
+        for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i].name === file) {
+                imgArray.splice(i, 1);
+                break;
+            }
         }
-      }
-      $(this).parent().parent().remove();
+        $(this).parent().parent().remove();
     });
-  }
+}
+
+
+
+
+
+//-------------------------- Save ----------------------------------
+
+$(document).ready(function () {
+    $('#btnSave').on('click', function () {
+        var Area = $('#inputGroupSelect01').val();
+        var AreaPd = $('#droppd').val();
+        var AreaLine = $('#dropline').val();
+        var AreaOther = $('#textother').val();
+        var ProcFunc = $('#processf').val();
+        var ToolSys = $('#SelTool').val();
+        var Maker = $('#addMaker').val();
+        var Model = $('#addModel').val();
+        var JobType = $('#SelJobtype').val();
+        var ProbCon = $('#SelProblem').val();
+        var ProbConDetail = $('#mdetailprdlm').val();
+
+        var pbpic1 = $('#file-input1-problm').val(); 
+        var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); // เอาเฉพาะชื่อไฟล์
+        var pbpic2 = $('#file-input2-problm').val(); 
+        var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); // เอาเฉพาะชื่อไฟล์
+        var pbpic3 = $('#file-input3-problm').val(); 
+        var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); // เอาเฉพาะชื่อไฟล์
+
+
+        // var ProbConPic2 = $('#edtSubMenu').val();
+        // var ProbConPic3 = $('#edtSubMenu').val();
+
+        var InspecMethod = $('#SelInspec').val();
+        var InspecDetail = $('#mdetailinsprc').val();
+
+        // var InspecPic1 = $('#edtSubMenu').val();
+        // var InspecPic2 = $('#edtSubMenu').val();
+        // var InspecPic3 = $('#edtSubMenu').val();
+
+        var Trouble = $('#SelTbAc').val();
+        var TroubleDetail = $('#mdetailtbac').val();
+
+        // var TroublePic1 = $('#edtSubMenu').val();
+        // var TroublePic2 = $('#edtSubMenu').val();
+        // var TroublePic3 = $('#edtSubMenu').val();
+        var Checked1 = $('#Check1').prop('checked');
+        var Checked2 = $('#Check2').prop('checked');
+        var Checked3 = $('#Check3').prop('checked');
+        var Checked4 = $('#Check4').prop('checked');
+        var Checked5 = $('#Check5').prop('checked');
+        var Checked6 = $('#Check6').prop('checked');
+        var Checked7 = $('#Check7').prop('checked');
+        var Checked8 = $('#Check8').prop('checked');
+        var Checked9 = $('#Check9').prop('checked');
+        var Checked10 = $('#Check10').prop('checked');
+        var Checked11 = $('#Check11').prop('checked');
+
+        var Checkval1 = Checked1 ? $('#Check1').val() : '';
+        var Checkval2 = Checked2 ? $('#Check2').val() : '';
+        var Checkval3 = Checked3 ? $('#Check3').val() : '';
+        var Checkval4 = Checked4 ? $('#Check4').val() : '';
+        var Checkval5 = Checked5 ? $('#Check5').val() : '';
+        var Checkval6 = Checked6 ? $('#Check6').val() : '';
+        var Checkval7 = Checked7 ? $('#Check7').val() : '';
+        var Checkval8 = Checked8 ? $('#Check8').val() : '';
+        var Checkval9 = Checked9 ? $('#Check9').val() : '';
+        var Checkval10 = Checked10 ? $('#Check10').val() : '';
+        var Checkval11 = Checked11 ? $('#Check11').val() : '';
+
+        // แสดงผลลัพธ์ใน cons11
+        console.log("Area: " + Area);
+        console.log("AreaPd: " + AreaPd);
+        console.log("AreaLine: " + AreaLine);
+        console.log("AreaOther: " + AreaOther);
+        console.log("ProcFunc: " + ProcFunc);
+        console.log("ToolSys: " + ToolSys);
+        console.log("Maker: " + Maker);
+        console.log("Model: " + Model);
+        console.log("JobType: " + JobType);
+        console.log("ProbCon: " + ProbCon);
+        console.log("ProbConDetail: " + ProbConDetail);
+        console.log("ProbConPic1: " + ProbConPic1);
+        console.log("ProbConPic2: " + ProbConPic2);
+        console.log("ProbConPic3: " + ProbConPic3);
+        console.log("InspecMethod: " + InspecMethod);
+        console.log("InspecDetail: " + InspecDetail);
+        console.log("Trouble: " + Trouble);
+        console.log("TroubleDetail: " + TroubleDetail);
+
+        console.log('Check1 :', Checkval1);
+        console.log('Check2 :', Checkval2);
+        console.log('Check3 :', Checkval3);
+        console.log('Check4 :', Checkval4);
+        console.log('Check5 :', Checkval5);
+        console.log('Check6 :', Checkval6);
+        console.log('Check7 :', Checkval7);
+        console.log('Check8 :', Checkval8);
+        console.log('Check9 :', Checkval9);
+        console.log('Check10 :', Checkval10);
+        console.log('Check11 :', Checkval11);
+
+        if (Area == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Area.',
+            });
+        } else if (ProcFunc == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter Process / Function.',
+            }); 
+        } 
+        else if (ToolSys == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Tooling System.',
+            }); 
+        } 
+        else if (JobType == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Jobtype.',
+            }); 
+        } 
+        else if (ProbCon == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Problem Condition.',
+            }); 
+        } 
+        else if (InspecMethod == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Inspection Method.',
+            }); 
+        } 
+        else if (Trouble == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Troubleshooting/Action.',
+            }); 
+        } 
+        
+        else if (!isThaiLanguage(SubName) || !isThaiLanguage(SubCon) || !isThaiLanguage(OrderNo)) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter in English only.',
+            });
+        } else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to save edit?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'Manage_submenu/edit_sub_menu';
+                    const formData = new FormData()
+                    formData.append('SubName', SubName);
+                    formData.append('SubCon', SubCon);
+                    formData.append('OrderNo', OrderNo);
+                    formData.append('subId', subId);
+
+                    $.ajax({
+                        url: base_url('SubMenu/callApiSaveEdit'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        dataType: 'json',
+                        success: function (res) {
+                            console.log("sssssjd=>>", res);
+                            if (res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    html: 'Edit main menu success',
+                                    timer: 2500,
+                                }).then(() => {
+                                    $('#mdlEdit').modal('hide');
+                                    shDataTable();
+                                });
+                            } else if (res.result == 2) {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Oops...',
+                                    text: 'Duplicate value!!',
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+});

@@ -247,8 +247,7 @@
                         </label>
                         <label for="dropline">Line :
                             <select class="form-select" id="dropline">
-                                <option value="1">Product Area</option>
-                                <option value="2">Other Area</option>
+                                <option value="">Choose Line Code</option>
                             </select></label>
                     </div>
 
@@ -266,23 +265,16 @@
                         <label for="processf" class="">Process / Function</label>
                         <textarea class="form-control" id="processf" rows="2"></textarea>
 
-                        <div>
-                            <label for="SelTool">Tooling System
-                                <select class="form-select" id="SelTool">
-                                    <option value="">Choose...</option>
 
-                                </select>
-                            </label>
-                        </div>
                     </div>
 
-                    <div class="row" style="margin-left: 25px;margin-right: 40px;">
-                        <label for="addMaker" class="form">Maker/Brand</label>
-                        <input type="text" id="addMaker" class="form-control" value="" readonly>
+                    <div>
+                        <label for="SelJobtype">Job Type
+                            <select class="form-select" id="SelJobtype">
+                                <option value="">Choose...</option>
 
-
-                        <label for="addModel" class="form">Model</label>
-                        <input type="text" id="addModel" class="form-control" value="" readonly>
+                            </select>
+                        </label>
                     </div>
 
                 </div>
@@ -292,24 +284,21 @@
 
                 <div class="col-lg-4 tool-mr">
                     <div class="row ">
-                        <div style="margin-left: 20px;">
-                            <label class="">Job Type</label>
-                            <div class="form-check mt-3">
-                                <input name="default-radio-1" class="form-check-input" type="radio" value="1" id="defaultRadio1">
-                                <label class="form-check-label" for="defaultRadio1"> ซ่อมแซม [BM] Breakdown Maintenance</label>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input name="default-radio-1" class="form-check-input" type="radio" value="2" id="defaultRadio2">
-                                <label class="form-check-label" for="defaultRadio2"> บำรุงรักษาตามแผน [PM] Planned Maintenance</label>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input name="default-radio-1" class="form-check-input" type="radio" value="3" id="defaultRadio3">
-                                <label class="form-check-label" for="defaultRadio3"> ปรับปรุง [KM] Kaizen / Improvement</label>
-                            </div>
-                            <div class="form-check mt-3">
-                                <input name="default-radio-1" class="form-check-input" type="radio" value="4" id="defaultRadio4">
-                                <label class="form-check-label" for="defaultRadio4"> ติดตั้ง [IM] Installation / Set Up</label>
-                            </div>
+                        <div>
+                            <label for="SelTool">Tooling System
+                                <select class="form-select" id="SelTool">
+                                    <option value="">Choose...</option>
+
+                                </select>
+                            </label>
+                        </div>
+                        <div class="row" style="    margin-left: -10px;margin-top: -10px;padding: 25px;">
+                            <label for="addMaker" class="form">Maker/Brand</label>
+                            <input type="text" id="addMaker" class="form-control" value="" readonly>
+
+
+                            <label for="addModel" class="form">Model</label>
+                            <input type="text" id="addModel" class="form-control" value="" readonly>
                         </div>
 
                     </div>
@@ -362,11 +351,26 @@ margin-top: -45px;">
                         <div class="upload__btn-box">
                             <label class="upload__btn">
                                 <p>Upload images</p>
-                                <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+                                <input type="file" multiple="" accept="image/*" data-max_length="3" class="upload__inputfile">
                             </label>
                         </div>
                         <div class="upload__img-wrap"></div>
                     </div>
+
+
+                    <div>
+                        <label for="file-input1-problm">Pic 1</label>
+                        <input type="file" id="file-input1-problm" class="file-input form-control" accept="image/*">
+
+                        <label for="file-input2-problm">Pic 2</label>
+                        <input type="file" id="file-input2-problm" class="file-input form-control" accept="image/*">
+
+                        <label for="file-input3-problm">Pic 3</label>
+                        <input type="file" id="file-input3-problm" class="file-input form-control" accept="image/*">
+
+                    </div>
+
+
 
                 </div>
                 <!-- --------------------------------------- -->
@@ -412,13 +416,13 @@ margin-top: -45px;">
 
                     <div class="col-lg-3 sh-im">
                         <div>
-                            <label for="file-input1">Pic 1</label>
+                            <label for="file-input1-isp">Pic 1</label>
                             <input type="file" id="file-input1-isp" class="file-input form-control" accept="image/*">
 
-                            <label for="file-input1">Pic 2</label>
+                            <label for="file-input2-isp">Pic 2</label>
                             <input type="file" id="file-input2-isp" class="file-input form-control" accept="image/*">
 
-                            <label for="file-input1">Pic 3</label>
+                            <label for="file-input3-isp">Pic 3</label>
                             <input type="file" id="file-input3-isp" class="file-input form-control" accept="image/*">
 
                         </div>
@@ -476,13 +480,13 @@ margin-top: -45px;">
 
                     <div class="col-lg-3 sh-im">
                         <div>
-                            <label for="file-input1">Pic 1</label>
+                            <label for="file-input1-tbac">Pic 1</label>
                             <input type="file" id="file-input1-tbac" class="file-input form-control" accept="image/*">
 
-                            <label for="file-input1">Pic 2</label>
+                            <label for="file-input2-tbac">Pic 2</label>
                             <input type="file" id="file-input2-tbac" class="file-input form-control" accept="image/*">
 
-                            <label for="file-input1">Pic 3</label>
+                            <label for="file-input3-tbac">Pic 3</label>
                             <input type="file" id="file-input3-tbac" class="file-input form-control" accept="image/*">
 
                         </div>
@@ -517,59 +521,119 @@ margin-top: -45px;">
         <div class="container-xxl flex-grow-1 container-p-y" style="margin-top: -45px;">
             <div class="card">
 
+            <div class="row ">
+                <div class="col-lg-4 area-mr">
 
-                <div class="col-md">
+                    <div class="row ">
+                        <label for="SelAnalyz">การวิเคราะสาเหตุของปัญหา
+                            <select class="form-select" id="SelAnalyz">
+                                <option value="">Choose...</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="mdetailAnalyz" class="">More Detail</label>
+                        <textarea class="form-control" id="mdetailAnalyz" rows="4"></textarea>
+                    </div>
 
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check1">
-                        <label class="form-check-label" for="Check1"> การออกแบบ </label>
+                    <div>
+                        <label for="file-input1-Analyz">Pic 1</label>
+                        <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*">
+
+                        <label for="file-input2-Analyz">Pic 2</label>
+                        <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*">
+
+                        <label for="file-input3-Analyz">Pic 3</label>
+                        <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*">
+
                     </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check2">
-                        <label class="form-check-label" for="Check2"> การติดตั้ง / ชิ้นส่วน </label>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check3">
-                        <label class="form-check-label" for="Check3"> การดัดแปลง / ซ่อมแซม </label>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check4">
-                        <label class="form-check-label" for="Check4"> การใช้งาน / ผิดวิธี </label>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check5">
-                        <label class="form-check-label" for="Check5"> การบำรุงรักษาเบื้องต้น </label>
-                    </div>
-                    <div class="form-check mt-3" style="margin-left: 30px;">
-                        <input class="form-check-input" type="checkbox" value="" id="Check6">
-                        <label class="form-check-label" for="Check6"> การขันยึดแน่น </label>
-                    </div>
-                    <div class="form-check mt-3" style="margin-left: 30px;">
-                        <input class="form-check-input" type="checkbox" value="" id="Check7">
-                        <label class="form-check-label" for="Check7"> การหล่อลื่น </label>
-                    </div>
-                    <div class="form-check mt-3" style="margin-left: 30px;">
-                        <input class="form-check-input" type="checkbox" value="" id="Check8">
-                        <label class="form-check-label" for="Check8"> การทำความสะอาด </label>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check9">
-                        <label class="form-check-label" for="Check9"> ปัจจัยภายนอก / ไฟฟ้า </label>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check10">
-                        <label class="form-check-label" for="Check10"> อายุการใช้งาน </label>
-                    </div>
-                    <div class="form-check mt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="Check11">
-                        <label class="form-check-label" for="Check11"> อื่นๆ </label><span class="additional-info"> (รายละเอียดเพิ่มเติม)</span>
-                    </div>
+                </div>
+
+
+                <div class="col-lg-3 sh-im">
 
                 </div>
 
 
+                <div class="col-lg-3">
 
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="Check1">
+                            <label class="form-check-label" for="Check1"> การออกแบบ </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="2" id="Check2">
+                            <label class="form-check-label" for="Check2"> การติดตั้ง / ชิ้นส่วน </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="3" id="Check3">
+                            <label class="form-check-label" for="Check3"> การดัดแปลง / ซ่อมแซม </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="4" id="Check4">
+                            <label class="form-check-label" for="Check4"> การใช้งาน / ผิดวิธี </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="5" id="Check5">
+                            <label class="form-check-label" for="Check5"> การบำรุงรักษาเบื้องต้น </label>
+                        </div>
+                        <div class="form-check mt-3" style="margin-left: 30px;">
+                            <input class="form-check-input" type="checkbox" value="6" id="Check6">
+                            <label class="form-check-label" for="Check6"> การขันยึดแน่น </label>
+                        </div>
+                        <div class="form-check mt-3" style="margin-left: 30px;">
+                            <input class="form-check-input" type="checkbox" value="7" id="Check7">
+                            <label class="form-check-label" for="Check7"> การหล่อลื่น </label>
+                        </div>
+                        <div class="form-check mt-3" style="margin-left: 30px;">
+                            <input class="form-check-input" type="checkbox" value="8" id="Check8">
+                            <label class="form-check-label" for="Check8"> การทำความสะอาด </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="9" id="Check9">
+                            <label class="form-check-label" for="Check9"> ปัจจัยภายนอก / ไฟฟ้า </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="10" id="Check10">
+                            <label class="form-check-label" for="Check10"> อายุการใช้งาน </label>
+                        </div>
+                        <div class="form-check mt-3">
+                            <input class="form-check-input" type="checkbox" value="11" id="Check11">
+                            <label class="form-check-label" for="Check11"> อื่นๆ </label><span class="additional-info"> (รายละเอียดเพิ่มเติม)</span>
+                        </div>
+
+                        </div>
+                        </div>
+
+
+
+                </div>
+                <button type="button" class="btn btn-outline-secondary">Reset</button>
+                <button type="button" class="btn btn-success" id="btnSave">Success</button>
             </div>
 
+
+
+                
+            </div>
         </div>
-    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
