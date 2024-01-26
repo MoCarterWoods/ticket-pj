@@ -127,7 +127,7 @@ $(() => {
                     html += `
                     <tr>
                     <td class="text-center"><i></i> <strong>${i+1}</strong></td>
-                    <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
+                    <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
                             <span class="emp_name text-truncate">${data[i].sa_fristname} ${data[i].sa_lastname}</span><small class="emp_post text-truncate text-muted">${data[i].sa_emp_code}</small></div></div></td>
                     <td class="text-center"><i></i> <strong>${data[i].spg_name}</strong></td>
                     <td class="text-center"><i></i>${data[i].sa_email}</td>

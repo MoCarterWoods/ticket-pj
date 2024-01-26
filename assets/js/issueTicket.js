@@ -1,46 +1,56 @@
 $(document).ready(function () {
     var dropdown = $('#inputGroupSelect01');
     var droppd = $('#droppd');
+    var dropline = $('#dropline'); // เพิ่มตัวแปร dropline
+    var textother = $('#textother');
 
     var selpdDiv = $('#selpd');
     var selotherDiv = $('#selother');
 
+    function resetUI() {
+        droppd.empty().val('');
+        dropline.empty().val('');
+        textother.val('');
+    }
+
     dropdown.change(function () {
         var selectedValue = dropdown.val();
-
-        if (selectedValue === "pdarea") {
+    
+        if (selectedValue === "1") {
             selpdDiv.show();
             selotherDiv.hide();
+            resetUI();
             populateDropdown();
-        } else if (selectedValue === "other") {
+        } else if (selectedValue === "2") {
             selpdDiv.hide();
             selotherDiv.show();
+            droppd.empty().val(' ');
+            dropline.empty().val(' ');
+            textother.val('');
+
+            console.log(droppd.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
+            console.log(dropline.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
         } else {
             selpdDiv.hide();
             selotherDiv.hide();
+            resetUI();
         }
     });
+    
 
-
-    // ----------------------------------- PD & LINE -----------------------------------------
     populateDropdown();
 
     function populateDropdown() {
         const apiUrlDroppd = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineMst';
-        const droppd = $('#droppd');
-    
+        
         $.ajax({
             url: apiUrlDroppd,
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                // Clear all existing options in the droppd dropdown
                 droppd.empty();
-    
-                // Add a default option
-                droppd.append('<option value="">Choose Production Code</option>');
-    
-                // Loop through the response and add new options
+                droppd.append('<option value=" ">Choose Production Code</option>');
+                dropline.append('<option value=" ">Choose Line Code</option>');
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
                     droppd.append(`<option value="${data.dep_cd}">${data.dep_cd}</option>`);
@@ -53,8 +63,6 @@ $(document).ready(function () {
     }
     
     $('#droppd').on('change', function () {
-        const dropline = $('#dropline');
-        dropline.empty();
         let getPD = $('#droppd').val();
         const apiUrlDropline = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineFormPD';
     
@@ -65,9 +73,10 @@ $(document).ready(function () {
             data: {
                 getPD: getPD,
             },
-            success: (response) => {
+            success: function (response) {
                 dropline.empty();
                 dropline.append('<option value="">Choose Line Code</option>');
+                
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
                     dropline.append(`<option value="${data.line_cd}">${data.line_cd}</option>`);
@@ -75,6 +84,8 @@ $(document).ready(function () {
             }
         });
     });
+});
+
     
 
      // ------------------------------------------- Job Type ----------------------------------------
@@ -327,7 +338,7 @@ $(document).ready(function () {
             }
         });
     }
-});
+
 
 
 
@@ -395,41 +406,66 @@ function ImgUpload() {
 $(document).ready(function () {
     $('#btnSave').on('click', function () {
         var Area = $('#inputGroupSelect01').val();
-        var AreaPd = $('#droppd').val();
-        var AreaLine = $('#dropline').val();
-        var AreaOther = $('#textother').val();
+        var AreaPd = '';
+        var AreaLine = '';
+        var AreaOther = '';
+        
+        // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
+        if (Area === '1') {
+            AreaPd = $('#droppd').val();
+            AreaLine = $('#dropline').val();
+            // รีเซ็ทค่าใน #droppd และ #dropline
+
+        } else if (Area === '2') {
+            AreaOther = $('#textother').val();
+            // รีเซ็ทค่าใน #droppd และ #dropline
+            $('#droppd').val(''); 
+            $('#dropline').val('');
+        }
+
         var ProcFunc = $('#processf').val();
         var ToolSys = $('#SelTool').val();
         var Maker = $('#addMaker').val();
         var Model = $('#addModel').val();
         var JobType = $('#SelJobtype').val();
+
+        // ------------ Problem Con ---------------
         var ProbCon = $('#SelProblem').val();
         var ProbConDetail = $('#mdetailprdlm').val();
 
         var pbpic1 = $('#file-input1-problm').val(); 
-        var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); // เอาเฉพาะชื่อไฟล์
+        var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); 
         var pbpic2 = $('#file-input2-problm').val(); 
-        var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); // เอาเฉพาะชื่อไฟล์
+        var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); 
         var pbpic3 = $('#file-input3-problm').val(); 
-        var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); // เอาเฉพาะชื่อไฟล์
+        var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); 
+        // ------------ End Problem Con ---------------
 
-
-        // var ProbConPic2 = $('#edtSubMenu').val();
-        // var ProbConPic3 = $('#edtSubMenu').val();
-
+        // ------------ Inspec Method ---------------
         var InspecMethod = $('#SelInspec').val();
         var InspecDetail = $('#mdetailinsprc').val();
 
-        // var InspecPic1 = $('#edtSubMenu').val();
-        // var InspecPic2 = $('#edtSubMenu').val();
-        // var InspecPic3 = $('#edtSubMenu').val();
+        var ismpic1 = $('#file-input1-isp').val(); 
+        var InspecPic1 = ismpic1.replace(/^.*[\\\/]/, ''); 
+        var ismpic2 = $('#file-input2-isp').val(); 
+        var InspecPic2 = ismpic2.replace(/^.*[\\\/]/, ''); 
+        var ismpic3 = $('#file-input3-isp').val(); 
+        var InspecPic3 = ismpic3.replace(/^.*[\\\/]/, ''); 
+        // ------------ End Inspec Method ---------------
 
+        // ------------ Trouble Shooting ---------------
         var Trouble = $('#SelTbAc').val();
         var TroubleDetail = $('#mdetailtbac').val();
 
-        // var TroublePic1 = $('#edtSubMenu').val();
-        // var TroublePic2 = $('#edtSubMenu').val();
-        // var TroublePic3 = $('#edtSubMenu').val();
+        var troubpic1 = $('#file-input1-tbac').val(); 
+        var TroublePic1 = troubpic1.replace(/^.*[\\\/]/, ''); 
+        var troubpic2 = $('#file-input2-tbac').val(); 
+        var TroublePic2 = troubpic2.replace(/^.*[\\\/]/, ''); 
+        var troubpic3 = $('#file-input3-tbac').val(); 
+        var TroublePic3 = troubpic3.replace(/^.*[\\\/]/, ''); 
+        // ------------ End Trouble Shooting ---------------
+
+        // ------------ Analyze problem -----------------
         var Checked1 = $('#Check1').prop('checked');
         var Checked2 = $('#Check2').prop('checked');
         var Checked3 = $('#Check3').prop('checked');
@@ -453,6 +489,23 @@ $(document).ready(function () {
         var Checkval9 = Checked9 ? $('#Check9').val() : '';
         var Checkval10 = Checked10 ? $('#Check10').val() : '';
         var Checkval11 = Checked11 ? $('#Check11').val() : '';
+        // ------------ End Analyze Problem -----------------
+        var DetailAnalyze = $('#additionalInput').val();
+        var analyzeChecked1 = $('#Check-de1').prop('checked');
+        var analyzeChecked2 = $('#Check-de2').prop('checked');
+        var analyzeChecked3 = $('#Check-de3').prop('checked');
+        var analyzeChecked4 = $('#Check-de4').prop('checked');
+        var analyzeChecked5 = $('#Check-de5').prop('checked');
+        var analyzeChecked6 = $('#Check-de6').prop('checked');
+
+        var analyzeCheckval1 = analyzeChecked1 ? $('#Check1').val() : '';
+        var analyzeCheckval2 = analyzeChecked2 ? $('#Check2').val() : '';
+        var analyzeCheckval3 = analyzeChecked3 ? $('#Check3').val() : '';
+        var analyzeCheckval4 = analyzeChecked4 ? $('#Check4').val() : '';
+        var analyzeCheckval5 = analyzeChecked5 ? $('#Check5').val() : '';
+        var analyzeCheckval6 = analyzeChecked6 ? $('#Check6').val() : '';
+
+        // ------------ Delivery Equipment -----------------
 
         // แสดงผลลัพธ์ใน cons11
         console.log("Area: " + Area);
@@ -465,14 +518,20 @@ $(document).ready(function () {
         console.log("Model: " + Model);
         console.log("JobType: " + JobType);
         console.log("ProbCon: " + ProbCon);
-        console.log("ProbConDetail: " + ProbConDetail);
-        console.log("ProbConPic1: " + ProbConPic1);
-        console.log("ProbConPic2: " + ProbConPic2);
-        console.log("ProbConPic3: " + ProbConPic3);
+        // console.log("ProbConDetail: " + ProbConDetail);
+        // console.log("ProbConPic1: " + ProbConPic1);
+        // console.log("ProbConPic2: " + ProbConPic2);
+        // console.log("ProbConPic3: " + ProbConPic3);
         console.log("InspecMethod: " + InspecMethod);
-        console.log("InspecDetail: " + InspecDetail);
+        // console.log("InspecDetail: " + InspecDetail);
+        // console.log("InspecPic1: " + InspecPic1);
+        // console.log("InspecPic2: " + InspecPic2);
+        // console.log("InspecPic3: " + InspecPic3);
         console.log("Trouble: " + Trouble);
-        console.log("TroubleDetail: " + TroubleDetail);
+        // console.log("TroubleDetail: " + TroubleDetail);
+        // console.log("TroublePic1: " + TroublePic1);
+        // console.log("TroublePic2: " + TroublePic2);
+        // console.log("TroublePic3: " + TroublePic3);
 
         console.log('Check1 :', Checkval1);
         console.log('Check2 :', Checkval2);
@@ -485,6 +544,8 @@ $(document).ready(function () {
         console.log('Check9 :', Checkval9);
         console.log('Check10 :', Checkval10);
         console.log('Check11 :', Checkval11);
+
+
 
         if (Area == '') {
             Swal.fire({
@@ -533,18 +594,10 @@ $(document).ready(function () {
                 title: 'Oops...',
                 text: 'Please Select Troubleshooting/Action.',
             }); 
-        } 
-        
-        else if (!isThaiLanguage(SubName) || !isThaiLanguage(SubCon) || !isThaiLanguage(OrderNo)) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops...',
-                text: 'Please enter in English only.',
-            });
-        } else {
+        }  else {
             Swal.fire({
                 title: 'Are you sure?',
-                text: 'Do you want to save edit?',
+                text: 'Do you want to save Ticket?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -552,15 +605,44 @@ $(document).ready(function () {
                 confirmButtonText: 'Yes, save!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var url = API_URL + 'Manage_submenu/edit_sub_menu';
+                    var url = API_URL + 'Issue_Ticket/save_issue';
                     const formData = new FormData()
-                    formData.append('SubName', SubName);
-                    formData.append('SubCon', SubCon);
-                    formData.append('OrderNo', OrderNo);
-                    formData.append('subId', subId);
+                    formData.append('AreaPd', AreaPd);
+                    formData.append('AreaLine', AreaLine);
+                    formData.append('AreaOther', AreaOther);
+                    formData.append('ProcFunc', ProcFunc);
+                    formData.append('ToolSys', ToolSys);
+                    formData.append('Maker', Maker);
+                    formData.append('Model', Model);
+                    formData.append('JobType', JobType);
+                    formData.append('ProbCon', ProbCon);
+                    formData.append('ProbConDetail', ProbConDetail);
+                    formData.append('ProbConPic1', ProbConPic1);
+                    formData.append('ProbConPic2', ProbConPic2);
+                    formData.append('ProbConPic3', ProbConPic3);
+                    formData.append('InspecMethod', InspecMethod);
+                    formData.append('InspecDetail', InspecDetail);
+                    formData.append('InspecPic1', InspecPic1);
+                    formData.append('InspecPic2', InspecPic2);
+                    formData.append('InspecPic3', InspecPic3);
+                    formData.append('Trouble', Trouble);
+                    formData.append('TroubleDetail', TroubleDetail);
+                    formData.append('TroublePic1', TroublePic1);
+                    formData.append('TroublePic2', TroublePic2);
+                    formData.append('TroublePic3', TroublePic3);
+
+                    formData.append('DetailAnalyze', DetailAnalyze);
+                    formData.append('analyzeCheckval1', analyzeCheckval1);
+                    formData.append('analyzeCheckval2', analyzeCheckval2);
+                    formData.append('analyzeCheckval3', analyzeCheckval3);
+                    formData.append('analyzeCheckval4', analyzeCheckval4);
+                    formData.append('analyzeCheckval5', analyzeCheckval5);
+                    formData.append('analyzeCheckval6', analyzeCheckval6);
+
+
 
                     $.ajax({
-                        url: base_url('SubMenu/callApiSaveEdit'),
+                        url: base_url('IssueTicket/callApiSaveTicket'),
                         type: 'POST',
                         data: formData,
                         processData: false,
@@ -568,22 +650,21 @@ $(document).ready(function () {
                         cache: false,
                         dataType: 'json',
                         success: function (res) {
-                            console.log("sssssjd=>>", res);
                             if (res.result == 1) {
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success!',
-                                    html: 'Edit main menu success',
+                                    html: 'Save Ticket success',
                                     timer: 2500,
                                 }).then(() => {
                                     $('#mdlEdit').modal('hide');
-                                    shDataTable();
+
                                 });
                             } else if (res.result == 2) {
                                 Swal.fire({
                                     icon: 'warning',
                                     title: 'Oops...',
-                                    text: 'Duplicate value!!',
+                                    text: 'Add Fail!!',
                                 });
                             } else {
                                 Swal.fire({

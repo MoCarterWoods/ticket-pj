@@ -67,21 +67,27 @@
       <div class="modal-body">
         <div class="row">
           <div class="col mb-3">
-            <label for="edtMainMenu" class="form-label">Current Password</label>
-            <input type="password" id="edtMainMenu" class="form-control" placeholder="Enter Your Current Password">
+            <label for="edtcurPass" class="form-label">Current Password</label>
+            <input type="password" id="edtcurPass" class="form-control" placeholder="Enter Your Current Password">
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="edtMainIcon" class="form-label">New Password</label>
-            <input type="password" id="edtMainIcon" class="form-control" placeholder="Enter Your New Password">
+            <label for="edtnewPass" class="form-label">New Password</label>
+            <input type="password" id="edtnewPass" class="form-control" placeholder="Enter Your New Password">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-3">
+            <label for="edtconnewPass" class="form-label">Confirm New Password</label>
+            <input type="password" id="edtconnewPass" class="form-control" placeholder="Confirm Your New Password">
           </div>
         </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnSavePass">Save changes</button>
       </div>
     </div>
   </div>

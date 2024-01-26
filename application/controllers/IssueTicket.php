@@ -72,6 +72,14 @@ class IssueTicket extends CI_Controller {
         echo json_encode($result);
     }
 
+    public function callApiSaveTicket()
+    {
+        $result = $this->curPostRequest('Issue_Ticket/save_issue', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    
+
 
 
 

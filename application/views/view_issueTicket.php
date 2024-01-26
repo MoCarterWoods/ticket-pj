@@ -232,8 +232,8 @@
                             <label class="input-group-text" for="inputGroupSelect01">Area</label>
                             <select class="form-select" id="inputGroupSelect01">
                                 <option value="">Choose...</option>
-                                <option value="pdarea">Product Area</option>
-                                <option value="other">Other</option>
+                                <option value="1">Product Area</option>
+                                <option value="2">Other</option>
                             </select>
                         </div>
                     </div>
@@ -429,12 +429,7 @@ margin-top: -45px;">
 
                     </div>
                     <div class="col-lg-5 sh-im">
-                        <div>
-                            <img id="image-preview1" class="preview" src="#" alt="Image Preview 1"><br>
-                            <img id="image-preview2" class="preview" src="#" alt="Image Preview 2"><br>
-                            <img id="image-preview3" class="preview" src="#" alt="Image Preview 3">
 
-                        </div>
 
                     </div>
 
@@ -493,12 +488,7 @@ margin-top: -45px;">
 
                     </div>
                     <div class="col-lg-5 sh-im">
-                        <div>
-                            <img id="image-preview1" class="preview" src="#" alt="Image Preview 1"><br>
-                            <img id="image-preview2" class="preview" src="#" alt="Image Preview 2"><br>
-                            <img id="image-preview3" class="preview" src="#" alt="Image Preview 3">
 
-                        </div>
 
                     </div>
 
@@ -514,48 +504,41 @@ margin-top: -45px;">
     </div>
 
 
-    <!--------------------------------------------------------------- new col------------------------------------------------------------------------- -->
+    <!--------------------------------------------------------------- วิเคราะสาเหตุของปัญหา ------------------------------------------------------------------------- -->
 
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y" style="margin-top: -45px;">
             <div class="card">
 
-            <div class="row ">
-                <div class="col-lg-4 area-mr">
+                <div class="row ">
+                    <div class="col-lg-4 area-mr">
 
-                    <div class="row ">
-                        <label for="SelAnalyz">การวิเคราะสาเหตุของปัญหา
-                            <select class="form-select" id="SelAnalyz">
-                                <option value="">Choose...</option>
-                            </select>
-                        </label>
+                        <div>
+                            <label for="mdetailAnalyz" class="">More Detail</label>
+                            <textarea class="form-control" id="mdetailAnalyz" rows="4"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="file-input1-Analyz">Pic 1</label>
+                            <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*">
+
+                            <label for="file-input2-Analyz">Pic 2</label>
+                            <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*">
+
+                            <label for="file-input3-Analyz">Pic 3</label>
+                            <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*">
+
+                        </div>
                     </div>
-                    <div>
-                        <label for="mdetailAnalyz" class="">More Detail</label>
-                        <textarea class="form-control" id="mdetailAnalyz" rows="4"></textarea>
-                    </div>
 
-                    <div>
-                        <label for="file-input1-Analyz">Pic 1</label>
-                        <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*">
 
-                        <label for="file-input2-Analyz">Pic 2</label>
-                        <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*">
-
-                        <label for="file-input3-Analyz">Pic 3</label>
-                        <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*">
+                    <div class="col-lg-3 sh-im">
 
                     </div>
-                </div>
 
 
-                <div class="col-lg-3 sh-im">
-
-                </div>
-
-
-                <div class="col-lg-3">
+                    <div class="col-lg-3">
 
                         <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="1" id="Check1">
@@ -602,22 +585,113 @@ margin-top: -45px;">
                             <label class="form-check-label" for="Check11"> อื่นๆ </label><span class="additional-info"> (รายละเอียดเพิ่มเติม)</span>
                         </div>
 
-                        </div>
-                        </div>
+                    </div>
+                </div>
 
+            </div>
+
+
+
+
+            <!-- -------------------------------------------- การส่งมอบอุปกรณ์ / เครื่องจักร ---------------------------------------  -->
+
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <h5 class="card-header">การส่งมอบอุปกรณ์ / เครื่องจักร</h5>
+                        <div class="card-body demo-vertical-spacing demo-only-element">
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="1" id="Check-de1">
+                                <label class="form-check-label" for="Check-de1"> อุปกรณ์ / เครื่องจักร มีการแก้ไขแบบชั่วคราว ต้องมีการแก้ไขถาวรภายหลังกำหนดการแก้ไขถาวร โดยประมาณ </label>
+                                <input type="text" class="form-control" id="additionalInput" placeholder=" . . . . . . . . . " for="Check-de1">
+
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="2" id="Check-de2">
+                                <label class="form-check-label" for="Check-de2"> อุปกรณ์ / เครื่องจักร มีการบำรุงรักษาเสร็จสิ้น / ครบถ้วน </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="3" id="Check-de3">
+                                <label class="form-check-label" for="Check-de3"> ตรวจสอบด้านคุณภาพ / จัดการงานเสีย </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="4" id="Check-de4">
+                                <label class="form-check-label" for="Check-de4"> บันทึกการเปลี่ยนแปลง 4M </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="5" id="Check-de5">
+                                <label class="form-check-label" for="Check-de5"> สภาพความปลอดภัย </label>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="6" id="Check-de6">
+                                <label class="form-check-label" for="Check-de6"> สภาพ 5ส เรียบร้อย </label>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="col-md-6">
+                    <!-- สรุปงานซ่อมบำรุง -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-4">
+                                <h5 class="card-header">สรุปงานซ่อมบำรุง</h5>
+                                <div class="card-body demo-vertical-spacing demo-only-element">
+
+                                    <div class="mb-3 row">
+                                        <label for="text-input" class="col-md-5 col-form-label" style="font-size: 16px;">ระยะเวลารอชิ้นส่วน</label>
+                                        <div class="col-md-5">
+                                            <input class="form-control text-center" type="text" value="" id="SumWait" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="text-input" class="col-md-5 col-form-label" style="font-size: 16px;">ระยะเวลาในการบำรุงรักษา</label>
+                                        <div class="col-md-5">
+                                            <input class="form-control text-center" type="text" value="" id="SumRepair" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="text-input" class="col-md-5 col-form-label" style="font-size: 16px;">เวลาเริ่มต้นการผลิต</label>
+                                        <div class="col-md-5">
+                                            <input class="form-control text-center" type="text" value="" id="SumStart" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="text-input" class="col-md-5 col-form-label" style="font-size: 16px;">รวมระยะเวลา Breakdown</label>
+                                        <div class="col-md-5">
+                                            <input class="form-control text-center" type="text" value="" id="SumBreak" readonly>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
-                <button type="button" class="btn btn-outline-secondary">Reset</button>
-                <button type="button" class="btn btn-success" id="btnSave">Success</button>
             </div>
 
 
 
-                
-            </div>
+            <!-- ปุ่มนอก -->
+
+            <button type="button" class="btn btn-outline-secondary">Reset</button>
+            <button type="button" class="btn btn-success" id="btnSave">Save</button>
         </div>
-    
 
 
 
@@ -632,8 +706,5 @@ margin-top: -45px;">
 
 
 
-
-
-
-
-                    
+    </div>
+</div>

@@ -148,3 +148,103 @@ cache: false,
 //     $('#edtPermission').val(emp_data[0].permis_id).trigger("change")
 //     $('#edtPlant').val(emp_data[0].plant).trigger("change")
 // }
+
+ //-------------------------- Save Edit ----------------------------------
+ $(document).ready(function () {
+    $('#btnSavePass').on('click', function () {
+        var arrDataAdd = [];
+        var CurrPass = $('#edtcurPass').val();
+        var NewPass = $('#edtnewPass').val();
+        var ConNewPass = $('#edtconnewPass').val();
+
+        if (CurrPass == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter Current Password',
+            });
+        } else if (NewPass == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter New Password',
+            });
+        } else if (ConNewPass == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter Confirm New Password',
+            });
+        } else if (NewPass === CurrPass) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'New Password cannot be the same as Current Password',
+            });
+        } else if (NewPass !== ConNewPass) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'New Password do not match',
+            });
+        } else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to Changes Password',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Changes Password!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'Edit_Account/update_pass';
+                    const formData = new FormData();
+                    formData.append('CurrPass', CurrPass);
+                    formData.append('ConNewPass', ConNewPass);
+
+                    $.ajax({
+                        url: base_url('EditAccount/callApiUpdatePass'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    html: 'Password changed successfully.',
+                                    timer: 2500,
+                                }).then(() => {
+                                    $('#mdlEdit').modal('hide');
+                                    $('#edtcurPass').val('');
+                                    $('#edtnewPass').val('');
+                                    $('#edtconnewPass').val('');
+                                });
+                            } else if (res.result == 0) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    html: 'Invalid Current Password.',
+                                }).then(() => {});
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        },
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
+

@@ -70,6 +70,12 @@ public function callApiUpdateAccount()
         echo json_encode($result);
 
     }
+    public function callApiUpdatePass()
+    {
+        $result = $this->curPostRequest('Edit_Account/update_pass', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
 
