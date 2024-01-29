@@ -344,44 +344,51 @@ $(document).ready(function () {
 
 
 // ------------------------ Image Uoload ---------------------
+var imgIdCounter = 1;
+var imgIds = {};
 
 jQuery(document).ready(function () {
-    ImgUpload();
+    ImgUpload('#upload-box1', 'img-', 1);
+    ImgUpload('#upload-box2', 'img-', 4);
+    ImgUpload('#upload-box3', 'img-', 7);
+    ImgUpload('#upload-box4', 'img-', 10);
 });
 
-function ImgUpload() {
+function ImgUpload(uploadBoxSelector, imgIdPrefix, startIdx) {
     var imgWrap = "";
     var imgArray = [];
 
-    $('.upload__inputfile').each(function () {
-        $(this).on('change', function (e) {
-            imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
-            var maxLength = 3; // กำหนดจำนวนไฟล์สูงสุดที่ต้องการ
+    $(uploadBoxSelector).find('.upload__inputfile').on('change', function (e) {
+        imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+        var maxLength = 3;
 
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-            var iterator = 0;
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
 
-            filesArr.forEach(function (f, index) {
-                if (!f.type.match('image.*')) {
-                    return;
+        filesArr.forEach(function (f) {
+            if (!f.type.match('image.*')) {
+                return;
+            }
+
+            if (imgArray.length >= maxLength) {
+                return false;
+            } else {
+                imgArray.push(f);
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var imgId = imgIdPrefix + imgIdCounter;
+                    var html = "<div class='upload__img-box' id='" + imgId + "'><div class='file-name img-" + imgIdCounter + "'>" + f.name + "</div><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+                    imgWrap.append(html);
+
+                    // กำหนดค่าตัวแปร imgIds
+                    imgIds[imgId] = f.name;
+
+                    imgIdCounter++; // เพิ่มค่าลำดับรูป
                 }
-            
-                if (imgArray.length >= maxLength) {
-                    return false;
-                } else {
-                    imgArray.push(f);
-            
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var imgId = "img-" + (iterator + 1); // สร้าง ID โดยใช้ iterator
-                        var html = "<div class='upload__img-box' id='" + imgId + "'><div class='file-name img-" + (iterator + 1) + "'>" + f.name + "</div><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
-                        imgWrap.append(html);
-                        iterator++;
-                    }
-                    reader.readAsDataURL(f);
-                }
-            });
+
+                reader.readAsDataURL(f);
+            }
         });
     });
 
@@ -397,8 +404,8 @@ function ImgUpload() {
     });
 }
 
-
-
+// แสดงผลลัพธ์ใน console.log
+console.log(imgIds);
 
 
 //-------------------------- Save ----------------------------------
@@ -433,24 +440,27 @@ $(document).ready(function () {
         var ProbCon = $('#SelProblem').val();
         var ProbConDetail = $('#mdetailprdlm').val();
 
-        var pbpic1 = $('#file-input1-problm').val(); 
-        var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); 
-        var pbpic2 = $('#file-input2-problm').val(); 
-        var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); 
-        var pbpic3 = $('#file-input3-problm').val(); 
-        var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); 
+        // var pic1 = $('.upload__img-box:eq(0) .file-name').text();
+        // var pic2 = $('.upload__img-box:eq(1) .file-name').text();
+        // var pic3 = $('.upload__img-box:eq(2) .file-name').text();
+        // var pbpic1 = $('#file-input1-problm').val(); 
+        // var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); 
+        // var pbpic2 = $('#file-input2-problm').val(); 
+        // var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); 
+        // var pbpic3 = $('#file-input3-problm').val(); 
+        // var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); 
         // ------------ End Problem Con ---------------
 
         // ------------ Inspec Method ---------------
         var InspecMethod = $('#SelInspec').val();
         var InspecDetail = $('#mdetailinsprc').val();
 
-        var ismpic1 = $('#file-input1-isp').val(); 
-        var InspecPic1 = ismpic1.replace(/^.*[\\\/]/, ''); 
-        var ismpic2 = $('#file-input2-isp').val(); 
-        var InspecPic2 = ismpic2.replace(/^.*[\\\/]/, ''); 
-        var ismpic3 = $('#file-input3-isp').val(); 
-        var InspecPic3 = ismpic3.replace(/^.*[\\\/]/, ''); 
+        // var ismpic1 = $('#file-input1-isp').val(); 
+        // var InspecPic1 = ismpic1.replace(/^.*[\\\/]/, ''); 
+        // var ismpic2 = $('#file-input2-isp').val(); 
+        // var InspecPic2 = ismpic2.replace(/^.*[\\\/]/, ''); 
+        // var ismpic3 = $('#file-input3-isp').val(); 
+        // var InspecPic3 = ismpic3.replace(/^.*[\\\/]/, ''); 
         // ------------ End Inspec Method ---------------
 
         // ------------ Trouble Shooting ---------------
@@ -466,6 +476,15 @@ $(document).ready(function () {
         // ------------ End Trouble Shooting ---------------
 
         // ------------ Analyze problem -----------------
+        var AnalyzDetail = $('#mdetailAnalyz').val();
+
+        var anallyzpic1 = $('#file-input1-Analyz').val(); 
+        var AnalyzPic1 = anallyzpic1.replace(/^.*[\\\/]/, ''); 
+        var anallyzpic2 = $('#file-input2-Analyz').val(); 
+        var AnalyzPic2 = anallyzpic2.replace(/^.*[\\\/]/, ''); 
+        var anallyzpic3 = $('#file-input3-Analyz').val(); 
+        var AnalyzPic3 = anallyzpic3.replace(/^.*[\\\/]/, ''); 
+
         var Checked1 = $('#Check1').prop('checked');
         var Checked2 = $('#Check2').prop('checked');
         var Checked3 = $('#Check3').prop('checked');
@@ -477,6 +496,7 @@ $(document).ready(function () {
         var Checked9 = $('#Check9').prop('checked');
         var Checked10 = $('#Check10').prop('checked');
         var Checked11 = $('#Check11').prop('checked');
+        var Detailcheck11 = $('#adddtInput').val();
 
         var Checkval1 = Checked1 ? $('#Check1').val() : '';
         var Checkval2 = Checked2 ? $('#Check2').val() : '';
@@ -490,24 +510,33 @@ $(document).ready(function () {
         var Checkval10 = Checked10 ? $('#Check10').val() : '';
         var Checkval11 = Checked11 ? $('#Check11').val() : '';
         // ------------ End Analyze Problem -----------------
-        var DetailAnalyze = $('#additionalInput').val();
-        var analyzeChecked1 = $('#Check-de1').prop('checked');
-        var analyzeChecked2 = $('#Check-de2').prop('checked');
-        var analyzeChecked3 = $('#Check-de3').prop('checked');
-        var analyzeChecked4 = $('#Check-de4').prop('checked');
-        var analyzeChecked5 = $('#Check-de5').prop('checked');
-        var analyzeChecked6 = $('#Check-de6').prop('checked');
-
-        var analyzeCheckval1 = analyzeChecked1 ? $('#Check1').val() : '';
-        var analyzeCheckval2 = analyzeChecked2 ? $('#Check2').val() : '';
-        var analyzeCheckval3 = analyzeChecked3 ? $('#Check3').val() : '';
-        var analyzeCheckval4 = analyzeChecked4 ? $('#Check4').val() : '';
-        var analyzeCheckval5 = analyzeChecked5 ? $('#Check5').val() : '';
-        var analyzeCheckval6 = analyzeChecked6 ? $('#Check6').val() : '';
 
         // ------------ Delivery Equipment -----------------
+        var Detaildelivery = $('#additionalInput').val();
+        var deliveryChecked1 = $('#Check-de1').prop('checked');
+        var deliveryChecked2 = $('#Check-de2').prop('checked');
+        var deliveryChecked3 = $('#Check-de3').prop('checked');
+        var deliveryChecked4 = $('#Check-de4').prop('checked');
+        var deliveryChecked5 = $('#Check-de5').prop('checked');
+        var deliveryChecked6 = $('#Check-de6').prop('checked');
+
+        var deliveryCheckval1 = deliveryChecked1 ? $('#Check-de1').val() : '';
+        var deliveryCheckval2 = deliveryChecked2 ? $('#Check-de2').val() : '';
+        var deliveryCheckval3 = deliveryChecked3 ? $('#Check-de3').val() : '';
+        var deliveryCheckval4 = deliveryChecked4 ? $('#Check-de4').val() : '';
+        var deliveryCheckval5 = deliveryChecked5 ? $('#Check-de5').val() : '';
+        var deliveryCheckval6 = deliveryChecked6 ? $('#Check-de6').val() : '';
+
+        // ------------ End Delivery Equipment -----------------
+
+        // สำหรับรูปที่ 1
+
 
         // แสดงผลลัพธ์ใน cons11
+
+
+
+
         console.log("Area: " + Area);
         console.log("AreaPd: " + AreaPd);
         console.log("AreaLine: " + AreaLine);
@@ -533,17 +562,31 @@ $(document).ready(function () {
         // console.log("TroublePic2: " + TroublePic2);
         // console.log("TroublePic3: " + TroublePic3);
 
-        console.log('Check1 :', Checkval1);
-        console.log('Check2 :', Checkval2);
-        console.log('Check3 :', Checkval3);
-        console.log('Check4 :', Checkval4);
-        console.log('Check5 :', Checkval5);
-        console.log('Check6 :', Checkval6);
-        console.log('Check7 :', Checkval7);
-        console.log('Check8 :', Checkval8);
-        console.log('Check9 :', Checkval9);
-        console.log('Check10 :', Checkval10);
-        console.log('Check11 :', Checkval11);
+        console.log('AnalyzDetail :', AnalyzDetail);
+        console.log('AnalyzPic1 :', AnalyzPic1);
+        console.log('AnalyzPic2 :', AnalyzPic2);
+        console.log('AnalyzPic3 :', AnalyzPic3);
+
+        console.log('Checkval1 :', Checkval1);
+        console.log('Checkval2 :', Checkval2);
+        console.log('Checkval3 :', Checkval3);
+        console.log('Checkval4 :', Checkval4);
+        console.log('Checkval5 :', Checkval5);
+        console.log('Checkval6 :', Checkval6);
+        console.log('Checkval7 :', Checkval7);
+        console.log('Checkval8 :', Checkval8);
+        console.log('Checkval9 :', Checkval9);
+        console.log('Checkval10 :', Checkval10);
+        console.log('Checkval11 :', Checkval11);
+        console.log('Detailcheck11 :', Detailcheck11);
+
+        console.log('Detaildelivery :', Detaildelivery);
+        console.log('deliveryCheckval1 :', deliveryCheckval1);
+        console.log('deliveryCheckval2 :', deliveryCheckval2);
+        console.log('deliveryCheckval3 :', deliveryCheckval3);
+        console.log('deliveryCheckval4 :', deliveryCheckval4);
+        console.log('deliveryCheckval5 :', deliveryCheckval5);
+        console.log('deliveryCheckval6 :', deliveryCheckval6);
 
 
 
@@ -631,15 +674,29 @@ $(document).ready(function () {
                     formData.append('TroublePic2', TroublePic2);
                     formData.append('TroublePic3', TroublePic3);
 
-                    formData.append('DetailAnalyze', DetailAnalyze);
-                    formData.append('analyzeCheckval1', analyzeCheckval1);
-                    formData.append('analyzeCheckval2', analyzeCheckval2);
-                    formData.append('analyzeCheckval3', analyzeCheckval3);
-                    formData.append('analyzeCheckval4', analyzeCheckval4);
-                    formData.append('analyzeCheckval5', analyzeCheckval5);
-                    formData.append('analyzeCheckval6', analyzeCheckval6);
+                    formData.append('Detaildelivery', Detaildelivery);
+                    formData.append('deliveryCheckval1', deliveryCheckval1);
+                    formData.append('deliveryCheckval2', deliveryCheckval2);
+                    formData.append('deliveryCheckval3', deliveryCheckval3);
+                    formData.append('deliveryCheckval4', deliveryCheckval4);
+                    formData.append('deliveryCheckval5', deliveryCheckval5);
+                    formData.append('deliveryCheckval6', deliveryCheckval6);
 
-
+                    formData.append('AnalyzDetail', AnalyzDetail);
+                    formData.append('AnalyzPic1', AnalyzPic1);
+                    formData.append('AnalyzPic1', AnalyzPic1);
+                    formData.append('AnalyzPic1', AnalyzPic3);
+                    formData.append('Checkval1', Checkval1);
+                    formData.append('Checkval2', Checkval2);
+                    formData.append('Checkval3', Checkval3);
+                    formData.append('Checkval4', Checkval4);
+                    formData.append('Checkval5', Checkval5);
+                    formData.append('Checkval6', Checkval6);
+                    formData.append('Checkval7', Checkval7);
+                    formData.append('Checkval8', Checkval8);
+                    formData.append('Checkval9', Checkval9);
+                    formData.append('Checkval10', Checkval10);
+                    formData.append('Checkval11', Checkval11);
 
                     $.ajax({
                         url: base_url('IssueTicket/callApiSaveTicket'),

@@ -226,10 +226,10 @@ cache: false,
                                 });
                             } else if (res.result == 0) {
                                 Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
+                                    icon: 'error',
+                                    title: 'Oops...',
                                     html: 'Invalid Current Password.',
-                                }).then(() => {});
+                                });
                             } else {
                                 Swal.fire({
                                     icon: 'error',
@@ -238,13 +238,20 @@ cache: false,
                                 });
                             }
                         },
+                        error: function (err) {
+                            console.error(err);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: 'An error occurred while processing your request.',
+                            });
+                        },
                     });
                 }
             });
         }
     });
 });
-
 
 
 

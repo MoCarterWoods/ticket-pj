@@ -211,7 +211,7 @@
 
                 </div>
 
-                <div class="col-lg text-center div-h3">
+                <div class="col-lg text-center div-h3" style="margin-left: -190px;">
                     <div style="display: inline-block;">
                         <p class="fs-3 fw-bold h3-top">MAINTENANCE WORKSHEET</p>
                         <p class="fs-3 fw-bold h3-top">ใบงานบำรุงรักษา</p>
@@ -262,14 +262,14 @@
 
                 <div class="col-lg-4 col-pro-f">
                     <div>
-                        <label for="processf" class="">Process / Function</label>
+                        <label for="processf" class="">Process / Function</label><span class="red-text">*</span>
                         <textarea class="form-control" id="processf" rows="2"></textarea>
 
 
                     </div>
 
                     <div>
-                        <label for="SelJobtype">Job Type
+                        <label for="SelJobtype">Job Type<span class="red-text">*</span>
                             <select class="form-select" id="SelJobtype">
                                 <option value="">Choose...</option>
 
@@ -285,7 +285,7 @@
                 <div class="col-lg-4 tool-mr">
                     <div class="row ">
                         <div>
-                            <label for="SelTool">Tooling System
+                            <label for="SelTool">Tooling System<span class="red-text">*</span>
                                 <select class="form-select" id="SelTool">
                                     <option value="">Choose...</option>
 
@@ -332,7 +332,7 @@ margin-top: -45px;">
                 <div class="col-lg-4 area-mr">
 
                     <div class="row ">
-                        <label for="SelProblem">Problem Condition
+                        <label for="SelProblem">Problem Condition<span class="red-text">*</span>
                             <select class="form-select" id="SelProblem">
                                 <option value="">Choose...</option>
                             </select>
@@ -343,36 +343,22 @@ margin-top: -45px;">
                         <textarea class="form-control" id="mdetailprdlm" rows="4"></textarea>
                     </div>
 
+
                 </div>
 
 
-                <div class="col-lg-8 sh-im">
-                    <div class="upload__box">
-                        <div class="upload__btn-box">
-                            <label class="upload__btn">
+                <div id="col-lg-8" class="col-lg-8 sh-im">
+                    <div id="upload-box1" class="upload__box">
+                        <div id="upload-btn-box1" class="upload__btn-box">
+                            <label id="upload-btn1" class="upload__btn">
                                 <p>Upload images</p>
                                 <input type="file" multiple="" accept="image/*" data-max_length="3" class="upload__inputfile">
                             </label>
                         </div>
-                        <div class="upload__img-wrap"></div>
+                        <div id="upload-img-wrap1" class="upload__img-wrap"></div>
                     </div>
-
-
-                    <div>
-                        <label for="file-input1-problm">Pic 1</label>
-                        <input type="file" id="file-input1-problm" class="file-input form-control" accept="image/*">
-
-                        <label for="file-input2-problm">Pic 2</label>
-                        <input type="file" id="file-input2-problm" class="file-input form-control" accept="image/*">
-
-                        <label for="file-input3-problm">Pic 3</label>
-                        <input type="file" id="file-input3-problm" class="file-input form-control" accept="image/*">
-
-                    </div>
-
-
-
                 </div>
+
                 <!-- --------------------------------------- -->
 
 
@@ -386,7 +372,7 @@ margin-top: -45px;">
 
 
 
-    <!--------------------------------------------------------------- new col------------------------------------------------------------------------- -->
+    <!--------------------------------------------------------------- Inspec Method ------------------------------------------------------------------------- -->
 
     <div class="content-wrapper">
         <!-- Content -->
@@ -400,7 +386,7 @@ margin-top: -45px;">
                     <div class="col-lg-4 area-mr">
 
                         <div class="row ">
-                            <label for="SelInspec">Inspection Method
+                            <label for="SelInspec">Inspection Method<span class="red-text">*</span>
                                 <select class="form-select" id="SelInspec">
                                     <option value="">Choose...</option>
                                 </select>
@@ -414,24 +400,18 @@ margin-top: -45px;">
                     </div>
 
 
-                    <div class="col-lg-3 sh-im">
-                        <div>
-                            <label for="file-input1-isp">Pic 1</label>
-                            <input type="file" id="file-input1-isp" class="file-input form-control" accept="image/*">
-
-                            <label for="file-input2-isp">Pic 2</label>
-                            <input type="file" id="file-input2-isp" class="file-input form-control" accept="image/*">
-
-                            <label for="file-input3-isp">Pic 3</label>
-                            <input type="file" id="file-input3-isp" class="file-input form-control" accept="image/*">
-
+                    <div id="col-lg-8" class="col-lg-8 sh-im">
+                        <div id="upload-box2" class="upload__box">
+                            <div id="upload-btn-box2" class="upload__btn-box">
+                                <label id="upload-btn2" class="upload__btn">
+                                    <p>Upload images</p>
+                                    <input type="file" multiple="" accept="image/*" data-max_length="3" class="upload__inputfile">
+                                </label>
+                            </div>
+                            <div id="upload-img-wrap2" class="upload__img-wrap"></div>
                         </div>
-
                     </div>
-                    <div class="col-lg-5 sh-im">
 
-
-                    </div>
 
                 </div>
                 <!-- --------------------------------------- -->
@@ -459,7 +439,7 @@ margin-top: -45px;">
                     <div class="col-lg-4 area-mr">
 
                         <div class="row ">
-                            <label for="SelTbAc">Troubleshooting/Action
+                            <label for="SelTbAc">Troubleshooting/Action<span class="red-text">*</span>
                                 <select class="form-select" id="SelTbAc">
                                     <option value="">Choose...</option>
                                 </select>
@@ -469,11 +449,24 @@ margin-top: -45px;">
                             <label for="mdetailtbac" class="">More Detail</label>
                             <textarea class="form-control" id="mdetailtbac" rows="4"></textarea>
                         </div>
+                        <div id="upload-box3" class="upload__box">
+                            <div id="upload-btn-box3" class="upload__btn-box">
+                                <label id="upload-btn3" class="upload__btn">
+                                    <p>Upload images</p>
+                                    <input type="file" multiple="" accept="image/*" data-max_length="3" class="upload__inputfile">
+                                </label>
+                            </div>
+                            <div id="upload-img-wrap3" class="upload__img-wrap"></div>
 
+                        </div>
                     </div>
 
 
                     <div class="col-lg-3 sh-im">
+                        putenv
+                    </div>
+                    <div class="col-lg-5 sh-im">
+
                         <div>
                             <label for="file-input1-tbac">Pic 1</label>
                             <input type="file" id="file-input1-tbac" class="file-input form-control" accept="image/*">
@@ -485,11 +478,6 @@ margin-top: -45px;">
                             <input type="file" id="file-input3-tbac" class="file-input form-control" accept="image/*">
 
                         </div>
-
-                    </div>
-                    <div class="col-lg-5 sh-im">
-
-
                     </div>
 
                 </div>
@@ -502,6 +490,10 @@ margin-top: -45px;">
 
         </div>
     </div>
+
+
+
+    <!-- ----------------------------- ----------------------------------------------------- -->
 
 
     <!--------------------------------------------------------------- วิเคราะสาเหตุของปัญหา ------------------------------------------------------------------------- -->
@@ -519,22 +511,123 @@ margin-top: -45px;">
                             <textarea class="form-control" id="mdetailAnalyz" rows="4"></textarea>
                         </div>
 
+
+
                         <div>
                             <label for="file-input1-Analyz">Pic 1</label>
-                            <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*">
+                            <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-Analyz', 'preview1', 1)">
 
-                            <label for="file-input2-Analyz">Pic 2</label>
-                            <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*">
+                            <label for="file-input2-Analyz" style="display:none;">Pic 2</label>
+                            <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-Analyz', 'preview2', 2)" style="display:none;">
 
-                            <label for="file-input3-Analyz">Pic 3</label>
-                            <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*">
+                            <label for="file-input3-Analyz" style="display:none;">Pic 3</label>
+                            <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-Analyz', 'preview3', 3)" style="display:none;">
 
                         </div>
+
+                        <script>
+                            function previewImage(inputId, imgId, order) {
+                                var input = document.getElementById(inputId);
+                                var img = document.getElementById(imgId);
+                                var deleteButton = document.querySelector(`button[onclick="deleteImage(${order})"]`);
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    img.src = e.target.result;
+                                    img.style.display = 'inline-block';
+                                    deleteButton.style.display = 'inline-block';
+                                };
+
+                                if (input.files[0]) {
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+
+                                // เพิ่มลำดับลงใน alt เพื่อให้สามารถจัดเรียงตามลำดับ
+                                img.alt = "Preview " + order;
+
+                                // ซ่อน label และ input ที่เคยถูกแสดง
+                                for (var i = 1; i <= 3; i++) {
+                                    var label = document.querySelector(`label[for=file-input${i}-Analyz]`);
+                                    var input = document.getElementById(`file-input${i}-Analyz`);
+
+                                    if (i === order) {
+
+                                    } else {
+
+                                    }
+                                }
+
+                                // แสดง label และ input ของอันถัดไป (ถ้ามี)
+                                if (order < 3) {
+                                    var nextOrder = order + 1;
+                                    var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-Analyz]`);
+                                    var nextInput = document.getElementById(`file-input${nextOrder}-Analyz`);
+                                    nextLabel.style.display = 'inline-block';
+                                    nextInput.style.display = 'inline-block';
+                                    // ทำให้รูปถัดไปซ่อนเริ่มต้น
+                                    var nextImg = document.getElementById(`preview${nextOrder}`);
+                                    nextImg.style.display = 'none';
+                                }
+                            }
+
+                            function deleteImage(order) {
+                                for (var i = order; i < 3; i++) {
+                                    var currentImg = document.getElementById(`preview${i}`);
+                                    var nextImg = document.getElementById(`preview${i + 1}`);
+                                    var currentInput = document.getElementById(`file-input${i}-Analyz`);
+                                    var nextInput = document.getElementById(`file-input${i + 1}-Analyz`);
+                                    var currentLabel = document.querySelector(`label[for=file-input${i}-Analyz]`);
+                                    var nextLabel = document.querySelector(`label[for=file-input${i + 1}-Analyz]`);
+                                    var currentDeleteButton = document.querySelector(`button[onclick="deleteImage(${i})"]`);
+                                    var nextDeleteButton = document.querySelector(`button[onclick="deleteImage(${i + 1})"]`);
+
+                                    currentImg.src = nextImg.src;
+                                    currentInput.value = nextInput.value;
+                                    currentLabel.innerHTML = nextLabel.innerHTML;
+                                    currentDeleteButton.style.display = nextDeleteButton.style.display;
+                                }
+
+                                // ลบข้อมูลของรูปที่สุดท้าย
+                                var lastImg = document.getElementById(`preview3`);
+                                var lastInput = document.getElementById(`file-input3-Analyz`);
+                                var lastLabel = document.querySelector(`label[for=file-input3-Analyz]`);
+                                var lastDeleteButton = document.querySelector(`button[onclick="deleteImage(3)"]`);
+
+                                lastImg.src = '#';
+                                lastImg.style.display = 'none';
+                                lastInput.value = '';
+                                lastLabel.style.display = 'none';
+                                lastDeleteButton.style.display = 'none';
+                            }
+                        </script>
+
+
+
+
+
+
+
+
                     </div>
 
 
-                    <div class="col-lg-3 sh-im">
+                    <div class="col-lg-4 sh-im" style="padding-top: 25px;padding-left: 100px;">
+                        <div id="upload-box4" class="upload__box">
+                            <div id="upload-btn-box4" class="upload__btn-box">
+                                <label id="upload-btn4" class="upload__btn">
+                                    <p>Upload images</p>
+                                    <input type="file" multiple="" accept="image/*" data-max_length="3" class="upload__inputfile">
+                                </label>
+                            </div>
+                            <div id="upload-img-wrap4" class="upload__img-wrap"></div>
 
+                        </div>
+                        <button onclick="deleteImage(1)" style="display:none;">Delete Pic 1</button>
+                        <img id="preview1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                        <button onclick="deleteImage(2)" style="display:none;">Delete Pic 2</button>
+                        <img id="preview2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                        <button onclick="deleteImage(3)" style="display:none;">Delete Pic 3</button>
+                        <img id="preview3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
                     </div>
 
 
@@ -582,7 +675,8 @@ margin-top: -45px;">
                         </div>
                         <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="11" id="Check11">
-                            <label class="form-check-label" for="Check11"> อื่นๆ </label><span class="additional-info"> (รายละเอียดเพิ่มเติม)</span>
+                            <label class="form-check-label" for="Check11"> อื่นๆ </label>
+                            <input type="text" class="form-control" id="adddtInput" placeholder=" . . . . . . . . . " for="Check11" style="margin-left: -25px;padding: 10px;">
                         </div>
 
                     </div>
