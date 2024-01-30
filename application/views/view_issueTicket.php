@@ -343,6 +343,17 @@ margin-top: -45px;">
                         <textarea class="form-control" id="mdetailprdlm" rows="4"></textarea>
                     </div>
 
+                    <div>
+                        <label for="file-input1-problm">Pic 1</label>
+                        <input type="file" id="file-input1-problm" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-problm', 'preview1', 1)">
+
+                        <label for="file-input2-problm">Pic 2</label>
+                        <input type="file" id="file-input2-problm" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-problm', 'preview2', 2)">
+
+                        <label for="file-input3-problm">Pic 3</label>
+                        <input type="file" id="file-input3-problm" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-problm', 'preview3', 3)">
+
+                    </div>
 
                 </div>
 
@@ -357,7 +368,15 @@ margin-top: -45px;">
                         </div>
                         <div id="upload-img-wrap1" class="upload__img-wrap"></div>
                     </div>
+
+
+
+
+
                 </div>
+
+
+
 
                 <!-- --------------------------------------- -->
 
@@ -397,6 +416,18 @@ margin-top: -45px;">
                             <textarea class="form-control" id="mdetailinsprc" rows="4"></textarea>
                         </div>
 
+                        <div>
+                            <label for="file-input1-isp">Pic 1</label>
+                            <input type="file" id="file-input1-isp" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-isp', 'preview1', 1)">
+
+                            <label for="file-input2-isp">Pic 2</label>
+                            <input type="file" id="file-input2-isp" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-isp', 'preview2', 2)">
+
+                            <label for="file-input3-isp">Pic 3</label>
+                            <input type="file" id="file-input3-isp" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-isp', 'preview3', 3)">
+
+                        </div>
+
                     </div>
 
 
@@ -411,6 +442,10 @@ margin-top: -45px;">
                             <div id="upload-img-wrap2" class="upload__img-wrap"></div>
                         </div>
                     </div>
+
+
+
+
 
 
                 </div>
@@ -493,7 +528,115 @@ margin-top: -45px;">
 
 
 
-    <!-- ----------------------------- ----------------------------------------------------- -->
+    <!-- --------------------------------------------- รายการ ชิ้นส่วนที่ต้องใช้(ทดแทน ติดตั้ง ปรับปรุง) ----------------------------------------------------- -->
+
+
+    <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y" style="margin-top: -45px;">
+            <div class="card">
+
+                <script src="https://code.jquery.com/jquery-latest.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                <p>&nbsp;</p>
+                <h5 class="text-center">รายการ ชิ้นส่วนที่ต้องใช้(ทดแทน ติดตั้ง ปรับปรุง)</h5>
+                <section class="container">
+                    <div class="table table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Maker</th>
+                                    <th>Model</th>
+                                    <th>จำนวน</th>
+                                    <th>เบิกจาก Stock</th>
+                                    <th></th>
+                                    <th>สั่งซื้อ / เรียกเข้า</th>
+                                    <th></th>
+                                    <th>ได้รับของ / เข้าซ่อม</th>
+                                    <th></th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="TextBoxContainer">
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="12">
+                                        <button id="btnAdd" type="button" class="btn btn-primary" data-toggle="tooltip" data-original-title="Add more controls"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp;
+                                            Add&nbsp;</button>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+    $(function () {
+        var maxItems = 5;
+
+        $("#btnAdd").bind("click", function () {
+            if ($("#TextBoxContainer tr").length < maxItems) {
+                var rowCount = $("#TextBoxContainer tr").length;
+                var div = GetDynamicTextBox(rowCount + 1);
+                $("#TextBoxContainer").append(div);
+            } else {
+                alert("Cannot add more than " + maxItems + " items");
+            }
+        });
+
+        $("body").on("click", ".remove", function () {
+            $(this).closest("tr").remove();
+            updateRowNumbers();
+        });
+    });
+
+    function updateRowNumbers() {
+        $("#TextBoxContainer tr").each(function (index) {
+            $(this).find("td:first").html('<i></i> <strong>' + (index + 1) + '</strong>');
+            // ดึงค่าของ ID ของแต่ละ input
+            var idPrefix = $(this).find("td:eq(1) input").attr("id").split("-")[0];
+            // อัพเดท ID ของแต่ละ input
+            $(this).find("td:eq(1) input").attr("id", idPrefix + "-name-input-" + (index + 1));
+            $(this).find("td:eq(2) input").attr("id", idPrefix + "-maker-input-" + (index + 1));
+            $(this).find("td:eq(3) input").attr("id", idPrefix + "-model-input-" + (index + 1));
+            $(this).find("td:eq(4) input").attr("id", idPrefix + "-qty-input-" + (index + 1));
+            $(this).find("td:eq(5) input").attr("id", idPrefix + "-stock-date-input-" + (index + 1));
+            $(this).find("td:eq(6) input").attr("id", idPrefix + "-stock-input-" + (index + 1));
+            $(this).find("td:eq(7) input").attr("id", idPrefix + "-input-date-input-" + (index + 1));
+            $(this).find("td:eq(8) input").attr("id", idPrefix + "-input-input-" + (index + 1));
+            $(this).find("td:eq(9) input").attr("id", idPrefix + "-mainten-date-input-" + (index + 1));
+            $(this).find("td:eq(10) input").attr("id", idPrefix + "-mainten-input-" + (index + 1));
+        });
+    }
+
+    function GetDynamicTextBox(rowNumber) {
+        return '<tr>' +
+            '<td class="text-center"><i></i> <strong>' + rowNumber + '</strong></td>' +
+            '<td><input type="text" value="" id="name-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><input type="text" value="" id="maker-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><input type="text" value="" id="model-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><input type="text" value="" id="qty-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><input class="form-control" type="date" value="" id="stock-date-input-' + rowNumber + '"></td>' +
+            '<td><input type="text" value="" id="stock-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><input class="form-control" type="date" value="" id="input-date-input-' + rowNumber + '"></td>' +
+            '<td><input type="text" value="" id="input-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><input class="form-control" type="date" value="" id="mainten-date-input-' + rowNumber + '"></td>' +
+            '<td><input type="text" value="" id="mainten-input-' + rowNumber + '" class="form-control" /></td>' +
+            '<td><button type="button" class="btn btn-danger remove"><i class="glyphicon glyphicon-remove-sign"></i></button></td>' +
+            '</tr>';
+    }
+</script>
+
+
 
 
     <!--------------------------------------------------------------- วิเคราะสาเหตุของปัญหา ------------------------------------------------------------------------- -->
@@ -517,11 +660,11 @@ margin-top: -45px;">
                             <label for="file-input1-Analyz">Pic 1</label>
                             <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-Analyz', 'preview1', 1)">
 
-                            <label for="file-input2-Analyz" style="display:none;">Pic 2</label>
-                            <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-Analyz', 'preview2', 2)" style="display:none;">
+                            <label for="file-input2-Analyz">Pic 2</label>
+                            <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-Analyz', 'preview2', 2)">
 
-                            <label for="file-input3-Analyz" style="display:none;">Pic 3</label>
-                            <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-Analyz', 'preview3', 3)" style="display:none;">
+                            <label for="file-input3-Analyz">Pic 3</label>
+                            <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-Analyz', 'preview3', 3)">
 
                         </div>
 

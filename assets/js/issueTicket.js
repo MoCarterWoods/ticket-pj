@@ -443,24 +443,25 @@ $(document).ready(function () {
         // var pic1 = $('.upload__img-box:eq(0) .file-name').text();
         // var pic2 = $('.upload__img-box:eq(1) .file-name').text();
         // var pic3 = $('.upload__img-box:eq(2) .file-name').text();
-        // var pbpic1 = $('#file-input1-problm').val(); 
-        // var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); 
-        // var pbpic2 = $('#file-input2-problm').val(); 
-        // var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); 
-        // var pbpic3 = $('#file-input3-problm').val(); 
-        // var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); 
+
+        var pbpic1 = $('#file-input1-problm').val(); 
+        var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); 
+        var pbpic2 = $('#file-input2-problm').val(); 
+        var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); 
+        var pbpic3 = $('#file-input3-problm').val(); 
+        var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); 
         // ------------ End Problem Con ---------------
 
         // ------------ Inspec Method ---------------
         var InspecMethod = $('#SelInspec').val();
         var InspecDetail = $('#mdetailinsprc').val();
 
-        // var ismpic1 = $('#file-input1-isp').val(); 
-        // var InspecPic1 = ismpic1.replace(/^.*[\\\/]/, ''); 
-        // var ismpic2 = $('#file-input2-isp').val(); 
-        // var InspecPic2 = ismpic2.replace(/^.*[\\\/]/, ''); 
-        // var ismpic3 = $('#file-input3-isp').val(); 
-        // var InspecPic3 = ismpic3.replace(/^.*[\\\/]/, ''); 
+        var ismpic1 = $('#file-input1-isp').val(); 
+        var InspecPic1 = ismpic1.replace(/^.*[\\\/]/, ''); 
+        var ismpic2 = $('#file-input2-isp').val(); 
+        var InspecPic2 = ismpic2.replace(/^.*[\\\/]/, ''); 
+        var ismpic3 = $('#file-input3-isp').val(); 
+        var InspecPic3 = ismpic3.replace(/^.*[\\\/]/, ''); 
         // ------------ End Inspec Method ---------------
 
         // ------------ Trouble Shooting ---------------
@@ -547,20 +548,20 @@ $(document).ready(function () {
         console.log("Model: " + Model);
         console.log("JobType: " + JobType);
         console.log("ProbCon: " + ProbCon);
-        // console.log("ProbConDetail: " + ProbConDetail);
-        // console.log("ProbConPic1: " + ProbConPic1);
-        // console.log("ProbConPic2: " + ProbConPic2);
-        // console.log("ProbConPic3: " + ProbConPic3);
+        console.log("ProbConDetail: " + ProbConDetail);
+        console.log("ProbConPic1: " + ProbConPic1);
+        console.log("ProbConPic2: " + ProbConPic2);
+        console.log("ProbConPic3: " + ProbConPic3);
         console.log("InspecMethod: " + InspecMethod);
-        // console.log("InspecDetail: " + InspecDetail);
-        // console.log("InspecPic1: " + InspecPic1);
-        // console.log("InspecPic2: " + InspecPic2);
-        // console.log("InspecPic3: " + InspecPic3);
+        console.log("InspecDetail: " + InspecDetail);
+        console.log("InspecPic1: " + InspecPic1);
+        console.log("InspecPic2: " + InspecPic2);
+        console.log("InspecPic3: " + InspecPic3);
         console.log("Trouble: " + Trouble);
-        // console.log("TroubleDetail: " + TroubleDetail);
-        // console.log("TroublePic1: " + TroublePic1);
-        // console.log("TroublePic2: " + TroublePic2);
-        // console.log("TroublePic3: " + TroublePic3);
+        console.log("TroubleDetail: " + TroubleDetail);
+        console.log("TroublePic1: " + TroublePic1);
+        console.log("TroublePic2: " + TroublePic2);
+        console.log("TroublePic3: " + TroublePic3);
 
         console.log('AnalyzDetail :', AnalyzDetail);
         console.log('AnalyzPic1 :', AnalyzPic1);
@@ -684,8 +685,8 @@ $(document).ready(function () {
 
                     formData.append('AnalyzDetail', AnalyzDetail);
                     formData.append('AnalyzPic1', AnalyzPic1);
-                    formData.append('AnalyzPic1', AnalyzPic1);
-                    formData.append('AnalyzPic1', AnalyzPic3);
+                    formData.append('AnalyzPic2', AnalyzPic2);
+                    formData.append('AnalyzPic3', AnalyzPic3);
                     formData.append('Checkval1', Checkval1);
                     formData.append('Checkval2', Checkval2);
                     formData.append('Checkval3', Checkval3);
@@ -697,6 +698,7 @@ $(document).ready(function () {
                     formData.append('Checkval9', Checkval9);
                     formData.append('Checkval10', Checkval10);
                     formData.append('Checkval11', Checkval11);
+                    formData.append('Detailcheck11', Detailcheck11);
 
                     $.ajax({
                         url: base_url('IssueTicket/callApiSaveTicket'),
