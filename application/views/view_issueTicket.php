@@ -197,6 +197,9 @@
         <div class="card">
 
 
+
+
+
             <div class="row align-items-center ">
                 <div class="col-lg-4">
 
@@ -580,61 +583,61 @@ margin-top: -45px;">
         </div>
     </div>
     <script>
-    $(function () {
-        var maxItems = 5;
+        $(function() {
+            var maxItems = 5;
 
-        $("#btnAdd").bind("click", function () {
-            if ($("#TextBoxContainer tr").length < maxItems) {
-                var rowCount = $("#TextBoxContainer tr").length;
-                var div = GetDynamicTextBox(rowCount + 1);
-                $("#TextBoxContainer").append(div);
-            } else {
-                alert("Cannot add more than " + maxItems + " items");
-            }
+            $("#btnAdd").bind("click", function() {
+                if ($("#TextBoxContainer tr").length < maxItems) {
+                    var rowCount = $("#TextBoxContainer tr").length;
+                    var div = GetDynamicTextBox(rowCount + 1);
+                    $("#TextBoxContainer").append(div);
+                } else {
+                    alert("Cannot add more than " + maxItems + " items");
+                }
+            });
+
+            $("body").on("click", ".remove", function() {
+                $(this).closest("tr").remove();
+                updateRowNumbers();
+            });
         });
 
-        $("body").on("click", ".remove", function () {
-            $(this).closest("tr").remove();
-            updateRowNumbers();
-        });
-    });
+        function updateRowNumbers() {
+            $("#TextBoxContainer tr").each(function(index) {
+                $(this).find("td:first").html('<i></i> <strong>' + (index + 1) + '</strong>');
+                // ดึงค่าของ ID ของแต่ละ input
+                var idPrefix = $(this).find("td:eq(1) input").attr("id").split("-")[0];
+                // อัพเดท ID ของแต่ละ input
+                $(this).find("td:eq(1) input").attr("id", idPrefix + "-name-input-" + (index + 1));
+                $(this).find("td:eq(2) input").attr("id", idPrefix + "-maker-input-" + (index + 1));
+                $(this).find("td:eq(3) input").attr("id", idPrefix + "-model-input-" + (index + 1));
+                $(this).find("td:eq(4) input").attr("id", idPrefix + "-qty-input-" + (index + 1));
+                $(this).find("td:eq(5) input").attr("id", idPrefix + "-stock-date-input-" + (index + 1));
+                $(this).find("td:eq(6) input").attr("id", idPrefix + "-stock-input-" + (index + 1));
+                $(this).find("td:eq(7) input").attr("id", idPrefix + "-input-date-input-" + (index + 1));
+                $(this).find("td:eq(8) input").attr("id", idPrefix + "-input-input-" + (index + 1));
+                $(this).find("td:eq(9) input").attr("id", idPrefix + "-mainten-date-input-" + (index + 1));
+                $(this).find("td:eq(10) input").attr("id", idPrefix + "-mainten-input-" + (index + 1));
+            });
+        }
 
-    function updateRowNumbers() {
-        $("#TextBoxContainer tr").each(function (index) {
-            $(this).find("td:first").html('<i></i> <strong>' + (index + 1) + '</strong>');
-            // ดึงค่าของ ID ของแต่ละ input
-            var idPrefix = $(this).find("td:eq(1) input").attr("id").split("-")[0];
-            // อัพเดท ID ของแต่ละ input
-            $(this).find("td:eq(1) input").attr("id", idPrefix + "-name-input-" + (index + 1));
-            $(this).find("td:eq(2) input").attr("id", idPrefix + "-maker-input-" + (index + 1));
-            $(this).find("td:eq(3) input").attr("id", idPrefix + "-model-input-" + (index + 1));
-            $(this).find("td:eq(4) input").attr("id", idPrefix + "-qty-input-" + (index + 1));
-            $(this).find("td:eq(5) input").attr("id", idPrefix + "-stock-date-input-" + (index + 1));
-            $(this).find("td:eq(6) input").attr("id", idPrefix + "-stock-input-" + (index + 1));
-            $(this).find("td:eq(7) input").attr("id", idPrefix + "-input-date-input-" + (index + 1));
-            $(this).find("td:eq(8) input").attr("id", idPrefix + "-input-input-" + (index + 1));
-            $(this).find("td:eq(9) input").attr("id", idPrefix + "-mainten-date-input-" + (index + 1));
-            $(this).find("td:eq(10) input").attr("id", idPrefix + "-mainten-input-" + (index + 1));
-        });
-    }
-
-    function GetDynamicTextBox(rowNumber) {
-        return '<tr>' +
-            '<td class="text-center"><i></i> <strong>' + rowNumber + '</strong></td>' +
-            '<td><input type="text" value="" id="name-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><input type="text" value="" id="maker-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><input type="text" value="" id="model-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><input type="text" value="" id="qty-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><input class="form-control" type="date" value="" id="stock-date-input-' + rowNumber + '"></td>' +
-            '<td><input type="text" value="" id="stock-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><input class="form-control" type="date" value="" id="input-date-input-' + rowNumber + '"></td>' +
-            '<td><input type="text" value="" id="input-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><input class="form-control" type="date" value="" id="mainten-date-input-' + rowNumber + '"></td>' +
-            '<td><input type="text" value="" id="mainten-input-' + rowNumber + '" class="form-control" /></td>' +
-            '<td><button type="button" class="btn btn-danger remove"><i class="glyphicon glyphicon-remove-sign"></i></button></td>' +
-            '</tr>';
-    }
-</script>
+        function GetDynamicTextBox(rowNumber) {
+            return '<tr>' +
+                '<td class="text-center"><i></i> <strong>' + rowNumber + '</strong></td>' +
+                '<td><input type="text" value="" id="name-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><input type="text" value="" id="maker-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><input type="text" value="" id="model-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><input type="text" value="" id="qty-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><input class="form-control" type="date" value="" id="stock-date-input-' + rowNumber + '"></td>' +
+                '<td><input type="text" value="" id="stock-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><input class="form-control" type="date" value="" id="input-date-input-' + rowNumber + '"></td>' +
+                '<td><input type="text" value="" id="input-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><input class="form-control" type="date" value="" id="mainten-date-input-' + rowNumber + '"></td>' +
+                '<td><input type="text" value="" id="mainten-input-' + rowNumber + '" class="form-control" /></td>' +
+                '<td><button type="button" class="btn btn-danger remove"><i class="glyphicon glyphicon-remove-sign"></i></button></td>' +
+                '</tr>';
+        }
+    </script>
 
 
 

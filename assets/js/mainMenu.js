@@ -24,7 +24,7 @@ $(() => {
                     
                     html += `
                     <tr>
-                    <td class="text-center"><i></i> <strong>${i+1}</strong></td>
+                    <td class="text-center" style="background-color: #f8f8f8;"><i></i> <strong>${i+1}</strong></td>
                     <td class="text-center"><i></i> <strong>${data[i].smm_name}</strong></td>
                     <td class="text-center">
                       <i class="bx ${data[i].smm_icon} bx-md me-3"></i>
@@ -44,9 +44,10 @@ $(() => {
                           <!-- ตรงนี้เป็นส่วนของ List Item -->
                         </ul>
                       </div>
-                      <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].smm_id}">
-                        <i class="bx bxs-edit"></i>
-                      </a>
+                      <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].smm_id}">
+                  <span class="tf-icons bx bxs-edit"></span>
+                </button>
+
                     </td>
                   </tr>
                   `;

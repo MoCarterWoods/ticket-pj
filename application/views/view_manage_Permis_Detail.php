@@ -69,8 +69,8 @@
 
           <div class="table-responsive text-nowrap">
             <div class="card-datatable table-responsive pt-0">
-              <table class="datatables-basic table table-striped table-bordered table-hover table-checkable order-column border-top w-100" id="tblPermis">
-                <thead>
+              <table class="datatables-basic table  table-bordered table-hover table-checkable order-column border-top w-100" id="tblPermis">
+                <thead style="background-color: #afdbff;">
                   <tr>
                     <th>No.</th>
                     <th>Main Menu</th>

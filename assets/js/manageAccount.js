@@ -126,8 +126,8 @@ $(() => {
                 for (var i = 0; i < data.length; i++) {
                     html += `
                     <tr>
-                    <td class="text-center"><i></i> <strong>${i+1}</strong></td>
-                    <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
+                    <td class="text-center" style="background-color: #f8f8f8;"><i></i> <strong>${i+1}</strong></td>
+                    <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="https://www.shutterstock.com/image-vector/blank-avatar-photo-place-holder-600nw-1114445501.jpg" alt="Avatar" class="rounded-circle"></div></div><div class="d-flex flex-column">
                             <span class="emp_name text-truncate">${data[i].sa_fristname} ${data[i].sa_lastname}</span><small class="emp_post text-truncate text-muted">${data[i].sa_emp_code}</small></div></div></td>
                     <td class="text-center"><i></i> <strong>${data[i].spg_name}</strong></td>
                     <td class="text-center"><i></i>${data[i].sa_email}</td>
@@ -138,9 +138,9 @@ $(() => {
                       </button>
                     </td>
                     <td class="text-center" style="">
-                      <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].sa_id}">
-                        <i class="bx bxs-edit"></i>
-                      </a>
+                      <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].sa_id}">
+                  <span class="tf-icons bx bxs-edit"></span>
+                </button>
                     </td>
                   </tr>
                   `;

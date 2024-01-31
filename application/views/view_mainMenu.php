@@ -42,8 +42,8 @@
         <h5 class="card-header mt-4">Table_MainMenu</h5>
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
-            <table class="table card-table table-striped table-bordered table-hover table-checkable order-column w-100" id="tblMainMenu">
-              <thead>
+            <table class="table card-table table-bordered table-hover table-checkable order-column w-100" id="tblMainMenu">
+              <thead style="background-color: #afdbff;">
                 <tr>
                   <th class="text-center">No.</th>
                   <th class="text-center">Main Menu Name</th>

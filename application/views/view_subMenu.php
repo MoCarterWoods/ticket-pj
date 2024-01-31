@@ -30,7 +30,6 @@
     <div class="card" style="display: none;" id="content">
 
 
-<!--  -->
 <div class="card-body">
         <div class="row py-2 mt-2">
           <div>
@@ -53,7 +52,7 @@
           </div>
         </div>
 
-<!--  -->
+
 
                 <div class="col-12 col-sm-12 justify-content-start">
                   <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
@@ -64,8 +63,8 @@
                 
                   <div class="table-responsive text-nowrap">
                     <div class="card-datatable table-responsive pt-0">
-                      <table class="datatables-basic table table-striped table-bordered table-hover table-checkable order-column border-top " id="tblSubMenu">
-                        <thead>
+                      <table class="datatables-basic table  table-bordered table-hover table-checkable order-column border-top " id="tblSubMenu">
+                        <thead style="background-color: #afdbff;">
                           <tr>
                             <th>No.</th>
                             <th>Sub Menu</th>

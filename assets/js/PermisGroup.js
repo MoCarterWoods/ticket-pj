@@ -19,7 +19,7 @@ $(() => {
                     for (var i = 0; i < data.length; i++) {
                         html += `
                         <tr>
-                        <td class="text-center"><i></i> <strong>${i + 1}</strong></td>
+                        <td class="text-center" style="background-color: #f8f8f8;"><i></i> <strong>${i + 1}</strong></td>
                         <td class="text-center"><i></i> <strong>${data[i].spg_name}</strong></td>
                         <td class="text-center">${data[i].spg_updated_date}</td>
                         <td class="text-center">${data[i].spg_updated_by}</td>
@@ -34,9 +34,10 @@ $(() => {
                               <!-- ตรงนี้เป็นส่วนของ List Item -->
                             </ul>
                           </div>
-                          <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spg_id}">
-                            <i class="bx bxs-edit"></i>
-                          </a>
+
+                          <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spg_id}">
+                      <span class="tf-icons bx bxs-edit"></span>
+                    </button>
                         </td>
                       </tr>
                       `;

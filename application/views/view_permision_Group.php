@@ -31,8 +31,8 @@
       <h5 class="card-header">Permission Group</h5>
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
-            <table class="table card-table table-striped table-bordered table-hover table-checkable order-column w-100" id="tblPermisGP">
-              <thead>
+            <table class="table card-table table-bordered table-hover table-checkable order-column w-100" id="tblPermisGP">
+              <thead style="background-color: #afdbff;">
                 <tr>
                   <th>No.</th>
                   <th>Permission Group Name</th>

@@ -45,7 +45,7 @@ class TicketControl extends CI_Controller {
     }
 	
 	public function ticControl() {
-        // $this->another_js = "<script src='" . base_url() . "assets/js/manageAccount.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/ticketControl.js'></script>";
         $this->render_view('view_ticketControl');
 
     }

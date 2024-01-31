@@ -11,6 +11,7 @@
   body {
     min-height: 100%;
     background-color: #ffffff;
+    
   }
 
   h1 {

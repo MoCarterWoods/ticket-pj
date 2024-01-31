@@ -68,7 +68,7 @@ function shDataTable() {
                 for (let i = 0; i < data.length; i++) {
                     html += `
                     <tr>
-  <td class="text-center"><strong>${i + 1}</strong></td>
+  <td class="text-center" style="background-color: #f8f8f8;"><strong>${i + 1}</strong></td>
   <td class="text-center"><strong>${data[i].smm_name}</strong></td>
   <td class="text-center"><strong>${data[i].ssm_name}</strong></td>
   <td class="text-center">${data[i].spd_updated_date}</td>
@@ -79,9 +79,11 @@ function shDataTable() {
     </button>
   </td>
   <td class="text-center">
-    <a href="" class="tblEditBtn btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
-      <i class="bx bxs-edit"></i>
-    </a>
+    
+    <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
+                      <span class="tf-icons bx bxs-edit"></span>
+                    </button>
+
   </td>
 </tr>
 
