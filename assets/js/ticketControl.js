@@ -49,7 +49,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 droppd.empty();
-                droppd.append('<option value=" ">Choose Production Code</option>');
+                droppd.append('<option value="">Choose Production Code</option>');
                 dropline.append('<option value=" ">Choose Line Code</option>');
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
@@ -202,3 +202,209 @@ $(function() {
         }
     });
 });
+
+// -------------------------------- Problem Con -------------------------------
+$(document).ready(function () {
+    ProbConDropdown();
+
+    function ProbConDropdown() {
+        const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_problem';
+
+    $.ajax({
+        url: apiUrl,
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+            response = res;
+
+            // Clear existing options in the dropdown
+            $('#SelProblem').empty();
+
+            // Add a default option
+            $('#SelProblem').append('<option value="">Choose...</option>');
+
+            // Loop through the API response and add options to the dropdown
+            for (let i = 0; i < response.length; i++) {
+                const problemData = response[i];
+                $('#SelProblem').append(`<option value="${problemData.mpc_id}">${problemData.mpc_name_eng} / ${problemData.mpc_name_thai}</option>`);
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching data from the API:', error);
+        }
+    });
+}
+
+});
+
+        // -------------------------------- Inspec Method -------------------------------
+        $(document).ready(function () {
+            InMeDropdown();
+        
+            function InMeDropdown() {
+                const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_inspec_method';
+    
+            $.ajax({
+                url: apiUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                    response = res;
+    
+                    // Clear existing options in the dropdown
+                    $('#SelInspec').empty();
+    
+                    // Add a default option
+                    $('#SelInspec').append('<option value="">Choose...</option>');
+    
+                    // Loop through the API response and add options to the dropdown
+                    for (let i = 0; i < response.length; i++) {
+                        const inspecData = response[i];
+                        $('#SelInspec').append(`<option value="${inspecData.mim_id}">${inspecData.mim_name_eng} / ${inspecData.mim_name_thai}</option>`);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching data from the API:', error);
+                }
+            });
+        }
+    
+        });
+
+
+// // ---------------------- 1 - 2 ------------------------
+
+// function setupTabClickHandler1_2() {
+//     document.querySelectorAll('.nav-tabs li').forEach(function(tabLink) {
+//         tabLink.addEventListener('click', function(event) {
+//             var targetTab = this.querySelector('a').getAttribute('href');
+            
+//             // ตรวจสอบว่าคลิกที่แท็บ "#2" และเงื่อนไขตรวจสอบข้อมูลผ่าน
+//             if (targetTab === "#2" && !checkFormData1_2()) {
+//                 event.stopPropagation();
+//                 event.preventDefault(); // เรียก preventDefault
+
+//             }
+//         });
+//     });
+// }
+
+
+
+// function checkFormData1_2() {
+//     var Area = $('#inputGroupSelect01').val();
+//     var AreaPd = '';
+//     var AreaLine = '';
+//     var AreaOther = '';
+    
+//     // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
+//     if (Area === '1') {
+//         AreaPd = $('#droppd').val();
+//         AreaLine = $('#dropline').val();
+
+//     } else if (Area === '2') {
+//         AreaOther = $('#textother').val();
+
+//     }
+
+//     var ProcFunc = $('#processf').val();
+//     var ToolSys = $('#SelTool').val();
+//     var JobType = $('#SelJobtype').val();
+
+//     if (Area == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please Select Area.',
+//         });
+//     } else if (Area === '1' && AreaPd === '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please fill in all fields in Area PD.',
+//         });
+//     } else if (Area === '1' && AreaLine === '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please fill in all fields in Area Line.',
+//         });
+//     } else if (Area === '2' && AreaOther === '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please fill in all fields in Area Other.',
+//         });
+//     } else if (JobType == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please Select Jobtype.',
+//         }); 
+//     } else if (ProcFunc == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please enter Process / Function.',
+//         }); 
+//     } else if (ToolSys == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please Select Tooling System.',
+//         });
+//     } else {
+//         return true;
+//     }
+// }
+
+
+
+
+// // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+// document.addEventListener('DOMContentLoaded', function() {
+//     setupTabClickHandler2_3();
+// });
+
+// // ---------------------- 2 - 3 ------------------------
+
+// function setupTabClickHandler2_3() {
+//     document.querySelectorAll('.nav-tabs li').forEach(function(tabLink) {
+//         tabLink.addEventListener('click', function(event) {
+//             var targetTab = this.querySelector('a').getAttribute('href');
+            
+//             // ตรวจสอบว่าคลิกที่แท็บ "#3" และเงื่อนไขตรวจสอบข้อมูลผ่าน
+//             if (targetTab === "#3" && !checkFormData2_3()) {
+//                 event.stopPropagation();
+//                 event.preventDefault(); // เรียก preventDefault
+
+//             }
+//         });
+//     });
+// }
+
+
+
+// function checkFormData2_3() {
+//     var ProbCon = $('#SelProblem').val();
+
+//         if (ProbCon == '') {
+//             Swal.fire({
+//                 icon: 'warning',
+//                 title: 'Oops...',
+//                 text: 'Please Select ProbCon.',
+//             });
+//         }  else {
+//             return true;
+//         }
+
+// }
+
+
+
+// // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+// document.addEventListener('DOMContentLoaded', function() {
+//     setupTabClickHandler1_2();
+// });

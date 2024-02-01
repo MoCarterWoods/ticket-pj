@@ -45,7 +45,7 @@ class TicketHistory extends CI_Controller {
     }
 	
 	public function ticHistory() {
-        // $this->another_js = "<script src='" . base_url() . "assets/js/manageAccount.js'></script>";
+        $this->another_js = "<script src='" . base_url() . "assets/js/ticketHistory.js'></script>";
         $this->render_view('view_ticketHistory');
 
     }

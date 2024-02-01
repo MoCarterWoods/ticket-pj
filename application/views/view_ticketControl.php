@@ -86,6 +86,11 @@
         font-size: 12px;
         border-radius: 50%;
     }
+
+    a:hover,
+    a:focus {
+        text-decoration: none;
+    }
 </style>
 <div class="content-wrapper">
 
@@ -103,26 +108,31 @@
             <div id="exTab2" class="container">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#1" data-toggle="tab">อุปกรณ์ / เครื่องจักร</a>
+                        <a href="#1" data-toggle="tab">Process 1</a>
                     </li>
-                    <li><a href="#2" data-toggle="tab">Problem Condition</a>
+                    <li><a href="#2" data-toggle="tab">Problem Con</a>
                     </li>
-                    <li><a href="#3" data-toggle="tab">Inspection Method</a>
+                    <li><a href="#3" data-toggle="tab">Inspection</a>
                     </li>
-                    <li><a href="#4" data-toggle="tab">Troubleshooting / Action</a>
+                    <li><a href="#4" data-toggle="tab">Troubleshooting</a>
                     </li>
-                    <li><a href="#5" data-toggle="tab">รายการ ชิ้นส่วนที่ต้องใช้</a>
+                    <li><a href="#5" data-toggle="tab">Required Parts</a>
                     </li>
-                    <li><a href="#6" data-toggle="tab">วิเคราะห์สาเหตุ / ปัญหา</a>
+                    <li><a href="#6" data-toggle="tab">Analyze</a>
                     </li>
-                    <li><a href="#7" data-toggle="tab">การส่งมอบอุปกรณ์ / เครื่องจักร</a>
+                    <li><a href="#7" data-toggle="tab">Prevention</a>
+                    </li>
+                    <li><a href="#8" data-toggle="tab">Delivery</a>
                     </li>
                 </ul>
 
                 <div class="tab-content ">
 
 
+                    <!-- Process 1 -->
+
                     <div class="tab-pane active" id="1">
+                        <h3>อุปกรณ์ / เครื่องจักร</h3>
                         <table border="1" class="table">
                             <tbody>
                                 <tr style="background-color: cornsilk;">
@@ -219,35 +229,691 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- End Process 1 -->
 
+
+                    <!-- Start Problem Con -->
 
                     <div class="tab-pane" id="2">
-                        <h3>Notice the gap between the content and tab after applying a background color</h3>
+                        <h3>สภาพปัญหา / แผน PM / สภาพปัญหาก่อนการปรับปรุง / Project</h3>
+
+                        <table border="1" class="table">
+                            <tbody>
+                                <tr style="background-color: cornsilk;">
+                                    <td>Problem Condition <span style="color:red">*</span></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row ">
+                                            <div class="col-lg-4 area-mr">
+
+                                                <div class="row ">
+                                                    <label for="SelProblem">Problem Condition<span class="red-text">*</span>
+                                                        <select class="form-select" id="SelProblem">
+                                                            <option value="">Choose...</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label for="mdetailprdlm" class="">More Detail</label>
+                                                    <textarea class="form-control" id="mdetailprdlm" rows="4"></textarea>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                            <div id="col-lg-8" class="col-lg-8 sh-im">
+                                                <div>
+                                                    <label for="file-input1-problm">Pic 1</label>
+                                                    <input type="file" id="file-input1-problm" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-problm', 'previewpb1', 1)">
+
+                                                    <label for="file-input2-problm">Pic 2</label>
+                                                    <input type="file" id="file-input2-problm" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-problm', 'previewpb2', 2)">
+
+                                                    <label for="file-input3-problm">Pic 3</label>
+                                                    <input type="file" id="file-input3-problm" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-problm', 'previewpb3', 3)">
+
+                                                </div>
+
+                                            </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-lg-4 sh-im" style="padding-top: 25px;padding-left: 100px;">
+                                                <button onclick="deleteImage(1)" style="display:none;">Delete Pic 1</button>
+                                                <img id="previewpb1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(2)" style="display:none;">Delete Pic 2</button>
+                                                <img id="previewpb2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(3)" style="display:none;">Delete Pic 3</button>
+                                                <img id="previewpb3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <script>
+                                    function previewImage(inputId, imgId, order) {
+                                        var input = document.getElementById(inputId);
+                                        var img = document.getElementById(imgId);
+                                        var deleteButton = document.querySelector(`button[onclick="deleteImage(${order})"]`);
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            img.src = e.target.result;
+                                            img.style.display = 'inline-block';
+                                            deleteButton.style.display = 'inline-block';
+                                        };
+
+                                        if (input.files[0]) {
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+
+                                        // เพิ่มลำดับลงใน alt เพื่อให้สามารถจัดเรียงตามลำดับ
+                                        img.alt = "Preview " + order;
+
+                                        // ซ่อน label และ input ที่เคยถูกแสดง
+                                        for (var i = 1; i <= 3; i++) {
+                                            var label = document.querySelector(`label[for=file-input${i}-Analyz]`);
+                                            var input = document.getElementById(`file-input${i}-Analyz`);
+
+                                            if (i === order) {
+
+                                            } else {
+
+                                            }
+                                        }
+
+                                        // แสดง label และ input ของอันถัดไป (ถ้ามี)
+                                        if (order < 3) {
+                                            var nextOrder = order + 1;
+                                            var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-Analyz]`);
+                                            var nextInput = document.getElementById(`file-input${nextOrder}-Analyz`);
+                                            nextLabel.style.display = 'inline-block';
+                                            nextInput.style.display = 'inline-block';
+                                            // ทำให้รูปถัดไปซ่อนเริ่มต้น
+                                            var nextImg = document.getElementById(`previewpb${nextOrder}`);
+                                            nextImg.style.display = 'none';
+                                        }
+                                    }
+
+                                    function deleteImage(order) {
+                                        for (var i = order; i < 3; i++) {
+                                            var currentImg = document.getElementById(`previewpb${i}`);
+                                            var nextImg = document.getElementById(`previewpb${i + 1}`);
+                                            var currentInput = document.getElementById(`file-input${i}-Analyz`);
+                                            var nextInput = document.getElementById(`file-input${i + 1}-Analyz`);
+                                            var currentLabel = document.querySelector(`label[for=file-input${i}-Analyz]`);
+                                            var nextLabel = document.querySelector(`label[for=file-input${i + 1}-Analyz]`);
+                                            var currentDeleteButton = document.querySelector(`button[onclick="deleteImage(${i})"]`);
+                                            var nextDeleteButton = document.querySelector(`button[onclick="deleteImage(${i + 1})"]`);
+
+                                            currentImg.src = nextImg.src;
+                                            currentInput.value = nextInput.value;
+                                            currentLabel.innerHTML = nextLabel.innerHTML;
+                                            currentDeleteButton.style.display = nextDeleteButton.style.display;
+                                        }
+
+                                        // ลบข้อมูลของรูปที่สุดท้าย
+                                        var lastImg = document.getElementById(`previewpb3`);
+                                        var lastInput = document.getElementById(`file-input3-Analyz`);
+                                        var lastLabel = document.querySelector(`label[for=file-input3-Analyz]`);
+                                        var lastDeleteButton = document.querySelector(`button[onclick="deleteImage(3)"]`);
+
+                                        lastImg.src = '#';
+                                        lastImg.style.display = 'none';
+                                        lastInput.value = '';
+                                        lastLabel.style.display = 'none';
+                                        lastDeleteButton.style.display = 'none';
+                                    }
+                                </script>
+                            </tbody>
+                        </table>
+
+                        <!-- End Problem Con -->
+
                     </div>
                     <div class="tab-pane" id="3">
-                        <h3>add clearfix to tab-content (see the css)</h3>
+                        <h3>การตรวจสอบสภาพอุปกรณ์ / ความผิดปกติ / ความเสียหาย</h3>
+
+                        <table border="1" class="table">
+                            <tbody>
+                                <tr style="background-color: cornsilk;">
+                                    <td>Inspection Method <span style="color:red">*</span></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row ">
+                                            <div class="col-lg-4 area-mr">
+
+                                                <div class="row ">
+                                                    <label for="SelInspec">Inspection Method<span class="red-text">*</span>
+                                                        <select class="form-select" id="SelInspec">
+                                                            <option value="">Choose...</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label for="mdetailinsprc" class="">More Detail</label>
+                                                    <textarea class="form-control" id="mdetailinsprc" rows="4"></textarea>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                            <div id="col-lg-8" class="col-lg-8 sh-im">
+                                                <div>
+                                                    <label for="file-input1-isp">Pic 1</label>
+                                                    <input type="file" id="file-input1-isp" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-isp', 'previewins1', 1)">
+
+                                                    <label for="file-input2-isp">Pic 2</label>
+                                                    <input type="file" id="file-input2-isp" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-isp', 'previewins2', 2)">
+
+                                                    <label for="file-input3-isp">Pic 3</label>
+                                                    <input type="file" id="file-input3-isp" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-isp', 'previewins3', 3)">
+
+                                                </div>
+
+                                            </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-lg-4 sh-im" style="padding-top: 25px;padding-left: 100px;">
+                                                <button onclick="deleteImage(1)" style="display:none;">Delete Pic 1</button>
+                                                <img id="previewins1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(2)" style="display:none;">Delete Pic 2</button>
+                                                <img id="previewins2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(3)" style="display:none;">Delete Pic 3</button>
+                                                <img id="previewins3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <script>
+                                    function previewImage(inputId, imgId, order) {
+                                        var input = document.getElementById(inputId);
+                                        var img = document.getElementById(imgId);
+                                        var deleteButton = document.querySelector(`button[onclick="deleteImage(${order})"]`);
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            img.src = e.target.result;
+                                            img.style.display = 'inline-block';
+                                            deleteButton.style.display = 'inline-block';
+                                        };
+
+                                        if (input.files[0]) {
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+
+                                        // เพิ่มลำดับลงใน alt เพื่อให้สามารถจัดเรียงตามลำดับ
+                                        img.alt = "Preview " + order;
+
+                                        // ซ่อน label และ input ที่เคยถูกแสดง
+                                        for (var i = 1; i <= 3; i++) {
+                                            var label = document.querySelector(`label[for=file-input${i}-isp]`);
+                                            var input = document.getElementById(`file-input${i}-isp`);
+
+                                            if (i === order) {
+
+                                            } else {
+
+                                            }
+                                        }
+
+                                        // แสดง label และ input ของอันถัดไป (ถ้ามี)
+                                        if (order < 3) {
+                                            var nextOrder = order + 1;
+                                            var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-isp]`);
+                                            var nextInput = document.getElementById(`file-input${nextOrder}-isp`);
+                                            nextLabel.style.display = 'inline-block';
+                                            nextInput.style.display = 'inline-block';
+                                            // ทำให้รูปถัดไปซ่อนเริ่มต้น
+                                            var nextImg = document.getElementById(`previewins${nextOrder}`);
+                                            nextImg.style.display = 'none';
+                                        }
+                                    }
+
+                                    function deleteImage(order) {
+                                        for (var i = order; i < 3; i++) {
+                                            var currentImg = document.getElementById(`previewins${i}`);
+                                            var nextImg = document.getElementById(`previewins${i + 1}`);
+                                            var currentInput = document.getElementById(`file-input${i}-isp`);
+                                            var nextInput = document.getElementById(`file-input${i + 1}-isp`);
+                                            var currentLabel = document.querySelector(`label[for=file-input${i}-isp]`);
+                                            var nextLabel = document.querySelector(`label[for=file-input${i + 1}-isp]`);
+                                            var currentDeleteButton = document.querySelector(`button[onclick="deleteImage(${i})"]`);
+                                            var nextDeleteButton = document.querySelector(`button[onclick="deleteImage(${i + 1})"]`);
+
+                                            currentImg.src = nextImg.src;
+                                            currentInput.value = nextInput.value;
+                                            currentLabel.innerHTML = nextLabel.innerHTML;
+                                            currentDeleteButton.style.display = nextDeleteButton.style.display;
+                                        }
+
+                                        // ลบข้อมูลของรูปที่สุดท้าย
+                                        var lastImg = document.getElementById(`previewins3`);
+                                        var lastInput = document.getElementById(`file-input3-isp`);
+                                        var lastLabel = document.querySelector(`label[for=file-input3-isp]`);
+                                        var lastDeleteButton = document.querySelector(`button[onclick="deleteImage(3)"]`);
+
+                                        lastImg.src = '#';
+                                        lastImg.style.display = 'none';
+                                        lastInput.value = '';
+                                        lastLabel.style.display = 'none';
+                                        lastDeleteButton.style.display = 'none';
+                                    }
+                                </script>
+                            </tbody>
+                        </table>
+
                     </div>
+                    <div class="tab-pane" id="4">
+                        <h3>การแก้ไขปัญหา / การดำเนินการ</h3>
+
+
+                        <table border="1" class="table">
+                            <tbody>
+                                <tr style="background-color: cornsilk;">
+                                    <td>Inspection Method <span style="color:red">*</span></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row ">
+                                            <div class="col-lg-4 area-mr">
+
+                                                <div class="row ">
+                                                    <label for="SelTbAc">Troubleshooting/Action<span class="red-text">*</span>
+                                                        <select class="form-select" id="SelTbAc">
+                                                            <option value="">Choose...</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label for="mdetailtbac" class="">More Detail</label>
+                                                    <textarea class="form-control" id="mdetailtbac" rows="4"></textarea>
+                                                </div>
 
 
 
+                                            </div>
+
+
+                                            <div id="col-lg-8" class="col-lg-8 sh-im">
+                                                <div>
+                                                    <label for="file-input1-tbac">Pic 1</label>
+                                                    <input type="file" id="file-input1-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-tbac', 'previewtbac1', 1)">
+
+                                                    <label for="file-input2-tbac">Pic 2</label>
+                                                    <input type="file" id="file-input2-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-tbac', 'previewtbac2', 2)">
+
+                                                    <label for="file-input3-tbac">Pic 3</label>
+                                                    <input type="file" id="file-input3-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-tbac', 'previewtbac3', 3)">
+
+                                                </div>
+
+                                            </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-lg-4 sh-im" style="padding-top: 25px;padding-left: 100px;">
+                                                <button onclick="deleteImage(1)" style="display:none;">Delete Pic 1</button>
+                                                <img id="previewtbac1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(2)" style="display:none;">Delete Pic 2</button>
+                                                <img id="previewtbac2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(3)" style="display:none;">Delete Pic 3</button>
+                                                <img id="previewtbac3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <script>
+                                    function previewImage(inputId, imgId, order) {
+                                        var input = document.getElementById(inputId);
+                                        var img = document.getElementById(imgId);
+                                        var deleteButton = document.querySelector(`button[onclick="deleteImage(${order})"]`);
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            img.src = e.target.result;
+                                            img.style.display = 'inline-block';
+                                            deleteButton.style.display = 'inline-block';
+                                        };
+
+                                        if (input.files[0]) {
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+
+                                        // เพิ่มลำดับลงใน alt เพื่อให้สามารถจัดเรียงตามลำดับ
+                                        img.alt = "Preview " + order;
+
+                                        // ซ่อน label และ input ที่เคยถูกแสดง
+                                        for (var i = 1; i <= 3; i++) {
+                                            var label = document.querySelector(`label[for=file-input${i}-tbac]`);
+                                            var input = document.getElementById(`file-input${i}-tbac`);
+
+                                            if (i === order) {
+
+                                            } else {
+
+                                            }
+                                        }
+
+                                        // แสดง label และ input ของอันถัดไป (ถ้ามี)
+                                        if (order < 3) {
+                                            var nextOrder = order + 1;
+                                            var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-tbac]`);
+                                            var nextInput = document.getElementById(`file-input${nextOrder}-tbac`);
+                                            nextLabel.style.display = 'inline-block';
+                                            nextInput.style.display = 'inline-block';
+                                            // ทำให้รูปถัดไปซ่อนเริ่มต้น
+                                            var nextImg = document.getElementById(`previewins${nextOrder}`);
+                                            nextImg.style.display = 'none';
+                                        }
+                                    }
+
+                                    function deleteImage(order) {
+                                        for (var i = order; i < 3; i++) {
+                                            var currentImg = document.getElementById(`previewins${i}`);
+                                            var nextImg = document.getElementById(`previewins${i + 1}`);
+                                            var currentInput = document.getElementById(`file-input${i}-tbac`);
+                                            var nextInput = document.getElementById(`file-input${i + 1}-tbac`);
+                                            var currentLabel = document.querySelector(`label[for=file-input${i}-tbac]`);
+                                            var nextLabel = document.querySelector(`label[for=file-input${i + 1}-tbac]`);
+                                            var currentDeleteButton = document.querySelector(`button[onclick="deleteImage(${i})"]`);
+                                            var nextDeleteButton = document.querySelector(`button[onclick="deleteImage(${i + 1})"]`);
+
+                                            currentImg.src = nextImg.src;
+                                            currentInput.value = nextInput.value;
+                                            currentLabel.innerHTML = nextLabel.innerHTML;
+                                            currentDeleteButton.style.display = nextDeleteButton.style.display;
+                                        }
+
+                                        // ลบข้อมูลของรูปที่สุดท้าย
+                                        var lastImg = document.getElementById(`previewins3`);
+                                        var lastInput = document.getElementById(`file-input3-tbac`);
+                                        var lastLabel = document.querySelector(`label[for=file-input3-tbac]`);
+                                        var lastDeleteButton = document.querySelector(`button[onclick="deleteImage(3)"]`);
+
+                                        lastImg.src = '#';
+                                        lastImg.style.display = 'none';
+                                        lastInput.value = '';
+                                        lastLabel.style.display = 'none';
+                                        lastDeleteButton.style.display = 'none';
+                                    }
+                                </script>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="5">
+                        <h3>รายงาน ชิ้นส่วนที่ต้องใช้ (ทดแทน ติดตั้ง ปรับปรุง)</h3>
+                    </div>
+                    <div class="tab-pane" id="6">
+                        <h3>การวิเคราะห์สาเหตุของปัญหา</h3>
+                        <table border="1" class="table">
+                            <tbody>
+                                <tr style="background-color: cornsilk;">
+                                    <td>Inspection Method <span style="color:red">*</span></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="row ">
+                                            <div class="col-lg-12 area-mr">
+
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="Check1">
+                                                        <label class="form-check-label" for="Check1"> การออกแบบ </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="2" id="Check2">
+                                                        <label class="form-check-label" for="Check2"> การติดตั้ง / ชิ้นส่วน </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="3" id="Check3">
+                                                        <label class="form-check-label" for="Check3"> การดัดแปลง / ซ่อมแซม </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="4" id="Check4">
+                                                        <label class="form-check-label" for="Check4"> การใช้งาน / ผิดวิธี </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="5" id="Check5">
+                                                        <label class="form-check-label" for="Check5"> การบำรุงรักษาเบื้องต้น </label>
+                                                    </div>
+                                                    <div class="form-check mt-3" style="margin-left: 30px;">
+                                                        <input class="form-check-input" type="checkbox" value="6" id="Check6">
+                                                        <label class="form-check-label" for="Check6"> การขันยึดแน่น </label>
+                                                    </div>
+                                                    <div class="form-check mt-3" style="margin-left: 30px;">
+                                                        <input class="form-check-input" type="checkbox" value="7" id="Check7">
+                                                        <label class="form-check-label" for="Check7"> การหล่อลื่น </label>
+                                                    </div>
+                                                    <div class="form-check mt-3" style="margin-left: 30px;">
+                                                        <input class="form-check-input" type="checkbox" value="8" id="Check8">
+                                                        <label class="form-check-label" for="Check8"> การทำความสะอาด </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="9" id="Check9">
+                                                        <label class="form-check-label" for="Check9"> ปัจจัยภายนอก / ไฟฟ้า </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="10" id="Check10">
+                                                        <label class="form-check-label" for="Check10"> อายุการใช้งาน </label>
+                                                    </div>
+                                                    <div class="form-check mt-3">
+                                                        <input class="form-check-input" type="checkbox" value="11" id="Check11">
+                                                        <label class="form-check-label" for="Check11"> อื่นๆ </label>
+                                                        <input type="text" class="form-control" id="adddtInput" placeholder=" . . . . . . . . . " for="Check11" style="margin-left: -25px;padding: 10px;">
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+
+                                        
+
+                                    <td>
+                                    <div id="col-lg-8" class="col-lg-8 sh-im">
+                                            <div>
+                                                <label for="file-input1-tbac">Pic 1</label>
+                                                <input type="file" id="file-input1-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-tbac', 'previewtbac1', 1)">
+
+                                                <label for="file-input2-tbac">Pic 2</label>
+                                                <input type="file" id="file-input2-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-tbac', 'previewtbac2', 2)">
+
+                                                <label for="file-input3-tbac">Pic 3</label>
+                                                <input type="file" id="file-input3-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-tbac', 'previewtbac3', 3)">
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 sh-im" style="padding-top: 25px;padding-left: 100px;">
+                                                <button onclick="deleteImage(1)" style="display:none;">Delete Pic 1</button>
+                                                <img id="previewtbac1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(2)" style="display:none;">Delete Pic 2</button>
+                                                <img id="previewtbac2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <button onclick="deleteImage(3)" style="display:none;">Delete Pic 3</button>
+                                                <img id="previewtbac3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <script>
+                                    function previewImage(inputId, imgId, order) {
+                                        var input = document.getElementById(inputId);
+                                        var img = document.getElementById(imgId);
+                                        var deleteButton = document.querySelector(`button[onclick="deleteImage(${order})"]`);
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            img.src = e.target.result;
+                                            img.style.display = 'inline-block';
+                                            deleteButton.style.display = 'inline-block';
+                                        };
+
+                                        if (input.files[0]) {
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+
+                                        // เพิ่มลำดับลงใน alt เพื่อให้สามารถจัดเรียงตามลำดับ
+                                        img.alt = "Preview " + order;
+
+                                        // ซ่อน label และ input ที่เคยถูกแสดง
+                                        for (var i = 1; i <= 3; i++) {
+                                            var label = document.querySelector(`label[for=file-input${i}-tbac]`);
+                                            var input = document.getElementById(`file-input${i}-tbac`);
+
+                                            if (i === order) {
+
+                                            } else {
+
+                                            }
+                                        }
+
+                                        // แสดง label และ input ของอันถัดไป (ถ้ามี)
+                                        if (order < 3) {
+                                            var nextOrder = order + 1;
+                                            var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-tbac]`);
+                                            var nextInput = document.getElementById(`file-input${nextOrder}-tbac`);
+                                            nextLabel.style.display = 'inline-block';
+                                            nextInput.style.display = 'inline-block';
+                                            // ทำให้รูปถัดไปซ่อนเริ่มต้น
+                                            var nextImg = document.getElementById(`previewins${nextOrder}`);
+                                            nextImg.style.display = 'none';
+                                        }
+                                    }
+
+                                    function deleteImage(order) {
+                                        for (var i = order; i < 3; i++) {
+                                            var currentImg = document.getElementById(`previewins${i}`);
+                                            var nextImg = document.getElementById(`previewins${i + 1}`);
+                                            var currentInput = document.getElementById(`file-input${i}-tbac`);
+                                            var nextInput = document.getElementById(`file-input${i + 1}-tbac`);
+                                            var currentLabel = document.querySelector(`label[for=file-input${i}-tbac]`);
+                                            var nextLabel = document.querySelector(`label[for=file-input${i + 1}-tbac]`);
+                                            var currentDeleteButton = document.querySelector(`button[onclick="deleteImage(${i})"]`);
+                                            var nextDeleteButton = document.querySelector(`button[onclick="deleteImage(${i + 1})"]`);
+
+                                            currentImg.src = nextImg.src;
+                                            currentInput.value = nextInput.value;
+                                            currentLabel.innerHTML = nextLabel.innerHTML;
+                                            currentDeleteButton.style.display = nextDeleteButton.style.display;
+                                        }
+
+                                        // ลบข้อมูลของรูปที่สุดท้าย
+                                        var lastImg = document.getElementById(`previewins3`);
+                                        var lastInput = document.getElementById(`file-input3-tbac`);
+                                        var lastLabel = document.querySelector(`label[for=file-input3-tbac]`);
+                                        var lastDeleteButton = document.querySelector(`button[onclick="deleteImage(3)"]`);
+
+                                        lastImg.src = '#';
+                                        lastImg.style.display = 'none';
+                                        lastInput.value = '';
+                                        lastLabel.style.display = 'none';
+                                        lastDeleteButton.style.display = 'none';
+                                    }
+                                </script>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane" id="7">
+                        <h3>การป้องกันการเกิดซ้ำ</h3>
+                    </div>
+                    <div class="tab-pane" id="8">
+                        <h3>การส่งมอบอุปกรณ์ / เครื่องจักร</h3>
+
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-md-12">
+                                <div class="card mb-4">
+
+                                    <div class="card-body demo-vertical-spacing demo-only-element">
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="1" id="Check-de1">
+                                            <label class="form-check-label" for="Check-de1"> อุปกรณ์ / เครื่องจักร มีการแก้ไขแบบชั่วคราว ต้องมีการแก้ไขถาวรภายหลังกำหนดการแก้ไขถาวร โดยประมาณ </label>
+                                            <input type="text" class="form-control" id="additionalInput" placeholder=" . . . . . . . . . " for="Check-de1">
+
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="2" id="Check-de2">
+                                            <label class="form-check-label" for="Check-de2"> อุปกรณ์ / เครื่องจักร มีการบำรุงรักษาเสร็จสิ้น / ครบถ้วน </label>
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="3" id="Check-de3">
+                                            <label class="form-check-label" for="Check-de3"> ตรวจสอบด้านคุณภาพ / จัดการงานเสีย </label>
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="4" id="Check-de4">
+                                            <label class="form-check-label" for="Check-de4"> บันทึกการเปลี่ยนแปลง 4M </label>
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="5" id="Check-de5">
+                                            <label class="form-check-label" for="Check-de5"> สภาพความปลอดภัย </label>
+                                        </div>
+                                        <div class="form-check mt-3">
+                                            <input class="form-check-input" type="checkbox" value="6" id="Check-de6">
+                                            <label class="form-check-label" for="Check-de6"> สภาพ 5ส เรียบร้อย </label>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- ปุ่มนอก -->
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-outline-secondary">Reset</button>
+                            <button type="button" class="btn btn-success ml-2" id="btnSave">Save</button>
+                        </div>
+
+
+                    </div>
                 </div>
-            </div>
 
-            <hr>
-            </hr>
+                <hr>
+                </hr>
 
 
-            <!-- Bootstrap core JavaScript
+                <!-- Bootstrap core JavaScript
     ================================================== -->
-            <!-- Placed at the end of the document so the pages load faster -->
+                <!-- Placed at the end of the document so the pages load faster -->
 
 
 
 
 
+            </div>
         </div>
     </div>
-</div>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
