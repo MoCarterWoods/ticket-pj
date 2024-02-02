@@ -273,6 +273,42 @@ $(document).ready(function () {
     
         });
 
+             // -------------------------------- Trouble -------------------------------
+             $(document).ready(function () {
+                TroubleDropdown();
+            
+                function TroubleDropdown() {
+                    const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_trouble';
+        
+                $.ajax({
+                    url: apiUrl,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (res) {
+                        // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                        response = res;
+        
+                        // Clear existing options in the dropdown
+                        $('#SelTbAc').empty();
+        
+                        // Add a default option
+                        $('#SelTbAc').append('<option value="">Choose...</option>');
+        
+                        // Loop through the API response and add options to the dropdown
+                        for (let i = 0; i < response.length; i++) {
+                            const troubleData = response[i];
+                            $('#SelTbAc').append(`<option value="${troubleData.mt_id}">${troubleData.mt_name_eng} / ${troubleData.mt_name_thai}</option>`);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Error fetching data from the API:', error);
+                    }
+                });
+            }
+        
+        });
+
+        
 
 // // ---------------------- 1 - 2 ------------------------
 
@@ -408,3 +444,406 @@ $(document).ready(function () {
 // document.addEventListener('DOMContentLoaded', function() {
 //     setupTabClickHandler1_2();
 // });
+
+
+
+
+    var globalArrayNewStep = [];
+
+    // วนลูปตรวจสอบ checkbox ทุกตัว
+    $('.form-check-input').each(function () {
+        var checkbox = $(this);
+
+        // ถ้า checkbox ถูกติ๊กให้เก็บค่า
+        if (checkbox.is(":checked")) {
+            var checkboxValue = checkbox.val();
+            var labelText = checkbox.next('.form-check-label').text();
+
+            globalArrayNewStep.push({
+                value: checkboxValue,
+                label: labelText
+            });
+        }
+    });
+
+
+
+    
+
+
+
+
+//-------------------------- Save ----------------------------------
+
+$(document).ready(function () {
+    $('#btnSave').on('click', function () {
+
+        var Area = $('#inputGroupSelect01').val();
+        var AreaPd = '';
+        var AreaLine = '';
+        var AreaOther = '';
+        
+        // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
+        if (Area === '1') {
+            AreaPd = $('#droppd').val();
+            AreaLine = $('#dropline').val();
+            // รีเซ็ทค่าใน #droppd และ #dropline
+
+        } else if (Area === '2') {
+            AreaOther = $('#textother').val();
+            // รีเซ็ทค่าใน #droppd และ #dropline
+            $('#droppd').val(''); 
+            $('#dropline').val('');
+        }
+
+        var ProcFunc = $('#processf').val();
+        var ToolSys = $('#SelTool').val();
+        var Maker = $('#addMaker').val();
+        var Model = $('#addModel').val();
+        var JobType = $('#SelJobtype').val();
+
+        // ------------ Problem Con ---------------
+        var ProbCon = $('#SelProblem').val();
+        var ProbConDetail = $('#mdetailprdlm').val();
+
+        // var pic1 = $('.upload__img-box:eq(0) .file-name').text();
+        // var pic2 = $('.upload__img-box:eq(1) .file-name').text();
+        // var pic3 = $('.upload__img-box:eq(2) .file-name').text();
+
+        var pbpic1 = $('#file-input1-problm').val(); 
+        var ProbConPic1 = pbpic1.replace(/^.*[\\\/]/, ''); 
+        var pbpic2 = $('#file-input2-problm').val(); 
+        var ProbConPic2 = pbpic2.replace(/^.*[\\\/]/, ''); 
+        var pbpic3 = $('#file-input3-problm').val(); 
+        var ProbConPic3 = pbpic3.replace(/^.*[\\\/]/, ''); 
+        // ------------ End Problem Con ---------------
+
+        // ------------ Inspec Method ---------------
+        var InspecMethod = $('#SelInspec').val();
+        var InspecDetail = $('#mdetailinsprc').val();
+
+        var ismpic1 = $('#file-input1-isp').val(); 
+        var InspecPic1 = ismpic1.replace(/^.*[\\\/]/, ''); 
+        var ismpic2 = $('#file-input2-isp').val(); 
+        var InspecPic2 = ismpic2.replace(/^.*[\\\/]/, ''); 
+        var ismpic3 = $('#file-input3-isp').val(); 
+        var InspecPic3 = ismpic3.replace(/^.*[\\\/]/, ''); 
+        // ------------ End Inspec Method ---------------
+
+        // ------------ Trouble Shooting ---------------
+        var Trouble = $('#SelTbAc').val();
+        var TroubleDetail = $('#mdetailtbac').val();
+
+        var troubpic1 = $('#file-input1-tbac').val(); 
+        var TroublePic1 = troubpic1.replace(/^.*[\\\/]/, ''); 
+        var troubpic2 = $('#file-input2-tbac').val(); 
+        var TroublePic2 = troubpic2.replace(/^.*[\\\/]/, ''); 
+        var troubpic3 = $('#file-input3-tbac').val(); 
+        var TroublePic3 = troubpic3.replace(/^.*[\\\/]/, ''); 
+        // ------------ End Trouble Shooting ---------------
+
+        // ------------ Required Parts ---------------
+        var requiredParts = [];
+        for (var i = 1; i <= 5; i++) {
+            var rqName = $('#name' + i).val();
+            var rqMaker = $('#maker' + i).val();
+            var rqModel = $('#model' + i).val();
+            var rqQty = $('#quantity' + i).val();
+            var rqStockDate = $('#stockDate' + i).val();
+            var rqStockQuantity = $('#stockQuantity' + i).val();
+            var rqOrderDate = $('#orderDate' + i).val();
+            var rqOrderQuantity = $('#orderQuantity' + i).val();
+            var rqReceivedDate = $('#receivedDate' + i).val();
+            var rqReceivedQuantity = $('#receivedQuantity' + i).val();
+
+            requiredParts.push({
+                rqName: rqName,
+                rqMaker: rqMaker,
+                rqModel: rqModel,
+                rqQty: rqQty,
+                rqStockDate: rqStockDate,
+                rqStockQuantity: rqStockQuantity,
+                rqOrderDate: rqOrderDate,
+                rqOrderQuantity: rqOrderQuantity,
+                rqReceivedDate: rqReceivedDate,
+                rqReceivedQuantity: rqReceivedQuantity
+            });
+
+        }
+
+
+        
+
+        // ------------ End Required Parts ---------------
+
+        // ------------ Analyze problem -----------------
+        var AnalyzDetail = $('#mdetailAnalyz').val();
+
+        var anallyzpic1 = $('#file-input1-Analyz').val(); 
+        var AnalyzPic1 = anallyzpic1.replace(/^.*[\\\/]/, ''); 
+        var anallyzpic2 = $('#file-input2-Analyz').val(); 
+        var AnalyzPic2 = anallyzpic2.replace(/^.*[\\\/]/, ''); 
+        var anallyzpic3 = $('#file-input3-Analyz').val(); 
+        var AnalyzPic3 = anallyzpic3.replace(/^.*[\\\/]/, ''); 
+
+        var Checked1 = $('#Check1').prop('checked');
+        var Checked2 = $('#Check2').prop('checked');
+        var Checked3 = $('#Check3').prop('checked');
+        var Checked4 = $('#Check4').prop('checked');
+        var Checked5 = $('#Check5').prop('checked');
+        var Checked6 = $('#Check6').prop('checked');
+        var Checked7 = $('#Check7').prop('checked');
+        var Checked8 = $('#Check8').prop('checked');
+        var Checked9 = $('#Check9').prop('checked');
+        var Checked10 = $('#Check10').prop('checked');
+        var Checked11 = $('#Check11').prop('checked');
+        var Detailcheck11 = $('#adddtInput').val();
+
+        var Checkval1 = Checked1 ? $('#Check1').val() : '';
+        var Checkval2 = Checked2 ? $('#Check2').val() : '';
+        var Checkval3 = Checked3 ? $('#Check3').val() : '';
+        var Checkval4 = Checked4 ? $('#Check4').val() : '';
+        var Checkval5 = Checked5 ? $('#Check5').val() : '';
+        var Checkval6 = Checked6 ? $('#Check6').val() : '';
+        var Checkval7 = Checked7 ? $('#Check7').val() : '';
+        var Checkval8 = Checked8 ? $('#Check8').val() : '';
+        var Checkval9 = Checked9 ? $('#Check9').val() : '';
+        var Checkval10 = Checked10 ? $('#Check10').val() : '';
+        var Checkval11 = Checked11 ? $('#Check11').val() : '';
+        // ------------ End Analyze Problem -----------------
+
+        // ------------ Delivery Equipment -----------------
+        var Detaildelivery = $('#additionalInput').val();
+        var deliveryChecked1 = $('#Check-de1').prop('checked');
+        var deliveryChecked2 = $('#Check-de2').prop('checked');
+        var deliveryChecked3 = $('#Check-de3').prop('checked');
+        var deliveryChecked4 = $('#Check-de4').prop('checked');
+        var deliveryChecked5 = $('#Check-de5').prop('checked');
+        var deliveryChecked6 = $('#Check-de6').prop('checked');
+
+        var deliveryCheckval1 = deliveryChecked1 ? $('#Check-de1').val() : '';
+        var deliveryCheckval2 = deliveryChecked2 ? $('#Check-de2').val() : '';
+        var deliveryCheckval3 = deliveryChecked3 ? $('#Check-de3').val() : '';
+        var deliveryCheckval4 = deliveryChecked4 ? $('#Check-de4').val() : '';
+        var deliveryCheckval5 = deliveryChecked5 ? $('#Check-de5').val() : '';
+        var deliveryCheckval6 = deliveryChecked6 ? $('#Check-de6').val() : '';
+
+        // ------------ End Delivery Equipment -----------------
+
+        // สำหรับรูปที่ 1
+
+
+        // แสดงผลลัพธ์ใน cons11
+
+
+
+        console.log("Area: " + Area);
+        console.log("AreaPd: " + AreaPd);
+        console.log("AreaLine: " + AreaLine);
+        console.log("AreaOther: " + AreaOther);
+        console.log("ProcFunc: " + ProcFunc);
+        console.log("ToolSys: " + ToolSys);
+        console.log("Maker: " + Maker);
+        console.log("Model: " + Model);
+        console.log("JobType: " + JobType);
+        console.log("ProbCon: " + ProbCon);
+        console.log("ProbConDetail: " + ProbConDetail);
+        console.log("ProbConPic1: " + ProbConPic1);
+        console.log("ProbConPic2: " + ProbConPic2);
+        console.log("ProbConPic3: " + ProbConPic3);
+        console.log("InspecMethod: " + InspecMethod);
+        console.log("InspecDetail: " + InspecDetail);
+        console.log("InspecPic1: " + InspecPic1);
+        console.log("InspecPic2: " + InspecPic2);
+        console.log("InspecPic3: " + InspecPic3);
+        console.log("Trouble: " + Trouble);
+        console.log("TroubleDetail: " + TroubleDetail);
+        console.log("TroublePic1: " + TroublePic1);
+        console.log("TroublePic2: " + TroublePic2);
+        console.log("TroublePic3: " + TroublePic3);
+
+        console.log('AnalyzDetail :', AnalyzDetail);
+        console.log('AnalyzPic1 :', AnalyzPic1);
+        console.log('AnalyzPic2 :', AnalyzPic2);
+        console.log('AnalyzPic3 :', AnalyzPic3);
+
+        console.log('Checkval1 :', Checkval1);
+        console.log('Checkval2 :', Checkval2);
+        console.log('Checkval3 :', Checkval3);
+        console.log('Checkval4 :', Checkval4);
+        console.log('Checkval5 :', Checkval5);
+        console.log('Checkval6 :', Checkval6);
+        console.log('Checkval7 :', Checkval7);
+        console.log('Checkval8 :', Checkval8);
+        console.log('Checkval9 :', Checkval9);
+        console.log('Checkval10 :', Checkval10);
+        console.log('Checkval11 :', Checkval11);
+        console.log('Detailcheck11 :', Detailcheck11);
+
+        console.log('Detaildelivery :', Detaildelivery);
+        console.log('deliveryCheckval1 :', deliveryCheckval1);
+        console.log('deliveryCheckval2 :', deliveryCheckval2);
+        console.log('deliveryCheckval3 :', deliveryCheckval3);
+        console.log('deliveryCheckval4 :', deliveryCheckval4);
+        console.log('deliveryCheckval5 :', deliveryCheckval5);
+        console.log('deliveryCheckval6 :', deliveryCheckval6);
+
+
+
+        if (Area == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Area.',
+            });
+        } else if (ProcFunc == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please enter Process / Function.',
+            }); 
+        } 
+        else if (ToolSys == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Tooling System.',
+            }); 
+        } 
+        else if (JobType == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Jobtype.',
+            }); 
+        } 
+        else if (ProbCon == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Problem Condition.',
+            }); 
+        } 
+        else if (InspecMethod == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Inspection Method.',
+            }); 
+        } 
+        else if (Trouble == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select Troubleshooting/Action.',
+            }); 
+        }  else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to save Ticket?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'Issue_Ticket/save_issue';
+                    const formData = new FormData()
+                    formData.append('AreaPd', AreaPd);
+                    formData.append('AreaLine', AreaLine);
+                    formData.append('AreaOther', AreaOther);
+                    formData.append('ProcFunc', ProcFunc);
+                    formData.append('ToolSys', ToolSys);
+                    formData.append('Maker', Maker);
+                    formData.append('Model', Model);
+                    formData.append('JobType', JobType);
+                    formData.append('ProbCon', ProbCon);
+                    formData.append('ProbConDetail', ProbConDetail);
+                    formData.append('ProbConPic1', ProbConPic1);
+                    formData.append('ProbConPic2', ProbConPic2);
+                    formData.append('ProbConPic3', ProbConPic3);
+                    formData.append('InspecMethod', InspecMethod);
+                    formData.append('InspecDetail', InspecDetail);
+                    formData.append('InspecPic1', InspecPic1);
+                    formData.append('InspecPic2', InspecPic2);
+                    formData.append('InspecPic3', InspecPic3);
+                    formData.append('Trouble', Trouble);
+                    formData.append('TroubleDetail', TroubleDetail);
+                    formData.append('TroublePic1', TroublePic1);
+                    formData.append('TroublePic2', TroublePic2);
+                    formData.append('TroublePic3', TroublePic3);
+
+                    for (var j = 0; j < requiredParts.length; j++) {
+                        var part = requiredParts[j];
+                        for (var key in part) {
+                            formData.append('Rq' + key + (j + 1), part[key]);
+                            
+                        }
+                    }
+
+                    formData.append('Detaildelivery', Detaildelivery);
+                    formData.append('deliveryCheckval1', deliveryCheckval1);
+                    formData.append('deliveryCheckval2', deliveryCheckval2);
+                    formData.append('deliveryCheckval3', deliveryCheckval3);
+                    formData.append('deliveryCheckval4', deliveryCheckval4);
+                    formData.append('deliveryCheckval5', deliveryCheckval5);
+                    formData.append('deliveryCheckval6', deliveryCheckval6);
+
+                    formData.append('AnalyzDetail', AnalyzDetail);
+                    formData.append('AnalyzPic1', AnalyzPic1);
+                    formData.append('AnalyzPic2', AnalyzPic2);
+                    formData.append('AnalyzPic3', AnalyzPic3);
+                    formData.append('Checkval1', Checkval1);
+                    formData.append('Checkval2', Checkval2);
+                    formData.append('Checkval3', Checkval3);
+                    formData.append('Checkval4', Checkval4);
+                    formData.append('Checkval5', Checkval5);
+                    formData.append('Checkval6', Checkval6);
+                    formData.append('Checkval7', Checkval7);
+                    formData.append('Checkval8', Checkval8);
+                    formData.append('Checkval9', Checkval9);
+                    formData.append('Checkval10', Checkval10);
+                    formData.append('Checkval11', Checkval11);
+                    formData.append('Detailcheck11', Detailcheck11);
+
+                    $.ajax({
+                        url: base_url('IssueTicket/callApiSaveTicket'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        dataType: 'json',
+                        success: function (res) {
+                            
+                            if (res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    html: 'Save Ticket success',
+                                    timer: 2500,
+                                }).then(() => {
+                                    $('#mdlEdit').modal('hide');
+
+                                });
+                            } else if (res.result == 2) {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Oops...',
+                                    text: 'Add Fail!!',
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+});

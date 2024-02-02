@@ -93,9 +93,9 @@
     }
 </style>
 <div class="content-wrapper">
-
-    <div class="container">
-        <div class="row">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
 
 
 
@@ -661,6 +661,189 @@
                     </div>
                     <div class="tab-pane" id="5">
                         <h3>รายงาน ชิ้นส่วนที่ต้องใช้ (ทดแทน ติดตั้ง ปรับปรุง)</h3>
+
+
+
+
+                        <div class="container" id="container1">
+                            <div class="col-12">
+                                <div class="card mb-6">
+                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                        <h4>No.1</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="name1">Name</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" id="name1">
+                                                </div>
+                                            </div>
+
+                                            <!-- เปลี่ยน ID ที่ซ้ำกันในฟอร์มทั้งหมด -->
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="maker1">MAKER</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" id="maker1">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="model1">MODEL</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="model1" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="quantity1">จำนวน</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="quantity1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="quantity1">
+                                                    <div class="form-text">You can use letters, numbers &amp; periods</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="stockDate1">เบิกจาก STOCK</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="date" value="" id="stockDate1">
+                                                    <br>
+                                                    <input type="text" id="stockQuantity1" class="form-control" placeholder="จำนวนเบิกจาก Stock">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="orderDate1">สั่งซื้อ / เรียกเข้า</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="date" value="" id="orderDate1">
+                                                    <br>
+                                                    <input type="text" id="orderQuantity1" class="form-control" placeholder="จำนวนเบิกจาก สั่งซื้อ / เรียกเข้า">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label class="col-sm-2 col-form-label" for="receivedDate1">ได้รับของ / เข้าซ่อม</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="date" value="" id="receivedDate1">
+                                                    <br>
+                                                    <input type="text" id="receivedQuantity1" class="form-control" placeholder="จำนวนเบิกจาก ได้รับของ / เข้าซ่อม">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <button id="btnAdd" type="button" class="btn btn-primary" data-toggle="tooltip" data-original-title="Add more controls" onclick="addNewForm()">
+                                <i class="glyphicon glyphicon-plus-sign"></i>&nbsp; Add&nbsp;
+                            </button>
+                        </div>
+
+                        <script>
+                            var containerCounter = 2; // เริ่มต้นที่ 1
+
+                            function addNewForm() {
+                                if (containerCounter <= 5) { // ไม่เพิ่มเกิน 5 ฟอร์ม
+                                    var newContainer = document.createElement("div");
+                                    newContainer.className = "container";
+                                    newContainer.id = "container" + containerCounter;
+
+                                    newContainer.innerHTML = `
+                <div class="col-xxl">
+                    <div class="card mb-12">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h4>No.${containerCounter}</h4>
+                            <button type="button" class="btn btn-danger" onclick="removeForm(${containerCounter})">Delete</button>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="name${containerCounter}">Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="name${containerCounter}">
+                                    </div>
+                                </div>
+                                <!-- เปลี่ยน ID ที่ซ้ำกันในฟอร์มทั้งหมด -->
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="maker${containerCounter}">MAKER</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="maker${containerCounter}">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="model${containerCounter}">MODEL</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="model${containerCounter}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="quantity${containerCounter}">จำนวน</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="quantity${containerCounter}" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" aria-describedby="quantity${containerCounter}">
+                                        <div class="form-text">You can use letters, numbers &amp; periods</div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="stockDate${containerCounter}">เบิกจาก STOCK</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="date" value="" id="stockDate${containerCounter}">
+                                        <br>
+                                        <input type="text" id="stockQuantity${containerCounter}" class="form-control" placeholder="จำนวนเบิกจาก Stock">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="orderDate${containerCounter}">สั่งซื้อ / เรียกเข้า</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="date" value="" id="orderDate${containerCounter}">
+                                        <br>
+                                        <input type="text" id="orderQuantity${containerCounter}" class="form-control" placeholder="จำนวนเบิกจาก สั่งซื้อ / เรียกเข้า">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" for="receivedDate${containerCounter}">ได้รับของ / เข้าซ่อม</label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" type="date" value="" id="receivedDate${containerCounter}">
+                                        <br>
+                                        <input type="text" id="receivedQuantity${containerCounter}" class="form-control" placeholder="จำนวนเบิกจาก ได้รับของ / เข้าซ่อม">
+                                    </div>
+                                </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                                    var existingContainer = document.getElementById("container1");
+                                    existingContainer.appendChild(newContainer);
+
+                                    containerCounter++;
+                                } else {
+                                    alert("ไม่สามารถเพิ่มฟอร์มเพิ่มได้เกิน 5 ฟอร์ม");
+                                }
+                            }
+
+                            function removeForm(containerId) {
+                                var containerToRemove = document.getElementById("container" + containerId);
+                                containerToRemove.remove();
+
+                                containerCounter--;
+                            }
+                        </script>
+
+
+
+
+
+
+
                     </div>
                     <div class="tab-pane" id="6">
                         <h3>การวิเคราะห์สาเหตุของปัญหา</h3>
@@ -676,9 +859,9 @@
                                         <div class="row ">
                                             <div class="col-lg-12 area-mr">
 
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
 
-                                                    <div class="form-check mt-3">
+                                                    <div class="form-check mt-3 checkbox-group" data-index="1">
                                                         <input class="form-check-input" type="checkbox" value="1" id="Check1">
                                                         <label class="form-check-label" for="Check1"> การออกแบบ </label>
                                                     </div>
@@ -718,11 +901,12 @@
                                                         <input class="form-check-input" type="checkbox" value="10" id="Check10">
                                                         <label class="form-check-label" for="Check10"> อายุการใช้งาน </label>
                                                     </div>
-                                                    <div class="form-check mt-3">
+                                                    <div class="form-check mt-3" style="margin-left: 30px;">
                                                         <input class="form-check-input" type="checkbox" value="11" id="Check11">
                                                         <label class="form-check-label" for="Check11"> อื่นๆ </label>
                                                         <input type="text" class="form-control" id="adddtInput" placeholder=" . . . . . . . . . " for="Check11" style="margin-left: -25px;padding: 10px;">
                                                     </div>
+
 
                                                 </div>
 
@@ -735,19 +919,22 @@
                                 </tr>
                                 <tr>
 
-                                        
+
 
                                     <td>
-                                    <div id="col-lg-8" class="col-lg-8 sh-im">
+                                        <div id="col-lg-12" class="col-lg-12 sh-im">
                                             <div>
-                                                <label for="file-input1-tbac">Pic 1</label>
-                                                <input type="file" id="file-input1-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-tbac', 'previewtbac1', 1)">
+                                                <label for="mdetailAnalyz" class="">More Detail</label>
+                                                <textarea class="form-control" id="mdetailAnalyz" rows="4"></textarea>
 
-                                                <label for="file-input2-tbac">Pic 2</label>
-                                                <input type="file" id="file-input2-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-tbac', 'previewtbac2', 2)">
+                                                <label for="file-input1-Analyz">Pic 1</label>
+                                                <input type="file" id="file-input1-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input1-Analyz', 'previewAnalyz1', 1)">
 
-                                                <label for="file-input3-tbac">Pic 3</label>
-                                                <input type="file" id="file-input3-tbac" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-tbac', 'previewtbac3', 3)">
+                                                <label for="file-input2-Analyz">Pic 2</label>
+                                                <input type="file" id="file-input2-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input2-Analyz', 'previewAnalyz2', 2)">
+
+                                                <label for="file-input3-Analyz">Pic 3</label>
+                                                <input type="file" id="file-input3-Analyz" class="file-input form-control" accept="image/*" onchange="previewImage('file-input3-Analyz', 'previewAnalyz3', 3)">
 
                                             </div>
 
@@ -755,11 +942,11 @@
                                         <div class="row">
                                             <div class="col-lg-4 sh-im" style="padding-top: 25px;padding-left: 100px;">
                                                 <button onclick="deleteImage(1)" style="display:none;">Delete Pic 1</button>
-                                                <img id="previewtbac1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <img id="previewAnalyz1" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
                                                 <button onclick="deleteImage(2)" style="display:none;">Delete Pic 2</button>
-                                                <img id="previewtbac2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <img id="previewAnalyz2" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
                                                 <button onclick="deleteImage(3)" style="display:none;">Delete Pic 3</button>
-                                                <img id="previewtbac3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
+                                                <img id="previewAnalyz3" src="#" alt="Preview" style="display:none; width: 180px; height: 180px;">
                                             </div>
                                         </div>
                                     </td>
@@ -786,8 +973,8 @@
 
                                         // ซ่อน label และ input ที่เคยถูกแสดง
                                         for (var i = 1; i <= 3; i++) {
-                                            var label = document.querySelector(`label[for=file-input${i}-tbac]`);
-                                            var input = document.getElementById(`file-input${i}-tbac`);
+                                            var label = document.querySelector(`label[for=file-input${i}-Analyz]`);
+                                            var input = document.getElementById(`file-input${i}-Analyz`);
 
                                             if (i === order) {
 
@@ -799,24 +986,24 @@
                                         // แสดง label และ input ของอันถัดไป (ถ้ามี)
                                         if (order < 3) {
                                             var nextOrder = order + 1;
-                                            var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-tbac]`);
-                                            var nextInput = document.getElementById(`file-input${nextOrder}-tbac`);
+                                            var nextLabel = document.querySelector(`label[for=file-input${nextOrder}-Analyz]`);
+                                            var nextInput = document.getElementById(`file-input${nextOrder}-Analyz`);
                                             nextLabel.style.display = 'inline-block';
                                             nextInput.style.display = 'inline-block';
                                             // ทำให้รูปถัดไปซ่อนเริ่มต้น
-                                            var nextImg = document.getElementById(`previewins${nextOrder}`);
+                                            var nextImg = document.getElementById(`previewAnalyz${nextOrder}`);
                                             nextImg.style.display = 'none';
                                         }
                                     }
 
                                     function deleteImage(order) {
                                         for (var i = order; i < 3; i++) {
-                                            var currentImg = document.getElementById(`previewins${i}`);
-                                            var nextImg = document.getElementById(`previewins${i + 1}`);
-                                            var currentInput = document.getElementById(`file-input${i}-tbac`);
-                                            var nextInput = document.getElementById(`file-input${i + 1}-tbac`);
-                                            var currentLabel = document.querySelector(`label[for=file-input${i}-tbac]`);
-                                            var nextLabel = document.querySelector(`label[for=file-input${i + 1}-tbac]`);
+                                            var currentImg = document.getElementById(`previewAnalyz${i}`);
+                                            var nextImg = document.getElementById(`previewAnalyz${i + 1}`);
+                                            var currentInput = document.getElementById(`file-input${i}-Analyz`);
+                                            var nextInput = document.getElementById(`file-input${i + 1}-Analyz`);
+                                            var currentLabel = document.querySelector(`label[for=file-input${i}-Analyz]`);
+                                            var nextLabel = document.querySelector(`label[for=file-input${i + 1}-Analyz]`);
                                             var currentDeleteButton = document.querySelector(`button[onclick="deleteImage(${i})"]`);
                                             var nextDeleteButton = document.querySelector(`button[onclick="deleteImage(${i + 1})"]`);
 
@@ -827,9 +1014,9 @@
                                         }
 
                                         // ลบข้อมูลของรูปที่สุดท้าย
-                                        var lastImg = document.getElementById(`previewins3`);
-                                        var lastInput = document.getElementById(`file-input3-tbac`);
-                                        var lastLabel = document.querySelector(`label[for=file-input3-tbac]`);
+                                        var lastImg = document.getElementById(`previewAnalyz3`);
+                                        var lastInput = document.getElementById(`file-input3-Analyz`);
+                                        var lastLabel = document.querySelector(`label[for=file-input3-Analyz]`);
                                         var lastDeleteButton = document.querySelector(`button[onclick="deleteImage(3)"]`);
 
                                         lastImg.src = '#';
