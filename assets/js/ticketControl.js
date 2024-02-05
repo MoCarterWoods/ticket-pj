@@ -238,6 +238,7 @@ $(document).ready(function () {
 
 });
 
+
         // -------------------------------- Inspec Method -------------------------------
         $(document).ready(function () {
             InMeDropdown();
@@ -543,35 +544,88 @@ $(document).ready(function () {
         // ------------ End Trouble Shooting ---------------
 
         // ------------ Required Parts ---------------
-        var requiredParts = [];
-        for (var i = 1; i <= 5; i++) {
-            var rqName = $('#name' + i).val();
-            var rqMaker = $('#maker' + i).val();
-            var rqModel = $('#model' + i).val();
-            var rqQty = $('#quantity' + i).val();
-            var rqStockDate = $('#stockDate' + i).val();
-            var rqStockQuantity = $('#stockQuantity' + i).val();
-            var rqOrderDate = $('#orderDate' + i).val();
-            var rqOrderQuantity = $('#orderQuantity' + i).val();
-            var rqReceivedDate = $('#receivedDate' + i).val();
-            var rqReceivedQuantity = $('#receivedQuantity' + i).val();
+        // var requiredParts = [];
+        // for (var i = 1; i <= 5; i++) {
+        //     var rqName = $('#name' + i).val();
+        //     var rqMaker = $('#maker' + i).val();
+        //     var rqModel = $('#model' + i).val();
+        //     var rqQty = $('#quantity' + i).val();
+        //     var rqStockDate = $('#stockDate' + i).val();
+        //     var rqStockQuantity = $('#stockQuantity' + i).val();
+        //     var rqOrderDate = $('#orderDate' + i).val();
+        //     var rqOrderQuantity = $('#orderQuantity' + i).val();
+        //     var rqReceivedDate = $('#receivedDate' + i).val();
+        //     var rqReceivedQuantity = $('#receivedQuantity' + i).val();
 
-            requiredParts.push({
-                rqName: rqName,
-                rqMaker: rqMaker,
-                rqModel: rqModel,
-                rqQty: rqQty,
-                rqStockDate: rqStockDate,
-                rqStockQuantity: rqStockQuantity,
-                rqOrderDate: rqOrderDate,
-                rqOrderQuantity: rqOrderQuantity,
-                rqReceivedDate: rqReceivedDate,
-                rqReceivedQuantity: rqReceivedQuantity
-            });
+        //     requiredParts.push({
+        //         rqName: rqName,
+        //         rqMaker: rqMaker,
+        //         rqModel: rqModel,
+        //         rqQty: rqQty,
+        //         rqStockDate: rqStockDate,
+        //         rqStockQuantity: rqStockQuantity,
+        //         rqOrderDate: rqOrderDate,
+        //         rqOrderQuantity: rqOrderQuantity,
+        //         rqReceivedDate: rqReceivedDate,
+        //         rqReceivedQuantity: rqReceivedQuantity
+        //     });
 
-        }
+        // }
+        var rqName1 = $('#name1').val();
+        var rqMaker1 = $('#maker1').val();
+        var rqModel1 = $('#model1').val();
+        var rqQty1 = $('#quantity1').val();
+        var rqStockDate1 = $('#stockDate1').val();
+        var rqStockQuantity1 = $('#stockQuantity1').val();
+        var rqOrderDate1 = $('#orderDate1').val();
+        var rqOrderQuantity1 = $('#orderQuantity1').val();
+        var rqReceivedDate1 = $('#receivedDate1').val();
+        var rqReceivedQuantity1 = $('#receivedQuantity1').val();
 
+        var rqName2 = $('#name2').val() || '';
+        var rqMaker2 = $('#maker2').val() || '';
+        var rqModel2 = $('#model2').val() || '';
+        var rqQty2 = $('#quantity2').val() || '';
+        var rqStockDate2 = $('#stockDate2').val() || '';
+        var rqStockQuantity2 = $('#stockQuantity2').val() || '';
+        var rqOrderDate2 = $('#orderDate2').val() || '';
+        var rqOrderQuantity2 = $('#orderQuantity2').val() || '';
+        var rqReceivedDate2 = $('#receivedDate2').val() || '';
+        var rqReceivedQuantity2 = $('#receivedQuantity2').val() || '';
 
+        var rqName3 = $('#name3').val() || '';
+        var rqMaker3 = $('#maker3').val() || '';
+        var rqModel3 = $('#model3').val() || '';
+        var rqQty3 = $('#quantity3').val() || '';
+        var rqStockDate3 = $('#stockDate3').val() || '';
+        var rqStockQuantity3 = $('#stockQuantity3').val() || '';
+        var rqOrderDate3 = $('#orderDate3').val() || '';
+        var rqOrderQuantity3 = $('#orderQuantity3').val() || '';
+        var rqReceivedDate3 = $('#receivedDate3').val() || '';
+        var rqReceivedQuantity3 = $('#receivedQuantity3').val() || '';
+
+        var rqName4 = $('#name4').val() || '';
+        var rqMaker4 = $('#maker4').val() || '';
+        var rqModel4 = $('#model4').val() || '';
+        var rqQty4 = $('#quantity4').val() || '';
+        var rqStockDate4 = $('#stockDate4').val() || '';
+        var rqStockQuantity4 = $('#stockQuantity4').val() || '';
+        var rqOrderDate4 = $('#orderDate4').val() || '';
+        var rqOrderQuantity4 = $('#orderQuantity4').val() || '';
+        var rqReceivedDate4 = $('#receivedDate4').val() || '';
+        var rqReceivedQuantity4 = $('#receivedQuantity4').val() || '';
+
+        var rqName5 = $('#name5').val() || '';
+        var rqMaker5 = $('#maker5').val() || '';
+        var rqModel5 = $('#model5').val() || '';
+        var rqQty5 = $('#quantity5').val() || '';
+        var rqStockDate5 = $('#stockDate5').val() || '';
+        var rqStockQuantity5 = $('#stockQuantity5').val() || '';
+        var rqOrderDate5 = $('#orderDate5').val() || '';
+        var rqOrderQuantity5 = $('#orderQuantity5').val() || '';
+        var rqReceivedDate5 = $('#receivedDate5').val() || '';
+        var rqReceivedQuantity5 = $('#receivedQuantity5').val() || '';
+        
         
 
         // ------------ End Required Parts ---------------
@@ -774,13 +828,60 @@ $(document).ready(function () {
                     formData.append('TroublePic2', TroublePic2);
                     formData.append('TroublePic3', TroublePic3);
 
-                    for (var j = 0; j < requiredParts.length; j++) {
-                        var part = requiredParts[j];
-                        for (var key in part) {
-                            formData.append('Rq' + key + (j + 1), part[key]);
-                            
-                        }
-                    }
+                    formData.append('rqName1', rqName1);
+                    formData.append('rqMaker1', rqMaker1);
+                    formData.append('rqModel1', rqModel1);
+                    formData.append('rqQty1', rqQty1);
+                    formData.append('rqStockDate1', rqStockDate1);
+                    formData.append('rqStockQuantity1', rqStockQuantity1);
+                    formData.append('rqOrderDate1', rqOrderDate1);
+                    formData.append('rqOrderQuantity1', rqOrderQuantity1);
+                    formData.append('rqReceivedDate1', rqReceivedDate1);
+                    formData.append('rqReceivedQuantity1', rqReceivedQuantity1);
+
+                    formData.append('rqName2', rqName2);
+                    formData.append('rqMaker2', rqMaker2);
+                    formData.append('rqModel2', rqModel2);
+                    formData.append('rqQty2', rqQty2);
+                    formData.append('rqStockDate2', rqStockDate2);
+                    formData.append('rqStockQuantity2', rqStockQuantity2);
+                    formData.append('rqOrderDate2', rqOrderDate2);
+                    formData.append('rqOrderQuantity2', rqOrderQuantity2);
+                    formData.append('rqReceivedDate2', rqReceivedDate2);
+                    formData.append('rqReceivedQuantity2', rqReceivedQuantity2);
+
+                    formData.append('rqName3', rqName3);
+                    formData.append('rqMaker3', rqMaker3);
+                    formData.append('rqModel3', rqModel3);
+                    formData.append('rqQty3', rqQty3);
+                    formData.append('rqStockDate3', rqStockDate3);
+                    formData.append('rqStockQuantity3', rqStockQuantity3);
+                    formData.append('rqOrderDate3', rqOrderDate3);
+                    formData.append('rqOrderQuantity3', rqOrderQuantity3);
+                    formData.append('rqReceivedDate3', rqReceivedDate3);
+                    formData.append('rqReceivedQuantity3', rqReceivedQuantity3);
+
+                    formData.append('rqName4', rqName4);
+                    formData.append('rqMaker4', rqMaker4);
+                    formData.append('rqModel4', rqModel4);
+                    formData.append('rqQty4', rqQty4);
+                    formData.append('rqStockDate4', rqStockDate4);
+                    formData.append('rqStockQuantity4', rqStockQuantity4);
+                    formData.append('rqOrderDate4', rqOrderDate4);
+                    formData.append('rqOrderQuantity4', rqOrderQuantity4);
+                    formData.append('rqReceivedDate4', rqReceivedDate4);
+                    formData.append('rqReceivedQuantity4', rqReceivedQuantity4);
+
+                    formData.append('rqName5', rqName5);
+                    formData.append('rqMaker5', rqMaker5);
+                    formData.append('rqModel5', rqModel5);
+                    formData.append('rqQty5', rqQty5);
+                    formData.append('rqStockDate5', rqStockDate5);
+                    formData.append('rqStockQuantity5', rqStockQuantity5);
+                    formData.append('rqOrderDate5', rqOrderDate5);
+                    formData.append('rqOrderQuantity5', rqOrderQuantity5);
+                    formData.append('rqReceivedDate5', rqReceivedDate5);
+                    formData.append('rqReceivedQuantity5', rqReceivedQuantity5);
 
                     formData.append('Detaildelivery', Detaildelivery);
                     formData.append('deliveryCheckval1', deliveryCheckval1);
