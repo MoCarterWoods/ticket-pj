@@ -990,3 +990,85 @@
     </hr>
 
 </div>
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+                            <div class="modal-dialog">
+                                <form class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="backDropModalTitle">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="namerq" class="form-label">Name</label>
+                                                <input type="text" id="namerq" class="form-control" placeholder="Enter Name">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="makerrq" class="form-label">MAKER</label>
+                                                <input type="text" id="makerrq" class="form-control" placeholder="Enter MAKER">
+                                            </div>
+                                            <div class="col mb-3">
+                                                <label for="modelrq" class="form-label">MODEL</label>
+                                                <input type="text" id="modelrq" class="form-control" placeholder="Enter MODEL">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="inpQTY" class="form-label">QTY</label>
+                                                <input type="number" id="inpQTY" class="form-control" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <div class="row g-2">
+                                            <div class="col mb-0">
+                                                <label for="inpStock" class="form-label">เบิกจาก Stock</label>
+                                                <input type="date" id="inpStock" class="form-control">
+                                            </div>
+                                            <div class="col mb-0">
+                                                <label for="inpStockqty" class="form-label">จำนวน</label>
+                                                <input type="number" id="inpStockqty" class="form-control" placeholder="0">
+                                            </div>
+
+                                        </div>
+                                        <div class="row g-2">
+                                            <div class="col mb-0">
+                                                <label for="inpOrder" class="form-label">สั่งซื้อ / เรียกเข้า</label>
+                                                <input type="date" id="inpOrder" class="form-control">
+                                            </div>
+                                            <div class="col mb-0">
+                                                <label for="inpOrderqty" class="form-label">จำนวน</label>
+                                                <input type="number" id="inpOrderqty" class="form-control" placeholder="0">
+                                            </div>
+
+                                        </div>
+                                        <div class="row g-2">
+                                            <div class="col mb-0">
+                                                <label for="inpReceived" class="form-label">เได้รับของ / เข้าซ่อม</label>
+                                                <input type="date" id="inpReceived" class="form-control">
+                                            </div>
+                                            <div class="col mb-0">
+                                                <label for="inpReceivedqty" class="form-label">จำนวน</label>
+                                                <input type="number" id="inpReceivedqty" class="form-control" placeholder="0">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="submit" data-bs-dismiss="modal">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Modal -->

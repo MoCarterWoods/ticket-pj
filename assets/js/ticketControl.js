@@ -1,15 +1,16 @@
 $(document).ready(function () {
-    var dropdown = $('#inputGroupSelect01');
-    var droppd = $('#droppd');
-    var dropline = $('#dropline'); // เพิ่มตัวแปร dropline
+    
+    var dropdown = $('#selArea');
+    var selProduction = $('#selProduction');
+    var selLine = $('#selLine'); // เพิ่มตัวแปร selLine
     var textother = $('#textother');
 
     var selpdDiv = $('#selpd');
     var selotherDiv = $('#selother');
 
     function resetUI() {
-        droppd.empty().val('');
-        dropline.empty().val('');
+        selProduction.empty().val('');
+        selLine.empty().val('');
         textother.val('');
     }
 
@@ -24,12 +25,12 @@ $(document).ready(function () {
         } else if (selectedValue === "2") {
             selpdDiv.hide();
             selotherDiv.show();
-            droppd.empty().val(' ');
-            dropline.empty().val(' ');
+            selProduction.empty().val(' ');
+            selLine.empty().val(' ');
             textother.val('');
 
-            console.log(droppd.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
-            console.log(dropline.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
+            console.log(selProduction.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
+            console.log(selLine.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
         } else {
             selpdDiv.hide();
             selotherDiv.hide();
@@ -41,19 +42,19 @@ $(document).ready(function () {
     populateDropdown();
 
     function populateDropdown() {
-        const apiUrlDroppd = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineMst';
+        const apiUrlselProduction = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineMst';
         
         $.ajax({
-            url: apiUrlDroppd,
+            url: apiUrlselProduction,
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                droppd.empty();
-                droppd.append('<option value="">Choose Production Code</option>');
-                dropline.append('<option value=" ">Choose Line Code</option>');
+                selProduction.empty();
+                selProduction.append('<option value="">Choose Production Code</option>');
+                selLine.append('<option value=" ">Choose Line Code</option>');
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
-                    droppd.append(`<option value="${data.dep_cd}">${data.dep_cd}</option>`);
+                    selProduction.append(`<option value="${data.dep_cd}">${data.dep_cd}</option>`);
                 }
             },
             error: function (error) {
@@ -62,29 +63,31 @@ $(document).ready(function () {
         });
     }
     
-    $('#droppd').on('change', function () {
-        let getPD = $('#droppd').val();
-        const apiUrlDropline = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineFormPD';
+    $('#selProduction').on('change', function () {
+        let getPD = $('#selProduction').val();
+        const apiUrlselLine = 'http://192.168.161.219/APIReprint/LogTag_information/show_LineFormPD';
     
         $.ajax({
             method: "POST",
-            url: base_url("IssueTicket/callApiSearchLineCd?url=" + apiUrlDropline),
+            url: base_url("IssueTicket/callApiSearchLineCd?url=" + apiUrlselLine),
             dataType: 'Json',
             data: {
                 getPD: getPD,
             },
             success: function (response) {
-                dropline.empty();
-                dropline.append('<option value="">Choose Line Code</option>');
+                selLine.empty();
+                selLine.append('<option value="">Choose Line Code</option>');
                 
                 for (let i = 0; i < response.lineMaster.length; i++) {
                     const data = response.lineMaster[i];
-                    dropline.append(`<option value="${data.line_cd}">${data.line_cd}</option>`);
+                    selLine.append(`<option value="${data.line_cd}">${data.line_cd}</option>`);
                 }
             }
         });
     });
 });
+
+
 
 
      // ------------------------------------------- Job Type ----------------------------------------
@@ -149,15 +152,15 @@ $(document).ready(function () {
                 response = res;
 
                 // Clear existing options in the dropdown
-                $('#SelTool').empty();
+                $('#selTooling').empty();
 
                 // Add a default option
-                $('#SelTool').append('<option value="">Choose...</option>');
+                $('#selTooling').append('<option value="">Choose...</option>');
 
                 // Loop through the API response and add options to the dropdown
                 for (let i = 0; i < response.length; i++) {
                     const toolData = response[i];
-                    $('#SelTool').append(`<option value="${toolData.mts_id}">${toolData.mts_name}</option>`);
+                    $('#selTooling').append(`<option value="${toolData.mts_id}">${toolData.mts_name}</option>`);
                 }
             },
             error: function (error) {
@@ -166,8 +169,8 @@ $(document).ready(function () {
         });
     }
 
-    // Add event listener for the change event on SelTool dropdown
-    $('#SelTool').on('change', function () {
+    // Add event listener for the change event on selTooling dropdown
+    $('#selTooling').on('change', function () {
         // Get the selected value from the dropdown
         const selectedValue = $(this).val();
 
@@ -311,15 +314,25 @@ $(document).ready(function () {
 
         
 
+        $(function() {
+            $(".btn-next").click(function() {
+                // แสดงแท็บ Problem Condition
+                $("#navs-pills-top-problem").tab("show");
+            });
+        });
+        
+        
+
 // // ---------------------- 1 - 2 ------------------------
 
 // function setupTabClickHandler1_2() {
-//     document.querySelectorAll('.nav-tabs li').forEach(function(tabLink) {
+//     document.querySelectorAll('.nav-pills li').forEach(function(tabLink) {
 //         tabLink.addEventListener('click', function(event) {
-//             var targetTab = this.querySelector('a').getAttribute('href');
+//             var targetTab = this.querySelector('button.nav-link').getAttribute('data-bs-target');
+
             
 //             // ตรวจสอบว่าคลิกที่แท็บ "#2" และเงื่อนไขตรวจสอบข้อมูลผ่าน
-//             if (targetTab === "#2" && !checkFormData1_2()) {
+//             if (targetTab === "#navs-pills-top-problem" && !checkFormData1_2()) {
 //                 event.stopPropagation();
 //                 event.preventDefault(); // เรียก preventDefault
 
@@ -331,15 +344,15 @@ $(document).ready(function () {
 
 
 // function checkFormData1_2() {
-//     var Area = $('#inputGroupSelect01').val();
+//     var Area = $('#selArea').val();
 //     var AreaPd = '';
 //     var AreaLine = '';
 //     var AreaOther = '';
     
 //     // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
 //     if (Area === '1') {
-//         AreaPd = $('#droppd').val();
-//         AreaLine = $('#dropline').val();
+//         AreaPd = $('#selProduction').val();
+//         AreaLine = $('#selLine').val();
 
 //     } else if (Area === '2') {
 //         AreaOther = $('#textother').val();
@@ -347,7 +360,7 @@ $(document).ready(function () {
 //     }
 
 //     var ProcFunc = $('#processf').val();
-//     var ToolSys = $('#SelTool').val();
+//     var ToolSys = $('#selTooling').val();
 //     var JobType = $('#SelJobtype').val();
 
 //     if (Area == '') {
@@ -408,12 +421,12 @@ $(document).ready(function () {
 // // ---------------------- 2 - 3 ------------------------
 
 // function setupTabClickHandler2_3() {
-//     document.querySelectorAll('.nav-tabs li').forEach(function(tabLink) {
+//     document.querySelectorAll('.nav-pills li').forEach(function(tabLink) {
 //         tabLink.addEventListener('click', function(event) {
-//             var targetTab = this.querySelector('a').getAttribute('href');
+//             var targetTab = this.querySelector('button.nav-link').getAttribute('data-bs-target');
             
 //             // ตรวจสอบว่าคลิกที่แท็บ "#3" และเงื่อนไขตรวจสอบข้อมูลผ่าน
-//             if (targetTab === "#3" && !checkFormData2_3()) {
+//             if (targetTab === "#navs-pills-top-inspection" && !checkFormData2_3()) {
 //                 event.stopPropagation();
 //                 event.preventDefault(); // เรียก preventDefault
 
@@ -447,7 +460,7 @@ $(document).ready(function () {
 // });
 
 
-
+// // --------------------------------------------------
 
     var globalArrayNewStep = [];
 
@@ -479,26 +492,26 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#btnSave').on('click', function () {
 
-        var Area = $('#inputGroupSelect01').val();
+        var Area = $('#selArea').val();
         var AreaPd = '';
         var AreaLine = '';
         var AreaOther = '';
         
         // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
         if (Area === '1') {
-            AreaPd = $('#droppd').val();
-            AreaLine = $('#dropline').val();
-            // รีเซ็ทค่าใน #droppd และ #dropline
+            AreaPd = $('#selProduction').val();
+            AreaLine = $('#selLine').val();
+            // รีเซ็ทค่าใน #selProduction และ #selLine
 
         } else if (Area === '2') {
             AreaOther = $('#textother').val();
-            // รีเซ็ทค่าใน #droppd และ #dropline
-            $('#droppd').val(''); 
-            $('#dropline').val('');
+            // รีเซ็ทค่าใน #selProduction และ #selLine
+            $('#selProduction').val(''); 
+            $('#selLine').val('');
         }
 
         var ProcFunc = $('#processf').val();
-        var ToolSys = $('#SelTool').val();
+        var ToolSys = $('#selTooling').val();
         var Maker = $('#addMaker').val();
         var Model = $('#addModel').val();
         var JobType = $('#SelJobtype').val();
