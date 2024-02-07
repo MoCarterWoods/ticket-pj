@@ -16025,41 +16025,79 @@ html:not(.layout-footer-fixed) .content-wrapper {
 }
 
 .avatar-group .avatar {
-  transition: all 0.25s ease;
-}
-.avatar-group .avatar img,
-.avatar-group .avatar .avatar-initial {
-  border: 2px solid #fff;
-}
-.avatar-group .avatar .avatar-initial {
-  background-color: #9da8b5;
-}
-.avatar-group .avatar:hover {
-  z-index: 30;
-  transition: all 0.25s ease;
-}
-.avatar-group .avatar {
-  margin-left: -0.8rem;
-}
-.avatar-group .avatar:first-child {
-  margin-left: 0;
-}
-.avatar-group .avatar-xs {
-  margin-left: -0.65rem;
-}
-.avatar-group .avatar-sm {
-  margin-left: -0.75rem;
-}
-.avatar-group .avatar-md {
-  margin-left: -0.9rem;
-}
-.avatar-group .avatar-lg {
-  margin-left: -1.5rem;
-}
-.avatar-group .avatar-xl {
-  margin-left: -1.75rem;
+  transition: all .25s ease
 }
 
+.avatar-group .avatar img,.avatar-group .avatar .avatar-initial {
+  border: 2px solid #fff
+}
+
+.avatar-group .avatar .avatar-initial {
+  background-color: #9da8b5
+}
+
+.avatar-group .avatar:hover {
+  z-index: 30;
+  transition: all .25s ease
+}
+
+.avatar-group .avatar {
+  margin-left: -0.8rem
+}
+
+.avatar-group .avatar:first-child {
+  margin-left: 0
+}
+
+.avatar-group .avatar-xs {
+  margin-left: -0.65rem
+}
+
+.avatar-group .avatar-sm {
+  margin-left: -0.75rem
+}
+
+.avatar-group .avatar-md {
+  margin-left: -0.9rem
+}
+
+.avatar-group .avatar-lg {
+  margin-left: -1.5rem
+}
+
+.avatar-group .avatar-xl {
+  margin-left: -1.75rem
+}
+
+[dir=rtl] .avatar-group .avatar {
+  margin-right: -0.8rem;
+  margin-left: 0
+}
+
+[dir=rtl] .avatar-group .avatar-xs {
+  margin-right: -0.65rem
+}
+
+[dir=rtl] .avatar-group .avatar-sm {
+  margin-right: -0.75rem
+}
+
+[dir=rtl] .avatar-group .avatar-md {
+  margin-right: -0.9rem
+}
+
+[dir=rtl] .avatar-group .avatar-lg {
+  margin-right: -1.5rem
+}
+
+[dir=rtl] .avatar-group .avatar-xl {
+  margin-right: -1.75rem
+}
+.avatar-group .avatar img, .avatar-group .avatar .avatar-initial {
+  border: 2px solid #fff;
+  width: 35px;
+  height: 35px;
+}
 .divider {
   display: block;
   text-align: center;

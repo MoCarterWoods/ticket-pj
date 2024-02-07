@@ -26,22 +26,23 @@
     </div>
     <br>
 
+
     
     <div class="card" style="display: none;" id="content">
 
 
-<div class="card-body">
+      <div class="card-body">
         <div class="row py-2 mt-2">
           <div>
-          <span class="fs-5 fw-bold text-primary-emphasis">Register Sub Menu</span>
+            <span class="fs-5 fw-bold text-primary-emphasis">Register Sub Menu</span>
             <div class="row">
               <div class="mb-3 col-md-4 col-md-1888">
-              <span>Sub Menu</span><span class="red-text">*</span>
-                <input class="form-control" type="text" id="inpSubMenuName" oninput="InputAdd(this)" value="" />
+                <label for="inpSubMenuName" class="form-label">Main Menu Name <span class="red-text">*</span></label>
+                <input class="form-control" type="text" id="inpSubMenuName" oninput="InputAdd(this)" value="" placeholder="Enter main menu"/>
               </div>
               <div class="mb-3 col-md-5">
-              <span>Sub Menu controller</span><span class="red-text">*</span>
-                <input class="form-control mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)" value="" />
+                <label for="inpSubMenuCon" class="form-label">Main Menu Name <span class="red-text">*</span></label>
+                <input class="form-control mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)" value="" placeholder="Enter menu name"/>
               </div>
               <div class="col-md-3 col-md-3-main">
 
@@ -54,42 +55,36 @@
 
 
 
-                <div class="col-12 col-sm-12 justify-content-start">
-                  <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
-                </div>
+        <div class="col-12 col-sm-12 justify-content-start">
+          <div id="errMegadd" style="color: red; display: none;">Please enter in English only.</div>
+        </div>
 
-
-                <h5 class="card-header">Table_Submenu</h5>
-                
-                  <div class="table-responsive text-nowrap">
-                    <div class="card-datatable table-responsive pt-0">
-                      <table class="datatables-basic table  table-bordered table-hover table-checkable order-column border-top " id="tblSubMenu">
-                        <thead style="background-color: #afdbff;">
-                          <tr>
-                            <th>No.</th>
-                            <th>Sub Menu</th>
-                            <th>Menu Controller</th>
-                            <th>Update Date</th>
-                            <th>Update By</th>
-                            <th>Stasus</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0" id="tbody">
-                          <!-- Table body content goes here -->
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="table-responsive text-nowrap">
+          <div class="card-datatable table-responsive pt-0">
+            <table class="datatables-basic table  table-bordered table-hover table-checkable order-column border-top w-100" id="tblSubMenu">
+              <thead>
+                <tr>
+                  <th class="text-center">No.</th>
+                  <th class="text-center">Sub Menu</th>
+                  <th class="text-center">Menu Controller</th>
+                  <th class="text-center">Update Date</th>
+                  <th class="text-center">Update By</th>
+                  <th class="text-center">Stasus</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody class="table-border-bottom-0" id="tbody">
+                <!-- Table body content goes here -->
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </div>
+
 <!--/ Bordered Table -->
 
 

@@ -31,15 +31,15 @@
       <h5 class="card-header">Permission Group</h5>
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
-            <table class="table card-table table-bordered table-hover table-checkable order-column w-100" id="tblPermisGP">
-              <thead style="background-color: #afdbff;">
+            <table class="table card-table table-bordered order-column w-100" id="tblPermisGP">
+              <thead>
                 <tr>
-                  <th>No.</th>
-                  <th>Permission Group Name</th>
-                  <th>Update Date</th>
-                  <th>Update By</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th class="text-center">No.</th>
+                  <th class="text-center">Permission Group Name</th>
+                  <th class="text-center">Update Date</th>
+                  <th class="text-center">Update By</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0" id="tbody">

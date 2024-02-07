@@ -8,7 +8,8 @@
     <!-- Account -->
     <div class="card-body d-flex justify-content-center">
       <div class="d-flex align-items-start align-items-sm-center gap-4">
-        <img src="<?php echo base_url() ?>/assets/img/avatars/no-avatar.png" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+      <img src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/<?php echo $this->session->userdata('userName'); ?>.jpg" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar"  onerror="this.onerror=null; this.src='<?php echo base_url() ?>/assets/img/avatars/no-avatar.png'">
+
       </div>
     </div>
     <hr class="my-0" />

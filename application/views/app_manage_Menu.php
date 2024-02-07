@@ -17,8 +17,8 @@
                 <div class="table-responsive text-nowrap">
                     <!-- Removed scrollBody -->
                     <div class="card-datatable table-responsive pt-0">
-                        <table class="table card-table table-bordered table-hover table-checkable order-column w-100" id="tblManageMenu">
-                            <thead style="background-color: #afdbff;">
+                        <table class="table card-table table-bordered order-column w-100" id="tblManageMenu">
+                            <thead>
                                 <tr>
                                     <th class="text-center">No.</th>
                                     <th class="text-center">Main Menu Name</th>

@@ -19,25 +19,22 @@ $(() => {
                     for (var i = 0; i < data.length; i++) {
                         html += `
                             <tr>
-                                <td class="text-center" style="background-color: #f8f8f8;"><i></i> <strong>${i + 1}</strong></td>
+                            <td class="text-center">${i+1}</td>
                                 <td class="text-center"><i></i> <strong>${data[i].spga_name}</strong></td>
                                 <td class="text-center">${data[i].spga_created_date}</td>
                                 <td class="text-center">${data[i].spga_created_by}</td>
                                 <td class="text-center">
-                                    <button class="btnStatus btn badge bg-label-${data[i].spga_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].spga_id}" value="${data[i].spga_status_flg}">
+                                    <button class="btnStatus btn badge bg-label-${data[i].spga_status_flg == 1 ? 'success' : 'secondary'} me-1" id="flgStatus" data-sa-id="${data[i].spga_id}" value="${data[i].spga_status_flg}">
                                         ${data[i].spga_status_flg == 1 ? 'Enable' : 'Disable'}
                                     </button>
                                 </td>
                                 <td class="text-center">
-                                    <div>
-                                        <ul>
-                                            <!-- ตรงนี้เป็นส่วนของ List Item -->
-                                        </ul>
-                                    </div>
 
-                                    <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spga_id}">
-                      <span class="tf-icons bx bxs-edit"></span>
-                    </button>
+                                <button class="btn btn-label-danger tblEditBtn btn btn-icon" data-repeater-delete="" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spga_id}">
+                                                    <i class="tf-icons bx bxs-edit"></i>
+                                                </button>
+            
+            
                                 </td>
                             </tr>
                         `;

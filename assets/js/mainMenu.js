@@ -24,29 +24,26 @@ $(() => {
                     
                     html += `
                     <tr>
-                    <td class="text-center" style="background-color: #f8f8f8;"><i></i> <strong>${i+1}</strong></td>
-                    <td class="text-center"><i></i> <strong>${data[i].smm_name}</strong></td>
+                    <td class="text-center">${i+1}</td>
+                    <td class="text-center"> ${data[i].smm_name}</td>
                     <td class="text-center">
-                      <i class="bx ${data[i].smm_icon} bx-md me-3"></i>
+                      <i class="bx ${data[i].smm_icon} bx-sm me-3"></i>
                       <p class="icon-name text-capitalize text-truncate mb-0"></p>
                     </td>
-                    <td class="text-center"><i></i>${data[i].smm_order_no}</td>
+                    <td class="text-center">${data[i].smm_order_no}</td>
                     <td class="text-center">${data[i].smm_updated_date}</td>
                     <td class="text-center">${data[i].smm_updated_by}</td>
                     <td class="text-center">
-                      <button class="btnStatus btn badge bg-label-${data[i].smm_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].smm_id}" value="${data[i].smm_status_flg}">
+                      <button class="btnStatus btn badge bg-label-${data[i].smm_status_flg == 1 ? 'success' : 'secondary'} me-1" id="flgStatus" data-sa-id="${data[i].smm_id}" value="${data[i].smm_status_flg}">
                         ${data[i].smm_status_flg == 1 ? 'Enable' : 'Disable'}
                       </button>
                     </td>
                     <td class="text-center">
-                      <div>
-                        <ul>
-                          <!-- ตรงนี้เป็นส่วนของ List Item -->
-                        </ul>
-                      </div>
-                      <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].smm_id}">
-                  <span class="tf-icons bx bxs-edit"></span>
-                </button>
+
+                    <button class="btn btn-label-danger tblEditBtn btn btn-icon" data-repeater-delete="" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].smm_id}">
+                                        <i class="tf-icons bx bxs-edit"></i>
+                                    </button>
+
 
                     </td>
                   </tr>
@@ -83,13 +80,13 @@ $(() => {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'Plese enter main menu',
+                        text: 'Please enter main menu',
                     })
                 } else if (MainMenuIcon == '') {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'Plese enter main menu icon',
+                        text: 'Please enter main menu icon',
                     })
                 } else if (!isThaiLanguage(MainMenuName) || !isThaiLanguage(MainMenuIcon)) {
                     Swal.fire({

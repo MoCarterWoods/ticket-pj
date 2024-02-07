@@ -69,16 +69,16 @@
 
           <div class="table-responsive text-nowrap">
             <div class="card-datatable table-responsive pt-0">
-              <table class="datatables-basic table  table-bordered table-hover table-checkable order-column border-top w-100" id="tblPermis">
-                <thead style="background-color: #afdbff;">
+              <table class="table card-table table-bordered order-column w-100" id="tblPermis">
+                <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Main Menu</th>
-                    <th>Sub Menu</th>
-                    <th>Update Date</th>
-                    <th>Update By</th>
-                    <th>Stasus</th>
-                    <th>Action</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Main Menu</th>
+                    <th class="text-center">Sub Menu</th>
+                    <th class="text-center">Update Date</th>
+                    <th class="text-center">Update By</th>
+                    <th class="text-center">Stasus</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="tbody">

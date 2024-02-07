@@ -68,21 +68,22 @@ function shDataTable() {
                 for (let i = 0; i < data.length; i++) {
                     html += `
                     <tr>
-  <td class="text-center" style="background-color: #f8f8f8;"><strong>${i + 1}</strong></td>
+                    <td class="text-center">${i+1}</td>
   <td class="text-center"><strong>${data[i].smm_name}</strong></td>
   <td class="text-center"><strong>${data[i].ssm_name}</strong></td>
   <td class="text-center">${data[i].spd_updated_date}</td>
   <td class="text-center">${data[i].spd_updated_by}</td>
   <td class="text-center">
-    <button class="btnStatus btn badge bg-label-${data[i].spd_status_flg == 1 ? 'success' : 'danger'} me-1" id="flgStatus" data-sa-id="${data[i].spd_id}" value="${data[i].spd_status_flg}">
+    <button class="btnStatus btn badge bg-label-${data[i].spd_status_flg == 1 ? 'success' : 'secondary'} me-1" id="flgStatus" data-sa-id="${data[i].spd_id}" value="${data[i].spd_status_flg}">
       ${data[i].spd_status_flg == 1 ? 'Enable' : 'Disable'}
     </button>
   </td>
   <td class="text-center">
-    
-    <button type="button" class="tblEditBtn btn btn-icon btn-secondary" style="width: 30px;height: 30px;" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
-                      <span class="tf-icons bx bxs-edit"></span>
-                    </button>
+
+  <button class="btn btn-label-danger tblEditBtn btn btn-icon" data-repeater-delete="" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
+                      <i class="tf-icons bx bxs-edit"></i>
+                  </button>
+
 
   </td>
 </tr>
