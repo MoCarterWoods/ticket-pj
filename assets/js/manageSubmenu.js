@@ -115,7 +115,7 @@ $(() => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, change it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 var url = API_URL + "Manage_submenu/update_flg";
@@ -167,13 +167,13 @@ $(document).ready(function () {
             Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Please enter main menu',
+                text: 'Please enter Sub menu',
             })
         } else if (SubMenuCon == '') {
             Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Please enter main menu icon',
+                text: 'Please enter Sub menu icon',
             })
         } else if (!isThaiLanguage(SunMenuName) || !isThaiLanguage(SubMenuCon)) {
             Swal.fire({
@@ -184,7 +184,7 @@ $(document).ready(function () {
         } else {
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Do you want to add Main Menu",
+                text: "Do you want to add Sub Menu",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -347,7 +347,7 @@ $(document).ready(function () {
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success!',
-                                    html: 'Edit main menu success',
+                                    html: 'Edit sub menu success',
                                     timer: 2500,
                                 }).then(() => {
                                     $('#mdlEdit').modal('hide');

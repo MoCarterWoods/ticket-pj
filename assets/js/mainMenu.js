@@ -123,7 +123,7 @@ $(() => {
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Success !',
-                                            html: 'Add account success',
+                                            html: 'Add Menu success',
                                             timer: 2500,
                                         }).then(() => {
                                             // $('#btnBack').trigger('click');
@@ -137,7 +137,7 @@ $(() => {
                     
                                             icon: 'warning',
                                             title: 'Ooops...',
-                                            html: 'This MainMenu code already exists.',
+                                            html: 'This MainMenu already exists.',
                                         }).then(() => {
                                             
                                         });
@@ -180,7 +180,7 @@ $(() => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, change it!'
     }).then((result) => {
         if (result.isConfirmed) {
             var url = API_URL + "Manage_mainmenu/upd_status_main_menu";

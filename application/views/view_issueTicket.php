@@ -1,97 +1,3 @@
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<!------ Include the above in your HEAD tag ---------->
-
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
-<!-- 
-<style>
-    #exTab1 .tab-content {
-        color: white;
-        background-color: #428bca;
-        padding: 5px 15px;
-    }
-
-    #exTab2 h3 {
-        color: white;
-        background-color: #428bca;
-        padding: 5px 15px;
-    }
-
-    /* remove border radius for the tab */
-
-    #exTab1 .nav-pills>li>a {
-        border-radius: 0;
-    }
-
-    /* change border radius for the tab , apply corners on top*/
-
-    #exTab3 .nav-pills>li>a {
-        border-radius: 4px 4px 0 0;
-    }
-
-    #exTab3 .tab-content {
-        color: white;
-        background-color: #428bca;
-        padding: 5px 15px;
-    }
-
-    .process-step .btn:focus {
-        outline: none;
-    }
-
-    .process {
-        display: table;
-        width: 100%;
-        position: relative;
-
-        padding: 15px;
-        border-radius: 10px;
-    }
-
-    .process-row {
-        display: table-row;
-    }
-
-    .process-step button[disabled] {
-        opacity: 1 !important;
-        filter: alpha(opacity=100) !important;
-    }
-
-    .process-row:before {
-        top: 40px;
-        bottom: 0;
-        position: absolute;
-        content: " ";
-        width: 100%;
-        height: 1px;
-        background-color: #ccc;
-
-    }
-
-    .process-step {
-        display: table-cell;
-        text-align: center;
-        position: relative;
-    }
-
-    .process-step p {
-        margin-top: 4px;
-    }
-
-    .btn-circle {
-        width: 80px;
-        height: 80px;
-        text-align: center;
-        font-size: 12px;
-        border-radius: 50%;
-    }
-
-    a:hover,
-    a:focus {
-        text-decoration: none;
-    }
-</style> -->
 <div class="content-wrapper">
     <!-- Content -->
 
@@ -103,12 +9,26 @@
                 <h2>Maintenance Worksheet (ใบงานบำรุงรักษา)</h2>
             </div> -->
         <div class="nav-align-top container card ">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-home" aria-controls="navs-top-home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-profile" aria-controls="navs-top-profile" aria-selected="false" tabindex="-1">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-messages" aria-controls="navs-top-messages" aria-selected="false" tabindex="-1">Messages</button>
+                </li>
+            </ul>
+
             <ul class="nav nav-pills mb-3 mt-3" role="tablist">
                 <li class="nav-item">
                     <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-Equipment" aria-controls="navs-pills-top-equipment" aria-selected="true">Equipment</button>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-problem" aria-controls="navs-pills-top-problem" aria-selected="false">Problem Condition</button>
+
                 </li>
                 <li class="nav-item">
                     <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-jobtype" aria-controls="navs-pills-top-jobtype" aria-selected="false">Job Type</button>
@@ -180,8 +100,8 @@
 
                                         <div class="row other-sel col-8" style="display: none;" id="selother">
                                             <div class="col-12">
-                                                <label for="textother" class="form-label">Other</label>
-                                                <textarea class="form-control" id="textother" rows="2" placeholder="Enter area other"></textarea>
+                                                <label for="inpOther" class="form-label">Other</label>
+                                                <textarea class="form-control" id="inpOther" rows="2" placeholder="Enter area other"></textarea>
                                             </div>
                                         </div>
 
@@ -211,8 +131,8 @@
 
                                                 <div class="row other-sel col-8" id="selother">
                                                     <div class="col-12">
-                                                        <label for="textother" class="form-label">Process / Funtion</label>
-                                                        <textarea class="form-control" id="textother" rows="2" placeholder="Enter process or function"></textarea>
+                                                        <label for="inpProcess" class="form-label">Process / Funtion</label>
+                                                        <textarea class="form-control" id="inpProcess" rows="2" placeholder="Enter process or function"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,10 +142,11 @@
                                     <div class="row mt-5">
                                         <div class="col-12 d-flex justify-content-end">
 
-                                            <button class="btn btn-primary btn-next1" type="button" data-bs-toggle="tab" data-bs-target="#yourTabId">
+                                            <button class="btn btn-primary btn-next1" type="button" data-bs-toggle="tab" data-bs-target="#navs-pills-top-problem">
                                                 <span class="d-sm-inline-block d-none me-1">Next</span>
                                                 <i class="bx bx-chevron-right"></i>
                                             </button>
+
 
                                         </div>
                                     </div>
@@ -312,8 +233,8 @@
 
                                     <div class="row justify-content-center mt-3">
                                         <div class="col">
-                                            <label for="dropzone-multi-problem" class="form-label">Upload Images</label>
-                                            <form action="/upload" class="dropzone needsclick" id="dropzone-multi-problem">
+                                            <label for="dropzone-multi" class="form-label">Upload Images</label>
+                                            <form action="/upload" class="dropzone needsclick" id="dropzone-multi">
                                                 <div class="dz-message needsclick">
                                                     Drop files here or click to upload
                                                     <span class="note needsclick">(This is just a demo dropzone. Selected files are <span class="fw-medium">not</span> actually uploaded.)</span>
@@ -373,7 +294,7 @@
                                         <div class="form-check custom-option custom-option-icon">
                                             <label class="form-check-label custom-option-content" for="customRadioIcon1">
                                                 <span class="custom-option-body">
-                                                <i class='bx bx-wrench'></i>
+                                                    <i class='bx bx-wrench'></i>
                                                     <span class="custom-option-title">ซ่อมแซม [BM]</span>
                                                     <small> Breakdown Maintenance </small>
                                                 </span>
@@ -385,7 +306,7 @@
                                         <div class="form-check custom-option custom-option-icon">
                                             <label class="form-check-label custom-option-content" for="customRadioIcon2">
                                                 <span class="custom-option-body">
-                                                <i class='bx bx-notepad'></i>
+                                                    <i class='bx bx-notepad'></i>
                                                     <span class="custom-option-title">บำรุงรักษาตามแผน [PM]</span>
                                                     <small> Planned Maintenance </small>
                                                 </span>
@@ -397,7 +318,7 @@
                                         <div class="form-check custom-option custom-option-icon">
                                             <label class="form-check-label custom-option-content" for="customRadioIcon3">
                                                 <span class="custom-option-body">
-                                                <i class='bx bx-edit'></i>
+                                                    <i class='bx bx-edit'></i>
                                                     <span class="custom-option-title">ปรับปรุง [ KM]</span>
                                                     <small> Kaizen / improvement </small>
                                                 </span>
@@ -407,13 +328,13 @@
                                     </div>
                                     <div class="col-md">
                                         <div class="form-check custom-option custom-option-icon">
-                                            <label class="form-check-label custom-option-content" for="customRadioIcon3">
+                                            <label class="form-check-label custom-option-content" for="customRadioIcon4">
                                                 <span class="custom-option-body">
-                                                <i class='bx bx-download'></i>
+                                                    <i class='bx bx-download'></i>
                                                     <span class="custom-option-title">ติดตั้ง [IM]</span>
                                                     <small> Installation / Set Up </small>
                                                 </span>
-                                                <input name="customRadioIcon" class="form-check-input" type="radio" value="" id="customRadioIcon3" />
+                                                <input name="customRadioIcon" class="form-check-input" type="radio" value="" id="customRadioIcon4" />
                                             </label>
                                         </div>
                                     </div>

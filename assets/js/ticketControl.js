@@ -21,7 +21,7 @@ function shDataTable()  {
                 
                 html += `
                 <tr>
-                <td class="text-center">${i+1}</td> 
+                <td class="text-center">${data[i].ist_id}</td> 
                 <td class="text-center">
                 ${data[i].ist_line_cd == '' ? `${data[i].ist_area_other}` : `${data[i].ist_line_cd}`}
             </td>
@@ -40,45 +40,54 @@ function shDataTable()  {
                   <td class="text-center">
                     <div class="d-flex flex-wrap align-items-center">
 
-                      <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0">
+                      <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup">
 
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Carter Woods" class="avatar pull-up">
+                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${data[i].swa_fristname} ${data[i].swa_lastname}" class="avatar pull-up">
 
-                          <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/SST42.jpg" alt="Avatar">
-
-                        </li>
-
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Carter Woods" class="avatar pull-up">
-
-                          <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/SST42.jpg" alt="Avatar">
+                          <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].swa_emp_code}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='${base_url('assets/img/avatars/no-avatar.png')}'">
 
                         </li>
 
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="Carter Woods" class="avatar pull-up">
-
-                          <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/SST42.jpg" alt="Avatar">
-
-                        </li>
 
                       </ul>
 
                     </div>
                   </td>
                   <td class="text-center">
-                    <span class="badge  bg-label-success">Disable</span>
+                  <span class="badge  bg-label-${
+                    data[i].ist_status_flg == 1 ? 'warning' :
+                    data[i].ist_status_flg == 5 ? 'info' :
+                    data[i].ist_status_flg == 9 ? 'primary' :
+                    'Unknown'
+                  }">
+                  ${
+                    data[i].ist_status_flg == 1 ? 'In Progress' :
+                    data[i].ist_status_flg == 5 ? 'Cancle' :
+                    data[i].ist_status_flg == 9 ? 'Approval' :
+                    'Unknown'
+                  }
+                </span>
+                
                   </td>
                   <td class="text-center">
-
+                  <button type="button" class="btn rounded-pill btn-label-info">Accept</button>
+                  <button type="button" class="btn rounded-pill btn-secondary">Deny</button>
                     <div class="btn-group">
-                      <button type="button" class="btn btn-label-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">Danger</button>
+                      <button type="button" class="btn btn-label-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">Edit</button>
                       <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
-                        <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                        <li><a class="dropdown-item" href="" data-toggle="modal" data-target="#mdlEdit">Equipment</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Problem Condition</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Job Type</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Inspection</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Troubleshooting</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Required Parts</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Analyze Problem</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Prevention</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Delivery</a></li>
                         <li>
                           <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);">Submit</a></li>
                       </ul>
                     </div>
                     
@@ -104,3 +113,4 @@ function shDataTable()  {
 
 });
 }
+

@@ -2,41 +2,43 @@
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Bordered Table -->
-    <h5 class="fw-bold py-3 mb-4" align="right">
-      <span class="text-muted fw-light">Administrator /</span> Manage Account
+    <h5 class="fw-bold py-3 mb-4" align="right" id="lblTitle">
+      <span class="text-muted fw-light">Ticket Maintenance /</span> Ticket Control
     </h5>
 
 
     <div class="card">
-      <h5 class="card-header">Ticket Control</h5>
-
-      <div class="card-body">
-        <div class="row py-2 mt-2">
-          <div>
-
-            <div class="row">
-              <div class="mb-3 col-md-4">
+    <h5 class="card-header">Ticket Control</h5>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3 mb-2">
                 <label for="selStartTime" class="form-label">Start Time</label>
                 <input class="form-control" type="date" value="" id="selStartTime">
-              </div>
-              <div class="mb-3 col-md-4">
+            </div>
+            <div class="col-md-3 mb-2">
                 <label for="selEndTime" class="form-label">End Time</label>
                 <input class="form-control" type="date" value="" id="selEndTime">
-              </div>
-
-              <div class="mb-3 col-md-4">
+            </div>
+            <div class="col-md-3 mb-2">
                 <label for="selStatus" class="form-label">Status</label>
                 <select id="selStatus" class="form-select">
-                  <option>Default select</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                    <option>Default select</option>
+                    <option value="1">IN PROGRESS</option>
+                    <option value="2">CANCLE</option>
+                    <option value="3">APPROVAL</option>
                 </select>
-              </div>
             </div>
-          </div>
-        </div>
 
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="card mt-3">
+      <h5 class="card-header">Table Ticket Control</h5>
+
+      <div class="card-body">
 
         <div class="table-responsive text-nowrap">
           <div class="card-datatable table-responsive pt-0">
@@ -56,7 +58,7 @@
               </thead>
               <tbody class="table-border-bottom-0" id="tbody">
                 <!-- Table body content goes here -->
-                
+
               </tbody>
             </table>
           </div>

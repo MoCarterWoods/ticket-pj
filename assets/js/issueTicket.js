@@ -3,7 +3,7 @@ $(document).ready(function () {
     var dropdown = $('#selArea');
     var selProduction = $('#selProduction');
     var selLine = $('#selLine'); // เพิ่มตัวแปร selLine
-    var textother = $('#textother');
+    var textother = $('#inpOther');
 
     var selpdDiv = $('#selpd');
     var selotherDiv = $('#selother');
@@ -323,144 +323,127 @@ $(document).ready(function () {
         
         
 
-// // ---------------------- 1 - 2 ------------------------
+// ---------------------- 1 - 2 ------------------------
+function handleTabClick(event) {
+    var targetTabId = event.target.getAttribute('aria-controls');
+    var targetTab = document.getElementById(targetTabId);
 
-// function setupTabClickHandler1_2() {
-//     document.querySelectorAll('.nav-pills li').forEach(function(tabLink) {
-//         tabLink.addEventListener('click', function(event) {
-//             var targetTab = this.querySelector('button.nav-link').getAttribute('data-bs-target');
-
-            
-//             // ตรวจสอบว่าคลิกที่แท็บ "#2" และเงื่อนไขตรวจสอบข้อมูลผ่าน
-//             if (targetTab === "#navs-pills-top-problem" && !checkFormData1_2()) {
-//                 event.stopPropagation();
-//                 event.preventDefault(); // เรียก preventDefault
-
-//             }
-//         });
-//     });
-// }
+    // ตรวจสอบว่าคลิกที่แท็บ "#navs-pills-top-problem" และเงื่อนไขตรวจสอบข้อมูลผ่าน
+    if (targetTabId === "navs-pills-top-problem" && !checkFormData1_2()) {
+        event.stopPropagation();
+        event.preventDefault(); // เรียก preventDefault
+    }
+}
 
 
-
-// function checkFormData1_2() {
-//     var Area = $('#selArea').val();
-//     var AreaPd = '';
-//     var AreaLine = '';
-//     var AreaOther = '';
+function checkFormData1_2() {
+    var Area = $('#selArea').val();
+    var AreaPd = '';
+    var AreaLine = '';
+    var AreaOther = '';
     
-//     // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
-//     if (Area === '1') {
-//         AreaPd = $('#selProduction').val();
-//         AreaLine = $('#selLine').val();
+    // เพิ่มเงื่อนไขตรวจสอบค่าของ Area
+    if (Area === '1') {
+        AreaPd = $('#selProduction').val();
+        AreaLine = $('#selLine').val();
+    } else if (Area === '2') {
+        AreaOther = $('#inpOther').val();
+    }
 
-//     } else if (Area === '2') {
-//         AreaOther = $('#textother').val();
+    var ProcFunc = $('#inpProcess').val();
+    var ToolSys = $('#selTooling').val();
 
-//     }
-
-//     var ProcFunc = $('#processf').val();
-//     var ToolSys = $('#selTooling').val();
-//     var JobType = $('#SelJobtype').val();
-
-//     if (Area == '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please Select Area.',
-//         });
-//     } else if (Area === '1' && AreaPd === '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please fill in all fields in Area PD.',
-//         });
-//     } else if (Area === '1' && AreaLine === '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please fill in all fields in Area Line.',
-//         });
-//     } else if (Area === '2' && AreaOther === '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please fill in all fields in Area Other.',
-//         });
-//     } else if (JobType == '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please Select Jobtype.',
-//         }); 
-//     } else if (ProcFunc == '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please enter Process / Function.',
-//         }); 
-//     } else if (ToolSys == '') {
-//         Swal.fire({
-//             icon: 'warning',
-//             title: 'Oops...',
-//             text: 'Please Select Tooling System.',
-//         });
-//     } else {
-//         return true;
-//     }
-// }
+    if (Area == '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please Select Area.',
+        });
+    } else if (Area === '1' && AreaPd === '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please fill in all fields in Area PD.',
+        });
+    } else if (Area === '1' && AreaLine === '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please fill in all fields in Area Line.',
+        });
+    } else if (Area === '2' && AreaOther === '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please fill in all fields in Area Other.',
+        });
+    } else if (ProcFunc == '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please enter Process / Function.',
+        }); 
+    } else if (ToolSys == '') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Please Select Tooling System.',
+        });
+    } else {
+        return true;
+    }
+}
 
 
 
 
-// // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
-// document.addEventListener('DOMContentLoaded', function() {
-//     setupTabClickHandler2_3();
-// });
 
-// // ---------------------- 2 - 3 ------------------------
+// เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    setupTabClickHandler2_3();
+});
 
-// function setupTabClickHandler2_3() {
-//     document.querySelectorAll('.nav-pills li').forEach(function(tabLink) {
-//         tabLink.addEventListener('click', function(event) {
-//             var targetTab = this.querySelector('button.nav-link').getAttribute('data-bs-target');
+// ---------------------- 2 - 3 ------------------------
+function setupTabClickHandler2_3() {
+    document.querySelectorAll('.nav-pills li button').forEach(function(tabButton) {
+        tabButton.addEventListener('click', function(event) {
+            var targetTab = this.getAttribute('data-bs-target');
             
-//             // ตรวจสอบว่าคลิกที่แท็บ "#3" และเงื่อนไขตรวจสอบข้อมูลผ่าน
-//             if (targetTab === "#navs-pills-top-inspection" && !checkFormData2_3()) {
-//                 event.stopPropagation();
-//                 event.preventDefault(); // เรียก preventDefault
+            // ตรวจสอบว่าคลิกที่แท็บ "#navs-pills-top-jobtype" และเงื่อนไขตรวจสอบข้อมูลผ่าน
+            if (targetTab === "#navs-pills-top-jobtype" && !checkFormData2_3()) {
+                event.preventDefault(); // เรียก preventDefault เพียงอย่างเดียวเพื่อไม่ให้เปลี่ยนแท็บ
+                event.stopPropagation(); // สามารถไม่ต้องใช้ได้
 
-//             }
-//         });
-//     });
-// }
-
-
-
-// function checkFormData2_3() {
-//     var ProbCon = $('#SelProblem').val();
-
-//         if (ProbCon == '') {
-//             Swal.fire({
-//                 icon: 'warning',
-//                 title: 'Oops...',
-//                 text: 'Please Select ProbCon.',
-//             });
-//         }  else {
-//             return true;
-//         }
-
-// }
+            }
+        });
+    });
+}
 
 
+function checkFormData2_3() {
+    var ProbCon = $('#SelProblem').val();
 
-// // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
-// document.addEventListener('DOMContentLoaded', function() {
-//     setupTabClickHandler1_2();
-// });
+        if (ProbCon == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please Select ProbCon.',
+            });
+        }  else {
+            return true;
+        }
+
+}
 
 
-// // --------------------------------------------------
+
+// เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    setupTabClickHandler1_2();
+});
+
+
+// --------------------------------------------------
 
     var globalArrayNewStep = [];
 
@@ -510,7 +493,7 @@ $(document).ready(function () {
             $('#selLine').val('');
         }
 
-        var ProcFunc = $('#processf').val();
+        var ProcFunc = $('#inpProcess').val();
         var ToolSys = $('#selTooling').val();
         var Maker = $('#addMaker').val();
         var Model = $('#addModel').val();

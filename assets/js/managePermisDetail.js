@@ -214,7 +214,7 @@ $(document).on('click', '.btnStatus', function () {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, change it!'
     }).then((result) => {
         if (result.isConfirmed) {
             var url = API_URL + "Manage_permis_detail/update_flg";
@@ -349,47 +349,57 @@ $(document).ready(function () {
 });
 
 
-    //-------------------------- Update Account ----------------------------------
-    var data_mmn;
-    var mmnId;
+//-------------------------- Update Account ----------------------------------
+var data_mmn;
+var mmnId;
 
-    $(document).on('click', '.tblEditBtn', function () {
-        let id = $(this).attr('data-id');
-        mmnId = id;
+$(document).on('click', '.tblEditBtn', function () {
+    let id = $(this).attr('data-id');
+    mmnId = id;
+
+    var url = API_URL + "Manage_permis_detail/show_show_edit";
     
-        var url = API_URL + "Manage_permis_detail/show_show_edit";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            id: id,
+        },
+        dataType: 'json',
+        success: (response) => {
+            console.log(response.data);
+            
+            // ตรวจสอบให้แน่ใจว่า response.result เป็น true
+            if (response.result) {
+                // ดึงค่า smm_name และ ssm_name จาก response.data
+                const smmName = response.data.smm_name;
+                const ssmName = response.data.ssm_name;
+                const smmId = response.data.smm_id;
+                const ssmId = response.data.ssm_id;
         
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                id: id,
-            },
-            dataType: 'json',
-            success: (response) => {
-                console.log(response.data);
+                // Log ค่าทั้งหมดเพื่อตรวจสอบว่าถูกต้อง
+                console.log(`smm_id: ${smmId}, smm_name: ${smmName}, ssm_id: ${ssmId}, ssm_name: ${ssmName}`);
+        
+                // ตั้งค่าให้กับ element ที่มี id ตามที่ระบุ
+                $('#edtMainmenu').empty(); // เคลียร์ตัวเลือกเดิมทั้งหมด
+                $('#edtMainmenu').append($('<option>', {
+                    value: smmId,
+                    text: smmName
+                }));
+                $('#edtMainmenu').val(smmId);
                 
-                // ตรวจสอบให้แน่ใจว่า response.result เป็น true
-                if (response.result) {
-                    // ดึงค่า smm_name และ ssm_name จาก response.data
-                    const smmName = response.data.smm_name;
-                    const ssmName = response.data.ssm_name;
-                    const smmId = response.data.smm_id;
-                    const ssmId = response.data.ssm_id;
-            
-                    // Log ค่าทั้งหมดเพื่อตรวจสอบว่าถูกต้อง
-                    console.log(`smm_id: ${smmId}, smm_name: ${smmName}, ssm_id: ${ssmId}, ssm_name: ${ssmName}`);
-            
-                    // ตั้งค่าให้กับ element ที่มี id ตามที่ระบุ
-                    $('#edtMainmenu').val(smmName);
-                    $('#edtSubEdit').val(ssmName).trigger("change");
-                } else {
-                    // กรณีที่ไม่พบข้อมูลหรือเกิดข้อผิดพลาด
-                    console.error("Error in API response:", response);
-                }
-            },
-            
-        });
-
-    
+                // เพิ่มตัวเลือกใหม่ในเมนูย่อยและเลือกตัวเลือกที่ต้องการ
+                $('#edtSubEdit').empty(); // เคลียร์ตัวเลือกเดิมทั้งหมด
+                $('#edtSubEdit').append($('<option>', {
+                    value: ssmId,
+                    text: ssmName
+                }));
+                $('#edtSubEdit').val(ssmId).trigger("change");
+            } else {
+                // กรณีที่ไม่พบข้อมูลหรือเกิดข้อผิดพลาด
+                console.error("Error in API response:", response);
+            }
+        },
+        
+    });
 });

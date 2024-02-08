@@ -5,7 +5,7 @@
 
   <div class="container-xxl flex-grow-1 container-p-y">
     <!-- Bordered Table -->
-    <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Sub Menu</h5>
+    <h5 class="fw-bold py-3 mb-4" align="right"><span class="text-muted fw-light">Administrator /</span> Manage Permission Detail</h5>
     <div class="row py-1">
       <div class="col-1">
         Premission Group

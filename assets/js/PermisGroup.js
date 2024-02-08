@@ -76,7 +76,7 @@ $(() => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, change it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 var url = API_URL + "Manage_permis_group/update_flg";
@@ -168,7 +168,7 @@ $(() => {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Please enter Main Menu name',
+                    text: 'Please enter Permission name',
                 });
             } else if (!isThaiLanguage(ManagePergname)) {
                 Swal.fire({
@@ -179,12 +179,12 @@ $(() => {
             } else {
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "Do you want to add Account",
+                    text: "Do you want to change Permission name?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, add account!'
+                    confirmButtonText: 'Yes, change it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // ตรวจสอบว่า data_mpg ถูกตั้งค่าแล้วและมี spg_name หรือไม่
@@ -203,12 +203,11 @@ $(() => {
                             cache: false,
                             dataType: 'json',
                             success: function (res) {
-                                console.log("sssssjd=>>", res);
                                 if (res.result == 1) {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Success !',
-                                        html: 'Add account success',
+                                        html: 'Change permission name success',
                                         timer: 2500,
                                     }).then(() => {
                                         $('#mdlEdit').modal('hide');
@@ -248,7 +247,7 @@ $(() => {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Oops...',
-                    text: 'Please enter main menu',
+                    text: 'Please enter permission group name', 
                 });
             } else if (!isThaiLanguage(ManagePersGroup)) {
                 Swal.fire({
@@ -284,7 +283,7 @@ $(() => {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Success !',
-                                        html: 'Add account success',
+                                        html: 'Add permission group success',
                                         timer: 2500,
                                     }).then(() => {
                                         // $('#btnBack').trigger('click');
