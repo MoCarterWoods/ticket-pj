@@ -10,17 +10,6 @@
             </div> -->
         <div class="nav-align-top container card ">
 
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-home" aria-controls="navs-top-home" aria-selected="true">Home</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-profile" aria-controls="navs-top-profile" aria-selected="false" tabindex="-1">Profile</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-top-messages" aria-controls="navs-top-messages" aria-selected="false" tabindex="-1">Messages</button>
-                </li>
-            </ul>
 
             <ul class="nav nav-pills mb-3 mt-3" role="tablist">
                 <li class="nav-item">
@@ -319,7 +308,7 @@
                                             <label class="form-check-label custom-option-content" for="customRadioIcon3">
                                                 <span class="custom-option-body">
                                                     <i class='bx bx-edit'></i>
-                                                    <span class="custom-option-title">ปรับปรุง [ KM]</span>
+                                                    <span class="custom-option-title">ปรับปรุง [KM]</span>
                                                     <small> Kaizen / improvement </small>
                                                 </span>
                                                 <input name="customRadioIcon" class="form-check-input" type="radio" value="" id="customRadioIcon3" />
@@ -807,7 +796,7 @@
                 <h3>การส่งมอบอุปกรณ์ / เครื่องจักร</h3>
 
                 <div class="row" style="margin-top: 15px;">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card mb-4">
 
                             <div class="card-body demo-vertical-spacing demo-only-element">
@@ -844,7 +833,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card mb-4">
                         <h5 class="card-header">สรุปงานซ่อมบำรุง</h5>
                         <div class="card-body demo-vertical-spacing demo-only-element">
@@ -885,9 +874,11 @@
 
                 <!-- ปุ่มนอก -->
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-outline-secondary">Reset</button>
-                    <button type="button" class="btn btn-success ml-2" id="btnSave">Save</button>
+                    <button type="button" class="btn btn-secondary mx-2 my-2 mr-2" id="btnReset" onclick="confirmReset()">Reset</button>
+                    <button type="button" class="btn btn-success mx-2 my-2" id="btnSave">Save</button>
                 </div>
+
+
             </div>
 
 

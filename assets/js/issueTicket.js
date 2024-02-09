@@ -466,6 +466,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     
+// -------------------- Reset --------------------
+function confirmReset() {
+    // เรียกใช้ SweetAlert เพื่อสร้างการเตือน
+    Swal.fire({
+        title: 'คุณแน่ใจหรือไม่?',
+        text: "การกระทำนี้จะรีเฟรชหน้าเพื่อ Reset!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ใช่, Reset!'
+    }).then((result) => {
+        // ถ้าผู้ใช้กดยอมรับ
+        if (result.isConfirmed) {
+            // แสดง SweetAlert ว่า Reset สำเร็จ
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                html: 'Reset Success!'
+            });
+
+            // รอ 2.5 วินาที (2500 มิลลิวินาที) ก่อนที่จะ reload
+            setTimeout(function(){
+                // รีเฟรชหน้าเพื่อทำการ Reset
+                location.reload();
+            }, 1500); 
+        }
+    });
+}
 
 
 
