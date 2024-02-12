@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="row pd-line-sel col-8" style="display: none;" id="selpd">
                                             <div class="col-4">
-                                                <label for="selProduction" class="form-label">Production</label>
+                                                <label for="selProduction" class="form-label selProduction">Production</label>
                                                 <select class="form-select" id="selProduction">
 
                                                 </select>
@@ -164,7 +164,6 @@
                                         <div class="col-lg-4 area-mr">
                                             <div>
                                                 <label for="SelProblem" class="form-label">Problem Condition</label>
-                                                <!-- <span class="red-text">*</span> -->
                                                 <select class="form-select" id="SelProblem">
                                                     <option value="">Choose...</option>
                                                 </select>

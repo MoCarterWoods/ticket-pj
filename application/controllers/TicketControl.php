@@ -65,8 +65,19 @@ class TicketControl extends CI_Controller {
         echo json_encode($data);
     }
 	
+    public function callApiAccept()
+    {
+        $result = $this->curPostRequest('Ticket_control/accept_ticket', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
 
+    }
 
+    public function callApiCancel()
+    {
+        $result = $this->curPostRequest('Ticket_control/cancel_ticket', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
 

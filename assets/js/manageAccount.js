@@ -130,9 +130,10 @@ $(() => {
                     <tr>
                     <td class="text-center">${i+1}</td> 
                     <td><div class="d-flex justify-content-start align-items-center"><div class="avatar-wrapper"><div class="avatar me-2"><img src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].sa_emp_code}.jpg" alt="Avatar" class="rounded-circle"  onerror="this.onerror=null; this.src='${base_url('assets/img/avatars/no-avatar.png')}'"></div></div><div class="d-flex flex-column">
-                            <span class="emp_name text-truncate">${data[i].sa_fristname} ${data[i].sa_lastname}</span><small class="emp_post text-truncate text-muted">${data[i].sa_emp_code}</small></div></div></td>
-                    <td class="text-center"><i></i> <strong>${data[i].spg_name}</strong></td>
-                    <td class="text-center"><i></i>${data[i].sa_email}</td>
+                            <span class="emp_name text-truncate">${data[i].sa_emp_code}</span><small class="emp_post text-truncate text-muted">${data[i].spg_name}</small></div></div></td>
+                    <td class="text-center">${data[i].sa_fristname}</td>
+                    <td class="text-center">${data[i].sa_lastname}</td>
+                    <td class="text-center">${data[i].sa_email}</td>
 
                     <td class="text-center">
                     <button class="btnStatus btn badge bg-label-${data[i].sa_status_flg == 1 ? 'success' : 'secondary'} me-1" id="flgStatus" data-sa-id="${data[i].sa_id}" value="${data[i].sa_status_flg}">

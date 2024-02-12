@@ -23,7 +23,8 @@
                 <tr>
                   <th class="text-center">No.</th>
                   <th class="text-center">Employee Details</th>
-                  <th class="text-center">Permis Group</th>
+                  <th class="text-center">First Name</th>
+                  <th class="text-center">Last Name</th>
                   <th class="text-center">Email</th>
 
                   <th class="text-center">Status</th>
