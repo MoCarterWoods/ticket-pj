@@ -62,12 +62,12 @@ function shDataTable() {
             <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
               <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].ploblem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].ploblem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].ploblem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].ploblem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item  d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -349,6 +349,56 @@ function getLine(pd) {
       }
   });
 }
+
+
+// ----=- show Equipment --------
+var data_ist_eq;
+var ist_Id;
+
+$(document).on('click', '.actEquipment', function () {
+
+
+ist_Id = $(this).attr('data-id');
+
+var url = API_URL + "Ticket_control/show_equipment";
+$.ajax({
+// url: base_url('ManageAccount/callApiEditAccount'),
+url: API_URL + "Ticket_control/show_equipment",
+type: 'POST',
+data: {
+  ist_Id: ist_Id,
+},
+dataType: 'json',
+success: (response) => {
+console.log(response);
+  getLine(response.data.ist_pd)
+    data_ist_eq = response.data
+   if(response.data.ist_pd == ''){
+      $('#selArea').val('2');
+      selotherDiv.show();
+      selpdDiv.hide();
+      $('#inpOther').val(response.data.ist_area_other)
+   }else{
+      $('#selArea').val('1');
+      selpdDiv.show();
+      selotherDiv.hide();
+      $('#selProduction').val(response.data.ist_pd)
+      $('#selLine').val(response.data.ist_line_cd)
+
+   }
+
+ 
+ 
+      
+        $('#inpProcess').val(response.data.ist_process)
+        $('#selTooling').val(response.data.ist_tool)
+        $('#addMaker').val(response.data.ist_maker)
+        $('#addModel').val(response.data.ist_model)
+
+}
+});
+});
+
 // ------------------------------------------- ToolSystem ----------------------------------------
 
 $(document).ready(function () {
@@ -422,49 +472,607 @@ $(function() {
       }
   });
 });
+// -------------------------------- Problem Con -------------------------------
+$(document).ready(function () {
+  ProbConDropdown();
 
-// ----=- show Equipment --------
-var data_ist_eq;
-var ist_Id;
+  function ProbConDropdown() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_problem';
 
-$(document).on('click', '.actEquipment', function () {
+  $.ajax({
+      url: apiUrl,
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+          // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+          response = res;
 
+          // Clear existing options in the dropdown
+          $('#SelProblem').empty();
 
-ist_Id = $(this).attr('data-id');
+          // Add a default option
+          $('#SelProblem').append('<option value="">Choose problem condition</option>');
 
-var url = API_URL + "Ticket_control/show_equipment";
-$.ajax({
-// url: base_url('ManageAccount/callApiEditAccount'),
-url: API_URL + "Ticket_control/show_equipment",
-type: 'POST',
-data: {
-  ist_Id: ist_Id,
-},
-dataType: 'json',
-success: (response) => {
-console.log(response);
-  getLine(response.data.ist_pd)
-    data_ist_eq = response.data
-   if(response.data.ist_pd == ''){
-      $('#selArea').val('2');
-      selotherDiv.show();
-      selpdDiv.hide();
-      $('#inpOther').val(response.data.ist_area_other)
-   }else{
-      $('#selArea').val('1');
-      selpdDiv.show();
-      selotherDiv.hide();
-      $('#selProduction').val(response.data.ist_pd)
-      $('#selLine').val(response.data.ist_line_cd)
-
-   }
-
- 
- 
-      
-        $('#inpProcess').val(response.data.ist_process)
-        $('#selTooling').val(response.data.ist_tool)
-
+          // Loop through the API response and add options to the dropdown
+          for (let i = 0; i < response.length; i++) {
+              const problemData = response[i];
+              $('#SelProblem').append(`<option value="${problemData.mpc_id}">${problemData.mpc_name_eng} / ${problemData.mpc_name_thai}</option>`);
+          }
+      },
+      error: function (error) {
+          console.error('Error fetching data from the API:', error);
+      }
+  });
 }
+
 });
+
+
+// ----=- show problem --------
+$(document).on('click', '.actProblem', function () {
+  ist_Id = $(this).attr('data-id');
+
+  var url = API_URL + "Ticket_control/show_problem";
+  $.ajax({
+      url: url,
+      type: 'POST',
+      data: {
+          ist_Id: ist_Id,
+      },
+      dataType: 'json',
+      success: (response) => {
+          data_ist_pb = response.data;
+
+          // Clear previous selections
+          $('#SelProblem').val('');
+          $('#mdetailprdlm').val('');
+          $('#customCheckpb1').prop('checked', false);
+          $('#customCheckpb2').prop('checked', false);
+          $('#customCheckpb3').prop('checked', false);
+
+          // Iterate through the data array
+          response.data.forEach(problem => {
+              // Check the checkbox based on mpc_id value
+              if (problem.mpc_id === "7") {
+                  $('#customCheckpb1').prop('checked', true);
+              } else if (problem.mpc_id === "8") {
+                  $('#customCheckpb2').prop('checked', true);
+              } else if (problem.mpc_id === "9") {
+                  $('#customCheckpb3').prop('checked', true);
+              }
+          });
+
+          // Update dropdown and detail textarea if needed
+          var validProblem = response.data.find(problem => parseInt(problem.mpc_id) >= 1 && parseInt(problem.mpc_id) <= 6);
+          if (validProblem) {
+              $('#SelProblem').val(validProblem.mpc_id);
+              $('#mdetailprdlm').val(validProblem.ipc_detail);
+          }
+      }
+  });
+});
+
+
+//-------------------------- Save Problem ----------------------------
+
+$('#btnSaveProblem').on('click', function () {
+
+  var ProblemSel = $('#SelProblem').val();
+  var ProblemDetail = $('#mdetailprdlm').val();
+
+  var PbCheck1 = $('#customCheckpb1').prop('checked') ? $('#customCheckpb1').val() : '';
+  var PbCheck2 = $('#customCheckpb2').prop('checked') ? $('#customCheckpb2').val() : '';
+  var PbCheck3 = $('#customCheckpb3').prop('checked') ? $('#customCheckpb3').val() : '';
+
+
+  if (ProblemSel == '') {
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please select a problem!'
+      });
+  } else {
+      Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to save edit?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, save!'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              var url = API_URL + 'Ticket_control/save_problem';
+              const formData = new FormData()
+              formData.append('ProblemSel', ProblemSel);
+              formData.append('ProblemDetail', ProblemDetail);
+              formData.append('PbCheck1', PbCheck1);
+              formData.append('PbCheck2', PbCheck2);
+              formData.append('PbCheck3', PbCheck3);
+              formData.append('ist_Id', ist_Id);
+
+              $.ajax({
+                  url: base_url('TicketControl/callApiSaveProblem'),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  dataType: 'json',
+                  success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit Problem success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlProblemcon').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+              });
+          }
+      });
+  }
+});
+
+
+
+
+// ----=- show Jobtype --------
+var data_ist_jt;
+var ist_Id;
+$(document).on('click', '.actJobtype', function () {
+  ist_Id = $(this).attr('data-id');
+
+  var url = API_URL + "Ticket_control/show_jobtype";
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: {
+      ist_Id: ist_Id,
+    },
+    dataType: 'json',
+    success: (response) => {
+      data_ist_jt = response.data;
+
+      // Clear previous selections
+      $('input[name="customRadioIcon"]').prop('checked', false);
+
+      // Check the radio button based on mjt_id
+      if (response.data[0].mjt_id === '1') {
+        $('#customRadioIcon1').prop('checked', true);
+      } else if (response.data[0].mjt_id === '2') {
+        $('#customRadioIcon2').prop('checked', true);
+      } else if (response.data[0].mjt_id === '3') {
+        $('#customRadioIcon3').prop('checked', true);
+      } else if (response.data[0].mjt_id === '4') {
+        $('#customRadioIcon4').prop('checked', true);
+      }
+    }
+  });
+});
+
+
+//-------------------------- Save jobtype ----------------------------
+
+$('#btnSaveJobtype').on('click', function () {
+  // เก็บค่า radio ที่ถูกเลือก
+  var Jtradio1 = $('#customRadioIcon1').prop('checked') ? $('#customRadioIcon1').val() : '';
+  var Jtradio2 = $('#customRadioIcon2').prop('checked') ? $('#customRadioIcon2').val() : '';
+  var Jtradio3 = $('#customRadioIcon3').prop('checked') ? $('#customRadioIcon3').val() : '';
+  var Jtradio4 = $('#customRadioIcon4').prop('checked') ? $('#customRadioIcon4').val() : '';
+
+  // ตรวจสอบค่าที่ได้
+  console.log("Jtradio1: " + Jtradio1);
+  console.log("Jtradio2: " + Jtradio2);
+  console.log("Jtradio3: " + Jtradio3);
+  console.log("Jtradio4: " + Jtradio4);
+  console.log("ist_Id: " + ist_Id);
+
+  // ตรวจสอบว่ามี radio ที่ถูกเลือกหรือไม่
+  if (Jtradio1 || Jtradio2 || Jtradio3 || Jtradio4) {
+      Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to save edit?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, save!'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              var url = API_URL + 'Ticket_control/save_jobtype';
+              const formData = new FormData()
+              formData.append('Jtradio1', Jtradio1);
+              formData.append('Jtradio2', Jtradio2);
+              formData.append('Jtradio3', Jtradio3);
+              formData.append('Jtradio4', Jtradio4);
+              formData.append('ist_Id', ist_Id);
+
+              $.ajax({
+                  url: base_url('TicketControl/callApiSaveJobtype'),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  dataType: 'json',
+                  success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit jobtype success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlJobtype').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+              });
+          }
+      });
+  }
+});
+
+
+
+
+// ----=- show Inspection --------
+$(document).on('click', '.actInspec', function () {
+  ist_Id = $(this).attr('data-id');
+
+  var url = API_URL + "Ticket_control/show_inspection";
+  $.ajax({
+      url: url,
+      type: 'POST',
+      data: {
+          ist_Id: ist_Id,
+      },
+      dataType: 'json',
+      success: (response) => {
+        data_ist_in = response.data;
+
+          // Clear previous selections
+          $('#SelInspec').val('');
+          $('#mdetailinsprc').val('');
+          $('#ChkInspec1').prop('checked', false);
+          $('#ChkInspec2').prop('checked', false);
+          $('#ChkInspec3').prop('checked', false);
+
+          // Iterate through the data array
+          response.data.forEach(Inspec => {
+              // Check the checkbox based on mim_id value
+              if (Inspec.mim_id === "6") {
+                  $('#ChkInspec1').prop('checked', true);
+              } else if (Inspec.mim_id === "7") {
+                  $('#ChkInspec2').prop('checked', true);
+              } else if (Inspec.mim_id === "8") {
+                  $('#ChkInspec3').prop('checked', true);
+              }
+          });
+
+          // Update dropdown and detail textarea if needed
+          var validInspec = response.data.find(Inspec => parseInt(Inspec.mim_id) >= 1 && parseInt(Inspec.mim_id) <= 5);
+          if (validInspec) {
+              $('#SelInspec').val(validInspec.mim_id);
+              $('#mdetailinsprc').val(validInspec.iim_detail);
+          }
+      }
+  });
+});
+
+//-------------------------- Save Inspection ----------------------------
+
+$('#btnSaveInspec').on('click', function () {
+
+  var InspecSel = $('#SelInspec').val();
+  var InspecDetail = $('#mdetailinsprc').val();
+
+  var InsCheck1 = $('#ChkInspec1').prop('checked') ? $('#ChkInspec1').val() : '';
+  var InsCheck2 = $('#ChkInspec2').prop('checked') ? $('#ChkInspec2').val() : '';
+  var InsCheck3 = $('#ChkInspec3').prop('checked') ? $('#ChkInspec3').val() : '';
+
+
+  if (InspecSel == '') {
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please select a inspection!'
+      });
+  } else {
+      Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to save edit?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, save!'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              var url = API_URL + 'Ticket_control/save_inspection';
+              const formData = new FormData()
+              formData.append('InspecSel', InspecSel);
+              formData.append('InspecDetail', InspecDetail);
+              formData.append('InsCheck1', InsCheck1);
+              formData.append('InsCheck2', InsCheck2);
+              formData.append('InsCheck3', InsCheck3);
+              formData.append('ist_Id', ist_Id);
+
+              $.ajax({
+                  url: base_url('TicketControl/callApiSaveInspection'),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  dataType: 'json',
+                  success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit Inspection success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlInspec').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+              });
+          }
+      });
+  }
+});
+
+
+
+ // -------------------------------- Inspec Method -------------------------------
+ $(document).ready(function () {
+  InMeDropdown();
+
+  function InMeDropdown() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_inspec_method';
+
+  $.ajax({
+      url: apiUrl,
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+          // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+          response = res;
+
+          // Clear existing options in the dropdown
+          $('#SelInspec').empty();
+
+          // Add a default option
+          $('#SelInspec').append('<option value="">Choose Inspection Method</option>');
+
+          // Loop through the API response and add options to the dropdown
+          for (let i = 0; i < response.length; i++) {
+              const inspecData = response[i];
+              $('#SelInspec').append(`<option value="${inspecData.mim_id}">${inspecData.mim_name_eng} / ${inspecData.mim_name_thai}</option>`);
+          }
+      },
+      error: function (error) {
+          console.error('Error fetching data from the API:', error);
+      }
+  });
+}
+
+});
+
+
+
+// ----=- show Analyze --------
+$(document).on('click', '.actAnalyze', function () {
+  ist_Id = $(this).attr('data-id');
+
+  var url = API_URL + "Ticket_control/show_analyze";
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: {
+      ist_Id: ist_Id,
+    },
+    dataType: 'json',
+    success: (response) => {
+      data_ist_anl = response.data;
+
+      // Clear previous selections
+      $('#mdetailAnalyz').val('');
+      $('.form-check-input').prop('checked', false);
+      $('#adddtInput').val('');
+
+      // Iterate through the data array
+      response.data.forEach(Analyze => {
+        // Check if map_id is not null
+        if (Analyze.map_id !== null) {
+          // Check the checkbox based on map_id value
+          switch (Analyze.map_id) {
+            case "1":
+              $('#Check1').prop('checked', true);
+              break;
+            case "2":
+              $('#Check2').prop('checked', true);
+              break;
+            case "3":
+              $('#Check3').prop('checked', true);
+              break;
+            case "4":
+              $('#Check4').prop('checked', true);
+              break;
+            case "5":
+              $('#Check5').prop('checked', true);
+              break;
+            case "6":
+              $('#Check6').prop('checked', true);
+              break;
+            case "7":
+              $('#Check7').prop('checked', true);
+              break;
+            case "8":
+              $('#Check8').prop('checked', true);
+              break;
+            case "9":
+              $('#Check9').prop('checked', true);
+              break;
+            case "10":
+              $('#Check10').prop('checked', true);
+              break;
+            case "11":
+              $('#Check11').prop('checked', true);
+              // Check if iap_detail exists before setting the value
+              if (Analyze.iap_detail !== null) {
+                $('#adddtInput').val(Analyze.iap_detail);
+              }
+              break;
+            default:
+              break;
+          }
+        } else {
+          // Set #mdetailAnalyz value if map_id is null
+          $('#mdetailAnalyz').val(Analyze.iap_detail);
+        }
+      });
+    }
+  });
+});
+
+
+
+//-------------------------- Save Analyze ----------------------------
+
+$('#btnSaveAnalyz').on('click', function () {
+
+  var Checked1 = $('#Check1').prop('checked');
+  var Checked2 = $('#Check2').prop('checked');
+  var Checked3 = $('#Check3').prop('checked');
+  var Checked4 = $('#Check4').prop('checked');
+  var Checked5 = $('#Check5').prop('checked');
+  var Checked6 = $('#Check6').prop('checked');
+  var Checked7 = $('#Check7').prop('checked');
+  var Checked8 = $('#Check8').prop('checked');
+  var Checked9 = $('#Check9').prop('checked');
+  var Checked10 = $('#Check10').prop('checked');
+  var Checked11 = $('#Check11').prop('checked');
+  var Detailcheck11 = $('#adddtInput').val();
+  var Mdetail = $('#mdetailAnalyz').val();
+
+
+  var Checkval1 = Checked1 ? $('#Check1').val() : '';
+  var Checkval2 = Checked2 ? $('#Check2').val() : '';
+  var Checkval3 = Checked3 ? $('#Check3').val() : '';
+  var Checkval4 = Checked4 ? $('#Check4').val() : '';
+  var Checkval5 = Checked5 ? $('#Check5').val() : '';
+  var Checkval6 = Checked6 ? $('#Check6').val() : '';
+  var Checkval7 = Checked7 ? $('#Check7').val() : '';
+  var Checkval8 = Checked8 ? $('#Check8').val() : '';
+  var Checkval9 = Checked9 ? $('#Check9').val() : '';
+  var Checkval10 = Checked10 ? $('#Check10').val() : '';
+  var Checkval11 = Checked11 ? $('#Check11').val() : '';
+
+
+
+  if (!Checked1 && !Checked2 && !Checked3 && !Checked4 && !Checked5 && !Checked6 && !Checked7 && !Checked8 && !Checked9 && !Checked10 && !Checked11) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please select an analyze!'
+    });
+} else if (Checked5 && !Checked6 && !Checked7 && !Checked8) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please select at least one option from Checked6, Checked7, Checked8!'
+    });
+} else if (Checked11 && Detailcheck11.trim() === '') {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter detail for the last option!'
+    });
+} else {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to save edit?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save!'
+    }).then((result) => {
+          if (result.isConfirmed) {
+              var url = API_URL + 'Ticket_control/save_analyze';
+              const formData = new FormData()
+              formData.append('Checkval1', Checkval1);
+              formData.append('Checkval2', Checkval2);
+              formData.append('Checkval3', Checkval3);
+              formData.append('Checkval4', Checkval4);
+              formData.append('Checkval5', Checkval5);
+              formData.append('Checkval6', Checkval6);
+              formData.append('Checkval7', Checkval7);
+              formData.append('Checkval8', Checkval8);
+              formData.append('Checkval9', Checkval9);
+              formData.append('Checkval10', Checkval10);
+              formData.append('Checkval11', Checkval11);
+              formData.append('Detailcheck11', Detailcheck11);
+              formData.append('Mdetail', Mdetail);
+              formData.append('ist_Id', ist_Id);
+
+              $.ajax({
+                  url: base_url('TicketControl/callApiSaveAnalyze'),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  dataType: 'json',
+                  success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit Analyze success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlAnalyze').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+              });
+          }
+      });
+  }
 });

@@ -79,6 +79,31 @@ class TicketControl extends CI_Controller {
 
     }
 
+    public function callApiSaveJobtype()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_jobtype', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+    public function callApiSaveProblem()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_problem', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiSaveInspection()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_inspection', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+    public function callApiSaveAnalyze()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_analyze', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
 
