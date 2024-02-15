@@ -5521,17 +5521,50 @@
     }()
 }));
 
-
-    // $('.dropzone').on('click', function () {
-        Dropzone.options.dropzoneMulti = {
-            acceptedFiles: 'image/*',
-            maxFiles: 3,
-            init: function () {
-                this.on("addedfile", function () {
-                    if (this.files.length > this.options.maxFiles) {
-                        this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
-                    }
-                });
+Dropzone.options.dropzoneMulti = {
+    acceptedFiles: 'image/*',
+    maxFiles: 3,
+    init: function () {
+        this.on("addedfile", function () {
+            if (this.files.length > this.options.maxFiles) {
+                this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
             }
-        };
-    // });
+        });
+    }
+};
+
+Dropzone.options.dropzoneMultiInspection = {
+    acceptedFiles: 'image/*',
+    maxFiles: 3,
+    init: function () {
+        this.on("addedfile", function () {
+            if (this.files.length > this.options.maxFiles) {
+                this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+            }
+        });
+    }
+};
+
+Dropzone.options.dropzoneMultiTroubleshooting = {
+    acceptedFiles: 'image/*',
+    maxFiles: 3,
+    init: function () {
+        this.on("addedfile", function () {
+            if (this.files.length > this.options.maxFiles) {
+                this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+            }
+        });
+    }
+};
+
+Dropzone.options.dropzoneMultiAnalyz = {
+    acceptedFiles: 'image/*',
+    maxFiles: 3,
+    init: function () {
+        this.on("addedfile", function () {
+            if (this.files.length > this.options.maxFiles) {
+                this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+            }
+        });
+    }
+};

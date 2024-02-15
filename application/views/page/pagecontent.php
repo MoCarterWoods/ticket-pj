@@ -60,6 +60,7 @@
 	<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 	<script src="<?php echo base_url() ?>/assets/js/config.js"></script>
 
+	<link rel="stylesheet" href="<?php echo base_url() ?>/assets/vendor/libs/bs-stepper/bs-stepper.css" />
 </head>
 
 <body>
@@ -286,9 +287,11 @@
 	<script src="<?php echo base_url() ?>/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
 	<script src="<?php echo base_url() ?>/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js"></script>
 	<script src="<?php echo base_url() ?>/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+	<script src="<?php echo base_url() ?>/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
 
 	<!-- Main JS -->
 	<script src="<?php echo base_url() ?>/assets/js/main.js"></script>
+	{another_js}
 	<!-- Vendors JS -->
 	<script src="<?php echo base_url() ?>/assets/vendor/js/dropzone.js"></script>
 	<!-- <script src="<?php echo base_url() ?>/assets/vendor/js/docs.js"></script> -->
@@ -306,7 +309,10 @@
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
-	{another_js}
+
+
+
+	<script src="<?php echo base_url() ?>/assets/js/form-wizard-validation.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> -->
 	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>

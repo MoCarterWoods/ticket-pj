@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class IssueTicket extends CI_Controller {
+class RemainApproval extends CI_Controller {
 
 	private $another_css;
     public $another_js;
@@ -44,9 +44,9 @@ class IssueTicket extends CI_Controller {
         $this->parser->parse('page/pagecontent', $this->data);
     }
 	
-	public function issTicket() {
+	public function remainApprov() {
         $this->another_js = "<script src='" . base_url() . "assets/js/issueTicket.js'></script>";
-        $this->render_view('view_issueTicket');
+        $this->render_view('view_remainApproval');
 
     }
 
