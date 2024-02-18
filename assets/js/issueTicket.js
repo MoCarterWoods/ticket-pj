@@ -257,7 +257,7 @@ $(document).ready(function () {
                 $('#selTooling').empty();
 
                 // Add a default option
-                $('#selTooling').append('<option value="">Choose...</option>');
+                $('#selTooling').append('<option value="">Choose tooling system</option>');
 
                 // Loop through the API response and add options to the dropdown
                 for (let i = 0; i < response.length; i++) {
@@ -292,9 +292,9 @@ $(document).ready(function () {
     // สร้างตัวแปร response ในขอบเขตของ document.ready
     let response;
 
-    populateToolDropdown();
+    populateToolDropdownrq();
 
-    function populateToolDropdown() {
+    function populateToolDropdownrq() {
         const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_tool';
 
         $.ajax({
@@ -309,7 +309,7 @@ $(document).ready(function () {
                 $('#selToolingrq').empty();
 
                 // Add a default option
-                $('#selToolingrq').append('<option value="">Choose...</option>');
+                $('#selToolingrq').append('<option value="">Choose tooling system</option>');
 
                 // Loop through the API response and add options to the dropdown
                 for (let i = 0; i < response.length; i++) {
@@ -331,11 +331,59 @@ $(document).ready(function () {
             const selectedTool = response.find(tool => tool.mts_id === selectedValue);
     
             // Update addMaker and addModel inputs with selected tool data
-            $('#addMaker').val(selectedTool ? selectedTool.mts_maker : '');
-            $('#addModel').val(selectedTool ? selectedTool.mts_model : '');
+            $('#addMakerrq').val(selectedTool ? selectedTool.mts_maker : '');
+            $('#addModelrq').val(selectedTool ? selectedTool.mts_model : '');
         });
 })
 
+
+$(document).ready(function () {
+    // สร้างตัวแปร response ในขอบเขตของ document.ready
+    let response;
+
+    populateEditToolDropdownrq();
+
+    function populateEditToolDropdownrq() {
+        const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_tool';
+
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                response = res;
+
+                // Clear existing options in the dropdown
+                $('#editselToolingrq').empty();
+
+                // Add a default option
+                $('#editselToolingrq').append('<option value="">Choose tooling system</option>');
+
+                // Loop through the API response and add options to the dropdown
+                for (let i = 0; i < response.length; i++) {
+                    const toolData = response[i];
+                    $('#editselToolingrq').append(`<option value="${toolData.mts_id}">${toolData.mts_name}</option>`);
+                }
+            },
+            error: function (error) {
+                console.error('Error fetching data from the API:', error);
+            }
+        });
+
+    }
+        $('#editselToolingrq').on('change', function () {
+
+            const selectedValue = $(this).val();
+    
+
+            const selectedTool = response.find(tool => tool.mts_id === selectedValue);
+    
+            // Update addMaker and addModel inputs with selected tool data
+            $('#editaddMakerrq').val(selectedTool ? selectedTool.mts_maker : '');
+            $('#editaddModelrq').val(selectedTool ? selectedTool.mts_model : '');
+        });
+})
     
 
 
@@ -361,6 +409,84 @@ $(function() {
         }
     });
 });
+
+
+
+// ------------------------------------------- Type Request ----------------------------------------
+
+$(document).ready(function () {
+    // สร้างตัวแปร response ในขอบเขตของ document.ready
+    let response;
+
+    populateTypeDropdown();
+
+    function populateTypeDropdown() {
+        const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_type';
+
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                response = res;
+
+                // Clear existing options in the dropdown
+                $('#selTyperq').empty();
+
+                // Add a default option
+                $('#selTyperq').append('<option value="">Choose type request</option>');
+
+                // Loop through the API response and add options to the dropdown
+                for (let i = 0; i < response.length; i++) {
+                    const toolData = response[i];
+                    $('#selTyperq').append(`<option value="${toolData.mtr_id}">${toolData.mtr_name}</option>`);
+                }
+            },
+            error: function (error) {
+                console.error('Error fetching data from the API:', error);
+            }
+        });
+    }
+});
+
+
+$(document).ready(function () {
+    // สร้างตัวแปร response ในขอบเขตของ document.ready
+    let response;
+
+    populateEditTypeDropdown();
+
+    function populateEditTypeDropdown() {
+        const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_type';
+
+        $.ajax({
+            url: apiUrl,
+            type: 'GET',
+            dataType: 'json',
+            success: function (res) {
+                // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                response = res;
+
+                // Clear existing options in the dropdown
+                $('#editselTyperq').empty();
+
+                // Add a default option
+                $('#editselTyperq').append('<option value="">Choose type request</option>');
+
+                // Loop through the API response and add options to the dropdown
+                for (let i = 0; i < response.length; i++) {
+                    const toolData = response[i];
+                    $('#editselTyperq').append(`<option value="${toolData.mtr_id}">${toolData.mtr_name}</option>`);
+                }
+            },
+            error: function (error) {
+                console.error('Error fetching data from the API:', error);
+            }
+        });
+    }
+});
+
 
 // -------------------------------- Problem Con -------------------------------
 $(document).ready(function () {
@@ -640,12 +766,77 @@ $(document).ready(function() {
     handleNextClick(checkFormData3_4, 'next3', 'navs-pills-top-inspection', 'navs-pills-top-jobtype', 'spanjt');
     handleNextClick(checkFormData4_5, 'next4', 'navs-pills-top-troubleshooting', 'navs-pills-top-inspection', 'spaninspec', uploadImage2);
     handleNextClick(checkFormData5_6, 'next5', 'navs-pills-top-required', 'navs-pills-top-troubleshooting', 'spantbs', uploadImage3);
-    handleNextClick(function() { return true; }, 'next6', 'navs-pills-top-analyze', 'navs-pills-top-required', 'spanreq');
+    handleNextClick(function() { return true; }, 'next6', 'navs-pills-top-analyze', 'navs-pills-top-required', 'spanreq', getAllRowData);
     handleNextClick(function() { return true; }, 'next7', 'navs-pills-top-prevention', 'navs-pills-top-analyze', 'spananly', uploadImage4);
-    handleNextClick(function() { return true; }, 'next8', 'navs-pills-top-delivery', 'navs-pills-top-prevention', 'spanpreven');
+    handleNextClick(function() { return true; }, 'next8', 'navs-pills-top-delivery', 'navs-pills-top-prevention', 'spanpreven', getAllRowDataPrevention);
     
 });
 
+var rowDataArray;
+
+function getAllRowData() {
+    var tableRows = document.getElementById('mytable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    rowDataArray = []; // เก็บในตัวแปร global
+
+    for (var i = 0; i < tableRows.length; i++) {
+        var row = tableRows[i];
+        var rowData = {};
+
+        rowData['Name'] = row.cells[0].getElementsByTagName('input')[0].value;
+        rowData['Maker'] = row.cells[1].getElementsByTagName('input')[0].value;
+        rowData['Model'] = row.cells[2].getElementsByTagName('input')[0].value;
+        rowData['Type'] = row.cells[3].getElementsByTagName('input')[0].value;
+        rowData['Qty'] = row.cells[4].getElementsByTagName('input')[0].value;
+        rowData['Stock'] = row.cells[5].getElementsByTagName('input')[0].value;
+        rowData['StockQty'] = row.cells[6].getElementsByTagName('input')[0].value;
+        rowData['Order'] = row.cells[7].getElementsByTagName('input')[0].value;
+        rowData['OrderQty'] = row.cells[8].getElementsByTagName('input')[0].value;
+        rowData['Received'] = row.cells[9].getElementsByTagName('input')[0].value;
+        rowData['ReceivedQty'] = row.cells[10].getElementsByTagName('input')[0].value;
+
+        rowDataArray.push(rowData);
+    }
+
+    console.log(rowDataArray);
+    return rowDataArray;
+}
+
+
+
+var allValues;
+
+function getAllRowDataPrevention()  {
+    allValues = [];
+  
+    // Iterate through each repeated form element
+    formRepeater.find("[data-repeater-list='group-a'] [data-repeater-item]").each(function() {
+        var formValues = {};
+  
+        // Flag to determine if all input values are null or empty
+        var allValuesNull = true;
+  
+        // Iterate through each text input field within the repeated form element
+        $(this).find(".form-control").each(function() {
+            var fieldName = $(this).attr("id");
+            var fieldValue = $(this).val().trim(); // Remove leading and trailing whitespaces
+  
+            // Check if the value is not null or empty
+            if (fieldValue !== null && fieldValue !== "") {
+                allValuesNull = false;
+            }
+  
+            formValues[fieldName] = fieldValue;
+        });
+  
+        // If any input has a non-null or non-empty value, add the row's values to the array
+        if (!allValuesNull) {
+            allValues.push(formValues);
+        }
+    });
+  
+    // Log or do something with allValues
+    console.log(allValues);
+}
 
 
 
@@ -815,64 +1006,8 @@ $(document).ready(function () {
         var TroubleCheckval4 = TbCheck4 ? $('#troublecheck4').val() : '';
 
         // ------------ Required Parts ---------------
-
-        var rqName1 = $('#name1').val();
-        var rqMaker1 = $('#maker1').val();
-        var rqModel1 = $('#model1').val();
-        var rqQty1 = $('#quantity1').val();
-        var rqStockDate1 = $('#stockDate1').val();
-        var rqStockQuantity1 = $('#stockQuantity1').val();
-        var rqOrderDate1 = $('#orderDate1').val();
-        var rqOrderQuantity1 = $('#orderQuantity1').val();
-        var rqReceivedDate1 = $('#receivedDate1').val();
-        var rqReceivedQuantity1 = $('#receivedQuantity1').val();
-
-        var rqName2 = $('#name2').val() || '';
-        var rqMaker2 = $('#maker2').val() || '';
-        var rqModel2 = $('#model2').val() || '';
-        var rqQty2 = $('#quantity2').val() || '';
-        var rqStockDate2 = $('#stockDate2').val() || '';
-        var rqStockQuantity2 = $('#stockQuantity2').val() || '';
-        var rqOrderDate2 = $('#orderDate2').val() || '';
-        var rqOrderQuantity2 = $('#orderQuantity2').val() || '';
-        var rqReceivedDate2 = $('#receivedDate2').val() || '';
-        var rqReceivedQuantity2 = $('#receivedQuantity2').val() || '';
-
-        var rqName3 = $('#name3').val() || '';
-        var rqMaker3 = $('#maker3').val() || '';
-        var rqModel3 = $('#model3').val() || '';
-        var rqQty3 = $('#quantity3').val() || '';
-        var rqStockDate3 = $('#stockDate3').val() || '';
-        var rqStockQuantity3 = $('#stockQuantity3').val() || '';
-        var rqOrderDate3 = $('#orderDate3').val() || '';
-        var rqOrderQuantity3 = $('#orderQuantity3').val() || '';
-        var rqReceivedDate3 = $('#receivedDate3').val() || '';
-        var rqReceivedQuantity3 = $('#receivedQuantity3').val() || '';
-
-        var rqName4 = $('#name4').val() || '';
-        var rqMaker4 = $('#maker4').val() || '';
-        var rqModel4 = $('#model4').val() || '';
-        var rqQty4 = $('#quantity4').val() || '';
-        var rqStockDate4 = $('#stockDate4').val() || '';
-        var rqStockQuantity4 = $('#stockQuantity4').val() || '';
-        var rqOrderDate4 = $('#orderDate4').val() || '';
-        var rqOrderQuantity4 = $('#orderQuantity4').val() || '';
-        var rqReceivedDate4 = $('#receivedDate4').val() || '';
-        var rqReceivedQuantity4 = $('#receivedQuantity4').val() || '';
-
-        var rqName5 = $('#name5').val() || '';
-        var rqMaker5 = $('#maker5').val() || '';
-        var rqModel5 = $('#model5').val() || '';
-        var rqQty5 = $('#quantity5').val() || '';
-        var rqStockDate5 = $('#stockDate5').val() || '';
-        var rqStockQuantity5 = $('#stockQuantity5').val() || '';
-        var rqOrderDate5 = $('#orderDate5').val() || '';
-        var rqOrderQuantity5 = $('#orderQuantity5').val() || '';
-        var rqReceivedDate5 = $('#receivedDate5').val() || '';
-        var rqReceivedQuantity5 = $('#receivedQuantity5').val() || '';
         
-        
-
+        var rowDataArrayString = JSON.stringify(rowDataArray);
         // ------------ End Required Parts ---------------
 
         // ------------ Analyze problem -----------------
@@ -906,6 +1041,12 @@ $(document).ready(function () {
 
 
         // ------------ End Analyze Problem -----------------
+
+        // ------------ Required Parts ---------------
+        
+        var PervenDataArrayString = JSON.stringify(allValues);
+
+        // ------------ End Required Parts ---------------
 
         // ------------ Delivery Equipment -----------------
         var Detaildelivery = $('#additionalInput').val();
@@ -963,6 +1104,9 @@ $(document).ready(function () {
         console.log("fileNamesTroub: " + fileNamesTroub);
 
 
+        console.log('RequiredrowDataArray :', rowDataArray);
+
+
         console.log('AnalyzDetail :', AnalyzDetail);
 
 
@@ -979,6 +1123,9 @@ $(document).ready(function () {
         console.log('Checkval11 :', Checkval11);
         console.log('Detailcheck11 :', Detailcheck11);
         console.log('fileNamesAnalz :', fileNamesAnalz);
+
+        console.log('PreventionallValues :', PervenDataArrayString);
+
 
         console.log('Detaildelivery :', Detaildelivery);
         console.log('deliveryCheckval1 :', deliveryCheckval1);
@@ -1010,6 +1157,8 @@ $(document).ready(function () {
                     formData.append('ToolSys', ToolSys);
                     formData.append('Maker', Maker);
                     formData.append('Model', Model);
+
+                    
                     formData.append('ProbCon', ProbCon);
                     formData.append('ProbConDetail', ProbConDetail);
                     formData.append('PbCheckval1', PbCheckval1);
@@ -1041,68 +1190,8 @@ $(document).ready(function () {
                     formData.append('TroubleDetail4', TroubleDetail4);
 
 
-                    formData.append('rqName1', rqName1);
-                    formData.append('rqMaker1', rqMaker1);
-                    formData.append('rqModel1', rqModel1);
-                    formData.append('rqQty1', rqQty1);
-                    formData.append('rqStockDate1', rqStockDate1);
-                    formData.append('rqStockQuantity1', rqStockQuantity1);
-                    formData.append('rqOrderDate1', rqOrderDate1);
-                    formData.append('rqOrderQuantity1', rqOrderQuantity1);
-                    formData.append('rqReceivedDate1', rqReceivedDate1);
-                    formData.append('rqReceivedQuantity1', rqReceivedQuantity1);
+                    formData.append('rowDataArray', rowDataArrayString);
 
-                    formData.append('rqName2', rqName2);
-                    formData.append('rqMaker2', rqMaker2);
-                    formData.append('rqModel2', rqModel2);
-                    formData.append('rqQty2', rqQty2);
-                    formData.append('rqStockDate2', rqStockDate2);
-                    formData.append('rqStockQuantity2', rqStockQuantity2);
-                    formData.append('rqOrderDate2', rqOrderDate2);
-                    formData.append('rqOrderQuantity2', rqOrderQuantity2);
-                    formData.append('rqReceivedDate2', rqReceivedDate2);
-                    formData.append('rqReceivedQuantity2', rqReceivedQuantity2);
-
-                    formData.append('rqName3', rqName3);
-                    formData.append('rqMaker3', rqMaker3);
-                    formData.append('rqModel3', rqModel3);
-                    formData.append('rqQty3', rqQty3);
-                    formData.append('rqStockDate3', rqStockDate3);
-                    formData.append('rqStockQuantity3', rqStockQuantity3);
-                    formData.append('rqOrderDate3', rqOrderDate3);
-                    formData.append('rqOrderQuantity3', rqOrderQuantity3);
-                    formData.append('rqReceivedDate3', rqReceivedDate3);
-                    formData.append('rqReceivedQuantity3', rqReceivedQuantity3);
-
-                    formData.append('rqName4', rqName4);
-                    formData.append('rqMaker4', rqMaker4);
-                    formData.append('rqModel4', rqModel4);
-                    formData.append('rqQty4', rqQty4);
-                    formData.append('rqStockDate4', rqStockDate4);
-                    formData.append('rqStockQuantity4', rqStockQuantity4);
-                    formData.append('rqOrderDate4', rqOrderDate4);
-                    formData.append('rqOrderQuantity4', rqOrderQuantity4);
-                    formData.append('rqReceivedDate4', rqReceivedDate4);
-                    formData.append('rqReceivedQuantity4', rqReceivedQuantity4);
-
-                    formData.append('rqName5', rqName5);
-                    formData.append('rqMaker5', rqMaker5);
-                    formData.append('rqModel5', rqModel5);
-                    formData.append('rqQty5', rqQty5);
-                    formData.append('rqStockDate5', rqStockDate5);
-                    formData.append('rqStockQuantity5', rqStockQuantity5);
-                    formData.append('rqOrderDate5', rqOrderDate5);
-                    formData.append('rqOrderQuantity5', rqOrderQuantity5);
-                    formData.append('rqReceivedDate5', rqReceivedDate5);
-                    formData.append('rqReceivedQuantity5', rqReceivedQuantity5);
-
-                    formData.append('Detaildelivery', Detaildelivery);
-                    formData.append('deliveryCheckval1', deliveryCheckval1);
-                    formData.append('deliveryCheckval2', deliveryCheckval2);
-                    formData.append('deliveryCheckval3', deliveryCheckval3);
-                    formData.append('deliveryCheckval4', deliveryCheckval4);
-                    formData.append('deliveryCheckval5', deliveryCheckval5);
-                    formData.append('deliveryCheckval6', deliveryCheckval6);
 
                     formData.append('AnalyzDetail', AnalyzDetail);
                     formData.append('Checkval1', Checkval1);
@@ -1119,6 +1208,15 @@ $(document).ready(function () {
                     formData.append('Detailcheck11', Detailcheck11);
                     formData.append('fileNamesAnalz', fileNamesAnalz);
 
+                    formData.append('PreventionallValues', PervenDataArrayString);
+
+                    formData.append('Detaildelivery', Detaildelivery);
+                    formData.append('deliveryCheckval1', deliveryCheckval1);
+                    formData.append('deliveryCheckval2', deliveryCheckval2);
+                    formData.append('deliveryCheckval3', deliveryCheckval3);
+                    formData.append('deliveryCheckval4', deliveryCheckval4);
+                    formData.append('deliveryCheckval5', deliveryCheckval5);
+                    formData.append('deliveryCheckval6', deliveryCheckval6);
 
                     $.ajax({
                         url: base_url('IssueTicket/callApiSaveTicket'),

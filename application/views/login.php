@@ -245,7 +245,7 @@
     animation: animationLeftRight 4s ease-in-out infinite;
   }
 
-  @keyframes animationLeftRight {
+  /* @keyframes animationLeftRight {
     0% {
       transform: translateX(0px);
     }
@@ -271,7 +271,7 @@
     100% {
       transform: translateX(0px);
     }
-  }
+  } */
 </style>
 <!DOCTYPE html>
 <html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="<?php echo base_url() ?>/assets/" data-template="vertical-menu-template-free">
@@ -365,14 +365,14 @@
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
                   <label for="empcode">Emp Code</label>
-                  <input type="text" name="empcode" id="username">
+                  <input type="text" name="empcode" id="username" placeholder="Enter your emp code">
                 </div>
                 <div class="field padding-bottom--24">
                   <div class="grid--50-50">
                     <label for="password">Password</label>
 
                   </div>
-                  <input type="password" name="password" id="password">
+                  <input type="password" name="password" id="password" placeholder="Enter your password">
                 </div>
 
                 <div class="field padding-bottom--24">
