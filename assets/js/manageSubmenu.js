@@ -1,4 +1,8 @@
 // Function to show DataTable
+
+$(document).ready(function () {
+    $("#loadingPage").attr("style", "display: none;");
+});
 function shDataTable() {
     var mainId = $('#selMainMenu').val();
 

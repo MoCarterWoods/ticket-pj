@@ -1,6 +1,8 @@
 $(() => {
     shDataTable();
-
+    $(document).ready(function () {
+        $("#loadingPage").attr("style", "display: none;");
+    });
     function shDataTable() {
         $(document).ready(function () {
             // URL of the API

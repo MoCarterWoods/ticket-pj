@@ -1,5 +1,7 @@
 $(() => {
-
+    $(document).ready(function () {
+        $("#loadingPage").attr("style", "display: none;");
+    });
 
     // Function to show Main Menu
     function showGroupDetail() {

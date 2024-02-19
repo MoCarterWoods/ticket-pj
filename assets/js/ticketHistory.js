@@ -1,3 +1,6 @@
+$(document).ready(function () {
+  $("#loadingPage").attr("style", "display: none;");
+});
 $(document).ready(function() {
     shDataTable(); // เรียกใช้ฟังก์ชัน shDataTable เมื่อเอกสารพร้อม
   });

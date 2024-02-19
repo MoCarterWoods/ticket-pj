@@ -1,4 +1,6 @@
-
+$(document).ready(function () {
+    $("#loadingPage").attr("style", "display: none;");
+});
 $(document).ready(function () {
     
     var dropdown = $('#selArea');
@@ -528,6 +530,321 @@ $(document).ready(function () {
 });
 
 
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_problem')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและแสดงใน HTML
+            const chkBoxProblemElement = document.getElementById('chkBoxProblem');
+            let i = 1; // กำหนดค่าเริ่มต้นของตัวแปร i
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('col-md-4');
+
+                // สร้าง element checkbox
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.classList.add('form-check', 'custom-option', 'custom-option-basic');
+                const checkboxLabel = document.createElement('label');
+                checkboxLabel.classList.add('form-check-label', 'custom-option-content');
+                checkboxLabel.setAttribute('for', `customCheckpb${i}`);
+                checkboxLabel.innerHTML = `
+                    <input class="form-check-input" type="checkbox" value="${item.mpc_id}" id="customCheckpb${i}" />
+                    <span class="custom-option-header">
+                        <span class="h5 mb-0">${item.mpc_name_eng}</span>
+                    </span>
+                    <span class="custom-option-body">
+                        <small class="option-text">${item.mpc_name_thai}</small>
+                    </span>
+                `;
+                checkboxDiv.appendChild(checkboxLabel);
+                div.appendChild(checkboxDiv);
+                chkBoxProblemElement.appendChild(div);
+                i++; // เพิ่มค่าของตัวแปร i ให้เพิ่มขึ้นทีละหนึ่งหลังจากการใช้งาน
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+        
+});
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/radio_jobtype')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและแสดงใน HTML
+            const chkBoxJobElement = document.getElementById('chkBoxJob');
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('col-3');
+
+                // สร้าง element radio button
+                const radioDiv = document.createElement('div');
+                radioDiv.classList.add('form-check', 'custom-option', 'custom-option-icon');
+                const radioLabel = document.createElement('label');
+                radioLabel.classList.add('form-check-label', 'custom-option-content');
+                radioLabel.setAttribute('for', `customRadioIcon${item.mjt_id}`);
+                radioLabel.innerHTML = `
+                    <span class="custom-option-body">
+                        <i class='bx bx-wrench'></i>
+                        <span class="custom-option-title " style="font-size: 1.2em;">${item.mjt_name_thai}</span>
+                        <small>${item.mjt_name_eng}</small>
+                    </span>
+                    <input name="customRadioIcon" class="form-check-input" type="radio" value="${item.mjt_id}" id="customRadioIcon${item.mjt_id}" />
+                `;
+                radioDiv.appendChild(radioLabel);
+                div.appendChild(radioDiv);
+                chkBoxJobElement.appendChild(div);
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_inspection')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและแสดงใน HTML
+            const chkBoxProblemElement = document.getElementById('chkBoxInspec');
+            let i = 1; // กำหนดค่าเริ่มต้นของตัวแปร i
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('col-md-6');
+
+                // สร้าง element checkbox
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.classList.add('form-check', 'custom-option', 'custom-option-basic');
+                const checkboxLabel = document.createElement('label');
+                checkboxLabel.classList.add('form-check-label', 'custom-option-content');
+                checkboxLabel.setAttribute('for', `customCheckins${i}`);
+                checkboxLabel.innerHTML = `
+                    <input class="form-check-input" type="checkbox" value="${item.mim_id}" id="customCheckins${i}" />
+                    <span class="custom-option-header">
+                        <span class="h5 mb-0">${item.mim_name_eng}</span>
+                    </span>
+                    <span class="custom-option-body">
+                        <small class="option-text">${item.mim_name_thai}</small>
+                    </span>
+                `;
+                checkboxDiv.appendChild(checkboxLabel);
+                div.appendChild(checkboxDiv);
+                chkBoxProblemElement.appendChild(div);
+                i++; // เพิ่มค่าของตัวแปร i ให้เพิ่มขึ้นทีละหนึ่งหลังจากการใช้งาน
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+        
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_trouble1')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและแสดงใน HTML
+            const chkBoxTroubleElement = document.getElementById('chkBoxTrouble1');
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('col');
+
+                // สร้าง element radio button
+                const radioDiv = document.createElement('div');
+                radioDiv.classList.add('col', 'form-check', 'custom-option', 'custom-option-basic');
+                const radioLabel = document.createElement('label');
+                radioLabel.classList.add('form-check-label', 'custom-option-content');
+                const radioId = `troublecheck${item.mt_id}`; // สร้าง id สำหรับ radio button
+                radioLabel.setAttribute('for', radioId);
+                radioLabel.innerHTML = `
+                    <input name="troublecheck" class="form-check-input" type="radio" value="${item.mt_id}" id="${radioId}" />
+                    <span class="custom-option-header">
+                        <span class="fw-medium">${item.mt_name_thai}</span>
+                    </span>
+                `;
+                radioDiv.appendChild(radioLabel);
+                div.appendChild(radioDiv);
+                chkBoxTroubleElement.appendChild(div);
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_trouble2')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและแสดงใน HTML
+            const chkBoxTroubleElement = document.getElementById('chkBoxTrouble2');
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('col');
+
+                // สร้าง element radio button
+                const radioDiv = document.createElement('div');
+                radioDiv.classList.add('col', 'form-check', 'custom-option', 'custom-option-basic');
+                const radioLabel = document.createElement('label');
+                radioLabel.classList.add('form-check-label', 'custom-option-content');
+                const radioId = `troublecheck${item.mt_id}`; // สร้าง id สำหรับ radio button
+                radioLabel.setAttribute('for', radioId);
+                radioLabel.innerHTML = `
+                    <input name="troublecheck2" class="form-check-input" type="radio" value="${item.mt_id}" id="${radioId}" />
+                    <span class="custom-option-header">
+                        <span class="fw-medium">${item.mt_name_thai}</span>
+                    </span>
+                    <span class="custom-option-body">
+                        <input type="text" class="form-control" id="text${radioId}" placeholder="Enter detail" />
+                    </span>
+                `;
+                radioDiv.appendChild(radioLabel);
+                div.appendChild(radioDiv);
+                chkBoxTroubleElement.appendChild(div);
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_analysis')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและแสดงใน HTML
+            const checkboxAnalyzElement = document.getElementById('checkboxanalyz');
+            let divCount = 0; // เพิ่มตัวแปรนับจำนวน div ที่สร้างแล้ว
+
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('form-check', 'col-lg-6' ,'mt-3');
+
+                // สร้าง element checkbox
+                const checkboxInput = document.createElement('input');
+                checkboxInput.classList.add('form-check-input');
+                checkboxInput.setAttribute('type', 'checkbox');
+                checkboxInput.setAttribute('value', item.map_id);
+                checkboxInput.setAttribute('id', `Check${item.map_id}`);
+
+                // สร้าง label สำหรับ checkbox
+                const checkboxLabel = document.createElement('label');
+                checkboxLabel.classList.add('form-check-label');
+                checkboxLabel.setAttribute('for', `Check${item.map_id}`);
+                checkboxLabel.textContent = item.map_name;
+
+                // เพิ่ม checkboxInput และ checkboxLabel เข้าไปใน div
+                div.appendChild(checkboxInput);
+                div.appendChild(checkboxLabel);
+
+                // เพิ่ม div เข้าไปใน checkboxAnalyzElement
+                checkboxAnalyzElement.appendChild(div);
+
+                // เพิ่มจำนวน div ที่สร้างแล้ว
+                divCount++;
+
+
+            });
+
+            // เพิ่ม input field สำหรับ "อื่นๆ"
+            const otherInputDiv = document.createElement('div');
+            otherInputDiv.classList.add('form-check');
+            const otherInputLabel = document.createElement('label');
+            otherInputLabel.classList.add('form-check-label');
+            otherInputLabel.setAttribute('for', 'adddtInput');
+            const otherInput = document.createElement('input');
+            otherInput.classList.add('form-control');
+            otherInput.setAttribute('type', 'text');
+            otherInput.setAttribute('id', 'adddtInput');
+            otherInput.setAttribute('placeholder', 'อื่นๆ กรุณากรอก');
+            otherInputDiv.appendChild(otherInputLabel);
+            otherInputDiv.appendChild(otherInput);
+            checkboxAnalyzElement.appendChild(otherInputDiv);
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // เรียกใช้งาน API
+    fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_delivery')
+        .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+        .then(data => {
+            // วนลูปผ่านข้อมูลและสร้าง checkbox และ input field สำหรับข้อความเพิ่มเติม
+            const checkboxDeliveryElement = document.querySelector('.card-body.demo-vertical-spacing.demo-only-element');
+            data.forEach(item => {
+                // สร้าง element div ใหม่
+                const div = document.createElement('div');
+                div.classList.add('form-check', 'mt-3');
+
+                // สร้าง element checkbox
+                const checkboxInput = document.createElement('input');
+                checkboxInput.classList.add('form-check-input');
+                checkboxInput.setAttribute('type', 'checkbox');
+                checkboxInput.setAttribute('value', item.mde_id);
+                checkboxInput.setAttribute('id', `Check-de${item.mde_id}`);
+
+                // สร้าง label สำหรับ checkbox
+                const checkboxLabel = document.createElement('label');
+                checkboxLabel.classList.add('form-check-label');
+                checkboxLabel.setAttribute('for', `Check-de${item.mde_id}`);
+                checkboxLabel.textContent = item.mde_name;
+
+                // เพิ่ม checkboxInput และ checkboxLabel เข้าไปใน div
+                div.appendChild(checkboxInput);
+                div.appendChild(checkboxLabel);
+
+                // เพิ่ม div เข้าไปใน checkboxDeliveryElement
+                checkboxDeliveryElement.appendChild(div);
+
+                // หากเป็น checkbox "อุปกรณ์ / เครื่องจักร มีการแก้ไขแบบชั่วคราว ต้องมีการแก้ไขถาวรภายหลังกำหนดการแก้ไขถาวร โดยประมาณ" ให้เพิ่ม input field ด้วยการเช็คสถานะของ checkbox และเพิ่มหรือลบ input field ตามความเหมาะสม
+                if (item.mde_id === '1') {
+                    checkboxInput.addEventListener('change', function() {
+                        const existingAdditionalInput = document.getElementById(`additionalInput${item.mde_id}`);
+                        if (this.checked) {
+                            if (!existingAdditionalInput) {
+                                const additionalInput = document.createElement('input');
+                                additionalInput.classList.add('form-control');
+                                additionalInput.setAttribute('type', 'text');
+                                additionalInput.setAttribute('placeholder', 'โปรดระบุ . . .');
+                                additionalInput.setAttribute('id', `additionalInput${item.mde_id}`);
+                                div.appendChild(additionalInput);
+                            }
+                        } else {
+                            if (existingAdditionalInput) {
+                                div.removeChild(existingAdditionalInput);
+                            }
+                        }
+                    });
+                }
+            });
+        })
+        .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+        });
+});
+
+
+
+
         // -------------------------------- Inspec Method -------------------------------
         $(document).ready(function () {
             InMeDropdown();
@@ -991,17 +1308,17 @@ $(document).ready(function () {
         // ------------ Trouble Shooting ---------------
         var Trouble = $('#SelTbAc').val();
         var TroubleDetail = $('#mdetailtbac').val();
-        var TroubleDetail3 = $('#texttroublecheck3').val();
-        var TroubleDetail4 = $('#texttroublecheck4').val();
+        var TroubleDetail3 = $('#texttroublecheck12').val();
+        var TroubleDetail4 = $('#texttroublecheck13').val();
 
 
-        var TbCheck1 = $('#troublecheck1').prop('checked');
-        var TbCheck2 = $('#troublecheck2').prop('checked');
-        var TbCheck3 = $('#troublecheck3').prop('checked');
-        var TbCheck4 = $('#troublecheck4').prop('checked');
+        var TbCheck1 = $('#troublecheck10').prop('checked');
+        var TbCheck2 = $('#troublecheck11').prop('checked');
+        var TbCheck3 = $('#troublecheck12').prop('checked');
+        var TbCheck4 = $('#troublecheck13').prop('checked');
 
-        var TroubleCheckval1 = TbCheck1 ? $('#troublecheck1').val() : '';
-        var TroubleCheckval2 = TbCheck2 ? $('#troublecheck2').val() : '';
+        var TroubleCheckval1 = TbCheck1 ? $('#troublecheck10').val() : '';
+        var TroubleCheckval2 = TbCheck2 ? $('#troublecheck11').val() : '';
         var TroubleCheckval3 = TbCheck3 ? $('#troublecheck3').val() : '';
         var TroubleCheckval4 = TbCheck4 ? $('#troublecheck4').val() : '';
 
@@ -1049,7 +1366,7 @@ $(document).ready(function () {
         // ------------ End Required Parts ---------------
 
         // ------------ Delivery Equipment -----------------
-        var Detaildelivery = $('#additionalInput').val();
+        var Detaildelivery = $('#additionalInput1').val();
         var deliveryChecked1 = $('#Check-de1').prop('checked');
         var deliveryChecked2 = $('#Check-de2').prop('checked');
         var deliveryChecked3 = $('#Check-de3').prop('checked');
@@ -1236,6 +1553,7 @@ $(document).ready(function () {
                                     timer: 2500,
                                 }).then(() => {
                                     $('#mdlEdit').modal('hide');
+                                    location.reload();
 
                                 });
                             } else if (res.result == 2) {

@@ -64,14 +64,97 @@
 </head>
 
 <body>
+<style>
+		.loader {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 
+		.wrapper {
+			margin-top: 47%;
+			width: 220px;
+			height: 60px;
+			position: fixed;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 2;
+		}
+
+
+		.text {
+			z-index: 3;
+			font-family: Whitney, -apple-system, Helvetica;
+			letter-spacing: 1px;
+			font-weight: 700;
+			font-size: 20px;
+			color: white;
+			filter: drop-shadow(2px 2px 0px #4d1e91e3);
+		}
+
+		.box {
+			width: 100%;
+			height: 100%;
+			background-color: #051729a1;
+			position: absolute;
+			z-index: 2;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			animation: loading ease-in-out 0.9s infinite alternate-reverse;
+		}
+
+		@keyframes loading {
+			0% {
+				transform: translateX(-20px);
+			}
+
+			100% {
+				transform: translateX(20px);
+			}
+		}
+
+		.box::before {
+			content: "";
+			width: 20px;
+			height: 170%;
+			background-color: #fe1a1a;
+			position: absolute;
+			z-index: 1;
+			animation: loading2 ease-in-out 0.9s infinite alternate-reverse;
+		}
+
+		@keyframes loading2 {
+			0% {
+				transform: translateX(-50px);
+			}
+
+			100% {
+				transform: translateX(50px);
+			}
+		}
+	</style>
+	<div id="loadingPage" style="    z-index: 9999999999999;position: fixed;background: #000000c7;width: 100%;height: 1900px;">
+		<div class="loader">
+			<div class="wrapper">
+				<div class="text">LOADING</div>
+				<div class="box"></div>
+			</div>
+		</div>
+	</div>
 	{left_sidebar}
 	{topbar}
-	{page_content}
-	{footer}
+	<div class="content-wrapper">
+		<div class="container-xxl flex-grow-1 container-p-y">
+			{page_content}
+			{footer}
 
-
-
+			<script>
+				function base_url(url) {
+					return '<?php echo $base_url; ?>' + url;
+				}
+			</script>
 	<script>
 		const API_URL = 'http://127.0.0.1/api/';
 

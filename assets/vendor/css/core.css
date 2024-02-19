@@ -2578,6 +2578,13 @@ textarea.form-control-lg {
   display: block;
   min-height: 1.434375rem;
   /* padding-left: 1.7em; */
+  margin-bottom: 1.125rem;
+}
+#checkboxanalyz .form-check{
+  margin-bottom: 0.125rem;
+}
+
+#checkAnalyze .form-check{
   margin-bottom: 0.125rem;
 }
 .form-check .form-check-input {

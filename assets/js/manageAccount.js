@@ -1,5 +1,8 @@
 
 $(() => {
+    $(document).ready(function () {
+        $("#loadingPage").attr("style", "display: none;");
+    });
     showdropdown()
     $('#mdlAdd').on('hidden.bs.modal', function () {
         $('#errMegadd').css('display', 'none');

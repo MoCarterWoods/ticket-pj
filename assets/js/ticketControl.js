@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
   shDataTable(); // เรียกใช้ฟังก์ชัน shDataTable เมื่อเอกสารพร้อม
 });
@@ -69,7 +71,7 @@ function shDataTable() {
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item  d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item">Submit</a></li>
               </ul>
@@ -88,6 +90,7 @@ function shDataTable() {
           </li>
         `;
         $(`#avatarGroup_${i}`).html(avatarHtml);
+        
         }
       }
 
@@ -97,6 +100,7 @@ function shDataTable() {
       // ปรับปรุงเนื้อหาของตารางและเริ่มใช้ DataTable ใหม่
       $("#tbody").html(html).promise().done(() => {
         $("#tblTicketControl").DataTable({ scrollX: true });
+        $("#loadingPage").attr("style", "display: none;");
       });
     },
     error: function (xhr, status, error) {
@@ -123,6 +127,8 @@ function generateAvatarHTML(data, i) {
   }
   return avatarHtml;
 }
+
+
 
 
     //-------------------------- Accept ticket ----------------------------------
@@ -510,7 +516,47 @@ $(document).ready(function () {
 
 // ----=- show problem --------
 $(document).on('click', '.actProblem', function () {
+  // เคลียร์ Dropzone ก่อนที่จะดึงข้อมูลใหม่
+
   ist_Id = $(this).attr('data-id');
+
+    // Initialize Dropzone
+    e = `<div class="dz-preview dz-file-preview">
+    <div class="dz-details">
+      <div class="dz-thumbnail">
+        <img data-dz-thumbnail>
+        <span class="dz-nopreview">No preview</span>
+        <div class="dz-success-mark"></div>
+        <div class="dz-error-mark"></div>
+        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+        </div>
+      </div>
+      <div class="dz-filename" data-dz-name></div>
+      <div class="dz-size" data-dz-size></div>
+    </div>
+    </div>`
+      var myDropzone = new Dropzone("#myDropzone", {
+        previewTemplate: e,
+        url: '/upload', // replace with your upload endpoint
+        acceptedFiles: 'image/*',
+        maxFiles: 3,
+        init: function () {
+          this.on("addedfile", function () {
+            if (this.files.length > this.options.maxFiles) {
+              this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+            }
+          });
+        },
+        addRemoveLinks: true,
+        dictDefaultMessage: 'Drop your image here or click to upload',
+        parallelUploads: 1,
+      });
+    
+      fetchExistingImages();
+
+      function fetchExistingImages() {
 
   var url = API_URL + "Ticket_control/show_problem";
   $.ajax({
@@ -523,22 +569,22 @@ $(document).on('click', '.actProblem', function () {
       success: (response) => {
           data_ist_pb = response.data;
 
-          // Clear previous selections
+
           $('#SelProblem').val('');
           $('#mdetailprdlm').val('');
-          $('#customCheckpb1').prop('checked', false);
-          $('#customCheckpb2').prop('checked', false);
-          $('#customCheckpb3').prop('checked', false);
+          $('#customCheckpb7').prop('checked', false);
+          $('#customCheckpb8').prop('checked', false);
+          $('#customCheckpb9').prop('checked', false);
 
           // Iterate through the data array
           response.data.forEach(problem => {
               // Check the checkbox based on mpc_id value
               if (problem.mpc_id === "7") {
-                  $('#customCheckpb1').prop('checked', true);
+                  $('#customCheckpb7').prop('checked', true);
               } else if (problem.mpc_id === "8") {
-                  $('#customCheckpb2').prop('checked', true);
+                  $('#customCheckpb8').prop('checked', true);
               } else if (problem.mpc_id === "9") {
-                  $('#customCheckpb3').prop('checked', true);
+                  $('#customCheckpb9').prop('checked', true);
               }
           });
 
@@ -548,9 +594,34 @@ $(document).on('click', '.actProblem', function () {
               $('#SelProblem').val(validProblem.mpc_id);
               $('#mdetailprdlm').val(validProblem.ipc_detail);
           }
-      }
+     
+          data_image = response.data_image;
+          for (let i = 1; i <= 3; i++) {
+            var imageName = data_image[0]['ipc_pic_' + i];
+             
+                // console.log(data_image[0].imageName);
+                // console.log(data_image[0].ipc_pic_1);
+                if (imageName != '') {
+                  console.log(imageName);
+                  var imagePath = base_url(`${data_ist_pb[0].ipc_path}${imageName}`);
+                  // console.log(imageUrl);
+                  let mockFile = { name: `${imageName}`, size: 12345 };
+                  let callback = null; // Optional callback when it's done
+                  let crossOrigin = null; // Added to the img tag for crossOrigin handling
+                  let resizeThumbnail = true; // Tells Dropzone whether it should resize the image first
+                  myDropzone.displayExistingFile(mockFile, imagePath, callback, crossOrigin, resizeThumbnail);
+                }
+
+  
+          }
+     
+
+        }
+      
   });
+}
 });
+
 
 
 //-------------------------- Save Problem ----------------------------
@@ -560,9 +631,9 @@ $('#btnSaveProblem').on('click', function () {
   var ProblemSel = $('#SelProblem').val();
   var ProblemDetail = $('#mdetailprdlm').val();
 
-  var PbCheck1 = $('#customCheckpb1').prop('checked') ? $('#customCheckpb1').val() : '';
-  var PbCheck2 = $('#customCheckpb2').prop('checked') ? $('#customCheckpb2').val() : '';
-  var PbCheck3 = $('#customCheckpb3').prop('checked') ? $('#customCheckpb3').val() : '';
+  var PbCheck1 = $('#customCheckpb7').prop('checked') ? $('#customCheckpb7').val() : '';
+  var PbCheck2 = $('#customCheckpb8').prop('checked') ? $('#customCheckpb8').val() : '';
+  var PbCheck3 = $('#customCheckpb9').prop('checked') ? $('#customCheckpb9').val() : '';
 
 
   if (ProblemSel == '') {
@@ -752,19 +823,19 @@ $(document).on('click', '.actInspec', function () {
           // Clear previous selections
           $('#SelInspec').val('');
           $('#mdetailinsprc').val('');
-          $('#ChkInspec1').prop('checked', false);
-          $('#ChkInspec2').prop('checked', false);
-          $('#ChkInspec3').prop('checked', false);
+          $('#ChkInspec6').prop('checked', false);
+          $('#ChkInspec7').prop('checked', false);
+          $('#ChkInspec8').prop('checked', false);
 
           // Iterate through the data array
           response.data.forEach(Inspec => {
               // Check the checkbox based on mim_id value
               if (Inspec.mim_id === "6") {
-                  $('#ChkInspec1').prop('checked', true);
+                  $('#ChkInspec6').prop('checked', true);
               } else if (Inspec.mim_id === "7") {
-                  $('#ChkInspec2').prop('checked', true);
+                  $('#ChkInspec7').prop('checked', true);
               } else if (Inspec.mim_id === "8") {
-                  $('#ChkInspec3').prop('checked', true);
+                  $('#ChkInspec8').prop('checked', true);
               }
           });
 
@@ -785,9 +856,9 @@ $('#btnSaveInspec').on('click', function () {
   var InspecSel = $('#SelInspec').val();
   var InspecDetail = $('#mdetailinsprc').val();
 
-  var InsCheck1 = $('#ChkInspec1').prop('checked') ? $('#ChkInspec1').val() : '';
-  var InsCheck2 = $('#ChkInspec2').prop('checked') ? $('#ChkInspec2').val() : '';
-  var InsCheck3 = $('#ChkInspec3').prop('checked') ? $('#ChkInspec3').val() : '';
+  var InsCheck1 = $('#ChkInspec6').prop('checked') ? $('#ChkInspec6').val() : '';
+  var InsCheck2 = $('#ChkInspec7').prop('checked') ? $('#ChkInspec7').val() : '';
+  var InsCheck3 = $('#ChkInspec8').prop('checked') ? $('#ChkInspec8').val() : '';
 
 
   if (InspecSel == '') {
@@ -887,6 +958,41 @@ $('#btnSaveInspec').on('click', function () {
 });
 
 
+ // -------------------------------- Trouble -------------------------------
+ $(document).ready(function () {
+  TroubleDropdown();
+
+  function TroubleDropdown() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_trouble';
+
+  $.ajax({
+      url: apiUrl,
+      type: 'GET',
+      dataType: 'json',
+      success: function (res) {
+          // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+          response = res;
+
+          // Clear existing options in the dropdown
+          $('#SelTbAc').empty();
+
+          // Add a default option
+          $('#SelTbAc').append('<option value="">Choose...</option>');
+
+          // Loop through the API response and add options to the dropdown
+          for (let i = 0; i < response.length; i++) {
+              const troubleData = response[i];
+              $('#SelTbAc').append(`<option value="${troubleData.mt_id}">${troubleData.mt_name_eng} / ${troubleData.mt_name_thai}</option>`);
+          }
+      },
+      error: function (error) {
+          console.error('Error fetching data from the API:', error);
+      }
+  });
+}
+
+});
+
 
 // ----=- show Analyze --------
 $(document).on('click', '.actAnalyze', function () {
@@ -962,6 +1068,7 @@ $(document).on('click', '.actAnalyze', function () {
     }
   });
 });
+
 
 
 
@@ -1075,4 +1182,392 @@ $('#btnSaveAnalyz').on('click', function () {
           }
       });
   }
+});
+
+
+// ----=- show Delivery --------
+var data_delivery = [];
+var ist_Id;
+
+$(document).on('click', '.actDelivery', function () {
+  ist_Id = $(this).attr('data-id');
+
+  var url = API_URL + "Ticket_control/show_delivery";
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: {
+      ist_Id: ist_Id,
+    },
+    dataType: 'json',
+    success: (response) => {
+      data_delivery = response.data;
+
+      // Clear previous selections
+      $('.form-check-input').prop('checked', false);
+      $('#additionalInput1').val('');
+
+      response.data.forEach(Delivery => {
+
+        if (Delivery.mde_id !== null) {
+
+          switch (Delivery.mde_id) {
+            case "1":
+              $('#Check-de1').prop('checked', true);
+              $('#additionalInput1').val(Delivery.ide_detail);
+              break;
+            case "2":
+              $('#Check-de2').prop('checked', true);
+              break;
+            case "3":
+              $('#Check-de3').prop('checked', true);
+              break;
+            case "4":
+              $('#Check-de4').prop('checked', true);
+
+              if (Delivery.ide_detail !== null) {
+                $('#additionalInput1').val(Delivery.ide_detail);
+              }
+              break;
+            case "5":
+              $('#Check-de5').prop('checked', true);
+              break;
+            case "6":
+              $('#Check-de6').prop('checked', true);
+              break;
+            default:
+              break;
+          }
+        } else {
+
+        }
+      });
+    }
+  });
+});
+
+//-------------------------- Save Delivery ----------------------------
+
+$('#btnSaveDelivery').on('click', function () {
+
+  var Checked1 = $('#Check-de1').prop('checked');
+  var Checked2 = $('#Check-de2').prop('checked');
+  var Checked3 = $('#Check-de3').prop('checked');
+  var Checked4 = $('#Check-de4').prop('checked');
+  var Checked5 = $('#Check-de5').prop('checked');
+  var Checked6 = $('#Check-de6').prop('checked');
+
+
+  var Detailcheck11 = $('#additionalInput1').val();
+
+
+  var Checkval1 = Checked1 ? $('#Check1').val() : '';
+  var Checkval2 = Checked2 ? $('#Check2').val() : '';
+  var Checkval3 = Checked3 ? $('#Check3').val() : '';
+  var Checkval4 = Checked4 ? $('#Check4').val() : '';
+  var Checkval5 = Checked5 ? $('#Check5').val() : '';
+  var Checkval6 = Checked6 ? $('#Check6').val() : '';
+
+
+
+
+  if (!Checked1 && !Checked2 && !Checked3 && !Checked4 && !Checked5 && !Checked6) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please select an delivery!'
+    });
+} else if (Checked1 && Detailcheck11.trim() === '') {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter detail for the first option!'
+    });
+} else {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to save edit?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save!'
+    }).then((result) => {
+          if (result.isConfirmed) {
+              var url = API_URL + 'Ticket_control/save_delivery';
+              const formData = new FormData()
+              formData.append('Checkval1', Checkval1);
+              formData.append('Checkval2', Checkval2);
+              formData.append('Checkval3', Checkval3);
+              formData.append('Checkval4', Checkval4);
+              formData.append('Checkval5', Checkval5);
+              formData.append('Checkval6', Checkval6);
+              formData.append('Detailcheck11', Detailcheck11);
+              formData.append('ist_Id', ist_Id);
+
+              $.ajax({
+                  url: base_url('TicketControl/callApiSaveDelivery'),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  dataType: 'json',
+                  success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit Delivery success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlDelivery').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+              });
+          }
+      });
+  }
+});
+
+
+// ----------------------------- loop ceckbox -----------------------------
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch data from API and create checkboxes
+  $.ajax({
+      url: 'http://127.0.0.1/api/Ticket_control/chkBox_problem',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          response.forEach(function(item) {
+              var checkboxHtml = `
+              <div class="col">
+                  <div class="form-check custom-option custom-option-basic">
+                      <label class="form-check-label custom-option-content" for="customCheckpb${item.mpc_id}">
+                          <input class="form-check-input" type="checkbox" value="${item.mpc_id}" id="customCheckpb${item.mpc_id}" />
+                          <span class="custom-option-header">
+                              <span class="h5 mb-0">${item.mpc_name_eng}</span>
+                          </span>
+                          <span class="custom-option-body">
+                              <small>${item.mpc_name_thai}</small>
+                          </span>
+                      </label>
+                  </div>
+              </div>`;
+              $('#checkboxPb').append(checkboxHtml);
+          });
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching checkbox data:', error);
+      }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch data from API and create radio buttons
+  $.ajax({
+      url: 'http://127.0.0.1/api/Ticket_control/radio_jobtype',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          response.forEach(function(item, index) {
+              if (index % 2 === 0) {
+                  // Create a new row for every even index
+                  $('#modalBodyJobtype').append(`<div class="row justify-content-center mt-2" id="row${index / 2}"></div>`);
+              }
+              var radioHtml = `
+              <div class="col-md-6">
+                  <div class="form-check custom-option custom-option-icon">
+                      <label class="form-check-label custom-option-content" for="customRadioIcon${item.mjt_id}">
+                          <span class="custom-option-body">
+                              <i class='bx bx-wrench'></i>
+                              <span class="custom-option-title">${item.mjt_name_thai}</span>
+                              <small>${item.mjt_name_eng}</small>
+                          </span>
+                          <input name="customRadioIcon" class="form-check-input" type="radio" value="${item.mjt_id}" id="customRadioIcon${item.mjt_id}" />
+                      </label>
+                  </div>
+              </div>`;
+              $(`#row${Math.floor(index / 2)}`).append(radioHtml);
+          });
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching radio button data:', error);
+      }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch data from API and create checkboxes
+  $.ajax({
+      url: 'http://127.0.0.1/api/Ticket_control/chkBox_inspection',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          response.forEach(function(item) {
+              var checkboxHtml = `
+              <div class="col-6">
+                  <div class="form-check custom-option custom-option-basic">
+                      <label class="form-check-label custom-option-content" for="ChkInspec${item.mim_id}">
+                          <input class="form-check-input" type="checkbox" value="${item.mim_id}" id="ChkInspec${item.mim_id}" />
+                          <span class="custom-option-header">
+                              <span class="fw-medium">${item.mim_name_thai}</span>
+                          </span>
+                          <span class="custom-option-body">
+                              <small>${item.mim_name_eng}</small>
+                          </span>
+                      </label>
+                  </div>
+              </div>`;
+              $('#checkboxInspec').append(checkboxHtml);
+          });
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching checkbox data:', error);
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch data from API and create checkboxes
+  $.ajax({
+      url: 'http://127.0.0.1/api/Issue_Ticket/chkBox_trouble1',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          response.forEach(function(item) {
+              var checkboxHtml = `
+              <div class="col form-check custom-option custom-option-basic">
+                  <label class="form-check-label custom-option-content" for="chkTrob${item.mt_id}">
+                      <input name="troublecheck1" class="form-check-input" type="radio" value="${item.mt_detail}" id="chkTrob${item.mt_id}" />
+                      <span class="custom-option-header">
+                          <span class="fw-medium">${item.mt_name_thai}</span>
+                      </span>
+                  </label>
+              </div>`;
+              $('#checkboxTrob1').append(checkboxHtml);
+          });
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching checkbox data:', error);
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch data from API and create checkboxes with input text
+  $.ajax({
+      url: 'http://127.0.0.1/api/Issue_Ticket/chkBox_trouble2',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          response.forEach(function(item) {
+              var checkboxHtml = `
+              <div class="col form-check custom-option custom-option-basic">
+                  <label class="form-check-label custom-option-content" for="chkTrob${item.mt_id}">
+                      <input name="troublecheck2" class="form-check-input" type="radio" value="${item.mt_detail}" id="chkTrob${item.mt_id}" />
+                      <span class="custom-option-header">
+                          <span class="fw-medium">${item.mt_name_thai}</span>
+                      </span>
+                      <span class="custom-option-body">
+                          <input type="text" class="form-control">
+                      </span>
+                  </label>
+              </div>`;
+              $('#checkboxTrob2').append(checkboxHtml);
+          });
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching checkbox data:', error);
+      }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Fetch data from API and create checkboxes
+  $.ajax({
+      url: 'http://127.0.0.1/api/Issue_Ticket/chkBox_analysis',
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+          var checkboxesHtml = '';
+          response.forEach(function(item, index) {
+              checkboxesHtml += `
+              <div class="col-md-6">
+                  <div class="form-check mt-3">
+                      <input class="form-check-input" type="checkbox" value="${item.map_id}" id="Check${item.map_id}">
+                      <label class="form-check-label" for="Check${item.map_id}"> ${item.map_name} </label>
+                      ${item.map_id === '11' ? '<input type="text" class="form-control mt-2" id="adddtInput" placeholder="อื่นๆ (กอรกข้อมูล)" for="Check11" style="margin-left: -25px;padding: 10px;">' : ''}
+                  </div>
+              </div>`;
+              if ((index + 1) % 2 === 0 || index === response.length - 1) {
+                  $('#checkAnalyze').append('<div class="row">' + checkboxesHtml + '</div>');
+                  checkboxesHtml = '';
+              }
+          });
+      },
+      error: function(xhr, status, error) {
+          console.error('Error fetching checkbox data:', error);
+      }
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // เรียกใช้งาน API
+  fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_delivery')
+      .then(response => response.json()) // แปลงข้อมูลเป็น JSON
+      .then(data => {
+          // วนลูปผ่านข้อมูลและสร้าง checkbox และ input field สำหรับข้อความเพิ่มเติม
+          const checkboxDeliveryElement = document.querySelector('#checkDeliveryeq');
+          data.forEach(item => {
+              // สร้าง element div ใหม่
+              const div = document.createElement('div');
+              div.classList.add('form-check', 'mt-3');
+
+              // สร้าง element checkbox
+              const checkboxInput = document.createElement('input');
+              checkboxInput.classList.add('form-check-input');
+              checkboxInput.setAttribute('type', 'checkbox');
+              checkboxInput.setAttribute('value', item.mde_id);
+              checkboxInput.setAttribute('id', `Check-de${item.mde_id}`);
+
+              // สร้าง label สำหรับ checkbox
+              const checkboxLabel = document.createElement('label');
+              checkboxLabel.classList.add('form-check-label');
+              checkboxLabel.setAttribute('for', `Check-de${item.mde_id}`);
+              checkboxLabel.textContent = item.mde_name;
+
+              // เพิ่ม checkboxInput และ checkboxLabel เข้าไปใน div
+              div.appendChild(checkboxInput);
+              div.appendChild(checkboxLabel);
+
+              // หากเป็น checkbox "อุปกรณ์ / เครื่องจักร มีการแก้ไขแบบชั่วคราว ต้องมีการแก้ไขถาวรภายหลังกำหนดการแก้ไขถาวร โดยประมาณ" ให้เพิ่ม input field ตรงที่นี่
+              if (item.mde_id === '1') {
+                  const additionalInput = document.createElement('input');
+                  additionalInput.classList.add('form-control');
+                  additionalInput.setAttribute('type', 'text');
+                  additionalInput.setAttribute('placeholder', 'โปรดระบุ . . .');
+                  additionalInput.setAttribute('id', `additionalInput${item.mde_id}`);
+                  div.appendChild(additionalInput);
+              }
+
+              // เพิ่ม div เข้าไปใน checkboxDeliveryElement
+              checkboxDeliveryElement.appendChild(div);
+          });
+      })
+      .catch(error => {
+          console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
+      });
 });

@@ -151,7 +151,7 @@
                                                 </div>
 
 
-                                                <div class="row mt-3">
+                                                <div class="row ">
                                                     <div class="col">
 
                                                         <div class="row mt-3">
@@ -230,54 +230,16 @@
                                                             <option value="">Choose...</option>
                                                         </select>
                                                     </div>
-                                                    <div>
+                                                    <div class="mt-3">
                                                         <label for="mdetailprdlm" class="form-label">More Detail</label>
                                                         <textarea class="form-control" id="mdetailprdlm" rows="4" placeholder="Enter more detail"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-8">
+                                                    <label for="chkBoxProblem" class="form-label"></label>
                                                     <div class="row" id="chkBoxProblem">
 
-                                                        <div class="col-md">
-                                                            <div class="form-check custom-option custom-option-basic">
-                                                                <label class="form-check-label custom-option-content" for="customCheckpb1">
-                                                                    <input class="form-check-input" type="checkbox" value="7" id="customCheckpb1" />
-                                                                    <span class="custom-option-header">
-                                                                        <span class="h5 mb-0">There is a barrier </span>
-                                                                    </span>
-                                                                    <span class="custom-option-body">
-                                                                        <small class="option-text"> มีการกั้นบริเวณ </small>
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="col-md">
-                                                            <div class="form-check custom-option custom-option-basic">
-                                                                <label class="form-check-label custom-option-content" for="customCheckpb2">
-                                                                    <input class="form-check-input" type="checkbox" value="8" id="customCheckpb2" />
-                                                                    <span class="custom-option-header">
-                                                                        <span class="h5 mb-0">There is a repair sign</span>
-                                                                    </span>
-                                                                    <span class="custom-option-body">
-                                                                        <small> มีป้ายการซ่อม </small>
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md">
-                                                            <div class="form-check custom-option custom-option-basic">
-                                                                <label class="form-check-label custom-option-content" for="customCheckpb3">
-                                                                    <input class="form-check-input" type="checkbox" value="9" id="customCheckpb3" />
-                                                                    <span class="custom-option-header">
-                                                                        <span class="h5 mb-0">Organized</span>
-                                                                    </span>
-                                                                    <span class="custom-option-body">
-                                                                        <small> มีการจัดการชิ้นงานเรียบร้อย </small>
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -331,70 +293,11 @@
                             <tbody>
                                 <tr>
                                     <td>
+                                        <div class="col-md-12">
+                                            <div class="row mt-5" id="chkBoxJob">
 
-                                        <div class="row mt-5">
-                                            <div class="col-md mb-md-0 mb-2">
-                                                <div class="form-check custom-option custom-option-icon">
-                                                    <label class="form-check-label custom-option-content" for="customRadioIcon1">
-                                                        <span class="custom-option-body">
-                                                            <i class='bx bx-wrench'></i>
-                                                            <span class="custom-option-title">ซ่อมแซม [BM]</span>
-                                                            <small> Breakdown Maintenance </small>
-                                                        </span>
-                                                        <input name="customRadioIcon" class="form-check-input" type="radio" value="1" id="customRadioIcon1" />
-                                                    </label>
-                                                </div>
+
                                             </div>
-
-
-                                            <div class="col-md mb-md-0 mb-2">
-                                                <div class="form-check custom-option custom-option-icon">
-                                                    <label class="form-check-label custom-option-content" for="customRadioIcon2">
-                                                        <span class="custom-option-body">
-                                                            <i class='bx bx-notepad'></i>
-                                                            <span class="custom-option-title">บำรุงรักษาตามแผน [PM]</span>
-                                                            <small> Planned Maintenance </small>
-                                                        </span>
-                                                        <input name="customRadioIcon" class="form-check-input" type="radio" value="2" id="customRadioIcon2" />
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="row mt-5 mb-5">
-
-
-
-                                            <div class="col-md">
-                                                <div class="form-check custom-option custom-option-icon">
-                                                    <label class="form-check-label custom-option-content" for="customRadioIcon3">
-                                                        <span class="custom-option-body">
-                                                            <i class='bx bx-edit'></i>
-                                                            <span class="custom-option-title">ปรับปรุง [KM]</span>
-                                                            <small> Kaizen / improvement </small>
-                                                        </span>
-                                                        <input name="customRadioIcon" class="form-check-input" type="radio" value="3" id="customRadioIcon3" />
-                                                    </label>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md">
-                                                <div class="form-check custom-option custom-option-icon">
-                                                    <label class="form-check-label custom-option-content" for="customRadioIcon4">
-                                                        <span class="custom-option-body">
-                                                            <i class='bx bx-download'></i>
-                                                            <span class="custom-option-title">ติดตั้ง [IM]</span>
-                                                            <small> Installation / Set Up </small>
-                                                        </span>
-                                                        <input name="customRadioIcon" class="form-check-input" type="radio" value="4" id="customRadioIcon4" />
-                                                    </label>
-                                                </div>
-                                            </div>
-
-
                                         </div>
 
                                     </td>
@@ -438,43 +341,18 @@
                                                     </select>
 
                                                 </div>
-                                                <div>
+                                                <div class="mt-3">
                                                     <label for="mdetailinsprc" class="form-label">More Detail</label>
                                                     <textarea class="form-control" id="mdetailinsprc" rows="4" placeholder="Enter inspection detail"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="row g-3 mt-3">
+                                            <div class="col-md-8">
+                                                <label for="mdetailinsprc" class="form-label">Inspection Checklist</label>
+
+                                                <div class="row" id="chkBoxInspec">
 
 
-                                                    <div class="col-12">
-                                                        <ul class="list-group">
-                                                            <li class="list-group-item d-flex justify-content-between ">
-                                                                <div class="offer">
-
-                                                                    <p class="mb-0"><span class="fw-medium">Found a damaged</span></p>
-                                                                    <span>พบสภาพชำรุดสอดคล้องกับปัญหา.</span>
-                                                                </div>
-                                                                <div class="apply"> <input class="form-check-input" type="checkbox" value="6" id="customCheckins1" /></div>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between">
-                                                                <div class="offer">
-                                                                    <p class="mb-0"><span class="fw-medium">Abnormalities found</span></p>
-                                                                    <span>พบความผิดปกติเพิ่มเติม.</span>
-                                                                </div>
-                                                                <div class="apply"> <input class="form-check-input" type="checkbox" value="7" id="customCheckins2" /></div>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between">
-                                                                <div class="offer">
-                                                                    <p class="mb-0"><span class="fw-medium">Not found with any equipment</span></p>
-                                                                    <span>ไม่พบความผิดปกติของอุปกรณ์ใดๆ.</span>
-                                                                </div>
-                                                                <div class="apply"> <input class="form-check-input" type="checkbox" value="8" id="customCheckins3" /></div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                         <div class="row justify-content-center mt-3">
@@ -510,7 +388,7 @@
                 </div>
 
                 <!-- Troubleshooting -->
-                <div id="navs-pills-top-troubleshooting" class="content ">
+                <div id="navs-pills-top-troubleshooting" class="content">
                     <div class="content-header mb-3">
                         <h6 class="mb-0">Troubleshooting</h6>
                         <small>การแก้ปัญหา / ดำเนินการ</small>
@@ -531,7 +409,7 @@
                                                     </select>
 
                                                 </div>
-                                                <div>
+                                                <div class="mt-3">
                                                     <label for="mdetailtbac" class="form-label">More Detail</label>
                                                     <textarea class="form-control" id="mdetailtbac" rows="4" placeholder="Enter more detail"></textarea>
                                                 </div>
@@ -539,62 +417,15 @@
 
 
                                             </div>
-                                            <div class="col">
+                                            <div class="col" id="chkBoxTrouble1">
                                                 <label class="form-label">Check List</label>
-
-
-                                                <div class="col form-check custom-option custom-option-basic">
-                                                    <label class="form-check-label custom-option-content" for="troublecheck1">
-                                                        <input name="troublecheck1" class="form-check-input" type="radio" value="10" id="troublecheck1" />
-                                                        <span class="custom-option-header">
-                                                            <span class="fw-medium">ชั่วคราว</span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                                <div class="col form-check custom-option custom-option-basic mt-3">
-                                                    <label class="form-check-label custom-option-content" for="troublecheck3">
-                                                        <input name="troublecheck2" class="form-check-input" type="radio" value="13" id="troublecheck3" />
-                                                        <span class="custom-option-header">
-                                                            <span class="fw-medium">ภายใน</span>
-                                                        </span>
-                                                        <span class="custom-option-body">
-                                                            <input type="text" class="form-control" id="texttroublecheck3" placeholder="Enter detail">
-                                                        </span>
-                                                    </label>
-                                                </div>
-
-
-
                                             </div>
 
-                                            <div class="col">
 
-
+                                            <div class="col" id="chkBoxTrouble2">
                                                 <label class="form-label">Check List</label>
-
-
-
-                                                <div class="col form-check custom-option custom-option-basic">
-                                                    <label class="form-check-label custom-option-content" for="troublecheck2">
-                                                        <input name="troublecheck1" class="form-check-input" type="radio" value="11" id="troublecheck2" />
-                                                        <span class="custom-option-header">
-                                                            <span class="fw-medium">ถาวร</span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-
-                                                <div class="col form-check custom-option custom-option-basic mt-3">
-                                                    <label class="form-check-label custom-option-content" for="troublecheck4">
-                                                        <input name="troublecheck2" class="form-check-input" type="radio" value="14" id="troublecheck4" />
-                                                        <span class="custom-option-header">
-                                                            <span class="fw-medium">ภายนอก</span>
-                                                        </span>
-                                                        <span class="custom-option-body">
-                                                            <input type="text" class="form-control" id="texttroublecheck4" placeholder="Enter detail" />
-                                                        </span>
-                                                    </label>
-                                                </div>
                                             </div>
+
 
                                         </div>
 
@@ -845,7 +676,7 @@
                                     <td>
                                         <div class="row ">
 
-                                            <div class="col-lg-6">
+                                            <div class="col-5">
 
                                                 <div>
                                                     <label for="mdetailAnalyz" class="">More Detail</label>
@@ -854,59 +685,14 @@
 
 
                                             </div>
-                                            <div class="col-lg-2">
-                                                <p>วิเคราะสาเหตุของปัญหา :</p>
-
-                                            </div>
-                                            <div class="col-lg-4">
-
-                                                <div class="form-check mt-3 checkbox-group" data-index="1">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="Check1">
-                                                    <label class="form-check-label" for="Check1"> การออกแบบ </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="2" id="Check2">
-                                                    <label class="form-check-label" for="Check2"> การติดตั้ง / ชิ้นส่วน </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="3" id="Check3">
-                                                    <label class="form-check-label" for="Check3"> การดัดแปลง / ซ่อมแซม </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="4" id="Check4">
-                                                    <label class="form-check-label" for="Check4"> การใช้งาน / ผิดวิธี </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="5" id="Check5">
-                                                    <label class="form-check-label" for="Check5"> การบำรุงรักษาเบื้องต้น </label>
-                                                </div>
-                                                <div class="form-check mt-3" style="margin-left: 30px;">
-                                                    <input class="form-check-input" type="checkbox" value="6" id="Check6">
-                                                    <label class="form-check-label" for="Check6"> การขันยึดแน่น </label>
-                                                </div>
-                                                <div class="form-check mt-3" style="margin-left: 30px;">
-                                                    <input class="form-check-input" type="checkbox" value="7" id="Check7">
-                                                    <label class="form-check-label" for="Check7"> การหล่อลื่น </label>
-                                                </div>
-                                                <div class="form-check mt-3" style="margin-left: 30px;">
-                                                    <input class="form-check-input" type="checkbox" value="8" id="Check8">
-                                                    <label class="form-check-label" for="Check8"> การทำความสะอาด </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="9" id="Check9">
-                                                    <label class="form-check-label" for="Check9"> ปัจจัยภายนอก / ไฟฟ้า </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="10" id="Check10">
-                                                    <label class="form-check-label" for="Check10"> อายุการใช้งาน </label>
-                                                </div>
-                                                <div class="form-check mt-3">
-                                                    <input class="form-check-input" type="checkbox" value="11" id="Check11">
-                                                    <label class="form-check-label" for="Check11"> อื่นๆ </label>
-                                                    <input type="text" class="form-control" id="adddtInput" placeholder=" . . . . . . . . . " for="Check11" style="margin-left: -25px;padding: 10px;">
-                                                </div>
 
 
+                                            <div class="col">
+                                                <label for="form-label">วิเคราะสาเหตุของปัญหา</label>
+
+                                                <div class="row" id="checkboxanalyz" style="padding-left: 1rem;">
+
+                                                </div>
                                             </div>
 
                                         </div>
@@ -955,7 +741,7 @@
                         <small>ป้องกันการเกิดซ้ำ</small>
                     </div>
                     <div class="row g-3">
-                        
+
                         <form class="form-repeater">
                             <div data-repeater-list="group-a">
                                 <div data-repeater-item>
@@ -1063,34 +849,6 @@
                                 <div class="card mb-4">
 
                                     <div class="card-body demo-vertical-spacing demo-only-element">
-                                        <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" value="1" id="Check-de1">
-                                            <label class="form-check-label" for="Check-de1"> อุปกรณ์ / เครื่องจักร มีการแก้ไขแบบชั่วคราว ต้องมีการแก้ไขถาวรภายหลังกำหนดการแก้ไขถาวร โดยประมาณ </label>
-                                            <input type="text" class="form-control" id="additionalInput" placeholder=" . . . . . . . . . " for="Check-de1">
-
-                                        </div>
-                                        <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" value="2" id="Check-de2">
-                                            <label class="form-check-label" for="Check-de2"> อุปกรณ์ / เครื่องจักร มีการบำรุงรักษาเสร็จสิ้น / ครบถ้วน </label>
-                                        </div>
-                                        <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" value="3" id="Check-de3">
-                                            <label class="form-check-label" for="Check-de3"> ตรวจสอบด้านคุณภาพ / จัดการงานเสีย </label>
-                                        </div>
-                                        <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" value="4" id="Check-de4">
-                                            <label class="form-check-label" for="Check-de4"> บันทึกการเปลี่ยนแปลง 4M </label>
-                                        </div>
-                                        <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" value="5" id="Check-de5">
-                                            <label class="form-check-label" for="Check-de5"> สภาพความปลอดภัย </label>
-                                        </div>
-                                        <div class="form-check mt-3">
-                                            <input class="form-check-input" type="checkbox" value="6" id="Check-de6">
-                                            <label class="form-check-label" for="Check-de6"> สภาพ 5ส เรียบร้อย </label>
-                                        </div>
-
-
 
                                     </div>
                                 </div>
