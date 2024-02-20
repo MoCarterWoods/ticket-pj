@@ -1,9 +1,5 @@
 $(() => {
 
-    $(document).ready(function () {
-        $("#loadingPage").attr("style", "display: none;");
-    });
-
     shDataTable()
     function shDataTable()  {
  
@@ -27,7 +23,7 @@ $(() => {
                     <tr>
                     <td class="text-center">${i+1}</td>
                     <td class="text-center"><i></i> <strong>${data[i].sma_name}</strong></td>
-                    <td class="text-center"><i></i>${data[i].sma_created_date}</td>
+                    <td class="text-center"><i></i>${data[i].sma_updated_date}</td>
                     <td class="text-center"><i></i>${data[i].sma_created_by}</td>
                     
                     <td class="text-center">
@@ -56,6 +52,8 @@ $(() => {
 	                                scrollX: true,
 	                            });
 	                        });
+        $("#loadingPage").attr("style", "display: none;");
+
             },
             error: function (xhr, status, error) {
                 console.error('Error:', error);

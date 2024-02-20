@@ -1,8 +1,6 @@
 $(() => {
 
-    $(document).ready(function () {
-        $("#loadingPage").attr("style", "display: none;");
-    });
+
 
     shDataTable();
 
@@ -61,6 +59,8 @@ $(() => {
                                 scrollX: true,
                             });
                         });
+        $("#loadingPage").attr("style", "display: none;");
+
                 },
                 error: function (xhr, status, error) {
                     console.error('Error:', error);

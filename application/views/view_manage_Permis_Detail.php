@@ -54,7 +54,7 @@
               </div>
 
 
-              <div class="col-md-2 col-md-2-main col-md-2-add">
+              <div class="col-md-2 col-md-2-main col-md-2-add mt-4">
                 <button type="button" class="btn btn-circle btn-primary btn-edt-add" id="btnSaveAddPer">Add</button>
 
               </div>
@@ -78,23 +78,11 @@
                     <th class="text-center">Update Date</th>
                     <th class="text-center">Update By</th>
                     <th class="text-center">Stasus</th>
-                    <th class="text-center">Action</th>
+
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="tbody">
-                  <tr>
-                    <td><i></i> <strong>1</strong></td>
-                    <td><i></i> <strong>Dashboard</strong></td>
-                    <td><i></i> <strong>Admin</strong></td>
-                    <td class="">2024-01-10 14:45:04</td>
-                    <td class="">SD525</td>
-                    <td><span class="badge bg-label-success me-1">Enable</span></td>
-                    <td class="">
-            </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">
-              <i class="bx bxs-edit"></i>
-            </a>
-            </td>
-            </tr>
+                  
             </tbody>
             </table>
           </div>

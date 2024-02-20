@@ -22,7 +22,7 @@
                                 <tr>
                                     <th class="text-center">No.</th>
                                     <th class="text-center">Main Menu Name</th>
-                                    <th class="text-center">CREATE DATE</th>
+                                    <th class="text-center">UPDATE DATE</th>
                                     <th class="text-center">CREATE BY</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>

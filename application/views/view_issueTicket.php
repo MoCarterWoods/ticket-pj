@@ -1996,37 +1996,3 @@
     }
 </script>
 
-<!-- <script>
-    $(document).ready(function() {
-        $('.list-group-item').on('click', function() {
-            // $('.list-group-item').removeClass('active');
-            $(this).find('li').addClass('active');
-        })
-    })
-</script> -->
-
-<!-- <div id="personal-info-1" class="content">
-    <div class="content-header mb-3">
-        <h6 class="mb-0">Personal Info</h6>
-        <small>Enter Your Personal Info.</small>
-    </div>
-    <div class="row g-3">
-        <label for="dropzone-multi" class="form-label">Upload Images</label>
-        <form action="/upload" class="dropzone needsclick" id="dropzone-multi">
-            <div class="dz-message needsclick">
-                Drop files here or click to upload
-                <span class="note needsclick">(This is just a demo dropzone. Selected files are <span class="fw-medium">not</span> actually uploaded.)</span>
-            </div>
-            <div class="fallback">
-                <input name="file" type="file" />
-            </div>
-        </form>
-
-        <div class="col-12 d-flex justify-content-between">
-            <button class="btn btn-primary btn-prev"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
-                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-            </button>
-            <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Next</span> <i class="bx bx-chevron-right bx-sm me-sm-n2"></i></button>
-        </div>
-    </div>
-</div> -->

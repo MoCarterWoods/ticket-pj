@@ -45,7 +45,7 @@
              
 
 
-              <div class="col-md-2 col-md-2-main col-md-2-add">
+              <div class="col-md-2 col-md-2-main col-md-2-add mt-4">
                 <button type="button" class="btn btn-circle btn-primary btn-edt-add" id="btnSaveAddPer">Add</button>
 
               </div>
@@ -68,7 +68,7 @@
                     <th class="text-center">Update Date</th>
                     <th class="text-center">Update By</th>
                     <th class="text-center">Stasus</th>
-                    <th class="text-center">Action</th>
+
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0" id="tbody">

@@ -87,6 +87,12 @@ class AppPermissionDetail extends CI_Controller {
 
     }
 
+    public function callApiUpdateStatus()
+    {
+        $result = $this->curPostRequest('App_Manage_permis_detail/update_flg', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
     public function test()

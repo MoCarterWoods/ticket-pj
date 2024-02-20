@@ -299,7 +299,7 @@
         </div>
 
 
-        <div class="row justify-content-center mt-3">
+        <div class="row justify-content-center">
           <div class="col">
             <label for="dropzone-multi-inspection" class="form-label">Upload Images</label>
             <form action="/upload" class="dropzone needsclick" id="dropzone-multi-inspection">
@@ -391,7 +391,7 @@
 
 <!-- Modal Required Parts -->
 <div class="modal fade" id="mdlRequiredParts" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel1">Required Parts | jobtypr no.</h5>
@@ -400,47 +400,203 @@
       <div class="modal-body">
 
 
-        <form class="form-repeater">
-          <div data-repeater-list="group-a">
-            <div data-repeater-item>
-              <div class="row">
-                <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                  <label class="form-label" for="inpSuggestions-1">ข้อเสนอแนะ</label>
-                  <input type="text" id="inpSuggestions-1" class="form-control" placeholder="Enter suggestion" />
-                </div>
-                <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                  <label class="form-label" for="inpOperated-1">ดำเนินการโดย</label>
-                  <input type="text" id="inpOperated-1" class="form-control" placeholder="Enter operator" />
-                </div>
-                <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                  <label class="form-label" for="inpSchedule-1">กำหนดการเสร็จ</label>
-                  <input type="date" id="inpSchedule-1" class="form-control" />
-                </div>
-                <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                  <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                    <i class="bx bx-x me-1"></i>
-                    <span class="align-middle">Delete</span>
-                  </button>
-                </div>
-              </div>
-              <hr>
-            </div>
+        <div class="row g-3">
+
+
+          <div class="row mt-3">
+            <table class="table" id="mytable" style="width: 100%;">
+
+              <tbody>
+
+              </tbody>
+            </table>
           </div>
-          <div class="mb-0">
-            <button class="btn btn-primary" data-repeater-create>
-              <i class="bx bx-plus me-1"></i>
-              <span class="align-middle">Add</span>
-            </button>
+          <div class="col-12 d-flex justify-content-between">
+            <button class="btn btn-primary " onclick="checkAndOpenModal()"> <i class="bx bx-plus bx-xl"></i> <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Add</span> </button>
           </div>
 
-        </form>
+
+        </div>
 
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
+          <button type="button" class="btn btn-primary" id="btnSaveEditRequired">Save changes</button>
         </div>
       </div>
+
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="backDropModalTitle">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col mb-3">
+
+
+              <label for="selToolingrq" class="form-label">Tooling System</label>
+              <select class="form-select" id="selToolingrq">
+                <option value="">Choose...</option>
+
+              </select>
+
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <label for="addMakerrq" class="form-label">Maker / Brand</label>
+              <input type="text" id="addMakerrq" class="form-control" value="" readonly>
+            </div>
+            <div class="col mb-3">
+              <label for="addModelrq" class="form-label">Model</label>
+              <input type="text" id="addModelrq" class="form-control" value="" readonly>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <label for="selTyperq" class="form-label">Type</label>
+              <select class="form-select" id="selTyperq">
+                <option value="">Choose...</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <label for="inpQTY" class="form-label">QTY</label>
+              <input type="number" id="inpQTY" class="form-control" placeholder="0">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="inpStock" class="form-label">เบิกจาก Stock</label>
+              <input type="date" id="inpStock" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="inpStockqty" class="form-label">จำนวน</label>
+              <input type="number" id="inpStockqty" class="form-control" placeholder="0">
+            </div>
+
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="inpOrder" class="form-label">สั่งซื้อ / เรียกเข้า</label>
+              <input type="date" id="inpOrder" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="inpOrderqty" class="form-label">จำนวน</label>
+              <input type="number" id="inpOrderqty" class="form-control" placeholder="0">
+            </div>
+
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="inpReceived" class="form-label">ได้รับของ / เข้าซ่อม</label>
+              <input type="date" id="inpReceived" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="inpReceivedqty" class="form-label">จำนวน</label>
+              <input type="number" id="inpReceivedqty" class="form-control" placeholder="0">
+
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="submit" data-bs-dismiss="modal">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="editbackDropModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="backDropModalTitle">Edit Modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col mb-3">
+              <label for="editselToolingrq" class="form-label">Tooling System</label>
+              <select class="form-select" id="editselToolingrq">
+                <option value="">Choose...</option>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col mb-3">
+              <label for="editaddMakerrq" class="form-label">Maker / Brand</label>
+              <input type="text" id="editaddMakerrq" class="form-control" value="" readonly>
+            </div>
+            <div class="col mb-3">
+              <label for="editaddModelrq" class="form-label">Model</label>
+              <input type="text" id="editaddModelrq" class="form-control" value="" readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <label for="editselTyperq" class="form-label">Type</label>
+              <select class="form-select" id="editselTyperq">
+
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col mb-3">
+              <label for="editInpQTY" class="form-label">QTY</label>
+              <input type="number" id="editInpQTY" class="form-control" placeholder="0">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="editInpStock" class="form-label">เบิกจาก Stock</label>
+              <input type="date" id="editInpStock" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="editInpStockqty" class="form-label">จำนวน</label>
+              <input type="number" id="editInpStockqty" class="form-control" placeholder="0">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="editInpOrder" class="form-label">สั่งซื้อ / เรียกเข้า</label>
+              <input type="date" id="editInpOrder" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="editInpOrderqty" class="form-label">จำนวน</label>
+              <input type="number" id="editInpOrderqty" class="form-control" placeholder="0">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="editInpReceived" class="form-label">ได้รับของ / เข้าซ่อม</label>
+              <input type="date" id="editInpReceived" class="form-control">
+            </div>
+            <div class="col mb-0">
+              <label for="editInpReceivedqty" class="form-label">จำนวน</label>
+              <input type="number" id="editInpReceivedqty" class="form-control" placeholder="0">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="saveEdit()">Save</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -513,10 +669,11 @@
 
 
         <div class="row">
+
           <form class="form-repeater">
             <div data-repeater-list="group-a">
               <div data-repeater-item>
-                <div class="row">
+                <div class="row" id="checkPrevention">
                   <div class="mb-3 col-lg-6 col-xl-3">
                     <label class="form-label" for="inpSuggestions-1">ข้อเสนอแนะ</label>
                     <input type="text" id="inpSuggestions-1" class="form-control" placeholder="Enter suggestion" />
@@ -536,9 +693,9 @@
                     </button>
                   </div>
                 </div>
-                <hr>
               </div>
             </div>
+
             <div class="mb-0">
               <button class="btn btn-primary" data-repeater-create>
                 <i class="bx bx-plus me-1"></i>
@@ -546,6 +703,7 @@
               </button>
             </div>
           </form>
+
         </div>
 
 
@@ -572,7 +730,7 @@
         <div class="row">
 
           <div class="col mb-3" id="checkDeliveryeq">
-            
+
           </div>
 
         </div>

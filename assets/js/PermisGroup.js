@@ -1,8 +1,6 @@
 $(() => {
     shDataTable();
-    $(document).ready(function () {
-        $("#loadingPage").attr("style", "display: none;");
-    });
+
     function shDataTable() {
         $(document).ready(function () {
             // URL of the API
@@ -51,6 +49,8 @@ $(() => {
                                 scrollX: true,
                             });
                         });
+        $("#loadingPage").attr("style", "display: none;");
+
                 },
                 error: function (xhr, status, error) {
                     console.error('Error:', error);

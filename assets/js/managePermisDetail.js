@@ -80,14 +80,7 @@ function shDataTable() {
       ${data[i].spd_status_flg == 1 ? 'Enable' : 'Disable'}
     </button>
   </td>
-  <td class="text-center">
 
-  <button class="btn btn-label-danger tblEditBtn btn btn-icon" data-repeater-delete="" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spd_id}">
-                      <i class="tf-icons bx bxs-edit"></i>
-                  </button>
-
-
-  </td>
 </tr>
 
                   `;

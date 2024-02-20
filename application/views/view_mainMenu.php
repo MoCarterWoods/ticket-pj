@@ -18,11 +18,11 @@
                 <label for="inpMainMenuName" class="form-label">Main Menu Name <span class="red-text">*</span></label>
                 <input class="form-control" type="text" id="inpMainMenuName" oninput="InputAdd(this)" value="" placeholder="Enter main menu" />
               </div>
-              <div class="mb-3 col-md-3">
+              <div class="mb-3 col-md-3 mt-3">
                 <label for="inpMainMenuIcon" class="form-label">Main Menu Icon <span class="red-text">*</span></label>
                 <input class="form-control mdl-textfield__input" type="text" id="inpMainMenuIcon" oninput="InputAdd(this)" value="" placeholder="Enter menu icon" />
               </div>
-              <div class="col-md-3 col-md-3-main">
+              <div class="col-md-3 col-md-3-main mt-5">
 
                 <button type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#mdlIcon" class="btn btn-outline-primary">
                   <span class="tf-icons bx bx-file-find me-1"></span>Icon

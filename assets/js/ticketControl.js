@@ -64,13 +64,13 @@ function shDataTable() {
             <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
               <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].ploblem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].ploblem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item">Submit</a></li>
@@ -1571,3 +1571,706 @@ document.addEventListener('DOMContentLoaded', function () {
           console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
       });
 });
+
+
+
+
+
+
+
+// ----------------------------------------- Request Part ----------------------------------------- 
+
+
+$(document).ready(function () {
+  // สร้างตัวแปร response ในขอบเขตของ document.ready
+  let response;
+
+  populateToolDropdownrq();
+
+  function populateToolDropdownrq() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_tool';
+
+      $.ajax({
+          url: apiUrl,
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+              // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+              response = res;
+
+              // Clear existing options in the dropdown
+              $('#selToolingrq').empty();
+
+              // Add a default option
+              $('#selToolingrq').append('<option value="">Choose tooling system</option>');
+
+              // Loop through the API response and add options to the dropdown
+              for (let i = 0; i < response.length; i++) {
+                  const toolData = response[i];
+                  $('#selToolingrq').append(`<option value="${toolData.mts_id}">${toolData.mts_name}</option>`);
+              }
+          },
+          error: function (error) {
+              console.error('Error fetching data from the API:', error);
+          }
+      });
+
+  }
+      $('#selToolingrq').on('change', function () {
+
+          const selectedValue = $(this).val();
+  
+
+          const selectedTool = response.find(tool => tool.mts_id === selectedValue);
+  
+          // Update addMaker and addModel inputs with selected tool data
+          $('#addMakerrq').val(selectedTool ? selectedTool.mts_maker : '');
+          $('#addModelrq').val(selectedTool ? selectedTool.mts_model : '');
+      });
+})
+
+$(document).ready(function () {
+  // สร้างตัวแปร response ในขอบเขตของ document.ready
+  let response;
+
+  populateEditToolDropdownrq();
+
+  function populateEditToolDropdownrq() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_tool';
+
+      $.ajax({
+          url: apiUrl,
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+              // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+              response = res;
+
+              // Clear existing options in the dropdown
+              $('#editselToolingrq').empty();
+
+              // Add a default option
+              $('#editselToolingrq').append('<option value="">Choose tooling system</option>');
+
+              // Loop through the API response and add options to the dropdown
+              for (let i = 0; i < response.length; i++) {
+                  const toolData = response[i];
+                  $('#editselToolingrq').append(`<option value="${toolData.mts_id}">${toolData.mts_name}</option>`);
+              }
+          },
+          error: function (error) {
+              console.error('Error fetching data from the API:', error);
+          }
+      });
+
+  }
+      $('#editselToolingrq').on('change', function () {
+
+          const selectedValue = $(this).val();
+  
+
+          const selectedTool = response.find(tool => tool.mts_id === selectedValue);
+  
+          // Update addMaker and addModel inputs with selected tool data
+          $('#editaddMakerrq').val(selectedTool ? selectedTool.mts_maker : '');
+          $('#editaddModelrq').val(selectedTool ? selectedTool.mts_model : '');
+      });
+})
+
+$(document).ready(function () {
+  // สร้างตัวแปร response ในขอบเขตของ document.ready
+  let response;
+
+  populateTypeDropdown();
+
+  function populateTypeDropdown() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_type';
+
+      $.ajax({
+          url: apiUrl,
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+              // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+              response = res;
+
+              // Clear existing options in the dropdown
+              $('#selTyperq').empty();
+
+              // Add a default option
+              $('#selTyperq').append('<option value="">Choose type request</option>');
+
+              // Loop through the API response and add options to the dropdown
+              for (let i = 0; i < response.length; i++) {
+                  const toolData = response[i];
+                  $('#selTyperq').append(`<option value="${toolData.mtr_id}">${toolData.mtr_name}</option>`);
+              }
+          },
+          error: function (error) {
+              console.error('Error fetching data from the API:', error);
+          }
+      });
+  }
+});
+
+
+$(document).ready(function () {
+  // สร้างตัวแปร response ในขอบเขตของ document.ready
+  let response;
+
+  populateEditTypeDropdown();
+
+  function populateEditTypeDropdown() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_type';
+
+      $.ajax({
+          url: apiUrl,
+          type: 'GET',
+          dataType: 'json',
+          success: function (res) {
+              // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+              response = res;
+
+              // Clear existing options in the dropdown
+              $('#editselTyperq').empty();
+
+              // Add a default option
+              $('#editselTyperq').append('<option value="">Choose type request</option>');
+
+              // Loop through the API response and add options to the dropdown
+              for (let i = 0; i < response.length; i++) {
+                  const toolData = response[i];
+                  $('#editselTyperq').append(`<option value="${toolData.mtr_id}">${toolData.mtr_name}</option>`);
+              }
+          },
+          error: function (error) {
+              console.error('Error fetching data from the API:', error);
+          }
+      });
+  }
+});
+
+var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrder, inpOrderqty, inpReceived, inpReceivedqty, submit;
+    selToolingrq = document.getElementById('selToolingrq');
+    addMakerrq = document.getElementById('addMakerrq');
+    addModelrq = document.getElementById('addModelrq');
+    inpQTY = document.getElementById('inpQTY');
+    inpStock = document.getElementById('inpStock');
+    inpStockqty = document.getElementById('inpStockqty');
+    inpOrder = document.getElementById('inpOrder');
+    inpOrderqty = document.getElementById('inpOrderqty');
+    inpReceived = document.getElementById('inpReceived');
+    inpReceivedqty = document.getElementById('inpReceivedqty');
+    submit = document.getElementById('submit');
+    submit.addEventListener("click", addData);
+
+    var rowCount = 0;
+
+
+    function checkAndOpenModal() {
+        var rowCount = document.getElementById('mytable').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+        if (rowCount >= 5) {
+            alert('สามารถเพิ่มข้อมูลได้ไม่เกิน 5 แถว!');
+            $('#backDropModal').modal('hide');
+        } else {
+            $('#backDropModal').modal('show');
+        }
+    }
+
+
+    function deleted(r) {
+        var result = confirm("Want to delete?");
+        if (result) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("mytable").deleteRow(i);
+        }
+    }
+
+    var row_id
+
+    function openEditModal(button) {
+
+        row_id = button.parentNode.parentNode.rowIndex;
+        var row = button.closest("tr");
+
+        if (row) {
+            var editedselToolingrq = row.cells[0].getElementsByTagName('input')[0].value;
+            var editedaddMakerrq = row.cells[1].getElementsByTagName('input')[0].value;
+            var editedaddModelrq = row.cells[2].getElementsByTagName('input')[0].value;
+            var editedselTyperq = row.cells[3].getElementsByTagName('input')[0].value;
+            var editedInpQTY = row.cells[4].getElementsByTagName('input')[0].value;
+            var editedInpStock = row.cells[5].getElementsByTagName('input')[0].value;
+            var editedInpStockqty = row.cells[6].getElementsByTagName('input')[0].value;
+            var editedInpOrder = row.cells[7].getElementsByTagName('input')[0].value;
+            var editedInpOrderqty = row.cells[8].getElementsByTagName('input')[0].value;
+            var editedInpReceived = row.cells[9].getElementsByTagName('input')[0].value;
+            var editedInpReceivedqty = row.cells[10].getElementsByTagName('input')[0].value;
+
+            // เปิด modal
+            var editModal = new bootstrap.Modal(document.getElementById('editbackDropModal'));
+            editModal.show();
+
+            // ดึงข้อมูลจากแถวและใส่ใน modal
+            document.getElementById("editselToolingrq").value = editedselToolingrq;
+            document.getElementById("editaddMakerrq").value = editedaddMakerrq;
+            document.getElementById("editaddModelrq").value = editedaddModelrq;
+            document.getElementById("editselTyperq").value = editedselTyperq;
+            document.getElementById("editInpQTY").value = editedInpQTY;
+            document.getElementById("editInpStock").value = editedInpStock;
+            document.getElementById("editInpStockqty").value = editedInpStockqty;
+            document.getElementById("editInpOrder").value = editedInpOrder;
+            document.getElementById("editInpOrderqty").value = editedInpOrderqty;
+            document.getElementById("editInpReceived").value = editedInpReceived;
+            document.getElementById("editInpReceivedqty").value = editedInpReceivedqty;
+
+
+        } else {
+            console.error("Unable to find row.");
+        }
+    }
+
+    function addData() {
+      var table = document.getElementById('mytable').getElementsByTagName("tbody")[0];
+      if (rowCount >= 5) { // เช็คว่าถ้าจำนวนแถวมากกว่าหรือเท่ากับ 5 แถวแล้ว
+          alert("Maximum row limit reached!"); // แสดงแจ้งเตือนว่าเกินจำนวนแถวสูงสุดแล้ว
+      } else if (addMakerrq.value == "" & selToolingrq.value == "") {
+          selToolingrq.focus();
+      } else {
+          var row = table.insertRow(0);
+          var col1 = row.insertCell(0);
+          var col2 = row.insertCell(1);
+          var col3 = row.insertCell(2);
+          var col4 = row.insertCell(3);
+          var col5 = row.insertCell(4);
+          var col6 = row.insertCell(5);
+          var col7 = row.insertCell(6);
+          var col8 = row.insertCell(7);
+          var col9 = row.insertCell(8);
+          var col10 = row.insertCell(9);
+          var col11 = row.insertCell(10);
+          var col12 = row.insertCell(11);
+
+          col1.innerHTML = `<label class="form-label">Name</label><input class="form-select" value="${selToolingrq.value}" disabled>`;
+          col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${addMakerrq.value}" disabled>`;
+          col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${addModelrq.value}" disabled>`;
+          col4.innerHTML = `<label class="form-label">Type</label><input class="form-select" value="${selTyperq.value}" disabled>`;
+          col5.innerHTML = `<label class="form-label">Qty</label><input type="number" class="form-control" value="${inpQTY.value}" disabled>`;
+          col6.innerHTML = `<input type="date" class="form-control" value="${inpStock.value}" id="tdinpStock">`;
+          col7.innerHTML = `<input type="number" class="form-control" value="${inpStockqty.value}">`;
+          col8.innerHTML = `<input type="date" class="form-control" value="${inpOrder.value}">`;
+          col9.innerHTML = `<input type="number" class="form-control" value="${inpOrderqty.value}">`;
+          col10.innerHTML = `<input type="date" class="form-control" value="${inpReceived.value}">`;
+          col11.innerHTML = `<input type="number" class="form-control" value="${inpReceivedqty.value}">`;
+          col12.innerHTML = `<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)">
+      <i class="bx bx-edit me-1"></i>
+      <span class="align-middle">Edit</span>
+      </button>
+                  <button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)">
+                    <i class="bx bx-x me-1"></i>
+                    <span class="align-middle">Delete</span>
+                  </button>`;
+
+          col6.style.display = "none";
+          col7.style.display = "none";
+          col8.style.display = "none";
+          col9.style.display = "none";
+          col10.style.display = "none";
+          col11.style.display = "none";
+          rowCount++;
+      }
+      selToolingrq.value = "";
+      addMakerrq.value = "";
+      addModelrq.value = "";
+      selTyperq.value = "";
+      inpQTY.value = "";
+      inpStock.value = "";
+      inpStockqty.value = "";
+      inpOrder.value = "";
+      inpOrderqty.value = "";
+      inpReceived.value = "";
+      inpReceivedqty.value = "";
+      selToolingrq.focus();
+  }
+
+
+
+    function saveEdit() {
+
+        document.getElementById("mytable").deleteRow(row_id);
+        // หาแถวที่มีการแก้ไขข้อมูล
+        var editedRow = document.querySelector('#mytable tbody tr.editing');
+
+        // ตรวจสอบว่ามีแถวที่ถูกกำหนดเป็นการแก้ไขหรือไม่
+        // if (editedRow) {
+        // ดึงค่าข้อมูลที่แก้ไขแล้วจากฟอร์มใน modal edit
+        var editedselToolingrq = document.getElementById('editselToolingrq').value;
+        var editedaddMakerrq = document.getElementById('editaddMakerrq').value;
+        var editedaddModelrq = document.getElementById('editaddModelrq').value;
+        var editedselTyperq = document.getElementById('editselTyperq').value;
+        var editedInpQTY = document.getElementById('editInpQTY').value;
+        var editedInpStock = document.getElementById('editInpStock').value;
+        var editedInpStockqty = document.getElementById('editInpStockqty').value;
+        var editedInpOrder = document.getElementById('editInpOrder').value;
+        var editedInpOrderqty = document.getElementById('editInpOrderqty').value;
+        var editedInpReceived = document.getElementById('editInpReceived').value;
+        var editedInpReceivedqty = document.getElementById('editInpReceivedqty').value;
+
+
+        var table = document.getElementById('mytable').getElementsByTagName("tbody")[0];
+        // if (editedaddMakerrq.value == "" & editedselToolingrq.value == "") {
+        //     editedselToolingrq.focus();
+        // } else {
+        var row = table.insertRow(0);
+        var col1 = row.insertCell(0);
+        var col2 = row.insertCell(1);
+        var col3 = row.insertCell(2);
+        var col4 = row.insertCell(3);
+        var col5 = row.insertCell(4);
+        var col6 = row.insertCell(5);
+        var col7 = row.insertCell(6);
+        var col8 = row.insertCell(7);
+        var col9 = row.insertCell(8);
+        var col10 = row.insertCell(9);
+        var col11 = row.insertCell(10);
+        var col12 = row.insertCell(11);
+        col1.innerHTML = `<label class="form-label">Name</label><input type="text" class="form-control" value="${editedselToolingrq}" disabled>`;
+        col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${editedaddMakerrq}" disabled>`;
+        col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${editedaddModelrq}" disabled>`;
+        col4.innerHTML = `<label class="form-label">Type</label><input class="form-select" value="${editselTyperq.value}" disabled>`;
+        col5.innerHTML = `<label class="form-label">Qty</label><input type="number" class="form-control" value="${editedInpQTY}" disabled>`;
+        col6.innerHTML = `<input type="date" class="form-control" value="${editedInpStock}" style="display:none">`;
+        col7.innerHTML = `<input type="number" class="form-control" value="${editedInpStockqty}" style="display:none">`;
+        col8.innerHTML = `<input type="date" class="form-control" value="${editedInpOrder}" style="display:none">`;
+        col9.innerHTML = `<input type="number" class="form-control" value="${editedInpOrderqty}" style="display:none">`;
+        col10.innerHTML = `<input type="date" class="form-control" value="${editedInpReceived}" style="display:none">`;
+        col11.innerHTML = `<input type="number" class="form-control" value="${editedInpReceivedqty}" style="display:none">`;
+        col12.innerHTML = `<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)">
+                                    <i class="bx bx-edit me-1"></i>
+                                    <span class="align-middle">Edit</span>
+                                    </button>
+
+                                    
+                                    <button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)">
+                          <i class="bx bx-x me-1"></i>
+                          <span class="align-middle">Delete</span>
+                                </button>`;
+        col6.style.display = "none";
+        col7.style.display = "none";
+        col8.style.display = "none";
+        col9.style.display = "none";
+        col10.style.display = "none";
+        col11.style.display = "none";
+        // }
+        editedselToolingrq.value = "";
+        editedaddMakerrq.value = "";
+        editedaddModelrq.value = "";
+        editselTyperq.value = "";
+        editedInpQTY.value = "";
+        editedInpStock.value = "";
+        editedInpStockqty.value = "";
+        editedInpOrder.value = "";
+        editedInpOrderqty.value = "";
+        editedInpReceived.value = "";
+        editedInpReceivedqty.value = "";
+
+
+        // ปิด modal edit
+        var editModal = bootstrap.Modal.getInstance(document.getElementById('editbackDropModal'));
+        editModal.hide();
+        // } else {
+        //     console.error("Unable to find row.");
+        // }
+    }
+
+
+    // ----=- show Required Parts --------
+    $(document).on('click', '.actRequiredParts', function () {
+      ist_Id = $(this).attr('data-id');
+
+      var url = API_URL + "Ticket_control/show_required_parts";
+      $.ajax({
+          url: url,
+          type: 'POST',
+          data: {
+              ist_Id: ist_Id,
+          },
+          dataType: 'json',
+          success: function (response) {
+              if (response.result === true) { // ตรวจสอบว่ามีผลลัพธ์ที่ถูกต้องหรือไม่
+                clearModal();
+                  showEditData(response.data); // เรียกใช้ฟังก์ชัน showEditData และส่งข้อมูลที่ได้รับมาจาก API ไปเป็นพารามิเตอร์
+              } else {
+                clearModal();
+                  console.error('Error: Invalid response from API');
+              }
+          },
+          error: function (error) {
+              console.error('Error fetching data from the API:', error);
+          }
+      });
+  });
+  
+
+  function clearModal() {
+    $('#mytable tbody').empty(); // เคลียร์ข้อมูลใน tbody ของตารางทั้งหมด
+}
+  function showEditData(data) {
+      if (!data || data.length === 0) { // ถ้าไม่มีข้อมูลหรือข้อมูลว่างเปล่า
+          return; // ไม่ต้องทำอะไร
+      }
+      clearModal();
+      var table = document.getElementById('mytable').getElementsByTagName("tbody")[0];
+          data.forEach(function (item) {
+              var row = table.insertRow(0);
+  
+              // เพิ่มคอลัมน์ที่ต้องการในแต่ละแถว
+              var col1 = row.insertCell(0);
+              var col2 = row.insertCell(1);
+              var col3 = row.insertCell(2);
+              var col4 = row.insertCell(3);
+              var col5 = row.insertCell(4);
+              var col6 = row.insertCell(5);
+              var col7 = row.insertCell(6);
+              var col8 = row.insertCell(7);
+              var col9 = row.insertCell(8);
+              var col10 = row.insertCell(9);
+              var col11 = row.insertCell(10);
+              var col12 = row.insertCell(11);
+  
+              // กำหนดค่าของแต่ละคอลัมน์ด้วยข้อมูลที่ได้รับจาก API
+              col1.innerHTML = '<label class="form-label">Name</label><input class="form-select" value="' + item.irp_name + '" disabled>';
+              col2.innerHTML = '<label class="form-label">Maker</label><input type="text" class="form-control" value="' + item.irp_maker + '" disabled>';
+              col3.innerHTML = '<label class="form-label">Model</label><input type="text" class="form-control" value="' + item.irp_model + '" disabled>';
+              col4.innerHTML = '<label class="form-label">Type</label><input class="form-select" value="' + item.irp_type + '" disabled>';
+              col5.innerHTML = '<label class="form-label">Qty</label><input type="number" class="form-control" value="' + item.irp_order_qty + '" disabled>';
+              col6.innerHTML = '<input type="date" class="form-control" value="' + item.irp_order_time + '">';
+              col7.innerHTML = '<input type="number" class="form-control" value="' + item.irp_qty + '">';
+              col8.innerHTML = '<input type="date" class="form-control" value="' + item.irp_received_time + '">';
+              col9.innerHTML = '<input type="number" class="form-control" value="' + item.irp_received_qty + '">';
+              col10.innerHTML = '<input type="date" class="form-control" value="' + item.irp_withdraw_time + '">';
+              col11.innerHTML = '<input type="number" class="form-control" value="' + item.irp_withdraw_qty + '">';
+              col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)"><i class="bx bx-edit me-1"></i><span class="align-middle">Edit</span></button><button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)"><i class="bx bx-x me-1"></i><span class="align-middle">Delete</span></button>';
+  
+              // ซ่อนคอลัมน์ที่ไม่ต้องการแสดง
+              col6.style.display = "none";
+              col7.style.display = "none";
+              col8.style.display = "none";
+              col9.style.display = "none";
+              col10.style.display = "none";
+              col11.style.display = "none";
+  
+              rowCount++;
+          });
+
+      // ล้างค่า input หลังจากการเพิ่มข้อมูล
+      selToolingrq.value = "";
+      addMakerrq.value = "";
+      addModelrq.value = "";
+      selTyperq.value = "";
+      inpQTY.value = "";
+      // ให้ input แรกได้ focus หลังจากการเพิ่มข้อมูล
+      selToolingrq.focus();
+  }
+
+  var rowDataArray;
+
+function getAllRowData() {
+    var tableRows = document.getElementById('mytable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    rowDataArray = []; // เก็บในตัวแปร global
+
+    for (var i = 0; i < tableRows.length; i++) {
+        var row = tableRows[i];
+        var rowData = {};
+
+        rowData['Name'] = row.cells[0].getElementsByTagName('input')[0].value;
+        rowData['Maker'] = row.cells[1].getElementsByTagName('input')[0].value;
+        rowData['Model'] = row.cells[2].getElementsByTagName('input')[0].value;
+        rowData['Type'] = row.cells[3].getElementsByTagName('input')[0].value;
+        rowData['Qty'] = row.cells[4].getElementsByTagName('input')[0].value;
+        rowData['Stock'] = row.cells[5].getElementsByTagName('input')[0].value;
+        rowData['StockQty'] = row.cells[6].getElementsByTagName('input')[0].value;
+        rowData['Order'] = row.cells[7].getElementsByTagName('input')[0].value;
+        rowData['OrderQty'] = row.cells[8].getElementsByTagName('input')[0].value;
+        rowData['Received'] = row.cells[9].getElementsByTagName('input')[0].value;
+        rowData['ReceivedQty'] = row.cells[10].getElementsByTagName('input')[0].value;
+
+        rowDataArray.push(rowData);
+    }
+
+    console.log(rowDataArray);
+    return rowDataArray;
+}
+
+  
+  //-------------------------- Save Request part ----------------------------
+
+$('#btnSaveEditRequired').on('click', function () {
+  getAllRowData();
+        // ------------ Required Parts ---------------
+        
+        var rowDataArrayString = JSON.stringify(rowDataArray);
+        // ------------ End Required Parts ---------------
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to save edit?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save!'
+    }).then((result) => {
+          if (result.isConfirmed) {
+              var url = API_URL + 'Ticket_control/save_required';
+              const formData = new FormData()
+              formData.append('rowDataArray', rowDataArrayString);
+              formData.append('ist_Id', ist_Id);
+
+              $.ajax({
+                  url: base_url('TicketControl/callApiSaveRequired'),
+                  type: 'POST',
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  cache: false,
+                  dataType: 'json',
+                  success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit Request success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlRequiredParts').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+              });
+          }
+      });
+});
+
+
+
+
+// -------------------------- Save Prevention ----------------------------
+// ----=- show prevention --------
+$(document).on('click', '.actPrevention', function () {
+  ist_Id = $(this).attr('data-id');
+
+  var url = API_URL + "Ticket_control/show_prevention";
+  $.ajax({
+      url: url,
+      type: 'POST',
+      data: {
+          ist_Id: ist_Id,
+      },
+      dataType: 'json',
+      success: function (response) {
+          if (response.result === true) {
+              var data = response.data; // ข้อมูลที่ได้จาก API
+
+              // Clear existing data
+              $('#checkPrevention').empty();
+
+              // Loop through data and populate the form
+              $.each(data, function(index, item) {
+                  var newDiv = $('<div class="row"></div>');
+                  var inputSuggestions = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                              <label class="form-label" for="inpSuggestions-' + (index + 1) + '">ข้อเสนอแนะ</label>\
+                                              <input type="text" id="inpSuggestions-' + (index + 1) + '" class="form-control" placeholder="Enter suggestion" value="' + item.ipr_suggestions + '" />\
+                                          </div>');
+
+                  var inputOperated = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                              <label class="form-label" for="inpOperated-' + (index + 1) + '">ดำเนินการโดย</label>\
+                                              <input type="text" id="inpOperated-' + (index + 1) + '" class="form-control" placeholder="Enter operator" value="' + item.ipr_operated + '" />\
+                                          </div>');
+
+                  var inputSchedule = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                              <label class="form-label" for="inpSchedule-' + (index + 1) + '">กำหนดการเสร็จ</label>\
+                                              <input type="date" id="inpSchedule-' + (index + 1) + '" class="form-control" value="' + item.ipr_schedule + '" />\
+                                          </div>');
+
+                  var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-3">\
+                                          <button class="btn btn-label-danger mt-4" data-repeater-delete>\
+                                              <i class="bx bx-x me-1"></i>\
+                                              <span class="align-middle">Delete</span>\
+                                          </button>\
+                                      </div>');
+
+                  // Append each input field to the new row div
+                  newDiv.append(inputSuggestions);
+                  newDiv.append(inputOperated);
+                  newDiv.append(inputSchedule);
+                  newDiv.append(deleteButton);
+
+                  // Append the new row to the checkPrevention div
+                  $('#checkPrevention').append(newDiv);
+              });
+          } else {
+              // Error handling if necessary
+              console.error('Error: Invalid response from API');
+          }
+      },
+  });
+});
+
+
+    
+// function showPreventionData(data) {
+//   var formRepeater = $(".form-repeater");
+//   var repeaterList = formRepeater.find('[data-repeater-list="group-a"]');
+
+//   // เคลียร์ข้อมูลเก่าทั้งหมดใน form repeater ก่อนที่จะเพิ่มข้อมูลใหม่
+//   repeaterList.empty();
+
+//   // ถ้าไม่มีข้อมูลส่งมาจาก API
+//   if (data.length === 0) {
+//       return; // ไม่ต้องทำอะไรเพิ่ม
+//   }
+
+//   // ลูปข้อมูลที่ได้รับมาจาก API
+//   data.forEach(function(item, index) {
+//       // ตรวจสอบว่ายังไม่ถึงขีดจำกัดของแถว
+//       if (index < 3) {
+//           var repeaterItem = $('<div class="row" data-repeater-item></div>'); // สร้าง element ของ repeater item
+
+//           var suggestionInput = $('<input type="text" class="form-control" placeholder="Enter suggestion" />')
+//               .attr('id', 'inpSuggestions-' + (index + 1))
+//               .val(item.ipr_suggestions); // สร้าง input element สำหรับข้อเสนอแนะและกำหนดค่า
+    
+//           var operatedInput = $('<input type="text" class="form-control" placeholder="Enter operator" />')
+//               .attr('id', 'inpOperated-' + (index + 1))
+//               .val(item.ipr_operated); // สร้าง input element สำหรับดำเนินการโดยและกำหนดค่า
+    
+//           var scheduleInput = $('<input type="date" class="form-control" />')
+//               .attr('id', 'inpSchedule-' + (index + 1))
+//               .val(item.ipr_schedule); // สร้าง input element สำหรับกำหนดการเสร็จและกำหนดค่า
+    
+//           var deleteButton = $('<button class="btn btn-label-danger mt-4" data-repeater-delete><i class="bx bx-x me-1"></i><span class="align-middle">Delete</span></button>'); // สร้าง button element สำหรับลบแถว
+    
+//           // กำหนด event listener สำหรับลบแถวเมื่อคลิกที่ปุ่ม Delete
+//           deleteButton.on('click', function() {
+//               $(this).closest('[data-repeater-item]').remove(); // ลบแถวที่มีปุ่ม Delete อยู่
+//           });
+    
+//           // เพิ่ม element ลงใน repeater item
+//           repeaterItem.append(
+//               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append('<label class="form-label" for="inpSuggestions-' + (index + 1) + '">ข้อเสนอแนะ</label>').append(suggestionInput),
+//               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append('<label class="form-label" for="inpOperated-' + (index + 1) + '">ดำเนินการโดย</label>').append(operatedInput),
+//               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append('<label class="form-label" for="inpSchedule-' + (index + 1) + '">กำหนดการเสร็จ</label>').append(scheduleInput),
+//               $('<div class="mb-3 col-lg-12 col-xl-3"></div>').append(deleteButton)
+//           );
+    
+//           repeaterList.append(repeaterItem); // เพิ่ม repeater item ลงใน repeater list
+//       }
+//   });
+// }

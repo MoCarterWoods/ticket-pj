@@ -145,8 +145,7 @@
 	</div>
 	{left_sidebar}
 	{topbar}
-	<div class="content-wrapper">
-		<div class="container-xxl flex-grow-1 container-p-y">
+
 			{page_content}
 			{footer}
 

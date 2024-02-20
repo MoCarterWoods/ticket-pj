@@ -71,18 +71,11 @@ function shDataTable() {
   <td class="text-center">${data[i].spda_updated_date}</td>
   <td class="text-center">${data[i].spda_updated_by}</td>
   <td class="text-center">
-    <button class="btnStatus btn badge bg-label-${data[i].spda_status_flg == 1 ? 'success' : 'secondary'} me-1" id="flgStatus" data-sa-id="${data[i].spga_id}" value="${data[i].spda_status_flg}">
+    <button class="btnStatus btn badge bg-label-${data[i].spda_status_flg == 1 ? 'success' : 'secondary'} me-1" id="flgStatus" data-sa-id="${data[i].spda_id}" value="${data[i].spda_status_flg}">
       ${data[i].spda_status_flg == 1 ? 'Enable' : 'Disable'}
     </button>
   </td>
-  <td class="text-center">
 
-  <button class="btn btn-label-danger tblEditBtn btn btn-icon" data-repeater-delete="" data-bs-toggle="modal" data-bs-target="#mdlEdit" id="btnEdit" data-id="${data[i].spga_id}">
-                      <i class="tf-icons bx bxs-edit"></i>
-                  </button>
-
-
-  </td>
 </tr>
 
                   `;
@@ -141,3 +134,66 @@ function MenuDropdown() {
         },
     });
 }
+
+ //-------------------------- Update flg status ----------------------------------
+
+ $(document).on('click', '.btnStatus', function () {
+    const smId = $(this).data('sa-id');
+    var newStatus = $(this).closest('td').find('.btnStatus').val();
+
+    if (newStatus == 1) {
+        newStatus = 0
+        
+    } else if (newStatus == 0) {
+        newStatus = 1
+    }
+    Swal.fire({
+        title: 'Are you Sure',
+        text: "You want to Changed Status ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, change it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var url = API_URL + "App_Manage_permis_detail/update_flg";
+            $.ajax({
+                url: base_url('AppPermissionDetail/callApiUpdateStatus?url=') + url,
+                type: 'POST',
+                data: {
+                    smId: smId,
+                    newStatus: newStatus,
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response == true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Changed Status Success!',
+                            timer: 2500,
+                        }).then(() => {
+                            shDataTable()
+                                // location.reload();
+                        })
+                    } else if (response == false) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning!',
+                            html: 'Change status Fail',
+                            timer: 2500,
+                        })
+                    }
+
+
+                },
+                error: function (error) {
+
+                }
+            });
+
+        }
+    })
+
+});

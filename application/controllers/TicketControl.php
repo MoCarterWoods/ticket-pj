@@ -98,6 +98,14 @@ class TicketControl extends CI_Controller {
         echo json_encode($result);
 
     }
+
+    public function callApiSaveRequired()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_required', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
     public function callApiSaveAnalyze()
     {
         $result = $this->curPostRequest('Ticket_control/save_analyze', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));

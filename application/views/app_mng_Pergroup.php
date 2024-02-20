@@ -13,12 +13,12 @@
 
         <span class="fs-5 fw-bold text-primary-emphasis">Add Permission group . App</span>
             <div class="row">
-            <div class="mb-3 col-md-5">
+            <div class="mb-3 col-md-5 mt-4">
             <span>Permission Group Name</span><span class="red-text">*</span>
-            <input class="form-control" type="text" id="inpPermisGroup" oninput="InputAdd(this)">
+            <input class="form-control" type="text" id="inpPermisGroup" oninput="InputAdd(this)" placeholder="Enter Permission Group Name">
             </div>
 
-            <div class="col-md col-sm-2 col-2 p-t-20">
+            <div class="col-md col-sm-2 col-2 p-t-20 mt-5">
           <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Submit</button>
         </div>
         </div>
@@ -43,20 +43,7 @@
                 </tr>
               </thead>
               <tbody class="table-border-bottom-0" id="tbody">
-                <!-- <tr>
-                  <td><i></i> <strong>1</strong></td>
-                  <td><i></i> <strong>Dash</strong></td>
 
-                  <td class="">02/13/2021</td>
-                  <td class="">SD525</td>
-                  <td><span class="badge bg-label-success me-1">Enable</span></td>
-                  <td class="">
-                    </li>
-                    </ul>
-          </div><a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal" data-bs-target="#basicModal">
-            <i class="bx bxs-edit"></i>
-          </a></td>
-          </tr> -->
               </tbody>
             </table>
           </div>

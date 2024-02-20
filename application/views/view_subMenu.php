@@ -27,7 +27,7 @@
     <br>
 
 
-    
+
     <div class="card" style="display: none;" id="content">
 
 
@@ -36,15 +36,15 @@
           <div>
             <span class="fs-5 fw-bold text-primary-emphasis">Register Sub Menu</span>
             <div class="row">
-              <div class="mb-3 col-md-4 col-md-1888">
+              <div class="mb-3 col-md-4 col-md-1888 mt-3">
                 <label for="inpSubMenuName" class="form-label">Main Menu Name <span class="red-text">*</span></label>
-                <input class="form-control" type="text" id="inpSubMenuName" oninput="InputAdd(this)" value="" placeholder="Enter main menu"/>
+                <input class="form-control" type="text" id="inpSubMenuName" oninput="InputAdd(this)" value="" placeholder="Enter main menu" />
               </div>
               <div class="mb-3 col-md-5">
                 <label for="inpSubMenuCon" class="form-label">Main Menu Name <span class="red-text">*</span></label>
-                <input class="form-control mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)" value="" placeholder="Enter menu name"/>
+                <input class="form-control mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)" value="" placeholder="Enter menu name" />
               </div>
-              <div class="col-md-3 col-md-3-main">
+              <div class="col-md-3 col-md-3-main mt-5">
 
                 <button type="button" class="btn btn-circle btn-primary" id="btnSaveAdd">Add</button>
 
@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
