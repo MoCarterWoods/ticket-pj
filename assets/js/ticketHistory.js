@@ -7,7 +7,7 @@ $(document).ready(function() {
   
   function shDataTable() {
     // URL of the API
-    var apiUrl = 'http://127.0.0.1/api/Ticket_control/show_data';
+    var apiUrl = 'http://127.0.0.1/api/Ticket_History/show_data';
   
     // Perform Ajax request
     $.ajax({

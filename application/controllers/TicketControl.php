@@ -79,6 +79,13 @@ class TicketControl extends CI_Controller {
 
     }
 
+    public function callApiSaveEquip()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_equipment', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
     public function callApiSaveJobtype()
     {
         $result = $this->curPostRequest('Ticket_control/save_jobtype', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
@@ -120,6 +127,12 @@ class TicketControl extends CI_Controller {
 
     }
 
+    public function callApiSaveWorker()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_worker', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
 

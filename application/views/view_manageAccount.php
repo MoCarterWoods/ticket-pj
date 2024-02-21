@@ -9,7 +9,7 @@
 
     <div class="card">
       <div class="row">
-        <div class="d-flex justify-content-end mt-2 pr-2">
+        <div class="d-flex justify-content-end mt-2 pr-2 mr-5">
           <button type="button" class="btn btn-circle btn-primary" id="callmodelAdd" data-bs-toggle="modal" data-bs-target="#mdlAdd">Add Account <i class="fa fa-plus"></i></button>
         </div>
       </div>

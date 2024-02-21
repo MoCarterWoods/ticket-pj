@@ -33,22 +33,8 @@ function shDataTable() {
             </td>
             <td class="text-center">
               <div class="d-flex flex-wrap align-items-center">
-                <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${i}">
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="RATEEPAR" class="avatar pull-up">
-                  <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/SST42.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-                </li>
-                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="RATEEPAR" class="avatar pull-up">
-                <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/K0089.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-              </li>
-              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="RATEEPAR" class="avatar pull-up">
-              <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/K0070.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-            </li>
-            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="RATEEPAR" class="avatar pull-up">
-              <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/K0070.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-            </li>
-            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="RATEEPAR" class="avatar pull-up">
-              <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/K0070.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-            </li>
+                <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_">
+
             
                 </ul>
               </div>
@@ -72,8 +58,9 @@ function shDataTable() {
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
                 <li><a class="dropdown-item  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${data[i].ist_id}">Manage Worker </a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item">Submit</a></li>
+                <li><a class="dropdown-item" id="btnSubmit">Submit</a></li>
               </ul>
             </div>
             <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${data[i].ist_status_flg == 3 || data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" >Cancle</button>
@@ -89,7 +76,7 @@ function shDataTable() {
             <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].swa_emp_code}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
           </li>
         `;
-        $(`#avatarGroup_${i}`).html(avatarHtml);
+        $(`#avatarGroup_`).html(avatarHtml);
         
         }
       }
@@ -404,6 +391,127 @@ console.log(response);
 }
 });
 });
+
+  //-------------------------- Save Equipment ----------------------------
+
+//   $('#btnSaveEditEquipment').on('click', function () {
+//     var Area = $('#selArea').val();
+//     var AreaPd = '';
+//     var AreaLine = '';
+//     var AreaOther = '';
+    
+
+//     if (Area === '1') {
+//         AreaPd = $('#selProduction').val();
+//         AreaLine = $('#selLine').val();
+
+
+//     } else if (Area === '2') {
+//         AreaOther = $('#inpOther').val();
+//         $('#selProduction').val(''); 
+//         $('#selLine').val('');
+//     }
+
+//     var ProcFunc = $('#inpProcess').val();
+//     var ToolSys = $('#selTooling').val();
+//     var Maker = $('#addMaker').val();
+//     var Model = $('#addModel').val();
+
+
+//     if (Area === '1') {
+//         AreaPd = $('#selProduction').val();
+//         AreaLine = $('#selLine').val();
+//     } else if (Area === '2') {
+//         AreaOther = $('#inpOther').val();
+//     }
+
+//     var ProcFunc = $('#inpProcess').val();
+//     var ToolSys = $('#selTooling').val();
+
+//     if (Area == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please Select Area.',
+//         });
+//     } else if (Area === '1' && (AreaPd === '' || AreaLine === '')) {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please fill in all fields in Area PD and Line.',
+//         });
+//     } else if (Area === '2' && AreaOther === '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please fill in all fields in Area Other.',
+//         });
+//     } else if (ProcFunc == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please enter Process / Function.',
+//         }); 
+//     } else if (ToolSys == '') {
+//         Swal.fire({
+//             icon: 'warning',
+//             title: 'Oops...',
+//             text: 'Please Select Tooling System.',
+//         });
+//     } else {
+//         Swal.fire({
+//         title: 'Are you sure?',
+//         text: 'Do you want to save edit?',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, save!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             var url = API_URL + 'Ticket_control/save_equipment';
+//             const formData = new FormData()
+//             formData.append('AreaPd', AreaPd);
+//             formData.append('AreaLine', AreaLine);
+//             formData.append('AreaOther', AreaOther);
+//             formData.append('ProcFunc', ProcFunc);
+//             formData.append('ToolSys', ToolSys);
+//             formData.append('Maker', Maker);
+//             formData.append('Model', Model);
+//             formData.append('ist_Id', ist_Id);
+
+//             $.ajax({
+//                 url: base_url('TicketControl/callApiSaveEquip'),
+//                 type: 'POST',
+//                 data: {
+//                     valuesOnly: valuesOnly,
+//                     ist_Id: ist_Id,
+//                 },
+//                 dataType: 'json',
+//                 success: function (res) {
+//                     if (res.result == 1) {
+//                         Swal.fire({
+//                             icon: 'success',
+//                             title: 'Success!',
+//                             html: 'Edit Equipment success',
+//                             timer: 2500,
+//                         }).then(() => {
+//                             $('#mdlEditEquipment').modal('hide');
+//                             shDataTable();
+//                         });
+//                     } else {
+//                         Swal.fire({
+//                             icon: 'error',
+//                             title: 'Oops...',
+//                             html: 'A system error has occurred.',
+//                         });
+//                     }
+//                 },
+//             });
+//         }
+//     });
+// }
+// });
 
 // ------------------------------------------- ToolSystem ----------------------------------------
 
@@ -2274,3 +2382,100 @@ $(document).on('click', '.actPrevention', function () {
 //       }
 //   });
 // }
+
+var ist_Id;
+$(document).on('click', '.actAddworker', function () {
+    ist_Id = $(this).attr('data-id');
+
+    var url = API_URL + "Ticket_control/drop_worker";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            ist_Id: ist_Id,
+        },
+        dataType: 'json',
+        success: (response) => {
+            // เมื่อร้องขอสำเร็จ
+            data_worker = response; // เข้าถึงข้อมูลโดยตรงจาก response โดยไม่ต้องแปลงเป็น JSON
+            var empId = data_worker.map(worker => worker.swa_id);
+            $('#TagifyUserList').val(empId.join(", ")); // ใส่ข้อมูลใน input
+        }
+    });
+});
+
+  //-------------------------- Save Manager Worker ----------------------------
+
+  $('#btnSaveWorker').on('click', function () {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to save edit?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var url = API_URL + 'Ticket_control/save_worker';
+            // ดึงค่า val ของ TagifyUserList
+            var selectedValues = $('#TagifyUserList').val();
+            var selectedObjects = JSON.parse(selectedValues);
+
+            var valuesOnly = selectedObjects.map(function(item) {
+                return { value: item.value };
+            });
+
+            // ส่งข้อมูลไปยัง API โดยใช้ AJAX
+            $.ajax({
+                url: base_url('TicketControl/callApiSaveWorker'),
+                type: 'POST',
+                data: {
+                    valuesOnly: valuesOnly,
+                    ist_Id: ist_Id,
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.result == 1) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            html: 'Edit Worker success',
+                            timer: 2500,
+                        }).then(() => {
+                            $('#mdlMngWorker').modal('hide');
+                            shDataTable();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: 'A system error has occurred.',
+                        });
+                    }
+                },
+            });
+        }
+    });
+});
+
+
+
+// ------------------------------------ Submit Button ------------------------------------
+
+$(document).ready(function () {
+    // เพิ่ม event listener สำหรับปุ่มที่มี id เป็น btnSubmit ที่ถูกคลิก
+    $('#btnSubmit').on('click', function () {
+        // สร้างอาร์เรย์เพื่อเก็บ data-id ของทุกตัว
+        var allDataIds = [];
+
+        // ใช้ jQuery เพื่อหา data-id ของทุกตัว
+        $('.dropdown-item').each(function () {
+            var dataId = $(this).data('id');
+            allDataIds.push(dataId);
+        });
+
+        // พิมพ์ค่า data-id ทั้งหมดที่พบในคอนโซล
+        console.log(allDataIds);
+    });
+});

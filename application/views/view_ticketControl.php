@@ -101,7 +101,7 @@
           </div>
           <div class="col ">
             <label for="selLine" class="form-label">Line</label>
-            <select class="form-select" id="selLine">
+            <select class="form-select" id="ToolDropdown">
             </select>
           </div>
         </div>
@@ -143,7 +143,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnSaveEditEquipment">Save changes</button>
       </div>
     </div>
   </div>
@@ -770,3 +770,50 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- Modal  Manageworker -->
+<div class="modal fade" id="mdlMngWorker" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Manageworker | jobtypr no.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col mb-3">
+            <!-- Users List -->
+            <label for="TagifyUserList" class="form-label">Users List</label>
+            <input id="TagifyUserList" name="TagifyUserList" class="form-control" value="" />
+
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnSaveWorker">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

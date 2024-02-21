@@ -61,6 +61,8 @@
 	<script src="<?php echo base_url() ?>/assets/js/config.js"></script>
 
 	<link rel="stylesheet" href="<?php echo base_url() ?>/assets/vendor/libs/bs-stepper/bs-stepper.css" />
+
+	<link rel="stylesheet" href="<?php echo base_url() ?>/assets/vendor/libs/tagify/tagify.css" />
 </head>
 
 <body>
@@ -135,10 +137,10 @@
 			}
 		}
 	</style>
-	<div id="loadingPage" style="    z-index: 9999999999999;position: fixed;background: #000000c7;width: 100%;height: 1900px;">
+	<div id="loadingPage" style="z-index: 9999999999999;position: fixed;background: #000000c7;width: 100%;height: 1900px;">
 		<div class="loader">
 			<div class="wrapper">
-				<div class="text">LOADING</div>
+				<div class="text">Ticket Maintenence</div>
 				<div class="box"></div>
 			</div>
 		</div>
@@ -376,6 +378,9 @@
 	{another_js}
 	<!-- Vendors JS -->
 	<script src="<?php echo base_url() ?>/assets/vendor/js/dropzone.js"></script>
+
+	<script src="<?php echo base_url() ?>/assets/vendor/libs/tagify/tagify.js"></script>
+
 	<!-- <script src="<?php echo base_url() ?>/assets/vendor/js/docs.js"></script> -->
 	<script src="<?php echo base_url() ?>/assets/vendor/js/forms-file-upload.js"></script>
 
@@ -388,6 +393,8 @@
 	<!-- Page JS -->
 	<script src="<?php echo base_url() ?>/assets/js/dashboards-analytics.js"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
+	<script src="<?php echo base_url() ?>/assets/js/forms-tagify.js"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
