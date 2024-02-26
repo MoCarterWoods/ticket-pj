@@ -977,9 +977,9 @@ function checkFormData1_2() {
         });
     } else {
         // เพิ่มคำสั่งเพื่อเปลี่ยนแท็บ
-        $('#navs-pills-top-problem').addClass('show active');
+        $('#navs-pills-top-jobtype').addClass('show active');
         $('#navs-pills-top-Equipment').removeClass('show active');
-        $('button[data-bs-target="#navs-pills-top-problem"]').parent().addClass('active');
+        $('button[data-bs-target="#navs-pills-top-jobtype"]').parent().addClass('active');
         $('button[data-bs-target="#navs-pills-top-Equipment"]').parent().removeClass('active');
         return true;
     }
@@ -1078,9 +1078,11 @@ $(document).ready(function() {
         });
     }
 
-    handleNextClick(checkFormData1_2, 'next1', 'navs-pills-top-problem', 'navs-pills-top-Equipment', 'spaneq');
-    handleNextClick(checkFormData2_3, 'next2', 'navs-pills-top-jobtype', 'navs-pills-top-problem', 'spanpb', uploadImage);
-    handleNextClick(checkFormData3_4, 'next3', 'navs-pills-top-inspection', 'navs-pills-top-jobtype', 'spanjt');
+    handleNextClick(checkFormData1_2, 'next1', 'navs-pills-top-jobtype', 'navs-pills-top-Equipment', 'spaneq');
+
+    handleNextClick(checkFormData3_4, 'next2', 'navs-pills-top-problem', 'navs-pills-top-jobtype', 'spanjt');
+    handleNextClick(checkFormData2_3, 'next3', 'navs-pills-top-inspection', 'navs-pills-top-problem', 'spanpb', uploadImage);
+
     handleNextClick(checkFormData4_5, 'next4', 'navs-pills-top-troubleshooting', 'navs-pills-top-inspection', 'spaninspec', uploadImage2);
     handleNextClick(checkFormData5_6, 'next5', 'navs-pills-top-required', 'navs-pills-top-troubleshooting', 'spantbs', uploadImage3);
     handleNextClick(function() { return true; }, 'next6', 'navs-pills-top-analyze', 'navs-pills-top-required', 'spanreq', getAllRowData);
@@ -1173,9 +1175,9 @@ $(document).ready(function() {
         });
     }
 
-    handlePrevClick('prev2', 'navs-pills-top-Equipment', 'navs-pills-top-problem', 'spaneq');
-    handlePrevClick('prev3', 'navs-pills-top-problem', 'navs-pills-top-jobtype', 'spanpb');
-    handlePrevClick('prev4', 'navs-pills-top-jobtype', 'navs-pills-top-inspection', 'spanjt');
+    handlePrevClick('prev2', 'navs-pills-top-Equipment', 'navs-pills-top-jobtype', 'spaneq');
+    handlePrevClick('prev3', 'navs-pills-top-jobtype', 'navs-pills-top-problem', 'spanjt');
+    handlePrevClick('prev4', 'navs-pills-top-problem', 'navs-pills-top-inspection', 'spanpb');
     handlePrevClick('prev5', 'navs-pills-top-inspection', 'navs-pills-top-troubleshooting', 'spaninspec');
     handlePrevClick('prev6', 'navs-pills-top-troubleshooting', 'navs-pills-top-required', 'spantbs');
     handlePrevClick('prev7', 'navs-pills-top-required', 'navs-pills-top-analyze', 'spanreq');
@@ -1271,6 +1273,10 @@ $(document).ready(function () {
         var Model = $('#addModel').val();
 
 
+        // ------------ Job Type ---------------
+        var JobtypeRadioVal = $('input[name="customRadioIcon"]:checked').val();
+
+
 
         // ------------ Problem Con ---------------
         var ProbCon = $('#SelProblem').val();
@@ -1285,10 +1291,6 @@ $(document).ready(function () {
         var PbCheckval3 = PbCheck3 ? $('#customCheckpb3').val() : '';
 
 
-
-
-        // ------------ Job Type ---------------
-        var JobtypeRadioVal = $('input[name="customRadioIcon"]:checked').val();
 
 
 
@@ -1319,8 +1321,8 @@ $(document).ready(function () {
 
         var TroubleCheckval1 = TbCheck1 ? $('#troublecheck10').val() : '';
         var TroubleCheckval2 = TbCheck2 ? $('#troublecheck11').val() : '';
-        var TroubleCheckval3 = TbCheck3 ? $('#troublecheck3').val() : '';
-        var TroubleCheckval4 = TbCheck4 ? $('#troublecheck4').val() : '';
+        var TroubleCheckval3 = TbCheck3 ? $('#troublecheck12').val() : '';
+        var TroubleCheckval4 = TbCheck4 ? $('#troublecheck13').val() : '';
 
         // ------------ Required Parts ---------------
         
@@ -1387,6 +1389,10 @@ $(document).ready(function () {
 
 
         // แสดงผลลัพธ์ใน cons11
+        console.log("TroubleCheckval4: " + TroubleCheckval4);
+        console.log("TroubleCheckval4: " + TroubleCheckval4);
+        console.log("TroubleCheckval4: " + TroubleCheckval4);
+        console.log("TroubleCheckval4: " + TroubleCheckval4);
 
 
         console.log("Area: " + Area);

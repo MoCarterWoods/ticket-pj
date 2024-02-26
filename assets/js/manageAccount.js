@@ -5,7 +5,7 @@ $(() => {
     $('#mdlAdd').on('hidden.bs.modal', function () {
         $('#errMegadd').css('display', 'none');
         $('#errAddempcode').css('display', 'none');
-        $('#errAddpersonal').css('display', 'none');
+
         $('#inpEmpCode').val('');
         $('#inpFirstName').val('');
         $('#inpEmpPassword').val('');
@@ -39,19 +39,25 @@ $(() => {
 			return Pattern.test(text);
 		}
 
-		function chkAddpersonal(text) {
-			// ตรวจสอบว่า text เป็น null หรือไม่
-			if (text === null) {
-				return false;
-			}
-			// ตรวจสอบว่า text เป็นช่องว่างหรือไม่
-			var trimmedText = text.trim();
-			if (trimmedText === '') {
-				return false;
-			}
-			var Pattern = /^(?:[a-zA-Z0-9\s]+|)$/;
-			return Pattern.test(text);
-		}
+        function chkAddpersonal(text) {
+            // ตรวจสอบว่า text เป็น null หรือไม่
+            if (text === null) {
+                return false;
+            }
+            // ตรวจสอบว่า text เป็นช่องว่างหรือไม่
+            var trimmedText = text.trim();
+            if (trimmedText === '') {
+                return false;
+            }
+            // ตรวจสอบว่า text มีตัวอักษรที่ไม่ใช่ a-z หรือไม่
+            var nonAlphaPattern = /[^a-z]/i; // i flag ให้ไม่สนใจตัวพิมพ์เล็ก-ใหญ่
+            if (nonAlphaPattern.test(text)) {
+                return false;
+            }
+            return true; // ถ้าไม่พบตัวอักษรที่ไม่ใช่ a-z ในข้อความ คืนค่าเป็นจริง (true)
+        }
+        
+        
 
 		function chkEditpersonal(text) {
 			// ตรวจสอบว่า text เป็น null หรือไม่
@@ -134,6 +140,7 @@ $(() => {
                             <span class="emp_name text-truncate">${data[i].sa_emp_code}</span><small class="emp_post text-truncate text-muted">${data[i].spg_name}</small></div></div></td>
                     <td class="text-center">${data[i].sa_fristname}</td>
                     <td class="text-center">${data[i].sa_lastname}</td>
+                    <td class="text-center">${data[i].spg_name}</td>
                     <td class="text-center">${data[i].sa_email}</td>
 
                     <td class="text-center">

@@ -66,11 +66,19 @@
 </head>
 
 <body>
-<style>
+	<style>
 		.loader {
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+
+		.woodsld {
+			z-index: 9999999999999;
+			position: fixed;
+			background: #000000c7;
+			width: 100%;
+			height: 1900px;
 		}
 
 		.wrapper {
@@ -137,10 +145,10 @@
 			}
 		}
 	</style>
-	<div id="loadingPage" style="z-index: 9999999999999;position: fixed;background: #000000c7;width: 100%;height: 1900px;">
+	<div id="loadingPage" class="woodsld">
 		<div class="loader">
 			<div class="wrapper">
-				<div class="text">Ticket Maintenence</div>
+				<div class="text">Loading</div>
 				<div class="box"></div>
 			</div>
 		</div>
@@ -148,14 +156,14 @@
 	{left_sidebar}
 	{topbar}
 
-			{page_content}
-			{footer}
+	{page_content}
+	{footer}
 
-			<script>
-				function base_url(url) {
-					return '<?php echo $base_url; ?>' + url;
-				}
-			</script>
+	<script>
+		function base_url(url) {
+			return '<?php echo $base_url; ?>' + url;
+		}
+	</script>
 	<script>
 		const API_URL = 'http://127.0.0.1/api/';
 

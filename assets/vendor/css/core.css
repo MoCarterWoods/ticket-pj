@@ -6871,6 +6871,9 @@ label.btn {
 .btn-outline-warning.disabled, .btn-outline-warning:disabled {
   box-shadow: none;
 }
+.btn-pointered {
+  cursor: pointer;
+}
 
 .btn-outline-warning .badge {
   background: #ffab00;
@@ -15308,6 +15311,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 }
 .menu:not(.menu-no-animation) .menu-link > :not(.menu-icon) {
   transition: opacity 0.3s ease-in-out;
+  
 }
 
 .menu-sub {

@@ -3,15 +3,33 @@
 $(document).ready(function() {
   shDataTable(); // เรียกใช้ฟังก์ชัน shDataTable เมื่อเอกสารพร้อม
 });
+$('#selStartTime, #selEndTime, #selStatus').change(function() {
+    $("#loadingPage").css("display", "");
+
+    shDataTable();
+});
 
 function shDataTable() {
-  // URL of the API
-  var apiUrl = 'http://127.0.0.1/api/Ticket_control/show_data';
+    var StartDate = $('#selStartTime').val();
+    var EndtDate = $('#selEndTime').val();
+    var selStatus = $('#selStatus').val();
 
-  // Perform Ajax request
+
+
+  var url = API_URL + 'Ticket_control/show_data';
+  const formData = new FormData()
+  formData.append('StartDate', StartDate);
+  formData.append('EndtDate', EndtDate);
+  formData.append('selStatus', selStatus);
+
+
   $.ajax({
-    url: apiUrl,
-    type: 'GET',
+    url: base_url('TicketControl/callApiShowData?url=') + url,
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    cache: false,
     dataType: 'json',
     success: function (data) {
       var html = "";
@@ -22,7 +40,7 @@ function shDataTable() {
             <td class="text-center">${i + 1}</td>
             <td class="text-center">${data[i].ist_line_cd == '' ? `${data[i].ist_area_other}` : `${data[i].ist_line_cd}`}</td>
             <td class="text-center">${data[i].mts_name === null ? '-' : data[i].mts_name}</td>
-            <td class="text-center">${data[i].ist_process === null ? '-' : data[i].ist_process}</td>
+
             <td class="text-center">
               <div class="text-center">${data[i].mjt_name_thai === null ? '-' : data[i].mjt_name_thai}</div>
               <div class="text-center">${data[i].mjt_name_eng === null ? '-' : data[i].mjt_name_eng}</div>
@@ -49,18 +67,113 @@ function shDataTable() {
             <div class="btn-group">
             <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
               <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${data[i].ist_id}">Manage Worker </a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${data[i].ist_id}">Manage Worker </a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" id="btnSubmit">Submit</a></li>
+                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-id="${data[i].ist_id}">Submit</a></li>
+              </ul>
+            </div>
+            <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${data[i].ist_status_flg == 3 || data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" >Cancle</button>
+          </td>
+          
+          </tr>
+        `;
+
+        var avatarHtml
+        if (i == i) {
+           avatarHtml += `
+          <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${data[i].swa_fristname} ${data[i].swa_lastname}" class="avatar pull-up">
+            <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].swa_emp_code}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
+          </li>
+        `;
+        $(`#avatarGroup_`).html(avatarHtml);
+        
+        }
+      }
+
+      // ทำลาย DataTable ที่มีอยู่ก่อนที่จะปรับปรุงเนื้อหาของตาราง
+      $('#tblTicketControl').DataTable().destroy();
+
+      // ปรับปรุงเนื้อหาของตารางและเริ่มใช้ DataTable ใหม่
+      $("#tbody").html(html).promise().done(() => {
+        $("#tblTicketControl").DataTable({ scrollX: true });
+        $("#loadingPage").attr("style", "display: none;");
+      });
+    },
+    error: function (xhr, status, error) {
+      console.error('Error:', error);
+    }
+  });
+}
+
+function viewAllData() {
+    document.getElementById("selStartTime").value = '';
+    document.getElementById("selEndTime").value = '';
+    document.getElementById("selStatus").value = '';
+    $("#loadingPage").css("display", "");
+    var apiUrl = 'http://127.0.0.1/api/Ticket_control/show_all_data';
+
+    // Perform Ajax request
+    $.ajax({
+      url: apiUrl,
+      type: 'GET',
+      dataType: 'json',
+      success: function (data) {
+      var html = "";
+      // Loop through the data and append menu items
+      for (var i = 0; i < data.length; i++) {
+        html += `
+          <tr>
+            <td class="text-center">${i + 1}</td>
+            <td class="text-center">${data[i].ist_line_cd == '' ? `${data[i].ist_area_other}` : `${data[i].ist_line_cd}`}</td>
+            <td class="text-center">${data[i].mts_name === null ? '-' : data[i].mts_name}</td>
+
+            <td class="text-center">
+              <div class="text-center">${data[i].mjt_name_thai === null ? '-' : data[i].mjt_name_thai}</div>
+              <div class="text-center">${data[i].mjt_name_eng === null ? '-' : data[i].mjt_name_eng}</div>
+            </td>
+            <td class="text-center">
+              <div class="text-center"><small class="emp_post text-truncate text-muted">${data[i].ist_request_by}</small></div>
+              <div class="text-center">${data[i].ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex flex-wrap align-items-center">
+                <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_">
+
+            
+                </ul>
+              </div>
+            </td>
+            <td class="text-center">
+              <span class="badge bg-label-${data[i].ist_status_flg == 1 ? 'warning' : data[i].ist_status_flg == 3 ? 'info' : data[i].ist_status_flg == 5 ? 'primary' : data[i].ist_status_flg == 7 ? 'success' : data[i].ist_status_flg == 8 ? 'danger' : 'Unknown'}">
+                ${data[i].ist_status_flg == 1 ? 'In Progress' : data[i].ist_status_flg == 3 ? 'Wait Accept' : data[i].ist_status_flg == 5 ? 'Wait Edit' : data[i].ist_status_flg == 7 ? 'Wait Approval' : data[i].ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
+              </span>
+            </td>
+            <td class="text-center">
+            <button type="button" class="btnAccept btn rounded-pill btn-primary"" ${data[i].ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" id="btnAccept">Accept</button>
+            <div class="btn-group">
+            <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
+              <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${data[i].ist_id}">Manage Worker </a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-id="${data[i].ist_id}">Submit</a></li>
               </ul>
             </div>
             <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${data[i].ist_status_flg == 3 || data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" >Cancle</button>
@@ -305,7 +418,7 @@ function populateDropdown() {
         success: function (response) {
             selProduction.empty();
             selProduction.append('<option value="">Choose Production Code</option>');
-            selLine.append('<option value=" ">Choose Line Code</option>');
+            selLine.append('<option value="">Choose Line Code</option>');
             for (let i = 0; i < response.lineMaster.length; i++) {
                 const data = response.lineMaster[i];
                 selProduction.append(`<option value="${data.dep_cd}">${data.dep_cd}</option>`);
@@ -622,186 +735,334 @@ $(document).ready(function () {
 });
 
 
+
+
 // ----=- show problem --------
-$(document).on('click', '.actProblem', function () {
-  // เคลียร์ Dropzone ก่อนที่จะดึงข้อมูลใหม่
+var data_ist_eq;
+  function ProbConDropdown() {
+      const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_problem';
 
-  ist_Id = $(this).attr('data-id');
-
-    // Initialize Dropzone
-    e = `<div class="dz-preview dz-file-preview">
-    <div class="dz-details">
-      <div class="dz-thumbnail">
-        <img data-dz-thumbnail>
-        <span class="dz-nopreview">No preview</span>
-        <div class="dz-success-mark"></div>
-        <div class="dz-error-mark"></div>
-        <div class="dz-error-message"><span data-dz-errormessage></span></div>
-        <div class="progress">
-          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-        </div>
-      </div>
-      <div class="dz-filename" data-dz-name></div>
-      <div class="dz-size" data-dz-size></div>
-    </div>
-    </div>`
-      var myDropzone = new Dropzone("#myDropzone", {
-        previewTemplate: e,
-        url: '/upload', // replace with your upload endpoint
-        acceptedFiles: 'image/*',
-        maxFiles: 3,
-        init: function () {
-          this.on("addedfile", function () {
-            if (this.files.length > this.options.maxFiles) {
-              this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
-            }
-          });
-        },
-        addRemoveLinks: true,
-        dictDefaultMessage: 'Drop your image here or click to upload',
-        parallelUploads: 1,
-      });
-    
-      fetchExistingImages();
-
-      function fetchExistingImages() {
-
-  var url = API_URL + "Ticket_control/show_problem";
   $.ajax({
-      url: url,
-      type: 'POST',
-      data: {
-          ist_Id: ist_Id,
-      },
+      url: apiUrl,
+      type: 'GET',
       dataType: 'json',
-      success: (response) => {
-          data_ist_pb = response.data;
+      success: function (res) {
+          // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+          response = res;
 
+          // Clear existing options in the dropdown
+          $('#SelProblem').empty();
 
-          $('#SelProblem').val('');
-          $('#mdetailprdlm').val('');
-          $('#customCheckpb7').prop('checked', false);
-          $('#customCheckpb8').prop('checked', false);
-          $('#customCheckpb9').prop('checked', false);
+          // Add a default option
+          $('#SelProblem').append('<option value="">Choose problem condition</option>');
 
-          // Iterate through the data array
-          response.data.forEach(problem => {
-              // Check the checkbox based on mpc_id value
-              if (problem.mpc_id === "7") {
-                  $('#customCheckpb7').prop('checked', true);
-              } else if (problem.mpc_id === "8") {
-                  $('#customCheckpb8').prop('checked', true);
-              } else if (problem.mpc_id === "9") {
-                  $('#customCheckpb9').prop('checked', true);
-              }
-          });
-
-          // Update dropdown and detail textarea if needed
-          var validProblem = response.data.find(problem => parseInt(problem.mpc_id) >= 1 && parseInt(problem.mpc_id) <= 6);
-          if (validProblem) {
-              $('#SelProblem').val(validProblem.mpc_id);
-              $('#mdetailprdlm').val(validProblem.ipc_detail);
+          // Loop through the API response and add options to the dropdown
+          for (let i = 0; i < response.length; i++) {
+              const problemData = response[i];
+              $('#SelProblem').append(`<option value="${problemData.mpc_id}">${problemData.mpc_name_eng} / ${problemData.mpc_name_thai}</option>`);
           }
-     
-          data_image = response.data_image;
-          for (let i = 1; i <= 3; i++) {
-            var imageName = data_image[0]['ipc_pic_' + i];
-             
-                // console.log(data_image[0].imageName);
-                // console.log(data_image[0].ipc_pic_1);
-                if (imageName != '') {
-                  console.log(imageName);
-                  var imagePath = base_url(`${data_ist_pb[0].ipc_path}${imageName}`);
-                  // console.log(imageUrl);
-                  let mockFile = { name: `${imageName}`, size: 12345 };
-                  let callback = null; // Optional callback when it's done
-                  let crossOrigin = null; // Added to the img tag for crossOrigin handling
-                  let resizeThumbnail = true; // Tells Dropzone whether it should resize the image first
-                  myDropzone.displayExistingFile(mockFile, imagePath, callback, crossOrigin, resizeThumbnail);
-                }
-
-  
-          }
-     
-
-        }
-      
+      },
+      error: function (error) {
+          console.error('Error fetching data from the API:', error);
+      }
   });
 }
-});
 
 
+
+
+
+
+
+
+// ----=- show problem --------
+$(document).on('click', '.actProblem', function () {
+    // ดึงค่า ist_Id จากองค์ประกอบที่ถูกคลิก
+    var ist_Id = $(this).attr('data-id');
+
+    // กำหนด URL สำหรับการเรียก API
+    var url = API_URL + "Ticket_control/show_problem";
+
+    // ทำการเรียก API ด้วย jQuery Ajax
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            ist_Id: ist_Id,
+        },
+        dataType: 'json',
+        success: (response) => {
+
+            // ดึงข้อมูลที่ได้รับจาก API
+            var data_ist_pb = response.data;
+
+            // เคลียร์การเลือกก่อนหน้า
+            $('#SelProblem').val('');
+            $('#mdetailprdlm').val('');
+            $('.customCheckpb').prop('checked', false);
+
+            // ตั้งค่าการเลือก checkbox ตามข้อมูลที่ได้รับ
+            response.data_check.forEach(problem => {
+                var checkboxId = '#customCheckpb' + problem.mpc_id;
+                $(checkboxId).prop('checked', true);
+            });
+
+            // อัพเดท dropdown และ textarea หากจำเป็น
+            var validProblem = response.data.find(problem => true);
+            if (validProblem) {
+                $('#SelProblem').val(validProblem.mpc_id);
+                $('#mdetailprdlm').val(validProblem.ipc_detail);
+            }
+
+                var data_image = response.data_image;
+                var maxFilesAllowed = 3;
+                // สร้าง Dropzone เพื่อเพิ่มไฟล์
+                var e = `<div class="dz-preview dz-success dz-processing dz-image-preview dz-complete">
+                <div class="dz-details">
+                    <div class="dz-thumbnail">
+                        <img data-dz-thumbnail>
+                        <span class="dz-nopreview">No preview</span>
+                        <div class="dz-success-mark"></div>
+                        <div class="dz-error-mark"></div>
+                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                        </div>
+                    </div>
+                    <div class="dz-filename" data-dz-name></div>
+                    <div class="dz-size" data-dz-size></div>
+                </div>
+            </div>`;
+            Dropzone.autoDiscover = false;
+            var myDropzone = new Dropzone("#myDropzone", {
+                previewTemplate: e,
+                url: '/upload', // replace with your upload endpoint
+                acceptedFiles: 'image/*',
+                maxFiles: maxFilesAllowed, // กำหนดจำนวนไฟล์ที่อนุญาตให้อัปโหลดสูงสุด
+                init: function () {
+                    this.on("addedfile", function () {
+                        // ตรวจสอบว่ามีไฟล์มากเกินไหม
+                        if (this.files.length > this.options.maxFiles) {
+                            this.removeFile(this.files[0]); // ถ้ามีไฟล์มากเกินจำนวนที่กำหนด ให้ลบไฟล์แรกออก
+                        }
+                    });
+                },
+                addRemoveLinks: true,
+                dictDefaultMessage: 'Drop your image here or click to upload',
+                parallelUploads: 1,
+            });
+            
+
+            // Display existing images
+            data_image = response.data_image[0]; // เปลี่ยนเป็น response.data_image[0]
+            var filesCount = 0; // ตัวแปรนับจำนวนไฟล์ที่จะแสดง
+            for (let i = 1; i <= 3; i++) {
+                var imageName = data_image['ipc_pic_' + i];
+                if (imageName != '') {
+                    var imagePath = base_url('/assets/img/upload/problem/' + imageName);
+                    let mockFile = { name: `${imageName}`, size: 12345 };
+                    myDropzone.emit("addedfile", mockFile);
+                    myDropzone.emit("thumbnail", mockFile, imagePath); // สร้างตัวอย่างรูปภาพขนาดย่อ
+                    myDropzone.emit("complete", mockFile);
+                    filesCount++; // เพิ่มจำนวนไฟล์ที่จะแสดง
+                }
+            }
+
+        },
+    })
+})
+
+        
+
+// -------------------------- Dropzone ----------------------------
+var fileNamesPb;
+var fileNamesIns;
+var fileNamesTroub;
+var fileNamesAnalz;
+
+function uploadImage() {
+    var formData = new FormData();
+    var files = $('#myDropzone').get(0).dropzone.files;
+    var maxFilesAllowed = 3; // กำหนดจำนวนไฟล์สูงสุดที่อนุญาตให้อัปโหลด
+
+    // ตรวจสอบจำนวนไฟล์ก่อนที่จะทำการส่ง
+    if (files.length > maxFilesAllowed) {
+        // แสดง Swal ในกรณีที่มีไฟล์เกิน 3 ไฟล์
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You can upload only up to 3 files.',
+        });
+    } else {
+        // ทำการส่งไฟล์เมื่อไม่เกิน 3 ไฟล์
+        $.each(files, function(key, el) {
+            formData.append('images[]', el);
+        });
+        $.ajax({
+            url: base_url('IssueTicket/imgUpload'),
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                fileNamesPb = response.split('"').filter(function(item) {
+                    return item.trim() !== ''; // กรองสตริงว่างที่เกิดขึ้นจากการแยก
+                });
+                console.log('ProblemPic :', fileNamesPb);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error during image upload. Status: ' + status + ', Error: ' + error);
+            }
+        });
+    }
+}
+
+
+function uploadImage2() {
+    var formData = new FormData();
+    $.each($('#dropzone-multi-inspection').get(0).dropzone.files, function(key, el1) {
+        formData.append('images[]', el1);
+    });
+    $.ajax({
+        url: base_url('IssueTicket/imgUpload2'),
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            fileNamesIns = response.split('"').filter(function(item) {
+                return item.trim() !== '';
+            });
+            console.log('InspecPic :', fileNamesIns);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error during image upload. Status: ' + status + ', Error: ' + error);
+        }
+    });
+}
+
+
+function uploadImage3() {
+    var formData = new FormData();
+    $.each($('#dropzone-multi-troubleshooting').get(0).dropzone.files, function(key, el2) {
+        formData.append('images[]', el2);
+    });
+    $.ajax({
+        url: base_url('IssueTicket/imgUpload3'),
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            fileNamesTroub = response.split('"').filter(function(item) {
+                return item.trim() !== ''; // กรองสตริงว่างที่เกิดขึ้นจากการแยก
+            });
+            console.log('TroublePic :', fileNamesTroub);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error during image upload. Status: ' + status + ', Error: ' + error);
+        }
+    });
+}
+
+
+function uploadImage4() {
+    var formData = new FormData();
+    $.each($('#dropzone-multi-analyz').get(0).dropzone.files, function(key, el3) {
+        formData.append('images[]', el3);
+    });
+    $.ajax({
+        url: base_url('IssueTicket/imgUpload4'),
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            fileNamesAnalz = response.split('"').filter(function(item) {
+                return item.trim() !== ''; // กรองสตริงว่างที่เกิดขึ้นจากการแยก
+            });
+            console.log('AnalyzPic :', fileNamesAnalz);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error during image upload. Status: ' + status + ', Error: ' + error);
+        }
+    });
+}
 
 //-------------------------- Save Problem ----------------------------
-
 $('#btnSaveProblem').on('click', function () {
+    uploadImage ();
+    return
+    var ProblemSel = $('#SelProblem').val();
+    var ProblemDetail = $('#mdetailprdlm').val();
 
-  var ProblemSel = $('#SelProblem').val();
-  var ProblemDetail = $('#mdetailprdlm').val();
+    // Initialize an array to store checked values
+    var checkedValues = [];
 
-  var PbCheck1 = $('#customCheckpb7').prop('checked') ? $('#customCheckpb7').val() : '';
-  var PbCheck2 = $('#customCheckpb8').prop('checked') ? $('#customCheckpb8').val() : '';
-  var PbCheck3 = $('#customCheckpb9').prop('checked') ? $('#customCheckpb9').val() : '';
+    // Loop through checkboxes to get checked values
+    $('.customCheckpb:checked').each(function() {
+        checkedValues.push($(this).val());
+    });
 
 
-  if (ProblemSel == '') {
-      Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please select a problem!'
-      });
-  } else {
-      Swal.fire({
-          title: 'Are you sure?',
-          text: 'Do you want to save edit?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, save!'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              var url = API_URL + 'Ticket_control/save_problem';
-              const formData = new FormData()
-              formData.append('ProblemSel', ProblemSel);
-              formData.append('ProblemDetail', ProblemDetail);
-              formData.append('PbCheck1', PbCheck1);
-              formData.append('PbCheck2', PbCheck2);
-              formData.append('PbCheck3', PbCheck3);
-              formData.append('ist_Id', ist_Id);
 
-              $.ajax({
-                  url: base_url('TicketControl/callApiSaveProblem'),
-                  type: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  cache: false,
-                  dataType: 'json',
-                  success: function (res) {
-                    if (res.result == 1) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            html: 'Edit Problem success',
-                            timer: 2500,
-                        }).then(() => {
-                            $('#mdlProblemcon').modal('hide');
-                            shDataTable();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            html: 'A system error has occurred.',
-                        });
-                    }
-                },
-              });
-          }
-      });
-  }
+    if (ProblemSel == '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please select a problem!'
+        });
+    } else {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to save edit?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var url = API_URL + 'Ticket_control/save_problem';
+                const formData = new FormData()
+                formData.append('ProblemSel', ProblemSel);
+                formData.append('ProblemDetail', ProblemDetail);
+                formData.append('CheckedValues', JSON.stringify(checkedValues));
+                formData.append('ist_Id', ist_Id);
+
+                $.ajax({
+                    url: base_url('TicketControl/callApiSaveProblem'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.result == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                html: 'Edit Problem success',
+                                timer: 2500,
+                            }).then(() => {
+                                $('#mdlProblemcon').modal('hide');
+                                shDataTable();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: 'A system error has occurred.',
+                            });
+                        }
+                    },
+                });
+            }
+        });
+    }
 });
+
 
 
 
@@ -821,141 +1082,174 @@ $(document).on('click', '.actJobtype', function () {
     },
     dataType: 'json',
     success: (response) => {
-      data_ist_jt = response.data;
+    data_ist_jt = response.data;
 
-      // Clear previous selections
-      $('input[name="customRadioIcon"]').prop('checked', false);
+    // Clear previous selections
+    $('input[name="customRadioIcon"]').prop('checked', false);
 
-      // Check the radio button based on mjt_id
-      if (response.data[0].mjt_id === '1') {
-        $('#customRadioIcon1').prop('checked', true);
-      } else if (response.data[0].mjt_id === '2') {
-        $('#customRadioIcon2').prop('checked', true);
-      } else if (response.data[0].mjt_id === '3') {
-        $('#customRadioIcon3').prop('checked', true);
-      } else if (response.data[0].mjt_id === '4') {
-        $('#customRadioIcon4').prop('checked', true);
-      }
-    }
+    // Loop through the data and set the checked radio button based on mjt_id
+    response.data.forEach(function(item) {
+        var radioId = '#customRadioIcon' + item.mjt_id;
+        $(radioId).prop('checked', true);
+    });
+}
+
   });
 });
 
 
 //-------------------------- Save jobtype ----------------------------
-
 $('#btnSaveJobtype').on('click', function () {
-  // เก็บค่า radio ที่ถูกเลือก
-  var Jtradio1 = $('#customRadioIcon1').prop('checked') ? $('#customRadioIcon1').val() : '';
-  var Jtradio2 = $('#customRadioIcon2').prop('checked') ? $('#customRadioIcon2').val() : '';
-  var Jtradio3 = $('#customRadioIcon3').prop('checked') ? $('#customRadioIcon3').val() : '';
-  var Jtradio4 = $('#customRadioIcon4').prop('checked') ? $('#customRadioIcon4').val() : '';
+    // เก็บค่า radio ที่ถูกเลือก
+    var Jtradio1 = $('input[name="customRadioIcon"]:checked').val();
 
-  // ตรวจสอบค่าที่ได้
-  console.log("Jtradio1: " + Jtradio1);
-  console.log("Jtradio2: " + Jtradio2);
-  console.log("Jtradio3: " + Jtradio3);
-  console.log("Jtradio4: " + Jtradio4);
-  console.log("ist_Id: " + ist_Id);
+    // ตรวจสอบว่ามี radio ที่ถูกเลือกหรือไม่
+    if (Jtradio1) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to save edit?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var url = API_URL + 'Ticket_control/save_jobtype';
+                const formData = new FormData()
+                formData.append('Jtradio1', Jtradio1);
+                formData.append('ist_Id', ist_Id);
 
-  // ตรวจสอบว่ามี radio ที่ถูกเลือกหรือไม่
-  if (Jtradio1 || Jtradio2 || Jtradio3 || Jtradio4) {
-      Swal.fire({
-          title: 'Are you sure?',
-          text: 'Do you want to save edit?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, save!'
-      }).then((result) => {
-          if (result.isConfirmed) {
-              var url = API_URL + 'Ticket_control/save_jobtype';
-              const formData = new FormData()
-              formData.append('Jtradio1', Jtradio1);
-              formData.append('Jtradio2', Jtradio2);
-              formData.append('Jtradio3', Jtradio3);
-              formData.append('Jtradio4', Jtradio4);
-              formData.append('ist_Id', ist_Id);
-
-              $.ajax({
-                  url: base_url('TicketControl/callApiSaveJobtype'),
-                  type: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  cache: false,
-                  dataType: 'json',
-                  success: function (res) {
-                    if (res.result == 1) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            html: 'Edit jobtype success',
-                            timer: 2500,
-                        }).then(() => {
-                            $('#mdlJobtype').modal('hide');
-                            shDataTable();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            html: 'A system error has occurred.',
-                        });
-                    }
-                },
-              });
-          }
-      });
-  }
+                $.ajax({
+                    url: base_url('TicketControl/callApiSaveJobtype'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.result == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                html: 'Edit jobtype success',
+                                timer: 2500,
+                            }).then(() => {
+                                $('#mdlJobtype').modal('hide');
+                                shDataTable();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: 'A system error has occurred.',
+                            });
+                        }
+                    },
+                });
+            }
+        });
+    } else {
+        // ถ้าไม่มี radio ที่ถูกเลือก
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please select a job type!'
+        });
+    }
 });
-
-
-
 
 // ----=- show Inspection --------
 $(document).on('click', '.actInspec', function () {
-  ist_Id = $(this).attr('data-id');
+    ist_Id = $(this).attr('data-id');
+  
+    var url = API_URL + "Ticket_control/show_inspection";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            ist_Id: ist_Id,
+        },
+        dataType: 'json',
+        success: (response) => {
+            data_ist_in = response.data;
+  
+            // Clear previous selections
+            $('#SelInspec').val('');
+            $('#mdetailinsprc').val('');
+            $('.chkInspec').prop('checked', false);
+            // Iterate through the data_check array
+            // Iterate through the data_check array
+            response.data_check.forEach(Inspec => {
+                // Construct the ID for the checkbox
+                var checkboxId = 'ChkInspec' + Inspec.mim_id;
+                // Check the checkbox based on mim_id
+                $('#' + checkboxId).prop('checked', true);
+            });
 
-  var url = API_URL + "Ticket_control/show_inspection";
-  $.ajax({
-      url: url,
-      type: 'POST',
-      data: {
-          ist_Id: ist_Id,
-      },
-      dataType: 'json',
-      success: (response) => {
-        data_ist_in = response.data;
+  
+            // Update dropdown and detail textarea if needed
+            var validInspec = response.data.find(Inspec => true);
+            if (validInspec) {
+                $('#SelInspec').val(validInspec.mim_id);
+                $('#mdetailinsprc').val(validInspec.iim_detail);
+            }
 
-          // Clear previous selections
-          $('#SelInspec').val('');
-          $('#mdetailinsprc').val('');
-          $('#ChkInspec6').prop('checked', false);
-          $('#ChkInspec7').prop('checked', false);
-          $('#ChkInspec8').prop('checked', false);
-
-          // Iterate through the data array
-          response.data.forEach(Inspec => {
-              // Check the checkbox based on mim_id value
-              if (Inspec.mim_id === "6") {
-                  $('#ChkInspec6').prop('checked', true);
-              } else if (Inspec.mim_id === "7") {
-                  $('#ChkInspec7').prop('checked', true);
-              } else if (Inspec.mim_id === "8") {
-                  $('#ChkInspec8').prop('checked', true);
+  
+            // Create Dropzone instance
+            var e = `<div class="dz-preview dz-file-preview">
+              <div class="dz-details">
+                <div class="dz-thumbnail">
+                  <img data-dz-thumbnail>
+                  <span class="dz-nopreview">No preview</span>
+                  <div class="dz-success-mark"></div>
+                  <div class="dz-error-mark"></div>
+                  <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                  </div>
+                </div>
+                <div class="dz-filename" data-dz-name></div>
+                <div class="dz-size" data-dz-size></div>
+              </div>
+              </div>`;
+            var myDropzone = new Dropzone("#myDropzone-", {
+              previewTemplate: e,
+              url: '/upload', // replace with your upload endpoint
+              acceptedFiles: 'image/*',
+              maxFiles: 3,
+              init: function () {
+                this.on("addedfile", function () {
+                  if (this.files.length > this.options.maxFiles) {
+                    this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+                  }
+                });
+              },
+              addRemoveLinks: true,
+              dictDefaultMessage: 'Drop your image here or click to upload',
+              parallelUploads: 1,
+            });
+  
+            // Display existing images
+            data_image = response.data_image[0]; // เปลี่ยนเป็น response.data_image[0]
+            for (let i = 1; i <= 3; i++) {
+              var imageName = data_image['iim_pic_' + i];
+              if (imageName != '') {
+                var imagePath = base_url(`${data_ist_in[0].iim_path}${imageName}`);
+                let mockFile = { name: `${imageName}`, size: 12345 };
+                let callback = null;
+                let crossOrigin = null;
+                let resizeThumbnail = true;
+                myDropzone.displayExistingFile(mockFile, imagePath, callback, crossOrigin, resizeThumbnail);
               }
-          });
-
-          // Update dropdown and detail textarea if needed
-          var validInspec = response.data.find(Inspec => parseInt(Inspec.mim_id) >= 1 && parseInt(Inspec.mim_id) <= 5);
-          if (validInspec) {
-              $('#SelInspec').val(validInspec.mim_id);
-              $('#mdetailinsprc').val(validInspec.iim_detail);
-          }
-      }
-  });
+            }
+        }
+    });
 });
+
+
+
 
 //-------------------------- Save Inspection ----------------------------
 
@@ -964,10 +1258,11 @@ $('#btnSaveInspec').on('click', function () {
   var InspecSel = $('#SelInspec').val();
   var InspecDetail = $('#mdetailinsprc').val();
 
-  var InsCheck1 = $('#ChkInspec6').prop('checked') ? $('#ChkInspec6').val() : '';
-  var InsCheck2 = $('#ChkInspec7').prop('checked') ? $('#ChkInspec7').val() : '';
-  var InsCheck3 = $('#ChkInspec8').prop('checked') ? $('#ChkInspec8').val() : '';
+  var checkedValues = []; 
 
+  $('.chkInspec:checked').each(function() {
+      checkedValues.push($(this).val());
+  });
 
   if (InspecSel == '') {
       Swal.fire({
@@ -990,9 +1285,7 @@ $('#btnSaveInspec').on('click', function () {
               const formData = new FormData()
               formData.append('InspecSel', InspecSel);
               formData.append('InspecDetail', InspecDetail);
-              formData.append('InsCheck1', InsCheck1);
-              formData.append('InsCheck2', InsCheck2);
-              formData.append('InsCheck3', InsCheck3);
+              formData.append('CheckedValues', JSON.stringify(checkedValues));
               formData.append('ist_Id', ist_Id);
 
               $.ajax({
@@ -1102,195 +1395,324 @@ $('#btnSaveInspec').on('click', function () {
 });
 
 
-// ----=- show Analyze --------
-$(document).on('click', '.actAnalyze', function () {
-  ist_Id = $(this).attr('data-id');
 
-  var url = API_URL + "Ticket_control/show_analyze";
-  $.ajax({
-    url: url,
-    type: 'POST',
-    data: {
-      ist_Id: ist_Id,
-    },
-    dataType: 'json',
-    success: (response) => {
-      data_ist_anl = response.data;
 
-      // Clear previous selections
-      $('#mdetailAnalyz').val('');
-      $('.form-check-input').prop('checked', false);
-      $('#adddtInput').val('');
 
-      // Iterate through the data array
-      response.data.forEach(Analyze => {
-        // Check if map_id is not null
-        if (Analyze.map_id !== null) {
-          // Check the checkbox based on map_id value
-          switch (Analyze.map_id) {
-            case "1":
-              $('#Check1').prop('checked', true);
-              break;
-            case "2":
-              $('#Check2').prop('checked', true);
-              break;
-            case "3":
-              $('#Check3').prop('checked', true);
-              break;
-            case "4":
-              $('#Check4').prop('checked', true);
-              break;
-            case "5":
-              $('#Check5').prop('checked', true);
-              break;
-            case "6":
-              $('#Check6').prop('checked', true);
-              break;
-            case "7":
-              $('#Check7').prop('checked', true);
-              break;
-            case "8":
-              $('#Check8').prop('checked', true);
-              break;
-            case "9":
-              $('#Check9').prop('checked', true);
-              break;
-            case "10":
-              $('#Check10').prop('checked', true);
-              break;
-            case "11":
-              $('#Check11').prop('checked', true);
-              // Check if iap_detail exists before setting the value
-              if (Analyze.iap_detail !== null) {
-                $('#adddtInput').val(Analyze.iap_detail);
+// ----=- show Trouble --------
+
+$(document).on('click', '.actTroubleshooting', function () {
+    ist_Id = $(this).attr('data-id');
+  
+    var url = API_URL + "Ticket_control/show_trouble";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            ist_Id: ist_Id,
+        },
+        dataType: 'json',
+        success: (response) => {
+            data_ist_trouble = response.data;
+  
+            // Clear previous selections
+            $('#SelTbAc').val('');
+            $('#mdetailtbac').val('');
+            $('.chkTrob1').prop('checked', false);
+            $('.chkTrob2').prop('checked', false);
+            $('.detailTrob2').val('');
+
+
+            response.data_check1.forEach(trouble1 => {
+                var checkboxId1 = '#chkTrob' + trouble1.mt_id;
+                $(checkboxId1).prop('checked', true);
+            });
+  
+            response.data_check2.forEach(trouble2 => {
+                var checkboxId2 = '#chkTrobdt' + trouble2.mt_id;
+                $(checkboxId2).prop('checked', true);
+                $('#detailTrob2' + trouble2.mt_id).val(trouble2.it_detail);
+            });
+            
+
+
+            var validTrouble = response.data.find(Trouble => true);
+            if (validTrouble) {
+                $('#SelTbAc').val(validTrouble.mt_id);
+                $('#mdetailtbac').val(validTrouble.it_detail);
+            }
+
+  
+            // Create Dropzone instance
+            var e = `<div class="dz-preview dz-file-preview">
+              <div class="dz-details">
+                <div class="dz-thumbnail">
+                  <img data-dz-thumbnail>
+                  <span class="dz-nopreview">No preview</span>
+                  <div class="dz-success-mark"></div>
+                  <div class="dz-error-mark"></div>
+                  <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                  </div>
+                </div>
+                <div class="dz-filename" data-dz-name></div>
+                <div class="dz-size" data-dz-size></div>
+              </div>
+              </div>`;
+            var myDropzone = new Dropzone("#myDropzone-", {
+              previewTemplate: e,
+              url: '/upload', // replace with your upload endpoint
+              acceptedFiles: 'image/*',
+              maxFiles: 3,
+              init: function () {
+                this.on("addedfile", function () {
+                  if (this.files.length > this.options.maxFiles) {
+                    this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+                  }
+                });
+              },
+              addRemoveLinks: true,
+              dictDefaultMessage: 'Drop your image here or click to upload',
+              parallelUploads: 1,
+            });
+  
+            // Display existing images
+            data_image = response.data_image;
+            for (let i = 1; i <= 3; i++) {
+              var imageName = data_image[0]['ipc_pic_' + i];
+              if (imageName != '') {
+                var imagePath = base_url(`${data_ist_in[0].ipc_path}${imageName}`);
+                let mockFile = { name: `${imageName}`, size: 12345 };
+                let callback = null;
+                let crossOrigin = null;
+                let resizeThumbnail = true;
+                myDropzone.displayExistingFile(mockFile, imagePath, callback, crossOrigin, resizeThumbnail);
               }
-              break;
-            default:
-              break;
-          }
-        } else {
-          // Set #mdetailAnalyz value if map_id is null
-          $('#mdetailAnalyz').val(Analyze.iap_detail);
+            }
         }
-      });
+    });
+  });
+
+  //-------------------------- Save Troubleshooting ----------------------------
+
+$('#btnSaveTrob').on('click', function () {
+
+    var Trobles = $('#SelTbAc').val();
+    var TroblesDetail = $('#mdetailtbac').val();
+  
+    var checkedValues1 = [];
+    var checkedValues2 = [];
+
+    // Loop through checkboxes and input text of troublecheck1
+    $('input[name="troublecheck1"]:checked').each(function() {
+        checkedValues1.push($(this).val());
+    });
+
+    // Loop through checkboxes and input text of troublecheck2
+    $('input[name="troublecheck2"]:checked').each(function() {
+        var checkboxVal = $(this).val();
+        var mt_id = $(this).attr('id').replace('chkTrobdt', '');
+        var detailVal = $('#detailTrob2' + mt_id).val();
+        var obj = { checkbox: checkboxVal, detail: detailVal };
+        checkedValues2.push(obj);
+    });
+  
+    if (Trobles == '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please select a trouble!'
+        });
+    } else {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to save edit?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var url = API_URL + 'Ticket_control/save_trobles';
+                const formData = new FormData()
+                formData.append('Trobles', Trobles);
+                formData.append('TroblesDetail', TroblesDetail);
+                formData.append('CheckedValues1', JSON.stringify(checkedValues1));
+                formData.append('CheckedValues2', JSON.stringify(checkedValues2));        
+                formData.append('ist_Id', ist_Id);
+  
+                $.ajax({
+                    url: base_url('TicketControl/callApiSaveTrobles'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    dataType: 'json',
+                    success: function (res) {
+                      if (res.result == 1) {
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Success!',
+                              html: 'Edit Trobles success',
+                              timer: 2500,
+                          }).then(() => {
+                              $('#mdlTrobles').modal('hide');
+                              shDataTable();
+                          });
+                      } else {
+                          Swal.fire({
+                              icon: 'error',
+                              title: 'Oops...',
+                              html: 'A system error has occurred.',
+                          });
+                      }
+                  },
+                });
+            }
+        });
     }
   });
-});
 
+// ----=- show Analyze --------
+$(document).on('click', '.actAnalyze', function () {
+    ist_Id = $(this).attr('data-id');
+  
+    var url = API_URL + "Ticket_control/show_analyze";
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: {
+        ist_Id: ist_Id,
+      },
+      dataType: 'json',
+      success: (response) => {
+        data_ist_anl = response.data;
+  
+        // Clear previous selections
+        $('#mdetailAnalyz').val('');
+        $('.form-check-input').prop('checked', false);
+        $('#adddtInput').val('');
+  
+        // Iterate through the data array
+        response.data.forEach(Analyze => {
+          // Check if map_id is not null
+          if (Analyze.map_id !== null) {
+            // Construct the ID for the checkbox
+            var checkboxId = '#Check' + Analyze.map_id;
+            // Check the checkbox based on map_id value
+            $(checkboxId).prop('checked', true);
+  
+            // Check if map_id is 11 and iap_detail exists
+            if (Analyze.map_id === '11' && Analyze.iap_detail !== null) {
+              // Set the value of the input
+              $('#adddtInput').val(Analyze.iap_detail);
+            }
+          } else {
+            // Set #mdetailAnalyz value if map_id is null
+            $('#mdetailAnalyz').val(Analyze.iap_detail);
+          }
+        });
+      }
+    });
+  });
+  
 
 
 
 //-------------------------- Save Analyze ----------------------------
-
 $('#btnSaveAnalyz').on('click', function () {
+    var checkboxes = []; // เก็บค่า Checkbox ที่ถูกเลือก
+    var details = ''; // เก็บค่า Detail ของ Checkbox 11
 
-  var Checked1 = $('#Check1').prop('checked');
-  var Checked2 = $('#Check2').prop('checked');
-  var Checked3 = $('#Check3').prop('checked');
-  var Checked4 = $('#Check4').prop('checked');
-  var Checked5 = $('#Check5').prop('checked');
-  var Checked6 = $('#Check6').prop('checked');
-  var Checked7 = $('#Check7').prop('checked');
-  var Checked8 = $('#Check8').prop('checked');
-  var Checked9 = $('#Check9').prop('checked');
-  var Checked10 = $('#Check10').prop('checked');
-  var Checked11 = $('#Check11').prop('checked');
-  var Detailcheck11 = $('#adddtInput').val();
-  var Mdetail = $('#mdetailAnalyz').val();
+    var Detailcheck11 = $('#adddtInput').val();
+    var Mdetail = $('#mdetailAnalyz').val();
 
-
-  var Checkval1 = Checked1 ? $('#Check1').val() : '';
-  var Checkval2 = Checked2 ? $('#Check2').val() : '';
-  var Checkval3 = Checked3 ? $('#Check3').val() : '';
-  var Checkval4 = Checked4 ? $('#Check4').val() : '';
-  var Checkval5 = Checked5 ? $('#Check5').val() : '';
-  var Checkval6 = Checked6 ? $('#Check6').val() : '';
-  var Checkval7 = Checked7 ? $('#Check7').val() : '';
-  var Checkval8 = Checked8 ? $('#Check8').val() : '';
-  var Checkval9 = Checked9 ? $('#Check9').val() : '';
-  var Checkval10 = Checked10 ? $('#Check10').val() : '';
-  var Checkval11 = Checked11 ? $('#Check11').val() : '';
-
-
-
-  if (!Checked1 && !Checked2 && !Checked3 && !Checked4 && !Checked5 && !Checked6 && !Checked7 && !Checked8 && !Checked9 && !Checked10 && !Checked11) {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please select an analyze!'
+    // เช็ค checkbox ที่มี id เริ่มต้นด้วย "Check"
+    $('[id^="Check"]').each(function() {
+        if ($(this).prop('checked')) {
+            checkboxes.push($(this).val());
+        }
     });
-} else if (Checked5 && !Checked6 && !Checked7 && !Checked8) {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please select at least one option from Checked6, Checked7, Checked8!'
-    });
-} else if (Checked11 && Detailcheck11.trim() === '') {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please enter detail for the last option!'
-    });
-} else {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to save edit?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, save!'
-    }).then((result) => {
-          if (result.isConfirmed) {
-              var url = API_URL + 'Ticket_control/save_analyze';
-              const formData = new FormData()
-              formData.append('Checkval1', Checkval1);
-              formData.append('Checkval2', Checkval2);
-              formData.append('Checkval3', Checkval3);
-              formData.append('Checkval4', Checkval4);
-              formData.append('Checkval5', Checkval5);
-              formData.append('Checkval6', Checkval6);
-              formData.append('Checkval7', Checkval7);
-              formData.append('Checkval8', Checkval8);
-              formData.append('Checkval9', Checkval9);
-              formData.append('Checkval10', Checkval10);
-              formData.append('Checkval11', Checkval11);
-              formData.append('Detailcheck11', Detailcheck11);
-              formData.append('Mdetail', Mdetail);
-              formData.append('ist_Id', ist_Id);
 
-              $.ajax({
-                  url: base_url('TicketControl/callApiSaveAnalyze'),
-                  type: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  cache: false,
-                  dataType: 'json',
-                  success: function (res) {
-                    if (res.result == 1) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            html: 'Edit Analyze success',
-                            timer: 2500,
-                        }).then(() => {
-                            $('#mdlAnalyze').modal('hide');
-                            shDataTable();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            html: 'A system error has occurred.',
-                        });
-                    }
-                },
-              });
-          }
-      });
-  }
+
+    // เช็ค checkbox 11
+    if ($('#Check11').prop('checked')) {
+        details = $('#adddtInput').val();
+    }
+
+    if (checkboxes.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please select an analyze!'
+        });
+    } else if (checkboxes.includes('5') && !(checkboxes.includes('6') || checkboxes.includes('7') || checkboxes.includes('8'))) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please select at least one option from Checked6, Checked7, Checked8!'
+        });
+    } else if (checkboxes.includes('11') && Detailcheck11.trim() === '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please enter detail for the last option!'
+        });
+    } else {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to save edit?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var url = API_URL + 'Ticket_control/save_analyze';
+                const formData = new FormData()
+                checkboxes.forEach(function(checkbox) {
+                    formData.append('checkboxes[]', checkbox);
+                });
+                formData.append('details', details);
+                formData.append('Mdetail', Mdetail);
+                formData.append('ist_Id', ist_Id);
+
+                $.ajax({
+                    url: base_url('TicketControl/callApiSaveAnalyze'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    dataType: 'json',
+                    success: function (res) {
+                        if (res.result == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                html: 'Edit Analyze success',
+                                timer: 2500,
+                            }).then(() => {
+                                $('#mdlAnalyze').modal('hide');
+                                shDataTable();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                html: 'A system error has occurred.',
+                            });
+                        }
+                    },
+                });
+            }
+        });
+    }
 });
+
 
 
 // ----=- show Delivery --------
@@ -1316,136 +1738,116 @@ $(document).on('click', '.actDelivery', function () {
       $('#additionalInput1').val('');
 
       response.data.forEach(Delivery => {
-
         if (Delivery.mde_id !== null) {
+          // หา element checkbox ด้วย id ของ Delivery
+          var checkbox = $(`#Check-de${Delivery.mde_id}`);
+          checkbox.prop('checked', true);
 
-          switch (Delivery.mde_id) {
-            case "1":
-              $('#Check-de1').prop('checked', true);
-              $('#additionalInput1').val(Delivery.ide_detail);
-              break;
-            case "2":
-              $('#Check-de2').prop('checked', true);
-              break;
-            case "3":
-              $('#Check-de3').prop('checked', true);
-              break;
-            case "4":
-              $('#Check-de4').prop('checked', true);
+          // หา element input ด้วย id ของ Delivery
+          var additionalInput = $(`#additionalInput${Delivery.mde_id}`);
 
-              if (Delivery.ide_detail !== null) {
-                $('#additionalInput1').val(Delivery.ide_detail);
-              }
-              break;
-            case "5":
-              $('#Check-de5').prop('checked', true);
-              break;
-            case "6":
-              $('#Check-de6').prop('checked', true);
-              break;
-            default:
-              break;
+          // ตรวจสอบว่ามีข้อมูลเพิ่มเติมหรือไม่ และเซ็ตค่าให้กับ input field
+          if (Delivery.ide_detail !== null) {
+            additionalInput.val(Delivery.ide_detail);
           }
-        } else {
-
         }
       });
     }
   });
 });
 
+
 //-------------------------- Save Delivery ----------------------------
 
 $('#btnSaveDelivery').on('click', function () {
-
-  var Checked1 = $('#Check-de1').prop('checked');
-  var Checked2 = $('#Check-de2').prop('checked');
-  var Checked3 = $('#Check-de3').prop('checked');
-  var Checked4 = $('#Check-de4').prop('checked');
-  var Checked5 = $('#Check-de5').prop('checked');
-  var Checked6 = $('#Check-de6').prop('checked');
-
-
-  var Detailcheck11 = $('#additionalInput1').val();
-
-
-  var Checkval1 = Checked1 ? $('#Check1').val() : '';
-  var Checkval2 = Checked2 ? $('#Check2').val() : '';
-  var Checkval3 = Checked3 ? $('#Check3').val() : '';
-  var Checkval4 = Checked4 ? $('#Check4').val() : '';
-  var Checkval5 = Checked5 ? $('#Check5').val() : '';
-  var Checkval6 = Checked6 ? $('#Check6').val() : '';
-
-
-
-
-  if (!Checked1 && !Checked2 && !Checked3 && !Checked4 && !Checked5 && !Checked6) {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please select an delivery!'
-    });
-} else if (Checked1 && Detailcheck11.trim() === '') {
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please enter detail for the first option!'
-    });
-} else {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to save edit?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, save!'
-    }).then((result) => {
-          if (result.isConfirmed) {
-              var url = API_URL + 'Ticket_control/save_delivery';
-              const formData = new FormData()
-              formData.append('Checkval1', Checkval1);
-              formData.append('Checkval2', Checkval2);
-              formData.append('Checkval3', Checkval3);
-              formData.append('Checkval4', Checkval4);
-              formData.append('Checkval5', Checkval5);
-              formData.append('Checkval6', Checkval6);
-              formData.append('Detailcheck11', Detailcheck11);
-              formData.append('ist_Id', ist_Id);
-
-              $.ajax({
-                  url: base_url('TicketControl/callApiSaveDelivery'),
-                  type: 'POST',
-                  data: formData,
-                  processData: false,
-                  contentType: false,
-                  cache: false,
-                  dataType: 'json',
-                  success: function (res) {
-                    if (res.result == 1) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            html: 'Edit Delivery success',
-                            timer: 2500,
-                        }).then(() => {
-                            $('#mdlDelivery').modal('hide');
-                            shDataTable();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            html: 'A system error has occurred.',
-                        });
-                    }
-                },
-              });
-          }
-      });
-  }
+    var formData = new FormData();
+    var checkboxes = [];
+    var details = [];
+  
+// เก็บค่า Checkbox ที่ถูกเลือกและ Detail ของ Checkbox 1
+$('[id^="Check-de"]').each(function() {
+    if ($(this).prop('checked')) {
+        var checkboxId = $(this).attr('id');
+        var detailId = checkboxId.replace('Check-de', 'additionalInput');
+        checkboxes.push($(this).val());
+        // เช็คว่าเป็น Checkbox ที่ 1 หรือไม่
+        if (checkboxId === 'Check-de1') {
+            // เก็บ Detail ของ Checkbox 1 เพียงอันเดียว
+            details.push($('#' + detailId).val());
+        } else {
+            // สำหรับ Checkbox อื่น ๆ ให้เพิ่ม Detail เป็นค่าว่าง
+            details.push('');
+        }
+    }
 });
 
+  
+    // ตรวจสอบว่ามี Checkbox ถูกเลือกหรือไม่
+    if (checkboxes.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please select a delivery!'
+        });
+    } else if (checkboxes.includes('1') && details[0].trim() === '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please enter detail for the first option!'
+        });
+    } else {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to save edit?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save!'
+        }).then((result) => {
+              if (result.isConfirmed) {
+                  var url = API_URL + 'Ticket_control/save_delivery';
+                  formData.append('ist_Id', ist_Id);
+                  checkboxes.forEach(function(checkbox) {
+                      formData.append('checkboxes[]', checkbox);
+                  });
+                  details.forEach(function(detail, index) {
+                      formData.append('details[]', detail);
+                  });
+  
+                  $.ajax({
+                      url: base_url('TicketControl/callApiSaveDelivery'),
+                      type: 'POST',
+                      data: formData,
+                      processData: false,
+                      contentType: false,
+                      cache: false,
+                      dataType: 'json',
+                      success: function (res) {
+                          if (res.result == 1) {
+                              Swal.fire({
+                                  icon: 'success',
+                                  title: 'Success!',
+                                  html: 'Edit Delivery success',
+                                  timer: 2500,
+                              }).then(() => {
+                                  $('#mdlDelivery').modal('hide');
+                                  shDataTable();
+                              });
+                          } else {
+                              Swal.fire({
+                                  icon: 'error',
+                                  title: 'Oops...',
+                                  html: 'A system error has occurred.',
+                              });
+                          }
+                      },
+                  });
+              }
+          });
+      }
+  });
+  
 
 // ----------------------------- loop ceckbox -----------------------------
 document.addEventListener('DOMContentLoaded', function() {
@@ -1460,7 +1862,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="col">
                   <div class="form-check custom-option custom-option-basic">
                       <label class="form-check-label custom-option-content" for="customCheckpb${item.mpc_id}">
-                          <input class="form-check-input" type="checkbox" value="${item.mpc_id}" id="customCheckpb${item.mpc_id}" />
+                          <input class="form-check-input customCheckpb" type="checkbox" value="${item.mpc_id}" id="customCheckpb${item.mpc_id}" />
                           <span class="custom-option-header">
                               <span class="h5 mb-0">${item.mpc_name_eng}</span>
                           </span>
@@ -1527,7 +1929,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="col-6">
                   <div class="form-check custom-option custom-option-basic">
                       <label class="form-check-label custom-option-content" for="ChkInspec${item.mim_id}">
-                          <input class="form-check-input" type="checkbox" value="${item.mim_id}" id="ChkInspec${item.mim_id}" />
+                          <input class="form-check-input chkInspec" type="checkbox" value="${item.mim_id}" id="ChkInspec${item.mim_id}" />
                           <span class="custom-option-header">
                               <span class="fw-medium">${item.mim_name_thai}</span>
                           </span>
@@ -1557,7 +1959,7 @@ document.addEventListener('DOMContentLoaded', function() {
               var checkboxHtml = `
               <div class="col form-check custom-option custom-option-basic">
                   <label class="form-check-label custom-option-content" for="chkTrob${item.mt_id}">
-                      <input name="troublecheck1" class="form-check-input" type="radio" value="${item.mt_detail}" id="chkTrob${item.mt_id}" />
+                      <input name="troublecheck1" class="form-check-input chkTrob1" type="radio" value="${item.mt_id}" id="chkTrob${item.mt_id}" />
                       <span class="custom-option-header">
                           <span class="fw-medium">${item.mt_name_thai}</span>
                       </span>
@@ -1582,13 +1984,13 @@ document.addEventListener('DOMContentLoaded', function() {
           response.forEach(function(item) {
               var checkboxHtml = `
               <div class="col form-check custom-option custom-option-basic">
-                  <label class="form-check-label custom-option-content" for="chkTrob${item.mt_id}">
-                      <input name="troublecheck2" class="form-check-input" type="radio" value="${item.mt_detail}" id="chkTrob${item.mt_id}" />
+                  <label class="form-check-label custom-option-content" for="chkTrobdt${item.mt_id}">
+                      <input name="troublecheck2" class="form-check-input chkTrob2" type="radio" value="${item.mt_id}" id="chkTrobdt${item.mt_id}" />
                       <span class="custom-option-header">
                           <span class="fw-medium">${item.mt_name_thai}</span>
                       </span>
                       <span class="custom-option-body">
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control detailTrob2" value="" id="detailTrob2${item.mt_id}">
                       </span>
                   </label>
               </div>`;
@@ -2462,20 +2864,88 @@ $(document).on('click', '.actAddworker', function () {
 
 
 // ------------------------------------ Submit Button ------------------------------------
+$(document).on('click', '.actSubmit', function () {
+    var ist_Id = $(this).attr('data-id');
+   // สร้าง object เพื่อเก็บสถานะของแต่ละประเภท
+var statusesToSend = {};
 
-$(document).ready(function () {
-    // เพิ่ม event listener สำหรับปุ่มที่มี id เป็น btnSubmit ที่ถูกคลิก
-    $('#btnSubmit').on('click', function () {
-        // สร้างอาร์เรย์เพื่อเก็บ data-id ของทุกตัว
-        var allDataIds = [];
+// วนลูปผ่านข้อมูลเพื่อตรวจสอบสถานะของแต่ละประเภท
+for (var i = 0; i < data.length; i++) {
+    var currentData = data[i]; // ข้อมูลปัจจุบันในการวนลูป
+    var id = currentData.ist_id; // ดึง ID ของข้อมูลปัจจุบัน
+    var equipmentStatus = currentData.equipment_status;
+    var jopTypeStatus = currentData.jopType_status;
+    var problemStatus = currentData.problem_status;
+    var inspectionStatus = currentData.inspection_status;
+    var troubleshootingStatus = currentData.troubleshooting_status;
+    var rqPartStatus = currentData.rqPart_status;
+    var analyzeStatus = currentData.analyze_status;
+    var preventionStatus = currentData.prevention_status;
+    var deliveryStatus = currentData.delivery_status;
 
-        // ใช้ jQuery เพื่อหา data-id ของทุกตัว
-        $('.dropdown-item').each(function () {
-            var dataId = $(this).data('id');
-            allDataIds.push(dataId);
-        });
+    // ตรวจสอบสถานะและเก็บข้อมูลสถานะใน object statusesToSend
+    if (equipmentStatus !== 3) {
+        statusesToSend['equipment_status'] = equipmentStatus;
+    }
+    if (jopTypeStatus !== 3) {
+        statusesToSend['jopType_status'] = jopTypeStatus;
+    }
+    if (problemStatus !== 3) {
+        statusesToSend['problem_status'] = problemStatus;
+    }
+    if (inspectionStatus !== 3) {
+        statusesToSend['inspection_status'] = inspectionStatus;
+    }
+    if (troubleshootingStatus !== 3) {
+        statusesToSend['troubleshooting_status'] = troubleshootingStatus;
+    }
+    if (rqPartStatus !== 3) {
+        statusesToSend['rqPart_status'] = rqPartStatus;
+    }
+    if (analyzeStatus !== 3) {
+        statusesToSend['analyze_status'] = analyzeStatus;
+    }
+    if (preventionStatus !== 3) {
+        statusesToSend['prevention_status'] = preventionStatus;
+    }
+    if (deliveryStatus !== 3) {
+        statusesToSend['delivery_status'] = deliveryStatus;
+    }
+}
 
-        // พิมพ์ค่า data-id ทั้งหมดที่พบในคอนโซล
-        console.log(allDataIds);
+// หลังจากวนลูปเสร็จแล้ว คุณจะได้ object statusesToSend ที่มีสถานะของแต่ละประเภทที่ไม่ใช่ 3
+// คุณสามารถนำ object นี้ไปใช้ต่อได้ตามต้องการ เช่น ส่งไปยังเซิร์ฟเวอร์
+
+    // ดึง id ของแถวที่ถูกคลิกและค่า status จากแต่ละแถว
+    var dataId = $(this).closest('.dropdown-item').attr('data-id');
+    var $icon = $(this).closest('.dropdown-item').find('i');
+
+    // เก็บเฉพาะ id และ status ของแถวที่ถูกคลิกไว้ใน statusesToSend
+    if (dataId && $icon.length > 0) {
+        var statusKey = dataId.split('_')[0] + '_status';
+        var status = $icon.hasClass('bx bxs-check-circle text-success') ? 'bx bxs-check-circle text-success' : 'bx bxs-error text-warning';
+        statusesToSend[statusKey] = status;
+    }
+
+    console.log(statusesToSend);
+    console.log(ist_Id);
+
+    // ทำ AJAX request ไปยังเซิร์ฟเวอร์
+    $.ajax({
+        url: 'your_url_here',
+        method: 'POST',
+        data: {
+            ist_Id: ist_Id,
+            statusesToSend: statusesToSend
+        },
+        success: function (response) {
+            console.log('ส่งข้อมูลสำเร็จ');
+            // ทำอย่างอื่นตามที่ต้องการหลังจากส่งข้อมูลสำเร็จ
+        },
+        error: function (xhr, status, error) {
+            console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+            // ทำอย่างอื่นตามที่ต้องการในกรณีเกิดข้อผิดพลาด
+        }
     });
 });
+

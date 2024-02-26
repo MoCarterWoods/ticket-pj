@@ -203,7 +203,7 @@ $(() => {
                             timer: 2500,
                         }).then(() => {
                             shDataTable()
-                                // location.reload();
+
                         })
                     } else if (response == false) {
                         Swal.fire({
@@ -227,6 +227,30 @@ $(() => {
 });
 });
 
+// ------------------------ Copy Icon --------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+    const copyableCards = document.querySelectorAll('.copyable-card');
+    copyableCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        const iconName = this.querySelector('.icon-name').textContent;
+        copyToClipboard(iconName);
+      });
+    });
+  
+    function copyToClipboard(text) {
+        const iconText = text.trim(); // ตัดช่องว่างที่อยู่ทางด้านหน้าและด้านหลังข้อความ
+        navigator.clipboard.writeText(iconText)
+          .then(() => {
+            alert('Copied to clipboard: ' + iconText);
+          })
+          .catch((error) => {
+            console.error('Failed to copy:', error);
+            alert('Failed to copy to clipboard');
+          });
+      }
+      
+      
+  });
 
     //-------------------------- Update Account ----------------------------------
     var data_mmn;

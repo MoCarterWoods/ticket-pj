@@ -138,7 +138,7 @@
 
   span {
     display: block;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 28px;
     color: #1a1f36;
   }
@@ -364,8 +364,8 @@
 
               <form id="stripe-login">
                 <div class="field padding-bottom--24">
-                  <label for="empcode">Emp Code</label>
-                  <input type="text" name="empcode" id="username" placeholder="Enter your emp code">
+                  <label for="empcode">Employee Code</label>
+                  <input type="text" name="empcode" id="username" placeholder="Enter your emplopyee code">
                 </div>
                 <div class="field padding-bottom--24">
                   <div class="grid--50-50">

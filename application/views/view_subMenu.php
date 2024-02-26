@@ -37,12 +37,12 @@
             <span class="fs-5 fw-bold text-primary-emphasis">Register Sub Menu</span>
             <div class="row">
               <div class="mb-3 col-md-4 col-md-1888 mt-3">
-                <label for="inpSubMenuName" class="form-label">Main Menu Name <span class="red-text">*</span></label>
+                <label for="inpSubMenuName" class="form-label">Sub Menu Name <span class="red-text">*</span></label>
                 <input class="form-control" type="text" id="inpSubMenuName" oninput="InputAdd(this)" value="" placeholder="Enter main menu" />
               </div>
               <div class="mb-3 col-md-5">
-                <label for="inpSubMenuCon" class="form-label">Main Menu Name <span class="red-text">*</span></label>
-                <input class="form-control mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)" value="" placeholder="Enter menu name" />
+                <label for="inpSubMenuCon" class="form-label">Sub Menu Controller <span class="red-text">*</span></label>
+                <input class="form-control mdl-textfield__input" type="text" id="inpSubMenuCon" oninput="InputAdd(this)" value="" placeholder="Enter menu controller" />
               </div>
               <div class="col-md-3 col-md-3-main mt-5">
 
@@ -97,19 +97,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropEdit">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropEdit">Edit Sub Menu</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col mb-3">
-            <label for="edtSubMenu" class="form-label">Main Menu</label>
+            <label for="edtSubMenu" class="form-label">Sub Menu</label>
             <input type="text" id="edtSubMenu" class="form-control" placeholder="Enter Main Menu">
           </div>
         </div>
         <div class="row">
           <div class="col mb-3">
-            <label for="edtController" class="form-label">Main Menu Icon</label>
+            <label for="edtController" class="form-label">Sub Menu Controller</label>
             <input type="text" id="edtController" class="form-control" placeholder="Enter Main Menu Icon">
           </div>
         </div>

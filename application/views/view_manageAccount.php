@@ -25,8 +25,8 @@
                   <th class="text-center">Employee Details</th>
                   <th class="text-center">First Name</th>
                   <th class="text-center">Last Name</th>
+                  <th class="text-center">Permission Group</th>
                   <th class="text-center">Email</th>
-
                   <th class="text-center">Status</th>
                   <th class="text-center">Action</th>
                 </tr>
@@ -129,7 +129,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel1">Add Account</h5>
+        <h5 class="modal-title" id="exampleModalLabel1">Edit Account</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

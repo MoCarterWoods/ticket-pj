@@ -65,6 +65,14 @@ class TicketControl extends CI_Controller {
         echo json_encode($data);
     }
 	
+
+    public function callApiShowData()
+    {
+        $result = $this->curPostRequest('Ticket_control/show_data', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
     public function callApiAccept()
     {
         $result = $this->curPostRequest('Ticket_control/accept_ticket', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
@@ -102,6 +110,13 @@ class TicketControl extends CI_Controller {
     public function callApiSaveInspection()
     {
         $result = $this->curPostRequest('Ticket_control/save_inspection', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
+    public function callApiSaveTrobles()
+    {
+        $result = $this->curPostRequest('Ticket_control/save_trobles', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
         echo json_encode($result);
 
     }
@@ -174,6 +189,168 @@ class TicketControl extends CI_Controller {
         curl_close($curl);
     
         return $is_array ? json_decode($result, $associative) : $result;
+    }
+
+
+    public function imgUpload()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $uploadDirectory = "assets/img/upload/problem/";
+    
+            if (!file_exists($uploadDirectory)) {
+                mkdir($uploadDirectory, 0777, true);
+            }
+    
+            // Check if 'images' key exists and is not null
+            if (isset($_FILES['images']) && is_array($_FILES['images'])) {
+                // Loop through each uploaded file
+                foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+                    // Check if the current file has a valid name
+                    if (isset($_FILES['images']['name'][$key])) {
+                        $originalFileName = $_FILES['images']['name'][$key];
+                        
+                        // Generate unique filename with timestamp
+                        $timestamp = time();
+                        $fileExtension = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+                        $newFileName = $timestamp . '_' . $originalFileName;
+                        
+                        $uploadedFile = $uploadDirectory . basename($newFileName);
+    
+                        // ... (rest of the PHP code remains the same)
+    
+                        if (move_uploaded_file($tmp_name, $uploadedFile)) {
+                            echo  json_encode($newFileName);
+                            // $result = $this->curPostRequest('Issue_Ticket/save_issue', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+                        } else {
+
+                        }
+                    }
+                }
+            } else {
+
+            }
+        }
+    }
+    
+
+    public function imgUpload2()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $uploadDirectory = "assets/img/upload/inspection/";
+    
+            if (!file_exists($uploadDirectory)) {
+                mkdir($uploadDirectory, 0777, true);
+            }
+    
+            // Check if 'images' key exists and is not null
+            if (isset($_FILES['images']) && is_array($_FILES['images'])) {
+                // Loop through each uploaded file
+                foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+                    // Check if the current file has a valid name
+                    if (isset($_FILES['images']['name'][$key])) {
+                        $originalFileName = $_FILES['images']['name'][$key];
+                        
+                        // Generate unique filename with timestamp
+                        $timestamp = time();
+                        $fileExtension = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+                        $newFileName = $timestamp . '_' . $originalFileName;
+                        
+                        $uploadedFile = $uploadDirectory . basename($newFileName);
+    
+                        // ... (rest of the PHP code remains the same)
+    
+                        if (move_uploaded_file($tmp_name, $uploadedFile)) {
+                            echo  json_encode($newFileName);
+                            // $result = $this->curPostRequest('Issue_Ticket/save_issue', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+                        } else {
+                            
+                        }
+                    }
+                }
+            } else {
+                
+            }
+        }
+    }
+
+    public function imgUpload3()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $uploadDirectory = "assets/img/upload/trouble/";
+    
+            if (!file_exists($uploadDirectory)) {
+                mkdir($uploadDirectory, 0777, true);
+            }
+    
+            // Check if 'images' key exists and is not null
+            if (isset($_FILES['images']) && is_array($_FILES['images'])) {
+                // Loop through each uploaded file
+                foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+                    // Check if the current file has a valid name
+                    if (isset($_FILES['images']['name'][$key])) {
+                        $originalFileName = $_FILES['images']['name'][$key];
+                        
+                        // Generate unique filename with timestamp
+                        $timestamp = time();
+                        $fileExtension = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+                        $newFileName = $timestamp . '_' . $originalFileName;
+                        
+                        $uploadedFile = $uploadDirectory . basename($newFileName);
+    
+                        // ... (rest of the PHP code remains the same)
+    
+                        if (move_uploaded_file($tmp_name, $uploadedFile)) {
+                            echo  json_encode($newFileName);
+                            // $result = $this->curPostRequest('Issue_Ticket/save_issue', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+                        } else {
+                            
+                        }
+                    }
+                }
+            } else {
+                
+            }
+        }
+    }
+
+    public function imgUpload4()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $uploadDirectory = "assets/img/upload/analyz/";
+    
+            if (!file_exists($uploadDirectory)) {
+                mkdir($uploadDirectory, 0777, true);
+            }
+    
+            // Check if 'images' key exists and is not null
+            if (isset($_FILES['images']) && is_array($_FILES['images'])) {
+                // Loop through each uploaded file
+                foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+                    // Check if the current file has a valid name
+                    if (isset($_FILES['images']['name'][$key])) {
+                        $originalFileName = $_FILES['images']['name'][$key];
+                        
+                        // Generate unique filename with timestamp
+                        $timestamp = time();
+                        $fileExtension = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+                        $newFileName = $timestamp . '_' . $originalFileName;
+                        
+                        $uploadedFile = $uploadDirectory . basename($newFileName);
+    
+                        // ... (rest of the PHP code remains the same)
+    
+                        if (move_uploaded_file($tmp_name, $uploadedFile)) {
+                            echo  json_encode($newFileName);
+                            // $result = $this->curPostRequest('Issue_Ticket/save_issue', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+                        } else {
+                            
+                        }
+                    }
+                }
+            } else {
+                
+            }
+        }
     }
 }
 

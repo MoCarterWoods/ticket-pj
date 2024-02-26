@@ -228,7 +228,7 @@ $(document).ready(function () {
                                 Swal.fire({
                                     icon: 'warning',
                                     title: 'Ooops...',
-                                    html: 'This SubMenu already exists.',
+                                    html: 'This submenu or controller already exists.',
                                 }).then(() => {
 
                                 });
@@ -297,7 +297,7 @@ $(document).ready(function () {
         var SubCon = $('#edtController').val();
         var OrderNo = $('#edtOrderNo').val();
 
-        if (data_mmn && data_mmn.ssm_name && data_mmn.ssm_controller == SubCon && data_mmn.ssm_order_no == OrderNo) {
+        if (data_mmn && data_mmn.ssm_name == SubName && data_mmn.ssm_controller === SubCon && data_mmn.ssm_order_no === OrderNo) {        
             Swal.fire({
                 icon: 'success',
                 title: 'Not changed!',

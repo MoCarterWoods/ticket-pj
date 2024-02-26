@@ -30,7 +30,7 @@ $(document).ready(function () {
 
     setInterval(function () {
         var diff = Date.now() - lastMove;
-        if (diff > 600000) {
+        if (diff > 1800000) {
             $.ajax({
                 url: base_url('Login/logout'),
                 success: (response) => {
@@ -38,6 +38,6 @@ $(document).ready(function () {
                 }
             })
         }
-    }, 600000);
+    }, 1800000);
 }());
 })

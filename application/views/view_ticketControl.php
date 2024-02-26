@@ -22,14 +22,22 @@
           <div class="col-md-3 mb-2">
             <label for="selStatus" class="form-label">Status</label>
             <select id="selStatus" class="form-select">
-              <option>Default select</option>
+              <option value="">Default select</option>
               <option value="1">IN PROGRESS</option>
-              <option value="2">CANCLE</option>
-              <option value="3">APPROVAL</option>
+              <option value="3">WAIT ACCEPT</option>
+              <option value="5">WAIT EDIT</option>
+              <option value="7">WAIT APPROVED</option>
+              <option value="8">APPROVED DENY</option>
             </select>
           </div>
 
+          <div class="col mb-2 mt-4 justify-content-end">
+
+            <button type="button" class="btn btn-primary justify-content-end" id="btnViewAll" onclick="viewAllData()">View All</button>
+
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -48,7 +56,7 @@
                   <th class="text-center">No.</th>
                   <th class="text-center">Area</th>
                   <th class="text-center">Tool</th>
-                  <th class="text-center">Process</th>
+                  <!-- <th class="text-center">Process</th> -->
                   <th class="text-center">Job Type</th>
                   <th class="text-center">Requester</th>
                   <th class="text-center">Maintenance by</th>
@@ -221,14 +229,8 @@
           <div class="col">
             <label for="dropzone-multi" class="form-label">Upload Images</label>
 
-            <form action="/upload" id="myDropzone" class="dropzone needsclick myDropzone">
-              <div class="dz-message needsclick" style="display: none;">
-                Drop files here or click to upload
-                <span class="note needsclick">(This is just a demo dropzone. Selected files are <span class="fw-medium">not</span> actually uploaded.)</span>
-              </div>
-              <div class="fallback">
-                <input name="file" type="file" />
-              </div>
+            <form action="/upload" id="myDropzone" class="dropzone needsclick">
+
             </form>
 
           </div>
@@ -382,7 +384,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnSaveTrob">Save changes</button>
       </div>
     </div>
   </div>
@@ -800,20 +802,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
