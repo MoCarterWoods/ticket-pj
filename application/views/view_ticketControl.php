@@ -11,14 +11,14 @@
       <h5 class="card-header">Ticket Control</h5>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-3 mb-2">
+          <!-- <div class="col-md-3 mb-2">
             <label for="selStartTime" class="form-label">Start Time</label>
             <input class="form-control" type="date" value="" id="selStartTime">
           </div>
           <div class="col-md-3 mb-2">
             <label for="selEndTime" class="form-label">End Time</label>
             <input class="form-control" type="date" value="" id="selEndTime">
-          </div>
+          </div> -->
           <div class="col-md-3 mb-2">
             <label for="selStatus" class="form-label">Status</label>
             <select id="selStatus" class="form-select">
@@ -33,7 +33,7 @@
 
           <div class="col mb-2 mt-4 justify-content-end">
 
-            <button type="button" class="btn btn-primary justify-content-end" id="btnViewAll" onclick="viewAllData()">View All</button>
+            <button type="button" class="btn btn-primary justify-content-end" id="btnViewAll">View All</button>
 
           </div>
         </div>
@@ -109,7 +109,7 @@
           </div>
           <div class="col ">
             <label for="selLine" class="form-label">Line</label>
-            <select class="form-select" id="ToolDropdown">
+            <select class="form-select" id="selLine">
             </select>
           </div>
         </div>
@@ -209,6 +209,7 @@
             <select class="form-select" id="SelProblem">
 
             </select>
+
           </div>
         </div>
 
@@ -231,7 +232,9 @@
 
             <form action="/upload" id="myDropzone" class="dropzone needsclick">
 
+
             </form>
+
 
           </div>
         </div>
@@ -675,26 +678,28 @@
           <form class="form-repeater">
             <div data-repeater-list="group-a">
               <div data-repeater-item>
+                
                 <div class="row" id="checkPrevention">
-                  <div class="mb-3 col-lg-6 col-xl-3">
-                    <label class="form-label" for="inpSuggestions-1">ข้อเสนอแนะ</label>
-                    <input type="text" id="inpSuggestions-1" class="form-control" placeholder="Enter suggestion" />
-                  </div>
-                  <div class="mb-3 col-lg-6 col-xl-3">
-                    <label class="form-label" for="inpOperated-1">ดำเนินการโดย</label>
-                    <input type="text" id="inpOperated-1" class="form-control" placeholder="Enter operator" />
-                  </div>
-                  <div class="mb-3 col-lg-6 col-xl-3">
-                    <label class="form-label" for="inpSchedule-1">กำหนดการเสร็จ</label>
-                    <input type="date" id="inpSchedule-1" class="form-control" />
-                  </div>
-                  <div class="mb-3 col-lg-12 col-xl-3">
-                    <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                      <i class="bx bx-x me-1"></i>
-                      <span class="align-middle">Delete</span>
-                    </button>
+                  <div class="row">
+                    <div class="mb-3 col-lg-6 col-xl-3">
+                      <label class="form-label" for="inpSuggestions-1">ข้อเสนอแนะ</label>
+                      <input type="text" id="inpSuggestions-1" class="form-control" placeholder="Enter suggestion" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-3">
+                      <label class="form-label" for="inpOperated-1">ดำเนินการโดย</label>
+                      <input type="text" id="inpOperated-1" class="form-control" placeholder="Enter operator" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-3">
+                      <label class="form-label" for="inpSchedule-1">กำหนดการเสร็จ</label>
+                      <input type="date" id="inpSchedule-1" class="form-control" value="">
+                    </div>
+                    <div class="mb-3 col-lg-12 col-xl-3">
+                      <button class="btn btn-label-danger mt-4" data-repeater-delete=""> <i class="bx bx-x me-1"></i> <span class="align-middle">Delete</span> </button>
+                    </div>
                   </div>
                 </div>
+
+
               </div>
             </div>
 
@@ -712,7 +717,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnSaveEdit">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnSavePrevention">Save changes</button>
       </div>
     </div>
   </div>

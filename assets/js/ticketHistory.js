@@ -37,29 +37,7 @@ $(document).ready(function() {
               ${data[i].swa_emp_code === null ? '-' : data[i].swa_emp_code.split(",").join(" | ")}
               </td>
               <td class="text-center">
-                <span class="badge bg-label-${data[i].ist_status_flg == 1 ? 'warning' : data[i].ist_status_flg == 3 ? 'info' : data[i].ist_status_flg == 5 ? 'primary' : data[i].ist_status_flg == 7 ? 'success' : data[i].ist_status_flg == 8 ? 'danger' : 'Unknown'}">
-                  ${data[i].ist_status_flg == 1 ? 'In Progress' : data[i].ist_status_flg == 3 ? 'Wait Accept' : data[i].ist_status_flg == 5 ? 'Wait Edit' : data[i].ist_status_flg == 7 ? 'Wait Approval' : data[i].ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
-                </span>
-              </td>
-              <td class="text-center">
-              <button type="button" class="btn rounded-pill btn-primary"" ${data[i].ist_status_flg == 3 ? '' : 'style="display: none;"'} id="btnAccept">Accept</button>
-              <div class="btn-group">
-              <button type="button" class="btn btn-label-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
-                <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
-                  <li><a class="dropdown-item" href="" data-toggle="modal" data-target="#mdlEdit">Equipment</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Problem Condition</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Job Type</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Inspection</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Troubleshooting</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Required Parts</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Analyze Problem</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Prevention</a></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Delivery</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="javascript:void(0);">Submit</a></li>
-                </ul>
-              </div>
-              <button type="button" class="btn rounded-pill btn-secondary" ${data[i].ist_status_flg == 3 || data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'} >Cancle</button>
+              <button type="button" class="btnDetail btn rounded-pill btn-primary"" data-ac-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" id="btnDetail">View Detail</button>
             </td>
             
             </tr>
@@ -71,11 +49,11 @@ $(document).ready(function() {
         }
   
         // ทำลาย DataTable ที่มีอยู่ก่อนที่จะปรับปรุงเนื้อหาของตาราง
-        $('#tblTicketControl').DataTable().destroy();
+        $('#tblTicketHistory').DataTable().destroy();
   
         // ปรับปรุงเนื้อหาของตารางและเริ่มใช้ DataTable ใหม่
         $("#tbody").html(html).promise().done(() => {
-          $("#tblTicketControl").DataTable({ scrollX: true });
+          $("#tblTicketHistory").DataTable({ scrollX: true });
         });
       },
       error: function (xhr, status, error) {

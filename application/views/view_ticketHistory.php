@@ -60,7 +60,6 @@
                                     <th class="text-center">Job Type</th>
                                     <th class="text-center">Requester</th>
                                     <th class="text-center">Maintenance by</th>
-                                    <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>

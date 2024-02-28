@@ -491,15 +491,15 @@ $(document).ready(function () {
 
 
 // -------------------------------- Problem Con -------------------------------
-$(document).ready(function () {
-    ProbConDropdown();
 
-    function ProbConDropdown() {
-        const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_problem';
+function ProbConDropdown(selectedValue) {
+    const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_problem';
 
+    // ส่งค่า val ไปกับข้อมูลของ AJAX
     $.ajax({
         url: apiUrl,
         type: 'GET',
+        data: { selectedValue: selectedValue }, // ส่งค่า val ที่เลือกไว้ด้วย AJAX
         dataType: 'json',
         success: function (res) {
             // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
@@ -521,13 +521,10 @@ $(document).ready(function () {
             console.error('Error fetching data from the API:', error);
         }
     });
-
-
-
-
 }
 
-});
+
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -599,6 +596,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 div.appendChild(radioDiv);
                 chkBoxJobElement.appendChild(div);
             });
+
+            // เพิ่ม event listener โดยใช้ event delegation
+            chkBoxJobElement.addEventListener('change', function(event) {
+                if (event.target.matches('.form-check-input')) {
+                    var selectedValue = event.target.value;
+                    ProbConDropdown(selectedValue);
+                    InMeDropdown(selectedValue);
+                    TroubleDropdown(selectedValue);
+
+                }
+            });
+
         })
         .catch(error => {
             console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
@@ -846,19 +855,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         // -------------------------------- Inspec Method -------------------------------
-        $(document).ready(function () {
-            InMeDropdown();
-        
-            function InMeDropdown() {
+
+            function InMeDropdown(selectedValue) {
                 const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_inspec_method';
     
-            $.ajax({
-                url: apiUrl,
-                type: 'GET',
-                dataType: 'json',
-                success: function (res) {
-                    // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
-                    response = res;
+                $.ajax({
+                    url: apiUrl,
+                    type: 'GET',
+                    data: { selectedValue: selectedValue }, // ส่งค่า val ที่เลือกไว้ด้วย AJAX
+                    dataType: 'json',
+                    success: function (res) {
+                        // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                        response = res;
     
                     // Clear existing options in the dropdown
                     $('#SelInspec').empty();
@@ -877,23 +885,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-    
-        });
+
 
              // -------------------------------- Trouble -------------------------------
-             $(document).ready(function () {
-                TroubleDropdown();
-            
-                function TroubleDropdown() {
+
+                function TroubleDropdown(selectedValue) {
                     const apiUrl = 'http://127.0.0.1/api/Issue_Ticket/drop_trouble';
         
-                $.ajax({
-                    url: apiUrl,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function (res) {
-                        // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
-                        response = res;
+                    $.ajax({
+                        url: apiUrl,
+                        type: 'GET',
+                        data: { selectedValue: selectedValue }, // ส่งค่า val ที่เลือกไว้ด้วย AJAX
+                        dataType: 'json',
+                        success: function (res) {
+                            // กำหนดค่าของตัวแปร response เมื่อ API สำเร็จ
+                            response = res;
         
                         // Clear existing options in the dropdown
                         $('#SelTbAc').empty();
@@ -912,8 +918,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             }
-        
-        });
+
 
         
 

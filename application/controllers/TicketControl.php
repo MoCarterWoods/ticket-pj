@@ -149,6 +149,12 @@ class TicketControl extends CI_Controller {
 
     }
 
+    public function callApiSubmitTicket()
+    {
+        $result = $this->curPostRequest('Ticket_control/submit_ticket', array('data' => serialize($_POST) ,'session' =>serialize( $this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
 
 
     public function test()
