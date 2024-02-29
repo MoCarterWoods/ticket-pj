@@ -678,7 +678,7 @@
           <form class="form-repeater">
             <div data-repeater-list="group-a">
               <div data-repeater-item>
-                
+
                 <div class="row" id="checkPrevention">
                   <div class="row">
                     <div class="mb-3 col-lg-6 col-xl-3">
@@ -697,14 +697,74 @@
                       <button class="btn btn-label-danger mt-4" data-repeater-delete=""> <i class="bx bx-x me-1"></i> <span class="align-middle">Delete</span> </button>
                     </div>
                   </div>
+
+                  <!-- <div class="row">
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSuggestions-2">ข้อเสนอแนะที่ 2</label>
+                      <input type="text" id="inpSuggestions-2" class="form-control" placeholder="Enter suggestion" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpOperated-2">ดำเนินการโดย</label>
+                      <input type="text" id="inpOperated-2" class="form-control" placeholder="Enter operator" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSchedule-2">กำหนดการเสร็จ</label>
+                      <input type="date" id="inpSchedule-2" class="form-control" value="">
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSuggestions-3">ข้อเสนอแนะที่ 3</label>
+                      <input type="text" id="inpSuggestions-3" class="form-control" placeholder="Enter suggestion" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpOperated-3">ดำเนินการโดย</label>
+                      <input type="text" id="inpOperated-3" class="form-control" placeholder="Enter operator" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSchedule-3">กำหนดการเสร็จ</label>
+                      <input type="date" id="inpSchedule-3" class="form-control" value="">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSuggestions-4">ข้อเสนอแนะที่ 4</label>
+                      <input type="text" id="inpSuggestions-4" class="form-control" placeholder="Enter suggestion" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpOperated-4">ดำเนินการโดย</label>
+                      <input type="text" id="inpOperated-4" class="form-control" placeholder="Enter operator" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSchedule-4">กำหนดการเสร็จ</label>
+                      <input type="date" id="inpSchedule-4" class="form-control" value="">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSuggestions-5">ข้อเสนอแนะที่ 5</label>
+                      <input type="text" id="inpSuggestions-5" class="form-control" placeholder="Enter suggestion" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpOperated-5">ดำเนินการโดย</label>
+                      <input type="text" id="inpOperated-5" class="form-control" placeholder="Enter operator" value="">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-xl-4">
+                      <label class="form-label" for="inpSchedule-5">กำหนดการเสร็จ</label>
+                      <input type="date" id="inpSchedule-5" class="form-control" value="">
+                    </div>
+                  </div> -->
+
                 </div>
 
 
               </div>
             </div>
-
             <div class="mb-0">
-              <button class="btn btn-primary" data-repeater-create>
+              <button type="submit" class="btn btn-primary" data-repeater-create>
                 <i class="bx bx-plus me-1"></i>
                 <span class="align-middle">Add</span>
               </button>

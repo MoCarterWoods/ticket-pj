@@ -100,6 +100,7 @@ function uploadImage() {
     $.each($('#dropzone-multi').get(0).dropzone.files, function(key, el) {
         formData.append('images[]', el);
     });
+
     $.ajax({
         url: base_url('IssueTicket/imgUpload'),
         type: 'POST',

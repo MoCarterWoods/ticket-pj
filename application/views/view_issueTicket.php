@@ -208,41 +208,41 @@
                         </div>
                     </div>
 
-                <!-- Job type -->
-                <div id="navs-pills-top-jobtype" class="content">
-                    <div class="content-header mb-3">
-                        <h6 class="mb-0">Job Type</h6>
-                        <small>ประเภทงาน</small>
-                    </div>
-                    <div class="row g-3">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="col-md-12">
-                                            <div class="row mt-5" id="chkBoxJob">
+                    <!-- Job type -->
+                    <div id="navs-pills-top-jobtype" class="content">
+                        <div class="content-header mb-3">
+                            <h6 class="mb-0">Job Type</h6>
+                            <small>ประเภทงาน</small>
+                        </div>
+                        <div class="row g-3">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="col-md-12">
+                                                <div class="row mt-5" id="chkBoxJob">
 
 
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
 
-                            </tbody>
-                        </table>
-                        <div class="col-12 d-flex justify-content-between">
+                                </tbody>
+                            </table>
+                            <div class="col-12 d-flex justify-content-between">
 
-                            <button class="btn btn-primary btn-prev2" id="prev2"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                            </button>
-                            <button class="btn btn-primary btn-next2" id="next2"> <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Next</span> <i class="bx bx-chevron-right bx-sm me-sm-n2"></i></button>
+                                <button class="btn btn-primary btn-prev2" id="prev2"> <i class="bx bx-chevron-left bx-sm ms-sm-n2"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                </button>
+                                <button class="btn btn-primary btn-next2" id="next2"> <span class="align-middle d-sm-inline-block d-none me-sm-1 me-0">Next</span> <i class="bx bx-chevron-right bx-sm me-sm-n2"></i></button>
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
                     <!-- Problem Con -->
                     <div id="navs-pills-top-problem" class="content">
@@ -910,7 +910,7 @@
 
 
 
-    
+
 </div>
 </div>
 
@@ -1151,4 +1151,3 @@
         // }
     }
 </script>
-

@@ -11,133 +11,106 @@ $('#selStartTime, #selEndTime, #selStatus').change(function() {
 
 
 function shDataTable() {
-    // var StartDate = $('#selStartTime').val();
-    // var EndtDate = $('#selEndTime').val();
     var selStatus = $('#selStatus').val();
+    var url = API_URL + 'Ticket_control/show_data';
+    const formData = new FormData();
+    formData.append('selStatus', selStatus);
 
-
-
-  var url = API_URL + 'Ticket_control/show_data';
-  const formData = new FormData()
-//   formData.append('StartDate', StartDate);
-//   formData.append('EndtDate', EndtDate);
-  formData.append('selStatus', selStatus);
-
-
-  $.ajax({
-    url: base_url('TicketControl/callApiShowData?url=') + url,
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    cache: false,
-    dataType: 'json',
-    success: function (data) {
-      var html = "";
-      // Loop through the data and append menu items
-      for (var i = 0; i < data.length; i++) {
-        html += `
-          <tr>
-            <td class="text-center">${i + 1}</td>
-            <td class="text-center">${data[i].ist_line_cd == '' ? `${data[i].ist_area_other}` : `${data[i].ist_line_cd}`}</td>
-            <td class="text-center">${data[i].mts_name === null ? '-' : data[i].mts_name}</td>
-
-            <td class="text-center">
-              <div class="text-center">${data[i].mjt_name_thai === null ? '-' : data[i].mjt_name_thai}</div>
-              <div class="text-center">${data[i].mjt_name_eng === null ? '-' : data[i].mjt_name_eng}</div>
-            </td>
-            <td class="text-center">
-              <div class="text-center"><small class="emp_post text-truncate text-muted">${data[i].ist_request_by}</small></div>
-              <div class="text-center">${data[i].ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
-            </td>
-            <td class="text-center">
-              <div class="d-flex flex-wrap align-items-center">
-                <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_">
-
+    $.ajax({
+        url: base_url('TicketControl/callApiShowData?url=') + url,
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
+            var html = "";
+            // Loop through the data and append menu items
+            data.forEach(function(item, index) {
+                var avatarHtml = ""; // Initialize avatar HTML
+                if (item.swa_emp_code !== null) { // Check if swa_emp_code is not null
+                    var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : []; // Split swa_emp_code by comma or initialize as empty array if it's null or empty
             
-                </ul>
-              </div>
-            </td>
-            <td class="text-center">
-              <span class="badge bg-label-${data[i].ist_status_flg == 1 ? 'warning' : data[i].ist_status_flg == 3 ? 'info' : data[i].ist_status_flg == 5 ? 'primary' : data[i].ist_status_flg == 7 ? 'success' : data[i].ist_status_flg == 8 ? 'danger' : 'Unknown'}">
-                ${data[i].ist_status_flg == 1 ? 'In Progress' : data[i].ist_status_flg == 3 ? 'Wait Accept' : data[i].ist_status_flg == 5 ? 'Wait Edit' : data[i].ist_status_flg == 7 ? 'Wait Approval' : data[i].ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
-              </span>
-            </td>
-            <td class="text-center">
-            <button type="button" class="btnAccept btn rounded-pill btn-primary"" ${data[i].ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" id="btnAccept">Accept</button>
-            <div class="btn-group">
-            <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
-              <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${data[i].ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${data[i].equipment_status},${data[i].jopType_status},${data[i].problem_status},${data[i].inspection_status},${data[i].troubleshooting_status},${data[i].rqPart_status},${data[i].analyze_status},${data[i].prevention_status},${data[i].delivery_status}" data-bs-toggle="modal" data-bs-target="#mdlSubmit" data-id="${data[i].ist_id}">Submit</a></li>
-              </ul>
-            </div>
-            <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${data[i].ist_status_flg == 3 || data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" >Cancle</button>
-          </td>
-          
-          </tr>
-        `;
-
-        // Your avatar HTML generation here
-        var avatarHtml = `
-        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${data[i].swa_fristname} ${data[i].swa_lastname}" class="avatar pull-up">
-            <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].swa_emp_code}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-        </li>
-        `;
-        $(`#avatarGroup_${i}`).html(avatarHtml);
-
-        // Destroy the DataTable instance
-        $('#tblTicketControl').DataTable().destroy();
-
-        // Reinitialize the DataTable with the updated table body
-        $("#tbody").html(html);
-
-        // Generate HTML for dropdown menu
-        var dropdownHtml = `
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_${i}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton_${i}">
-                <li><a class="dropdown-item" href="#">Action 1</a></li>
-                <li><a class="dropdown-item" href="#">Action 2</a></li>
-                <!-- Add more dropdown items here -->
-            </ul>
-        </div>
-        `;
-
-        // Insert dropdown menu HTML above the table
-        $(`#tblTicketControl_wrapper_${i}`).prepend(dropdownHtml);
-
-        // Handle click event for dropdown items
-        $(`#dropdownMenuButton_${i}`).on('click', function () {
-        // Handle click event here
-        var action = $(this).text();
-        console.log("Selected action:", action);
+                    for (var k = 0; k < swaEmpCodes.length; k++) {
+                        var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
+                        if (empCode) { // Check if the employee code is not empty
+                            avatarHtml += `
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${item.swa_fristname}" class="avatar pull-up">
+                                    <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
+                                </li>
+                            `;
+                        }
+                    }
+                }
+                html += `
+                <tr>
+                    <td class="text-center">${index + 1}</td>
+                    <td class="text-center">${item.ist_line_cd == '' ? `${item.ist_area_other}` : `${item.ist_line_cd}`}</td>
+                    <td class="text-center">${item.mts_name === null ? '-' : item.mts_name}</td>
+                    <td class="text-center">
+                        <div class="text-center">${item.mjt_name_thai === null ? '-' : item.mjt_name_thai}</div>
+                        <div class="text-center">${item.mjt_name_eng === null ? '-' : item.mjt_name_eng}</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="text-center"><small class="emp_post text-truncate text-muted">${item.ist_request_by}</small></div>
+                        <div class="text-center">${item.ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${index}">
+                                ${avatarHtml} <!-- Insert avatar HTML here -->
+                            </ul>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge bg-label-${item.ist_status_flg == 1 ? 'warning' : item.ist_status_flg == 3 ? 'info' : item.ist_status_flg == 5 ? 'primary' : item.ist_status_flg == 7 ? 'success' : item.ist_status_flg == 8 ? 'danger' : 'Unknown'}">
+                            ${item.ist_status_flg == 1 ? 'In Progress' : item.ist_status_flg == 3 ? 'Wait Accept' : item.ist_status_flg == 5 ? 'Wait Edit' : item.ist_status_flg == 7 ? 'Wait Approval' : item.ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btnAccept btn rounded-pill btn-primary" ${item.ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnAccept">Accept</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
+                            <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);z-index: 10000;" data-popper-placement="bottom-start">
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${item.ist_id}">Equipment ${item.equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${item.ist_id}">Job Type ${item.jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${item.ist_id}">Problem Condition ${item.problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${item.ist_id}">Inspection ${item.inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${item.ist_id}">Troubleshooting ${item.troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${item.ist_id}">Required Parts ${item.rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${item.ist_id}">Analyze Problem ${item.analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${item.ist_id}">Prevention ${item.prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${item.ist_id}">Delivery ${item.delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${item.ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${item.equipment_status},${item.jopType_status},${item.problem_status},${item.inspection_status},${item.troubleshooting_status},${item.rqPart_status},${item.analyze_status},${item.prevention_status},${item.delivery_status}" data-bs-toggle="modal" data-bs-target="#mdlSubmit" data-id="${item.ist_id}">Submit</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${item.ist_status_flg == 3 || item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${item.ist_id}" value="${item.ist_status_flg}" >Cancel</button>
+                    </td>
+                </tr>
+                `;
         });
+        
+                    // Destroy the DataTable instance
+                    $('#tblTicketControl').DataTable().destroy();
+        
+                    // Reinitialize the DataTable with the updated table body
+                    $("#tbody").html(html);
+        
+                    // Reinitialize the DataTable with the updated table body
+                    $("#tblTicketControl").DataTable({ scrollX: true });
+        
+                    // Hide loading indicator
+                    $("#loadingPage").attr("style", "display: none;");
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
         }
 
-        // Reinitialize the DataTable with the updated table body
-        $("#tblTicketControl").DataTable({ scrollX: true });
-
-        // Hide loading indicator
-        $("#loadingPage").attr("style", "display: none;");
-        },
-        error: function (xhr, status, error) {
-        console.error('Error:', error);
-        }
-});
-}
 
 $(document).on("click", "#btnViewAll", function () {
     viewAllData();
@@ -148,117 +121,103 @@ function viewAllData() {
     // document.getElementById("selEndTime").value = '';
     document.getElementById("selStatus").value = '';
     $("#loadingPage").css("display", "");
+
     var apiUrl = 'http://127.0.0.1/api/Ticket_control/show_all_data';
 
     // Perform Ajax request
     $.ajax({
-      url: apiUrl,
-      type: 'GET',
-      dataType: 'json',
-      success: function (data) {
-      var html = "";
-      // Loop through the data and append menu items
-      for (var i = 0; i < data.length; i++) {
-        html += `
-          <tr>
-            <td class="text-center">${i + 1}</td>
-            <td class="text-center">${data[i].ist_line_cd == '' ? `${data[i].ist_area_other}` : `${data[i].ist_line_cd}`}</td>
-            <td class="text-center">${data[i].mts_name === null ? '-' : data[i].mts_name}</td>
+        url: apiUrl,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            var html = "";
 
-            <td class="text-center">
-              <div class="text-center">${data[i].mjt_name_thai === null ? '-' : data[i].mjt_name_thai}</div>
-              <div class="text-center">${data[i].mjt_name_eng === null ? '-' : data[i].mjt_name_eng}</div>
-            </td>
-            <td class="text-center">
-              <div class="text-center"><small class="emp_post text-truncate text-muted">${data[i].ist_request_by}</small></div>
-              <div class="text-center">${data[i].ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
-            </td>
-            <td class="text-center">
-              <div class="d-flex flex-wrap align-items-center">
-                <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_">
+            // Loop through the data and append menu items
+            data.forEach(function(item, index) {
+                var avatarHtml = ""; // Initialize avatar HTML
 
-            
-                </ul>
-              </div>
-            </td>
-            <td class="text-center">
-              <span class="badge bg-label-${data[i].ist_status_flg == 1 ? 'warning' : data[i].ist_status_flg == 3 ? 'info' : data[i].ist_status_flg == 5 ? 'primary' : data[i].ist_status_flg == 7 ? 'success' : data[i].ist_status_flg == 8 ? 'danger' : 'Unknown'}">
-                ${data[i].ist_status_flg == 1 ? 'In Progress' : data[i].ist_status_flg == 3 ? 'Wait Accept' : data[i].ist_status_flg == 5 ? 'Wait Edit' : data[i].ist_status_flg == 7 ? 'Wait Approval' : data[i].ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
-              </span>
-            </td>
-            <td class="text-center">
-            <button type="button" class="btnAccept btn rounded-pill btn-primary"" ${data[i].ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" id="btnAccept">Accept</button>
-            <div class="btn-group">
-            <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
-              <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);" data-popper-placement="bottom-start">
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${data[i].ist_id}">Equipment ${data[i].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${data[i].ist_id}">Job Type ${data[i].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${data[i].ist_id}">Problem Condition ${data[i].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${data[i].ist_id}">Inspection ${data[i].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${data[i].ist_id}">Troubleshooting ${data[i].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${data[i].ist_id}">Required Parts ${data[i].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${data[i].ist_id}">Analyze Problem ${data[i].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${data[i].ist_id}">Prevention ${data[i].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${data[i].ist_id}">Delivery ${data[i].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[i].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${data[i].ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${data[i].equipment_status},${data[i].jopType_status},${data[i].problem_status},${data[i].inspection_status},${data[i].troubleshooting_status},${data[i].rqPart_status},${data[i].analyze_status},${data[i].prevention_status},${data[i].delivery_status}" data-id="${data[i].ist_id}">Submit</a></li>
-              </ul>
-            </div>
-            <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${data[i].ist_status_flg == 3 || data[i].ist_status_flg == 5 || data[i].ist_status_flg == 7 || data[i].ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" >Cancle</button>
-          </td>
-          
-          </tr>
-        `;
+                if (item.swa_emp_code !== null) {
+                    var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : [];
 
-// Your avatar HTML generation here
-var avatarHtml = `
-<li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${data[i].swa_fristname} ${data[i].swa_lastname}" class="avatar pull-up">
-    <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${data[i].swa_emp_code}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-</li>
-`;
-$(`#avatarGroup_${i}`).html(avatarHtml);
+                    swaEmpCodes.forEach(function(empCode) {
+                        empCode = empCode.trim(); // Remove any leading or trailing whitespace
+                        if (empCode) {
+                            avatarHtml += `
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${item.swa_fristname}" class="avatar pull-up">
+                                    <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
+                                </li>
+                            `;
+                        }
+                    });
+                }
 
-// Destroy the DataTable instance
-$('#tblTicketControl').DataTable().destroy();
+                html += `
+                    <tr>
 
-// Reinitialize the DataTable with the updated table body
-$("#tbody").html(html);
+                <td class="text-center">${index + 1}</td>
+                <td class="text-center">${item.ist_line_cd == '' ? `${item.ist_area_other}` : `${item.ist_line_cd}`}</td>
+                <td class="text-center">${item.mts_name === null ? '-' : item.mts_name}</td>
+                <td class="text-center">
+                    <div class="text-center">${item.mjt_name_thai === null ? '-' : item.mjt_name_thai}</div>
+                    <div class="text-center">${item.mjt_name_eng === null ? '-' : item.mjt_name_eng}</div>
+                </td>
+                <td class="text-center">
+                    <div class="text-center"><small class="emp_post text-truncate text-muted">${item.ist_request_by}</small></div>
+                    <div class="text-center">${item.ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
+                </td>
+                <td class="text-center">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${index}">
+                            ${avatarHtml} <!-- Insert avatar HTML here -->
+                        </ul>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span class="badge bg-label-${item.ist_status_flg == 1 ? 'warning' : item.ist_status_flg == 3 ? 'info' : item.ist_status_flg == 5 ? 'primary' : item.ist_status_flg == 7 ? 'success' : item.ist_status_flg == 8 ? 'danger' : 'Unknown'}">
+                        ${item.ist_status_flg == 1 ? 'In Progress' : item.ist_status_flg == 3 ? 'Wait Accept' : item.ist_status_flg == 5 ? 'Wait Edit' : item.ist_status_flg == 7 ? 'Wait Approval' : item.ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
+                    </span>
+                </td>
+                <td class="text-center">
+                    <button type="button" class="btnAccept btn rounded-pill btn-primary" ${item.ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnAccept">Accept</button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
+                        <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);z-index: 10000;" data-popper-placement="bottom-start">
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${item.ist_id}">Equipment ${item.equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${item.ist_id}">Job Type ${item.jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${item.ist_id}">Problem Condition ${item.problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${item.ist_id}">Inspection ${item.inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${item.ist_id}">Troubleshooting ${item.troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${item.ist_id}">Required Parts ${item.rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${item.ist_id}">Analyze Problem ${item.analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${item.ist_id}">Prevention ${item.prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${item.ist_id}">Delivery ${item.delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                            <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${item.ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${item.equipment_status},${item.jopType_status},${item.problem_status},${item.inspection_status},${item.troubleshooting_status},${item.rqPart_status},${item.analyze_status},${item.prevention_status},${item.delivery_status}" data-bs-toggle="modal" data-bs-target="#mdlSubmit" data-id="${item.ist_id}">Submit</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${item.ist_status_flg == 3 || item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${item.ist_id}" value="${item.ist_status_flg}" >Cancel</button>
+                </td>
+            </tr>
+            `;
 
-// Generate HTML for dropdown menu
-var dropdownHtml = `
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton_${i}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Actions
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton_${i}">
-        <li><a class="dropdown-item" href="#">Action 1</a></li>
-        <li><a class="dropdown-item" href="#">Action 2</a></li>
-        <!-- Add more dropdown items here -->
-    </ul>
-</div>
-`;
+        });
+        
+        // Destroy the DataTable instance
+        $('#tblTicketControl').DataTable().destroy();
 
-// Insert dropdown menu HTML above the table
-$(`#tblTicketControl_wrapper_${i}`).prepend(dropdownHtml);
+        // Reinitialize the DataTable with the updated table body
+        $("#tbody").html(html);
 
-// Handle click event for dropdown items
-$(`#dropdownMenuButton_${i}`).on('click', function () {
-// Handle click event here
-var action = $(this).text();
-console.log("Selected action:", action);
-});
-}
+        // Reinitialize the DataTable with the updated table body
+        $("#tblTicketControl").DataTable({ scrollX: true });
 
-// Reinitialize the DataTable with the updated table body
-$("#tblTicketControl").DataTable({ scrollX: true });
-
-// Hide loading indicator
-$("#loadingPage").attr("style", "display: none;");
-},
-error: function (xhr, status, error) {
-console.error('Error:', error);
-}
+        // Hide loading indicator
+        $("#loadingPage").attr("style", "display: none;");
+    },
+    error: function (xhr, status, error) {
+        console.error('Error:', error);
+    }
 });
 }
 
@@ -942,7 +901,8 @@ var fileNamesAnalz;
 
 function uploadImage() {
     var formData = new FormData();
-    var files = $('#myDropzone').get(0).dropzone.files;
+    var myDropzone = Dropzone.forElement("#myDropzone");
+    var files = myDropzone.getAcceptedFiles(); // รับรายการไฟล์ที่ได้รับการยอมรับจาก Dropzone
     var maxFilesAllowed = 3; // กำหนดจำนวนไฟล์สูงสุดที่อนุญาตให้อัปโหลด
 
     // ตรวจสอบจำนวนไฟล์ก่อนที่จะทำการส่ง
@@ -955,8 +915,9 @@ function uploadImage() {
         });
     } else {
         // ทำการส่งไฟล์เมื่อไม่เกิน 3 ไฟล์
-        $.each(files, function(key, el) {
-            formData.append('images[]', el);
+        $.each(files, function(key, file) {
+            // ให้แต่ละไฟล์มีชื่อและเพิ่มลงใน FormData
+            formData.append('images[]', file, file.name); // ใช้ชื่อของไฟล์ในการเพิ่มลงใน FormData
         });
         $.ajax({
             url: base_url('TicketControl/imgUpload'),
@@ -976,6 +937,7 @@ function uploadImage() {
         });
     }
 }
+
 
 
 function uploadImage2() {
@@ -2682,10 +2644,10 @@ function getAllRowData() {
 
 $('#btnSaveEditRequired').on('click', function () {
   getAllRowData();
-        // ------------ Required Parts ---------------
+
         
         var rowDataArrayString = JSON.stringify(rowDataArray);
-        // ------------ End Required Parts ---------------
+
 
     Swal.fire({
         title: 'Are you sure?',
@@ -2735,82 +2697,271 @@ $('#btnSaveEditRequired').on('click', function () {
 });
 
 
-
-
-// -------------------------- Save Prevention ----------------------------
+var prevenLength = 0;
 // ----=- show prevention --------
 $(document).on('click', '.actPrevention', function () {
-    ist_Id = $(this).attr('data-id');
+ist_Id = $(this).attr('data-id');
   
-    // Clear existing data before loading new data
-    $('#checkPrevention').empty();
-  
-    var url = API_URL + "Ticket_control/show_prevention";
-    $.ajax({
-        url: url,
-        type: 'POST',
-        data: {
-            ist_Id: ist_Id,
-        },
-        dataType: 'json',
-        success: function (response) {
-            if (response.result === true) {
-                var data = response.data; // ข้อมูลที่ได้จาก API
+// Clear existing data before loading new data
+$('#checkPrevention').empty();
 
-                // Loop through data and populate the form
-                $.each(data, function(index, item) {
-                    var newDiv = $('<div class="row"></div>');
-                    var inputSuggestions = $('<div class="mb-3 col-lg-6 col-xl-3">\
-                                                <label class="form-label" for="inpSuggestions-' + (index + 1) + '">ข้อเสนอแนะ</label>\
-                                                <input type="text" id="inpSuggestions-' + (index + 1) + '" class="form-control" placeholder="Enter suggestion" value="' + item.ipr_suggestions + '" />\
-                                            </div>');
-  
-                    var inputOperated = $('<div class="mb-3 col-lg-6 col-xl-3">\
-                                                <label class="form-label" for="inpOperated-' + (index + 1) + '">ดำเนินการโดย</label>\
-                                                <input type="text" id="inpOperated-' + (index + 1) + '" class="form-control" placeholder="Enter operator" value="' + item.ipr_operated + '" />\
-                                            </div>');
-  
-                    var inputSchedule = $('<div class="mb-3 col-lg-6 col-xl-3">\
-                                                <label class="form-label" for="inpSchedule-' + (index + 1) + '">กำหนดการเสร็จ</label>\
-                                                <input type="date" id="inpSchedule-' + (index + 1) + '" class="form-control" value="' + item.ipr_schedule + '" />\
-                                            </div>');
-  
-                    var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-3">\
-                                            <button class="btn btn-label-danger mt-4" data-repeater-delete>\
-                                                <i class="bx bx-x me-1"></i>\
-                                                <span class="align-middle">Delete</span>\
-                                            </button>\
+var url = API_URL + "Ticket_control/show_prevention";
+$.ajax({
+    url: url,
+    type: 'POST',
+    data: {
+        ist_Id: ist_Id,
+    },
+    dataType: 'json',
+    success: function (response) {
+        prevenLength = response.data.length;
+        if (response.result === true) {
+            var data = response.data; // ข้อมูลที่ได้จาก API
+
+            // Loop through data and populate the form
+            $.each(data, function(index, item) {
+                var id = 'form-repeater-' + (index + 1);
+                var newDiv = $('<div class="row"></div>');
+                var inputSuggestions = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                            <label class="form-label" for="inpSuggestions-' + (index + 1) + '">ข้อเสนอแนะ</label>\
+                                            <input type="text" id="inpSuggestions-' + (index + 1) + '" class="form-control" placeholder="Enter suggestion" value="' + item.ipr_suggestions + '" />\
                                         </div>');
+
+                var inputOperated = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                            <label class="form-label" for="inpOperated-' + (index + 1) + '">ดำเนินการโดย</label>\
+                                            <input type="text" id="inpOperated-' + (index + 1) + '" class="form-control" placeholder="Enter operator" value="' + item.ipr_operated + '" />\
+                                        </div>');
+
+                var inputSchedule = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                            <label class="form-label" for="inpSchedule-' + (index + 1) + '">กำหนดการเสร็จ</label>\
+                                            <input type="date" id="inpSchedule-' + (index + 1) + '" class="form-control" value="' + item.ipr_schedule + '" />\
+                                        </div>');
+
+                var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-3">\
+                                        <button class="btn btn-label-danger mt-4" data-repeater-delete>\
+                                            <i class="bx bx-x me-1"></i>\
+                                            <span class="align-middle">Delete</span>\
+                                        </button>\
+                                    </div>');
+
+                // Append each input field and delete button to the new row div
+                newDiv.append(inputSuggestions);
+                newDiv.append(inputOperated);
+                newDiv.append(inputSchedule);
+                newDiv.append(deleteButton);
+
+                // Append the new row to the checkPrevention div
+                $('#checkPrevention').append(newDiv);
+            });
+        } else {
+            // Error handling if necessary
+            console.error('Error: Invalid response from API');
+        }
+    },
+    error: function(xhr, status, error) {
+        console.error('Error: ' + status + ' - ' + error);
+    }
+});
+});
+
+var formRepeater = $(".form-repeater");
+
+var row = 2;
+var col = 1;
+var maxElements = 5 - prevenLength;
+
+
+formRepeater.on('submit', function(e) {
+    e.preventDefault();
+  });
+
+formRepeater.repeater({
+  show: function() {
+// Check if the maximum number of elements is reached
+if (row <= maxElements) {
+  var fromControl = $(this).find('.form-control, .form-select');
+  var formLabel = $(this).find('.form-label');
+
+  fromControl.each(function(i) {
+    var id = 'form-repeater-' + row + '-' + col;
+    $(fromControl[i]).attr('id', id);
+    $(formLabel[i]).attr('for', id);
+    col++;
+  });
+
+  row++;
+
+  // Clone the first repeater item and append it to the repeater list
+  var clonedItem = $('[data-repeater-item]').first().clone();
+  $(this).find('[data-repeater-list="group-a"]').append(clonedItem);
+
+  $(this).slideDown();
+} else {
+  alert('Maximum number of elements reached (5).');
+}
+
+  },
   
-                    // Append each input field and delete button to the new row div
-                    newDiv.append(inputSuggestions);
-                    newDiv.append(inputOperated);
-                    newDiv.append(inputSchedule);
-                    newDiv.append(deleteButton);
+
+  hide: function(e) {
+    confirm('Are you sure you want to delete this element?') && $(this).slideUp(e);
+    row--; // Decrement row count when an element is removed
+  }
+});
+
+
+//-------------------------- Save Prevention ----------------------------
+
+$('#btnSavePrevention').on('click', function () {
+getAllRowDataPrevention();
+console.log(allValues);
+// ส่งข้อมูลที่ได้รับมาไปที่ API
+});
+
+
+
+// // ----=- show prevention --------
+// $(document).on('click', '.actPrevention', function () {
+//     var ist_Id = $(this).attr('data-id');
   
-                    // Append the new row to the checkPrevention div
-                    $('#checkPrevention').append(newDiv);
-                });
-            } else {
-                // Error handling if necessary
-                console.error('Error: Invalid response from API');
+//     // Clear existing data before loading new data
+//     $('#checkPrevention').empty();
+  
+//     var url = API_URL + "Ticket_control/show_prevention";
+//     $.ajax({
+//         url: url,
+//         type: 'POST',
+//         data: {
+//             ist_Id: ist_Id,
+//         },
+//         dataType: 'json',
+//         success: function(response) {
+//             if (response.result === true) {
+//                 var data = response.data;
+//                 // Check if the received data is an array
+//                 if (Array.isArray(data)) {
+//                     // Loop through the data
+//                     for (var i = 0; i < data.length; i++) {
+//                         var itemIndex = i + 1;
+//                         var newDiv = $('<div class="row"></div>');
+//                         var inputSuggestions = $('<div class="mb-3 col-lg-6 col-xl-4">\
+//                             <label class="form-label" for="inpSuggestions-' + itemIndex + '">ข้อเสนอแนะที่ ' + itemIndex + '</label>\
+//                             <input type="text" id="inpSuggestions-' + itemIndex + '" class="form-control" placeholder="Enter suggestion" value="' + (data[i].ipr_suggestions || '') + '">\
+//                         </div>');
+//                         var inputOperated = $('<div class="mb-3 col-lg-6 col-xl-4">\
+//                             <label class="form-label" for="inpOperated-' + itemIndex + '">ดำเนินการโดย</label>\
+//                             <input type="text" id="inpOperated-' + itemIndex + '" class="form-control" placeholder="Enter operator" value="' + (data[i].ipr_operated || '') + '">\
+//                         </div>');
+//                         var inputSchedule = $('<div class="mb-3 col-lg-6 col-xl-4">\
+//                             <label class="form-label" for="inpSchedule-' + itemIndex + '">กำหนดการเสร็จ</label>\
+//                             <input type="date" id="inpSchedule-' + itemIndex + '" class="form-control" value="' + (data[i].ipr_schedule || '') + '">\
+//                         </div>');
+                        
+//                         newDiv.append(inputSuggestions);
+//                         newDiv.append(inputOperated);
+//                         newDiv.append(inputSchedule);
+            
+//                         $('#checkPrevention').append(newDiv);
+//                     }
+                    
+//                     // Add additional empty rows if needed
+//                     var numEmptyRows = 5 - data.length;
+//                     for (var j = 0; j < numEmptyRows; j++) {
+//                         var emptyItemIndex = data.length + j + 1;
+//                         var emptyDiv = $('<div class="row"></div>');
+//                         var emptyInputSuggestions = $('<div class="mb-3 col-lg-6 col-xl-4">\
+//                             <label class="form-label" for="inpSuggestions-' + emptyItemIndex + '">ข้อเสนอแนะที่ ' + emptyItemIndex + '</label>\
+//                             <input type="text" id="inpSuggestions-' + emptyItemIndex + '" class="form-control" placeholder="Enter suggestion" value="">\
+//                         </div>');
+//                         var emptyInputOperated = $('<div class="mb-3 col-lg-6 col-xl-4">\
+//                             <label class="form-label" for="inpOperated-' + emptyItemIndex + '">ดำเนินการโดย</label>\
+//                             <input type="text" id="inpOperated-' + emptyItemIndex + '" class="form-control" placeholder="Enter operator" value="">\
+//                         </div>');
+//                         var emptyInputSchedule = $('<div class="mb-3 col-lg-6 col-xl-4">\
+//                             <label class="form-label" for="inpSchedule-' + emptyItemIndex + '">กำหนดการเสร็จ</label>\
+//                             <input type="date" id="inpSchedule-' + emptyItemIndex + '" class="form-control" value="">\
+//                         </div>');
+                        
+//                         emptyDiv.append(emptyInputSuggestions);
+//                         emptyDiv.append(emptyInputOperated);
+//                         emptyDiv.append(emptyInputSchedule);
+            
+//                         $('#checkPrevention').append(emptyDiv);
+//                     }
+//                 } else {
+//                     // Handle other data structures as needed
+//                 }
+//             } else {
+//                 // Handle false result if needed
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error: ' + status + ' - ' + error);
+//         }
+//     });
+// });
+
+var allValues;
+
+function getAllRowDataPrevention()  {
+    allValues = [];
+  
+    // Iterate through each repeated form element
+    formRepeater.find("[data-repeater-list='group-a'] [data-repeater-item]").each(function() {
+        var formValues = {};
+  
+        // Flag to determine if all input values are null or empty
+        var allValuesNull = true;
+  
+        // Iterate through each text input field within the repeated form element
+        $(this).find(".form-control").each(function() {
+            var fieldName = $(this).attr("id");
+            var fieldValue = $(this).val().trim(); // Remove leading and trailing whitespaces
+  
+            // Check if the value is not null or empty
+            if (fieldValue !== null && fieldValue !== "") {
+                allValuesNull = false;
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error: ' + status + ' - ' + error);
+  
+            formValues[fieldName] = fieldValue;
+        });
+  
+        // If any input has a non-null or non-empty value, add the row's values to the array
+        if (!allValuesNull) {
+            allValues.push(formValues);
         }
     });
-});
-
-
-  //-------------------------- Save Prevention ----------------------------
-
-  $('#btnSavePrevention').on('click', function () {
-    getAllRowDataPrevention();
+  
+    // Log or do something with allValues
     console.log(allValues);
-    // ส่งข้อมูลที่ได้รับมาไปที่ API
-});
+}
+
+
+
+//   //-------------------------- Save Prevention ----------------------------
+//   $('#btnSavePrevention').on('click', function () {
+//     const allValues = getAllRowDataPrevention();
+
+//     console.log('All values:');
+//     allValues.forEach(function(row, index) {
+//         console.log('Row', index + 1);
+//         Object.keys(row).forEach(function(key) {
+//             console.log(key + ':', row[key]);
+//         });
+//     });
+
+//     for (let i = 1; i <= 5; i++) {
+//         const inpSuggestions = $(`#inpSuggestions-${i}`).val();
+//         const inpOperated = $(`#inpOperated-${i}`).val();
+//         const inpSchedule = $(`#inpSchedule-${i}`).val();
     
+//         console.log(`inpSuggestions-${i}:`, inpSuggestions);
+//         console.log(`inpOperated-${i}:`, inpOperated);
+//         console.log(`inpSchedule-${i}:`, inpSchedule);
+//     }
+// });
+
+
 // function showPreventionData(data) {
 //   var formRepeater = $(".form-repeater");
 //   var repeaterList = formRepeater.find('[data-repeater-list="group-a"]');

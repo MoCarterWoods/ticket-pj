@@ -46,6 +46,7 @@ class IssueTicket extends CI_Controller {
 	
 	public function issTicket() {
         $this->another_js = "<script src='" . base_url() . "assets/js/issueTicket.js'></script>";
+        $this->another_js .= "<script src='" . base_url() . "assets/vendor/js/forms-extras.js'></script>";
         $this->render_view('view_issueTicket');
 
     }
@@ -181,7 +182,7 @@ class IssueTicket extends CI_Controller {
                         $timestamp = time();
                         $fileExtension = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
                         $newFileName = $timestamp . '_' . $originalFileName;
-                        
+
                         $uploadedFile = $uploadDirectory . basename($newFileName);
     
                         // ... (rest of the PHP code remains the same)

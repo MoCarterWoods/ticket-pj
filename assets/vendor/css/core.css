@@ -2263,9 +2263,11 @@ progress {
   color: #fff;
   border-color: #394859;
 }
-
+.dataTables_scrollBody{
+  overflow: visible !important;
+}
 .table-responsive {
-  overflow-x: auto;
+  overflow-x: visible;
   -webkit-overflow-scrolling: touch;
 }
 

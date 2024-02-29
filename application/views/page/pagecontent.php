@@ -392,7 +392,7 @@
 	<!-- <script src="<?php echo base_url() ?>/assets/vendor/js/docs.js"></script> -->
 	<script src="<?php echo base_url() ?>/assets/vendor/js/forms-file-upload.js"></script>
 
-	<script src="<?php echo base_url() ?>/assets/vendor/js/forms-extras.js"></script>
+	<!-- <script src="<?php echo base_url() ?>/assets/vendor/js/forms-extras.js"></script> -->
 
 	<script src="<?php echo base_url() ?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
