@@ -1,11 +1,10 @@
+
 $(document).ready(function () {
     $("#loadingPage").attr("style", "display: none;");
-});
-$(document).ready(function () {
     
     var dropdown = $('#selArea');
     var selProduction = $('#selProduction');
-    var selLine = $('#selLine'); // เพิ่มตัวแปร selLine
+    var selLine = $('#selLine'); 
     var textother = $('#inpOther');
 
     var selpdDiv = $('#selpd');
@@ -32,8 +31,8 @@ $(document).ready(function () {
             selLine.empty().val(' ');
             textother.val('');
 
-            console.log(selProduction.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
-            console.log(selLine.val()); // ตรวจสอบค่าที่ได้หลังจาก .val('')
+            console.log(selProduction.val()); 
+            console.log(selLine.val()); 
         } else {
             selpdDiv.hide();
             selotherDiv.hide();
