@@ -245,7 +245,7 @@
                     </div>
 
                     <!-- Problem Con -->
-                    <div id="navs-pills-top-problem" class="content">
+                    <div id="navs-pills-top-problem" class="content show active">
                         <div class="content-header mb-3">
                             <h6 class="mb-0">Problem Condition</h6>
                             <small>สภาพปัญหา / แผน PM / สภาพปัญหาก่อนการปรับปรุง / Project</small>
@@ -295,6 +295,55 @@
                                                     </form>
 
                                                 </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                            <label for="inpDate" class="form-label">เวลาเริ่มหยุดผลิต</label>
+                                                                <input type="date" id="inpDate" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class=" col">
+                                                                <label for="inpTimeStop" class="form-label">Time</label>
+                                                                <input type="time" id="inpTimeStop" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                            <label for="inpRequester" class="form-label">ผู้ร้องขอการบำรุงรักษา</label>
+                                                                <input type="date" id="inpRequester" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class=" col">
+                                                                <label for="inpTimeRequester" class="form-label">Time</label>
+                                                                <input type="time" id="inpTimeRequester" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                            <label for="inpApprove" class="form-label">อนุมัติการเข้าบำรุงรักษา</label>
+                                                                <input type="date" id="inpApprove" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class=" col">
+                                                                <label for="inpTimeApprove" class="form-label">Time</label>
+                                                                <input type="time" id="inpTimeApprove" class="form-control" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                             </div>
 
                         </div>
@@ -953,6 +1002,8 @@
             var col10 = row.insertCell(9);
             var col11 = row.insertCell(10);
             var col12 = row.insertCell(11);
+            var col13 = row.insertCell(12);
+
 
             col1.innerHTML = `<label class="form-label">Name</label><input class="form-select" value="${selToolingrq.value}" disabled>`;
             col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${addMakerrq.value}" disabled>`;
@@ -965,14 +1016,8 @@
             col9.innerHTML = `<input type="number" class="form-control" value="${inpOrderqty.value}">`;
             col10.innerHTML = `<input type="date" class="form-control" value="${inpReceived.value}">`;
             col11.innerHTML = `<input type="number" class="form-control" value="${inpReceivedqty.value}">`;
-            col12.innerHTML = `<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)">
-        <i class="bx bx-edit me-1"></i>
-        <span class="align-middle">Edit</span>
-        </button>
-                    <button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)">
-                      <i class="bx bx-x me-1"></i>
-                      <span class="align-middle">Delete</span>
-                    </button>`;
+            col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
+              col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
 
             col6.style.display = "none";
             col7.style.display = "none";
@@ -1102,6 +1147,7 @@
         var col10 = row.insertCell(9);
         var col11 = row.insertCell(10);
         var col12 = row.insertCell(11);
+        var col13 = row.insertCell(12);
         col1.innerHTML = `<label class="form-label">Name</label><input type="text" class="form-control" value="${editedselToolingrq}" disabled>`;
         col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${editedaddMakerrq}" disabled>`;
         col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${editedaddModelrq}" disabled>`;
@@ -1113,16 +1159,9 @@
         col9.innerHTML = `<input type="number" class="form-control" value="${editedInpOrderqty}" style="display:none">`;
         col10.innerHTML = `<input type="date" class="form-control" value="${editedInpReceived}" style="display:none">`;
         col11.innerHTML = `<input type="number" class="form-control" value="${editedInpReceivedqty}" style="display:none">`;
-        col12.innerHTML = `<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)">
-                                    <i class="bx bx-edit me-1"></i>
-                                    <span class="align-middle">Edit</span>
-                                    </button>
+        col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
+              col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
 
-                                    
-                                    <button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)">
-                          <i class="bx bx-x me-1"></i>
-                          <span class="align-middle">Delete</span>
-                                </button>`;
         col6.style.display = "none";
         col7.style.display = "none";
         col8.style.display = "none";

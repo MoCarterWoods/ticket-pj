@@ -94,6 +94,13 @@ class AppPermissionDetail extends CI_Controller {
 
     }
 
+    public function callApiAddPermiss()
+    {
+        $result = $this->curPostRequest('App_Manage_permis_detail/insert_permiss', array('data' => serialize($_POST),'session' => serialize($this->session->userdata('userName'))));
+        echo json_encode($result);
+
+    }
+
 
     public function test()
     {

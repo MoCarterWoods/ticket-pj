@@ -199,7 +199,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel1">Problem Condition | jobtypr no.</h5>
+        <h5 class="modal-title" id="ModalLabelProblem">Problem Condition | jobtypr no.</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -234,7 +234,6 @@
 
 
             </form>
-
 
           </div>
         </div>
@@ -307,14 +306,8 @@
         <div class="row justify-content-center">
           <div class="col">
             <label for="dropzone-multi-inspection" class="form-label">Upload Images</label>
-            <form action="/upload" class="dropzone needsclick" id="dropzone-multi-inspection">
-              <div class="dz-message needsclick">
-                Drop files here or click to upload
-                <span class="note needsclick">(This is just a demo dropzone. Selected files are <span class="fw-medium">not</span> actually uploaded.)</span>
-              </div>
-              <div class="fallback">
-                <input name="file" type="file" />
-              </div>
+            <form action="/upload" id="myDropzoneinspection" class="dropzone needsclick">
+
 
             </form>
           </div>
@@ -370,15 +363,10 @@
 
         <div class="row justify-content-center mt-3">
           <div class="col">
-            <label for="dropzone-multi-inspection" class="form-label">Upload Images</label>
-            <form action="/upload" class="dropzone needsclick" id="dropzone-multi-troubleshooting">
-              <div class="dz-message needsclick">
-                Drop files here or click to upload
-                <span class="note needsclick">(This is just a demo dropzone. Selected files are <span class="fw-medium">not</span> actually uploaded.)</span>
-              </div>
-              <div class="fallback">
-                <input name="file" type="file" />
-              </div>
+            <label for="dropzone-multi-troubleshooting" class="form-label">Upload Images</label>
+            <form action="/upload" id="myDropzonetroubleshooting" class="dropzone needsclick">
+
+
             </form>
           </div>
         </div>
@@ -638,14 +626,9 @@
         <div class="row justify-content-center mt-3">
           <div class="col">
             <label for="dropzone-multi-analyz" class="form-label">Upload Images</label>
-            <form action="/upload" class="dropzone needsclick" id="dropzone-multi-analyz">
-              <div class="dz-message needsclick">
-                Drop files here or click to upload
-                <span class="note needsclick">(This is just a demo dropzone. Selected files are <span class="fw-medium">not</span> actually uploaded.)</span>
-              </div>
-              <div class="fallback">
-                <input name="file" type="file" />
-              </div>
+            <form action="/upload" id="myDropzoneanalyz" class="dropzone needsclick">
+
+
             </form>
           </div>
         </div>
@@ -705,7 +688,7 @@
               </div>
             </div>
             <div class="mb-0">
-              <button type="submit" class="btn btn-primary" data-repeater-create>
+              <button type="submit" class="btn btn-primary" data-repeater-create-f>
                 <i class="bx bx-plus me-1"></i>
                 <span class="align-middle">Add</span>
               </button>

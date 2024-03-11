@@ -1,12 +1,11 @@
-$(document).ready(function () {
-  $("#loadingPage").attr("style", "display: none;");
-});
+
 $(document).ready(function() {
     shDataTable(); // เรียกใช้ฟังก์ชัน shDataTable เมื่อเอกสารพร้อม
   });
   
   function shDataTable() {
     // URL of the API
+    
     var apiUrl = 'http://127.0.0.1/api/Ticket_History/show_data';
   
     // Perform Ajax request
@@ -17,50 +16,74 @@ $(document).ready(function() {
       success: function (data) {
         var html = "";
         // Loop through the data and append menu items
-        for (var i = 0; i < data.length; i++) {
-         
-          html += `
+        data.forEach(function(item, index) {
+            var avatarHtml = ""; // Initialize avatar HTML
+            if (item.swa_emp_code !== null) { // Check if swa_emp_code is not null
+                var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : []; // Split swa_emp_code by comma or initialize as empty array if it's null or empty
+            
+                var swaFirstNames = item.swa_fristname ? item.swa_fristname.split(',') : []; // Split swa_fristname by comma or initialize as empty array if it's null or empty
+            
+                for (var k = 0; k < swaEmpCodes.length; k++) {
+                    var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
+                    var firstName = swaFirstNames[k] ? swaFirstNames[k].trim() : ''; // Remove any leading or trailing whitespace for the first name
+            
+                    if (empCode) { // Check if the employee code is not empty
+                        avatarHtml += `
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${firstName}" class="avatar pull-up">
+                                <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
+                            </li>
+                        `;
+                    }
+                }
+            }
+            
+            html += `
             <tr>
-              <td class="text-center">${i + 1}</td>
-              <td class="text-center">${data[i].ist_line_cd == '' ? `${data[i].ist_area_other}` : `${data[i].ist_line_cd}`}</td>
-              <td class="text-center">${data[i].mts_name === null ? '-' : data[i].mts_name}</td>
-              <td class="text-center">${data[i].ist_process === null ? '-' : data[i].ist_process}</td>
+              <td class="text-center">${index + 1}</td>
+              <td class="text-center">${item.ist_line_cd == '' ? `${item.ist_area_other}` : `${item.ist_line_cd}`}</td>
+              <td class="text-center">${item.mts_name === null ? '-' : item.mts_name}</td>
+              <td class="text-center">${item.ist_process === null ? '-' : item.ist_process}</td>
               <td class="text-center">
-                <div class="text-center">${data[i].mjt_name_thai === null ? '-' : data[i].mjt_name_thai}</div>
-                <div class="text-center">${data[i].mjt_name_eng === null ? '-' : data[i].mjt_name_eng}</div>
+                <div class="text-center">${item.mjt_name_thai === null ? '-' : item.mjt_name_thai}</div>
+                <div class="text-center">${item.mjt_name_eng === null ? '-' : item.mjt_name_eng}</div>
               </td>
               <td class="text-center">
-                <div class="text-center"><small class="emp_post text-truncate text-muted">${data[i].ist_request_by}</small></div>
-                <div class="text-center">${data[i].ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
+                <div class="text-center"><small class="emp_post text-truncate text-muted">${item.ist_request_by}</small></div>
+                <div class="text-center">${item.ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
               </td>
               <td class="text-center">
-              ${data[i].swa_emp_code === null ? '-' : data[i].swa_emp_code.split(",").join(" | ")}
+                <div class="d-flex flex-wrap align-items-center">
+                  <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${index}">
+                      ${avatarHtml} <!-- Insert avatar HTML here -->
+                  </ul>
+                </div>
               </td>
               <td class="text-center">
-              <button type="button" class="btnDetail btn rounded-pill btn-primary"" data-ac-id="${data[i].ist_id}" value="${data[i].ist_status_flg}" id="btnDetail">View Detail</button>
+              <button type="button" class="btnDetail btn rounded-pill btn-primary" data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnDetail" onclick="openModal()">View Detail</button>
             </td>
             
             </tr>
-          `;
-  
-          // เรียกใช้งาน generateAvatarHTML เพื่อสร้าง HTML สำหรับ avatar
-          var avatarHtml = generateAvatarHTML(data, i);
-          $(`#avatarGroup_${i}`).html(avatarHtml);
-        }
-  
-        // ทำลาย DataTable ที่มีอยู่ก่อนที่จะปรับปรุงเนื้อหาของตาราง
-        $('#tblTicketHistory').DataTable().destroy();
-  
-        // ปรับปรุงเนื้อหาของตารางและเริ่มใช้ DataTable ใหม่
-        $("#tbody").html(html).promise().done(() => {
-          $("#tblTicketHistory").DataTable({ scrollX: true });
-        });
-      },
-      error: function (xhr, status, error) {
-        console.error('Error:', error);
-      }
-    });
-  }
+            `;
+          });
+  $("#loadingPage").attr("style", "display: none;");
+          
+                      // Destroy the DataTable instance
+                      $('#tblTicketHistory').DataTable().destroy();
+          
+                      // Reinitialize the DataTable with the updated table body
+                      $("#tbody").html(html);
+          
+                      // Reinitialize the DataTable with the updated table body
+                      $("#tblTicketHistory").DataTable({ scrollX: true });
+          
+                      // Hide loading indicator
+                      $("#loadingPage").attr("style", "display: none;");
+                  },
+                  error: function (xhr, status, error) {
+                      console.error('Error:', error);
+                  }
+              });
+          }
   
   function generateAvatarHTML(data, i) {
     var avatarHtml = "";
@@ -78,4 +101,96 @@ $(document).ready(function() {
     }
     return avatarHtml;
   }
-  
+  function openModal() {
+    $('#mdlEdit').modal('show');
+}
+
+
+
+$(document).on('click', '#btnSearch', function () {
+  var inpStartDate = $('#inpStartDate').val();
+  var inpEndDate = $('#inpEndDate').val();
+  var apiUrl = 'http://127.0.0.1/api/Ticket_History/show_data_list';
+
+  $.ajax({
+      url: apiUrl,
+      type: 'POST',
+      data: {
+          inpStartDate: inpStartDate,
+          inpEndDate: inpEndDate
+      },
+      dataType: 'json',
+      
+      success: function (data) {
+        $("#loadingPage").show();
+
+        var html = "";
+        // Loop through the data and append menu items
+        data.forEach(function(item, index) {
+            var avatarHtml = ""; // Initialize avatar HTML
+            if (item.swa_emp_code !== null) { // Check if swa_emp_code is not null
+                var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : []; // Split swa_emp_code by comma or initialize as empty array if it's null or empty
+            
+                var swaFirstNames = item.swa_fristname ? item.swa_fristname.split(',') : []; // Split swa_fristname by comma or initialize as empty array if it's null or empty
+            
+                for (var k = 0; k < swaEmpCodes.length; k++) {
+                    var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
+                    var firstName = swaFirstNames[k] ? swaFirstNames[k].trim() : ''; // Remove any leading or trailing whitespace for the first name
+            
+                    if (empCode) { // Check if the employee code is not empty
+                        avatarHtml += `
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${firstName}" class="avatar pull-up">
+                                <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
+                            </li>
+                        `;
+                    }
+                }
+            }
+            
+            html += `
+            <tr>
+              <td class="text-center">${index + 1}</td>
+              <td class="text-center">${item.ist_line_cd == '' ? `${item.ist_area_other}` : `${item.ist_line_cd}`}</td>
+              <td class="text-center">${item.mts_name === null ? '-' : item.mts_name}</td>
+              <td class="text-center">${item.ist_process === null ? '-' : item.ist_process}</td>
+              <td class="text-center">
+                <div class="text-center">${item.mjt_name_thai === null ? '-' : item.mjt_name_thai}</div>
+                <div class="text-center">${item.mjt_name_eng === null ? '-' : item.mjt_name_eng}</div>
+              </td>
+              <td class="text-center">
+                <div class="text-center"><small class="emp_post text-truncate text-muted">${item.ist_request_by}</small></div>
+                <div class="text-center">${item.ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
+              </td>
+              <td class="text-center">
+                <div class="d-flex flex-wrap align-items-center">
+                  <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${index}">
+                      ${avatarHtml} <!-- Insert avatar HTML here -->
+                  </ul>
+                </div>
+              </td>
+              <td class="text-center">
+              <button type="button" class="btnDetail btn rounded-pill btn-primary" data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnDetail" onclick="openModal()">View Detail</button>
+            </td>
+            
+            </tr>
+            `;
+          });
+  $("#loadingPage").attr("style", "display: none;");
+          
+                      // Destroy the DataTable instance
+                      $('#tblTicketHistory').DataTable().destroy();
+          
+                      // Reinitialize the DataTable with the updated table body
+                      $("#tbody").html(html);
+          
+                      // Reinitialize the DataTable with the updated table body
+                      $("#tblTicketHistory").DataTable({ scrollX: true });
+          
+                      // Hide loading indicator
+                      $("#loadingPage").attr("style", "display: none;");
+                  },
+      error: function (xhr, status, error) {
+          console.error('Error:', error);
+      }
+  });
+});

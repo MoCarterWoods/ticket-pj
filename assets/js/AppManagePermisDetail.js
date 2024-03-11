@@ -99,6 +99,93 @@ function shDataTable() {
 
 
 
+//-------------------------- add Permiss ----------------------------------
+
+$(document).ready(function () {
+    $('#btnSaveAddPer').on('click', function () {
+        var arrDataAdd = [];
+        var PermisID = $('#selGroup').val();
+        var MenuGroup = $('#selMenuGroupName').val();
+
+
+        if (MenuGroup == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Please choose MenuGroup code',
+            })
+        }  else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to add Permission",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, add Permission!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = API_URL + 'App_Manage_permis_detail/insert_permiss';
+                    const formData = new FormData()
+                    formData.append('PermisID', PermisID);
+                    formData.append('MenuGroup', MenuGroup);
+
+                    
+                    $.ajax({
+                        url: base_url('AppPermissionDetail/callApiAddPermiss'),
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+ contentType: false,
+    cache: false,
+                        dataType: 'json',
+                        success: function(res) {
+                            if (res.result == 1) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success !',
+                                    html: 'Add Permission success',
+                                    timer: 2500,
+                                }).then(() => {
+                                    // $('#btnBack').trigger('click');
+                                    loadData()
+                                    
+                                });
+                            } else if (res.result == 9) {
+                                Swal.fire({
+            
+                                    icon: 'warning',
+                                    title: 'Ooops...',
+                                    html: 'This permission already exists.',
+                                }).then(() => {
+                                    
+                                });
+                            } else if (res.result == 2) {
+                                Swal.fire({
+            
+                                    icon: 'warning',
+                                    title: 'Ooops...',
+                                    html: 'Group and Sub do not match.',
+                                }).then(() => {
+                                    
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Ooops...',
+                                    html: 'A system error has occurred.',
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
 
 function MenuDropdown() {
     var dropdown = $('.selMenuGroupName');

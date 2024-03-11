@@ -4,9 +4,8 @@
 ******************************************************************************/
 
 .menu .app-brand.demo {
-  height: 90px;
-    width: 260px;
-    margin-top: 12px;
+  height: -15px;
+    width: 215px;
     background-color: #ffffff;
 }
 

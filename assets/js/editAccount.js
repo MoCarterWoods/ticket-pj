@@ -90,12 +90,12 @@ $('#btnSaveEdit').on('click', function () {
 
         Swal.fire({
             title: 'Are you sure?',
-            text: "Do you want to add Account",
+            text: "Do you want to edit Account details?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, add account!'
+            confirmButtonText: 'Yes, edit!'
         }).then((result) => {
             if (result.isConfirmed) {
                 var url = API_URL + 'Edit_Account/update_user';
@@ -119,7 +119,7 @@ cache: false,
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Success !',
-                                html: 'Add account success',
+                                html: 'edit account details success',
                                 timer: 2500,
                             }).then(() => {
                                 location.reload();

@@ -11,23 +11,30 @@
             <h5 class="card-header">Ticket Control</h5>
             <div class="card-body">
                 <div class="row">
+                <div class="card-body">
+                <div class="row">
                     <div class="col-md-2 mb-2">
-                    <label for="dateSelect" class="form-label">Daily or Monthly</label>
-                        <select id="dateSelect" class="form-select">
-                            <option>Select date</option>
-                            <option value="1">Daily</option>
-                            <option value="2">Monthly</option>
-                        </select>
+                        <label for="selDaiily" class="form-label">Start Date</label>
+                        <input class="form-control" type="date" value="" id="inpStartDate">
                     </div>
-                    <div class="col-md-2 mb-2" >
+                    <div class="col-md-2 mb-2">
+                        <label for="selDaiily" class="form-label">End Date</label>
+                        <input class="form-control" type="date" value="" id="inpEndDate">
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <button class="btn btn-primary" id="btnSearch" style="margin-top: 28px;"><span class="tf-icons bx bx-search-alt me-1"></span>Search</button>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-md-2 mb-2" style="display: none;">
                         <label for="selDaiily" class="form-label">Daily</label>
                         <input class="form-control" type="date" value="" id="selDaiily">
                     </div>
-                    <div class="col-md-2 mb-2" >
+                    <div class="col-md-2 mb-2" style="display: none;">
                         <label for="selDaiily" class="form-label">Daily</label>
                         <input class="form-control" type="date" value="" id="selDaiily">
                     </div>
-                    <div class="col-md-2 mb-2" >
+                    <div class="col-md-2 mb-2" style="display: none;">
                         <label for="selDaiily" class="form-label">Daily</label>
                         <input class="form-control" type="date" value="" id="selDaiily">
                     </div>
@@ -114,3 +121,4 @@
         </div>
     </div>
 </div>
+

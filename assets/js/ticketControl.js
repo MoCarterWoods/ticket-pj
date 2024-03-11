@@ -24,30 +24,39 @@ function shDataTable() {
         contentType: false,
         cache: false,
         dataType: 'json',
-        success: function (data) {
+        success: function(data) {
             var html = "";
             // Loop through the data and append menu items
             data.forEach(function(item, index) {
                 var avatarHtml = ""; // Initialize avatar HTML
                 if (item.swa_emp_code !== null) { // Check if swa_emp_code is not null
-                    var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : []; // Split swa_emp_code by comma or initialize as empty array if it's null or empty
-                
-                    var swaFirstNames = item.swa_fristname ? item.swa_fristname.split(',') : []; // Split swa_fristname by comma or initialize as empty array if it's null or empty
-                
-                    for (var k = 0; k < swaEmpCodes.length; k++) {
-                        var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
-                        var firstName = swaFirstNames[k] ? swaFirstNames[k].trim() : ''; // Remove any leading or trailing whitespace for the first name
-                
-                        if (empCode) { // Check if the employee code is not empty
-                            avatarHtml += `
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${firstName}" class="avatar pull-up">
-                                    <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-                                </li>
-                            `;
-                        }
-                    }
-                }
-                
+                  var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : []; // Split swa_emp_code by comma or initialize as an empty array if it's null or empty
+                  var swaFirstNames = item.swa_fristname ? item.swa_fristname.split(',') : []; // Split swa_fristname by comma or initialize as an empty array if it's null or empty
+              
+                  for (var k = 0; k < Math.min(4, swaEmpCodes.length); k++) {
+                      var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
+                      var firstName = swaFirstNames[k] ? swaFirstNames[k].trim() : ''; // Remove any leading or trailing whitespace for the first name
+              
+                      if (empCode) { // Check if the employee code is not empty
+                          avatarHtml += `
+                          <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${empCode}" class="avatar pull-up">
+                                          <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='http://192.168.161.219/ticketMaintenance/assets/img/avatars/no-avatar.png'">
+                                      </li>
+                          `;
+                      }
+                  }
+              
+                  // Check if there are more than 4 avatars
+                  if (swaEmpCodes.length > 4) {
+                      const remainingCount = swaEmpCodes.length - 4;
+                      avatarHtml += `
+                          <li style="font-size: 1.5rem; padding-left: 15px;">
+                              <span>+${remainingCount}</span>
+                          </li>
+                      `;
+                  }
+              }
+
                 html += `
                 <tr>
                     <td class="text-center">${index + 1}</td>
@@ -96,25 +105,25 @@ function shDataTable() {
                     </td>
                 </tr>
                 `;
-        });
-        
-                    // Destroy the DataTable instance
-                    $('#tblTicketControl').DataTable().destroy();
-        
-                    // Reinitialize the DataTable with the updated table body
-                    $("#tbody").html(html);
-        
-                    // Reinitialize the DataTable with the updated table body
-                    $("#tblTicketControl").DataTable({ scrollX: true });
-        
-                    // Hide loading indicator
-                    $("#loadingPage").attr("style", "display: none;");
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error:', error);
-                }
             });
+
+            // Destroy the DataTable instance
+            $('#tblTicketControl').DataTable().destroy();
+
+            // Reinitialize the DataTable with the updated table body
+            $("#tbody").html(html);
+
+            // Reinitialize the DataTable with the updated table body
+            $("#tblTicketControl").DataTable({ scrollX: true });
+
+            // Hide loading indicator
+            $("#loadingPage").attr("style", "display: none;");
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
         }
+    });
+}
 
 
 $(document).on("click", "#btnViewAll", function () {
@@ -138,31 +147,34 @@ function viewAllData() {
             var html = "";
             // Loop through the data and append menu items
             data.forEach(function(item, index) {
-                var ulId = `dropdownMenuUl_${index}`;
-
                 var avatarHtml = ""; // Initialize avatar HTML
-                if (item.swa_emp_code !== null) {
-                    // Split swa_emp_code and swa_fristname by comma or initialize as empty array if null or empty
-                    var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : [];
-                    var swaFirstNames = item.swa_fristname ? item.swa_fristname.split(',') : [];
-                    
-                    // Loop through emp codes and first names
-                    for (var k = 0; k < swaEmpCodes.length; k++) {
-                        var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
-                        var firstName = swaFirstNames[k] ? swaFirstNames[k].trim() : '';
-
-                        // Check if the employee code is not empty
-                        if (empCode) {
-                            avatarHtml += `
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${firstName}" class="avatar pull-up">
-                                    <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='assets/img/avatars/no-avatar.png'">
-                                </li>
-                            `;
-                        }
-                    }
-                }
-
-
+                if (item.swa_emp_code !== null) { // Check if swa_emp_code is not null
+                  var swaEmpCodes = item.swa_emp_code ? item.swa_emp_code.split(',') : []; // Split swa_emp_code by comma or initialize as an empty array if it's null or empty
+                  var swaFirstNames = item.swa_fristname ? item.swa_fristname.split(',') : []; // Split swa_fristname by comma or initialize as an empty array if it's null or empty
+              
+                  for (var k = 0; k < Math.min(4, swaEmpCodes.length); k++) {
+                      var empCode = swaEmpCodes[k].trim(); // Remove any leading or trailing whitespace
+                      var firstName = swaFirstNames[k] ? swaFirstNames[k].trim() : ''; // Remove any leading or trailing whitespace for the first name
+              
+                      if (empCode) { // Check if the employee code is not empty
+                          avatarHtml += `
+                          <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="${empCode}" class="avatar pull-up">
+                                          <img class="rounded-circle" src="http://192.168.161.207/tbkk_shopfloor_sys/asset/img_emp/${empCode}.jpg" alt="Avatar" onerror="this.onerror=null; this.src='http://192.168.161.219/ticketMaintenance/assets/img/avatars/no-avatar.png'">
+                                      </li>
+                          `;
+                      }
+                  }
+              
+                  // Check if there are more than 4 avatars
+                  if (swaEmpCodes.length > 4) {
+                      const remainingCount = swaEmpCodes.length - 4;
+                      avatarHtml += `
+                          <li style="font-size: 1.5rem; padding-left: 15px;">
+                              <span>+${remainingCount}</span>
+                          </li>
+                      `;
+                  }
+              }
                 html += `
                     <tr>
                         <td class="text-center">${index + 1}</td>
@@ -192,19 +204,8 @@ function viewAllData() {
                         <button type="button" class="btnAccept btn rounded-pill btn-primary" ${item.ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnAccept">Accept</button>
                             <div class="btn-group">
                             <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle btn-edit-drop" data-id="${item.ist_id}" data-bs-toggle="dropdown" aria-expanded="true" ${item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
-                            <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);z-index: 10000;" data-popper-placement="bottom-start">
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${item.ist_id}">Equipment ${item.equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${item.ist_id}">Job Type ${item.jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${item.ist_id}">Problem Condition ${item.problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${item.ist_id}">Inspection ${item.inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${item.ist_id}">Troubleshooting ${item.troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${item.ist_id}">Required Parts ${item.rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${item.ist_id}">Analyze Problem ${item.analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${item.ist_id}">Prevention ${item.prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${item.ist_id}">Delivery ${item.delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
-                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${item.ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${item.equipment_status},${item.jopType_status},${item.problem_status},${item.inspection_status},${item.troubleshooting_status},${item.rqPart_status},${item.analyze_status},${item.prevention_status},${item.delivery_status}" data-bs-toggle="modal" data-bs-target="#mdlSubmit" data-id="${item.ist_id}">Submit</a></li>
+                            <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);z-index: 10000;" data-popper-placement="bottom-start" id="ulEdit_${ist_Id}">
+                            <!-- Populate this ul with data from another API -->
                             </ul>
                             </div>
                             <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${item.ist_status_flg == 3 || item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${item.ist_id}" value="${item.ist_status_flg}" >Cancel</button>
@@ -252,7 +253,6 @@ function generateAvatarHTML(data, i) {
 //-------------------------- Edit Button ----------------------------------
 $(document).on('click', '.btn-edit-drop', function() {
     var ist_Id = $(this).attr('data-id');
-    console.log(ist_Id);
 
     var url = API_URL + "Ticket_control/get_status";
 
@@ -264,23 +264,41 @@ $(document).on('click', '.btn-edit-drop', function() {
         },
         dataType: 'json',
         success: function (data) {
-            console.log(data);
-            // อัปเดตสถานะใน dropdown ด้วยข้อมูลที่ได้มา
-            $('.actEquipment').find('.dropdown-item').html(`Equipment ${data[0].equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actJobtype').find('.dropdown-item').html(`Job Type ${data[0].jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actProblem').find('.dropdown-item').html(`Problem Condition ${data[0].problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actInspec').find('.dropdown-item').html(`Inspection ${data[0].inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actTroubleshooting').find('.dropdown-item').html(`Troubleshooting ${data[0].troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actRequiredParts').find('.dropdown-item').html(`Required Parts ${data[0].rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actAnalyze').find('.dropdown-item').html(`Analyze Problem ${data[0].analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actPrevention').find('.dropdown-item').html(`Prevention ${data[0].prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
-            $('.actDelivery').find('.dropdown-item').html(`Delivery ${data[0].delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : data[0].delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}`);
+            // Generate HTML for dropdown menu items
+            var dropdownHtml = generateDropdownMenuItemsHtml(data[0]);
+
+            // Insert the generated HTML into the appropriate dropdown menu
+            $(`#ulEdit_${data[0].ist_id}`).append(dropdownHtml);
         },
         error: function (xhr, status, error) {
             console.error('Error:', error);
         }
     });
 });
+
+
+// Function to generate HTML for dropdown menu items
+function generateDropdownMenuItemsHtml(item) {
+    return `
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${item.ist_id}">Equipment ${getStatusIcon(item.equipment_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${item.ist_id}">Job Type ${getStatusIcon(item.jopType_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${item.ist_id}">Problem Condition ${getStatusIcon(item.problem_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${item.ist_id}">Inspection ${getStatusIcon(item.inspection_status)}</a></li> 
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${item.ist_id}">Troubleshooting ${getStatusIcon(item.troubleshooting_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${item.ist_id}">Required Parts ${getStatusIcon(item.rqPart_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${item.ist_id}">Analyze Problem ${getStatusIcon(item.analyze_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${item.ist_id}">Prevention ${getStatusIcon(item.prevention_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${item.ist_id}">Delivery ${getStatusIcon(item.delivery_status)}</a></li>
+        <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${item.ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${item.equipment_status},${item.jopType_status},${item.problem_status},${item.inspection_status},${item.troubleshooting_status},${item.rqPart_status},${item.analyze_status},${item.prevention_status},${item.delivery_status}" data-bs-toggle="modal" data-bs-target="#mdlSubmit" data-id="${item.ist_id}">Submit</a></li>
+    `;
+}
+
+// Function to generate HTML for status icon
+function getStatusIcon(status) {
+    return status == 1 ? `<i class='bx bxs-error text-warning'></i>` : status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning'></i>`;
+}
 
 
 
@@ -320,7 +338,7 @@ $(document).on('click', '.btn-edit-drop', function() {
                               html: 'Accept ticket Success!',
                               timer: 2500,
                           }).then(() => {
-                              location.reload();
+                              shDataTable();
                             });
                       } else if (response === false) {
                           Swal.fire({
@@ -394,7 +412,7 @@ $(document).on('click', '.btn-edit-drop', function() {
                                       timer: 2500,
                                   }).then(() => {
                                     $('#mdlCancle').modal('hide')
-                                      location.reload();
+                                      shDataTable();
                                   });
                               } else if (res == 2) {
                                   Swal.fire({
@@ -678,7 +696,7 @@ $(document).on('click', '.actEquipment', function () {
                             timer: 2500,
                         }).then(() => {
                             $('#mdlEditEquipment').modal('hide');
-                            location.reload();
+                            shDataTable();
                         });
                     } else {
                         Swal.fire({
@@ -921,7 +939,7 @@ $(document).on('click', '.actProblem', function () {
                         let mockFile = { name: `${imageName}`, size: 12345 };
                         myDropzone.emit("addedfile", mockFile);
                         myDropzone.emit("thumbnail", mockFile, imagePath);
-                        myDropzone.emit("complete", mockFile);
+                        myDropzone.emit("complete", mockFile); // เพิ่มบรรทัดนี้เพื่อให้ Dropzone เป็นสถานะเต็มรูปแบบของไฟล์ที่ถูกเพิ่ม
                         filesCount++;
                     }
                 }
@@ -1113,7 +1131,7 @@ return
                                 timer: 2500,
                             }).then(() => {
                                 $('#mdlProblemcon').modal('hide');
-                                location.reload();
+                                shDataTable();
                             });
                         } else {
                             Swal.fire({
@@ -1203,7 +1221,7 @@ $('#btnSaveJobtype').on('click', function () {
                                 timer: 2500,
                             }).then(() => {
                                 $('#mdlJobtype').modal('hide');
-                                location.reload();
+                                shDataTable();
                             });
                         } else {
                             Swal.fire({
@@ -1246,6 +1264,7 @@ $(document).on('click', '.actInspec', function () {
             $('#mdetailinsprc').val('');
             $('.chkInspec').prop('checked', false);
 
+
             var selectedValue = response.data[0].mjt_id; 
             
             InMeDropdown(selectedValue, function() {
@@ -1259,51 +1278,53 @@ $(document).on('click', '.actInspec', function () {
                 $('#SelInspec').val(response.data[0].mim_id);
                 $('#mdetailinsprc').val(response.data[0].iim_detail);
               
-                // Create Dropzone instance
-                var e = `<div class="dz-preview dz-file-preview">
-                    <div class="dz-details">
-                        <div class="dz-thumbnail">
-                            <img data-dz-thumbnail>
-                            <span class="dz-nopreview">No preview</span>
-                            <div class="dz-success-mark"></div>
-                            <div class="dz-error-mark"></div>
-                            <div class="dz-error-message"><span data-dz-errormessage></span></div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                var data_image = response.data_image[0];
+                var maxFilesAllowed = 3;
+                var e = `<div class="dz-preview dz-success dz-processing dz-image-preview dz-complete">
+                            <div class="dz-details">
+                                <div class="dz-thumbnail">
+                                    <img data-dz-thumbnail>
+                                    <span class="dz-nopreview">No preview</span>
+                                    <div class="dz-success-mark"></div>
+                                    <div class="dz-error-mark"></div>
+                                    <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                                    </div>
+                                </div>
+                                <div class="dz-filename" data-dz-name></div>
+                                <div class="dz-size" data-dz-size></div>
                             </div>
-                        </div>
-                        <div class="dz-filename" data-dz-name></div>
-                        <div class="dz-size" data-dz-size></div>
-                    </div>
-                </div>`;
-                var myDropzone = new Dropzone("#myDropzone-", {
+                        </div>`;
+                Dropzone.autoDiscover = false;
+                var myDropzone = new Dropzone("#myDropzoneinspection", {
                     previewTemplate: e,
-                    url: '/upload', // replace with your upload endpoint
+                    url: '/upload',
                     acceptedFiles: 'image/*',
-                    maxFiles: 3,
+                    maxFiles: maxFilesAllowed,
                     init: function () {
                         this.on("addedfile", function () {
                             if (this.files.length > this.options.maxFiles) {
-                                this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+                                this.removeFile(this.files[0]);
                             }
                         });
                     },
                     addRemoveLinks: true,
                     dictDefaultMessage: 'Drop your image here or click to upload',
                     parallelUploads: 1,
+                    autoProcessQueue: false // ปิดการอัพโหลดอัตโนมัติ
                 });
 
-                // Display existing images
-                data_image = response.data_image[0];
+                var filesCount = 0;
                 for (let i = 1; i <= 3; i++) {
                     var imageName = data_image['iim_pic_' + i];
                     if (imageName != '') {
-                        var imagePath = base_url(`${data_ist_in[0].iim_path}${imageName}`);
+                        var imagePath = base_url('/assets/img/upload/inspection/' + imageName);
                         let mockFile = { name: `${imageName}`, size: 12345 };
-                        let callback = null;
-                        let crossOrigin = null;
-                        let resizeThumbnail = true;
-                        myDropzone.displayExistingFile(mockFile, imagePath, callback, crossOrigin, resizeThumbnail);
+                        myDropzone.emit("addedfile", mockFile);
+                        myDropzone.emit("thumbnail", mockFile, imagePath);
+                        myDropzone.emit("complete", mockFile); // เพิ่มบรรทัดนี้เพื่อให้ Dropzone เป็นสถานะเต็มรูปแบบของไฟล์ที่ถูกเพิ่ม
+                        filesCount++;
                     }
                 }
             });
@@ -1313,7 +1334,6 @@ $(document).on('click', '.actInspec', function () {
         }
     });
 });
-
 
 
 
@@ -1372,7 +1392,7 @@ $('#btnSaveInspec').on('click', function () {
                             timer: 2500,
                         }).then(() => {
                             $('#mdlInspec').modal('hide');
-                            location.reload();
+                            shDataTable();
                         });
                     } else {
                         Swal.fire({
@@ -1511,61 +1531,62 @@ $(document).on('click', '.actTroubleshooting', function () {
                 $('#SelTbAc').val(response.data[0].mt_id);
                 $('#mdetailtbac').val(response.data[0].it_detail);
   
-                // Create Dropzone instance
-                var e = `<div class="dz-preview dz-file-preview">
-                  <div class="dz-details">
-                    <div class="dz-thumbnail">
-                      <img data-dz-thumbnail>
-                      <span class="dz-nopreview">No preview</span>
-                      <div class="dz-success-mark"></div>
-                      <div class="dz-error-mark"></div>
-                      <div class="dz-error-message"><span data-dz-errormessage></span></div>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
-                      </div>
-                    </div>
-                    <div class="dz-filename" data-dz-name></div>
-                    <div class="dz-size" data-dz-size></div>
-                  </div>
-                </div>`;
-                var myDropzone = new Dropzone("#myDropzone-", {
+                var data_image = response.data_image[0];
+                var maxFilesAllowed = 3;
+                var e = `<div class="dz-preview dz-success dz-processing dz-image-preview dz-complete">
+                            <div class="dz-details">
+                                <div class="dz-thumbnail">
+                                    <img data-dz-thumbnail>
+                                    <span class="dz-nopreview">No preview</span>
+                                    <div class="dz-success-mark"></div>
+                                    <div class="dz-error-mark"></div>
+                                    <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                                    </div>
+                                </div>
+                                <div class="dz-filename" data-dz-name></div>
+                                <div class="dz-size" data-dz-size></div>
+                            </div>
+                        </div>`;
+                Dropzone.autoDiscover = false;
+                var myDropzone = new Dropzone("#myDropzonetroubleshooting", {
                     previewTemplate: e,
-                    url: '/upload', // replace with your upload endpoint
+                    url: '/upload',
                     acceptedFiles: 'image/*',
-                    maxFiles: 3,
+                    maxFiles: maxFilesAllowed,
                     init: function () {
                         this.on("addedfile", function () {
                             if (this.files.length > this.options.maxFiles) {
-                                this.removeFile(this.files[0]); // Remove the first file if more than maxFiles
+                                this.removeFile(this.files[0]);
                             }
                         });
                     },
                     addRemoveLinks: true,
                     dictDefaultMessage: 'Drop your image here or click to upload',
                     parallelUploads: 1,
+                    autoProcessQueue: false // ปิดการอัพโหลดอัตโนมัติ
                 });
-  
-                // Display existing images
-                data_image = response.data_image;
+
+                var filesCount = 0;
                 for (let i = 1; i <= 3; i++) {
-                    var imageName = data_image[0]['ipc_pic_' + i];
+                    var imageName = data_image['it_pic_' + i];
                     if (imageName != '') {
-                        var imagePath = base_url(`${data_ist_in[0].ipc_path}${imageName}`);
+                        var imagePath = base_url('/assets/img/upload/trouble/' + imageName);
                         let mockFile = { name: `${imageName}`, size: 12345 };
-                        let callback = null;
-                        let crossOrigin = null;
-                        let resizeThumbnail = true;
-                        myDropzone.displayExistingFile(mockFile, imagePath, callback, crossOrigin, resizeThumbnail);
+                        myDropzone.emit("addedfile", mockFile);
+                        myDropzone.emit("thumbnail", mockFile, imagePath);
+                        myDropzone.emit("complete", mockFile); // เพิ่มบรรทัดนี้เพื่อให้ Dropzone เป็นสถานะเต็มรูปแบบของไฟล์ที่ถูกเพิ่ม
+                        filesCount++;
                     }
                 }
             });
         },
-        error: (error) => {
+        error: function (error) {
             console.error('Error fetching data from the API:', error);
         }
     });
 });
-
   //-------------------------- Save Troubleshooting ----------------------------
 
 $('#btnSaveTrob').on('click', function () {
@@ -1632,7 +1653,7 @@ $('#btnSaveTrob').on('click', function () {
                               timer: 2500,
                           }).then(() => {
                               $('#mdlTrobles').modal('hide');
-                              location.reload();
+                              shDataTable();
                           });
                       } else {
                           Swal.fire({
@@ -1654,43 +1675,96 @@ $(document).on('click', '.actAnalyze', function () {
   
     var url = API_URL + "Ticket_control/show_analyze";
     $.ajax({
-      url: url,
-      type: 'POST',
-      data: {
-        ist_Id: ist_Id,
-      },
-      dataType: 'json',
-      success: (response) => {
-        data_ist_anl = response.data;
+        url: url,
+        type: 'POST',
+        data: {
+            ist_Id: ist_Id,
+        },
+        dataType: 'json',
+        success: (response) => {
+            data_ist_anl = response.data;
   
-        // Clear previous selections
-        $('#mdetailAnalyz').val('');
-        $('.form-check-input').prop('checked', false);
-        $('#adddtInput').val('');
+            // Clear previous selections
+            $('#mdetailAnalyz').val('');
+            $('.form-check-input').prop('checked', false);
+            $('#adddtInput').val('');
   
-        // Iterate through the data array
-        response.data.forEach(Analyze => {
-          // Check if map_id is not null
-          if (Analyze.map_id !== null) {
-            // Construct the ID for the checkbox
-            var checkboxId = '#Check' + Analyze.map_id;
-            // Check the checkbox based on map_id value
-            $(checkboxId).prop('checked', true);
+            // Iterate through the data array
+            response.data.forEach(Analyze => {
+                // Check if map_id is not null
+                if (Analyze.map_id !== null) {
+                    // Construct the ID for the checkbox
+                    var checkboxId = '#Check' + Analyze.map_id;
+                    // Check the checkbox based on map_id value
+                    $(checkboxId).prop('checked', true);
   
-            // Check if map_id is 11 and iap_detail exists
-            if (Analyze.map_id === '11' && Analyze.iap_detail !== null) {
-              // Set the value of the input
-              $('#adddtInput').val(Analyze.iap_detail);
+                    // Check if map_id is 11 and iap_detail exists
+                    if (Analyze.map_id === '11' && Analyze.iap_detail !== null) {
+                        // Set the value of the input
+                        $('#adddtInput').val(Analyze.iap_detail);
+                    }
+                } else {
+                    // Set #mdetailAnalyz value if map_id is null
+                    $('#mdetailAnalyz').val(Analyze.iap_detail);
+                }
+            });
+
+            var data_image = response.data_image[0];
+            var maxFilesAllowed = 3;
+            var e = `<div class="dz-preview dz-success dz-processing dz-image-preview dz-complete">
+                        <div class="dz-details">
+                            <div class="dz-thumbnail">
+                                <img data-dz-thumbnail>
+                                <span class="dz-nopreview">No preview</span>
+                                <div class="dz-success-mark"></div>
+                                <div class="dz-error-mark"></div>
+                                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress></div>
+                                </div>
+                            </div>
+                            <div class="dz-filename" data-dz-name></div>
+                            <div class="dz-size" data-dz-size></div>
+                        </div>
+                    </div>`;
+            Dropzone.autoDiscover = false;
+            var myDropzone = new Dropzone("#myDropzoneanalyz", {
+                previewTemplate: e,
+                url: '/upload',
+                acceptedFiles: 'image/*',
+                maxFiles: maxFilesAllowed,
+                init: function () {
+                    this.on("addedfile", function () {
+                        if (this.files.length > this.options.maxFiles) {
+                            this.removeFile(this.files[0]);
+                        }
+                    });
+                },
+                addRemoveLinks: true,
+                dictDefaultMessage: 'Drop your image here or click to upload',
+                parallelUploads: 1,
+                autoProcessQueue: false // ปิดการอัพโหลดอัตโนมัติ
+            });
+
+            var filesCount = 0;
+            for (let i = 1; i <= 3; i++) {
+                var imageName = data_image['iap_pic' + i];
+                if (imageName != '') {
+                    var imagePath = base_url('/assets/img/upload/trouble/' + imageName);
+                    let mockFile = { name: `${imageName}`, size: 12345 };
+                    myDropzone.emit("addedfile", mockFile);
+                    myDropzone.emit("thumbnail", mockFile, imagePath);
+                    myDropzone.emit("complete", mockFile); // เพิ่มบรรทัดนี้เพื่อให้ Dropzone เป็นสถานะเต็มรูปแบบของไฟล์ที่ถูกเพิ่ม
+                    filesCount++;
+                }
             }
-          } else {
-            // Set #mdetailAnalyz value if map_id is null
-            $('#mdetailAnalyz').val(Analyze.iap_detail);
-          }
-        });
-      }
+        },
+        error: function (error) {
+            console.error('Error fetching data from the API:', error);
+        }
     });
-  });
-  
+});
+
 
 
 
@@ -1770,7 +1844,7 @@ $('#btnSaveAnalyz').on('click', function () {
                                 timer: 2500,
                             }).then(() => {
                                 $('#mdlAnalyze').modal('hide');
-                                location.reload();
+                                shDataTable();
                             });
                         } else {
                             Swal.fire({
@@ -1905,7 +1979,7 @@ $('[id^="Check-de"]').each(function() {
                                   timer: 2500,
                               }).then(() => {
                                   $('#mdlDelivery').modal('hide');
-                                  location.reload();
+                                  shDataTable();
                               });
                           } else {
                               Swal.fire({
@@ -2432,6 +2506,8 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
           var col10 = row.insertCell(9);
           var col11 = row.insertCell(10);
           var col12 = row.insertCell(11);
+          var col13 = row.insertCell(12);
+
 
           col1.innerHTML = `<label class="form-label">Name</label><input class="form-select" value="${selToolingrq.value}" disabled>`;
           col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${addMakerrq.value}" disabled>`;
@@ -2444,14 +2520,8 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
           col9.innerHTML = `<input type="number" class="form-control" value="${inpOrderqty.value}">`;
           col10.innerHTML = `<input type="date" class="form-control" value="${inpReceived.value}">`;
           col11.innerHTML = `<input type="number" class="form-control" value="${inpReceivedqty.value}">`;
-          col12.innerHTML = `<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)">
-      <i class="bx bx-edit me-1"></i>
-      <span class="align-middle">Edit</span>
-      </button>
-                  <button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)">
-                    <i class="bx bx-x me-1"></i>
-                    <span class="align-middle">Delete</span>
-                  </button>`;
+          col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
+          col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
 
           col6.style.display = "none";
           col7.style.display = "none";
@@ -2516,6 +2586,7 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
         var col10 = row.insertCell(9);
         var col11 = row.insertCell(10);
         var col12 = row.insertCell(11);
+        var col13 = row.insertCell(12);
         col1.innerHTML = `<label class="form-label">Name</label><input type="text" class="form-control" value="${editedselToolingrq}" disabled>`;
         col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${editedaddMakerrq}" disabled>`;
         col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${editedaddModelrq}" disabled>`;
@@ -2527,16 +2598,9 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
         col9.innerHTML = `<input type="number" class="form-control" value="${editedInpOrderqty}" style="display:none">`;
         col10.innerHTML = `<input type="date" class="form-control" value="${editedInpReceived}" style="display:none">`;
         col11.innerHTML = `<input type="number" class="form-control" value="${editedInpReceivedqty}" style="display:none">`;
-        col12.innerHTML = `<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)">
-                                    <i class="bx bx-edit me-1"></i>
-                                    <span class="align-middle">Edit</span>
-                                    </button>
+        col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
+        col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
 
-                                    
-                                    <button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)">
-                          <i class="bx bx-x me-1"></i>
-                          <span class="align-middle">Delete</span>
-                                </button>`;
         col6.style.display = "none";
         col7.style.display = "none";
         col8.style.display = "none";
@@ -2619,6 +2683,7 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
               var col10 = row.insertCell(9);
               var col11 = row.insertCell(10);
               var col12 = row.insertCell(11);
+              var col13 = row.insertCell(12);
   
               // กำหนดค่าของแต่ละคอลัมน์ด้วยข้อมูลที่ได้รับจาก API
               col1.innerHTML = '<label class="form-label">Name</label><input class="form-select" value="' + item.irp_name + '" disabled>';
@@ -2632,7 +2697,8 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
               col9.innerHTML = '<input type="number" class="form-control" value="' + item.irp_received_qty + '">';
               col10.innerHTML = '<input type="date" class="form-control" value="' + item.irp_withdraw_time + '">';
               col11.innerHTML = '<input type="number" class="form-control" value="' + item.irp_withdraw_qty + '">';
-              col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete onclick="openEditModal(this)"><i class="bx bx-edit me-1"></i><span class="align-middle">Edit</span></button><button class="btn btn-label-danger mt-4" data-repeater-delete onclick="deleted(this)"><i class="bx bx-x me-1"></i><span class="align-middle">Delete</span></button>';
+              col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
+              col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
   
               // ซ่อนคอลัมน์ที่ไม่ต้องการแสดง
               col6.style.display = "none";
@@ -2726,7 +2792,7 @@ $('#btnSaveEditRequired').on('click', function () {
                             timer: 2500,
                         }).then(() => {
                             $('#mdlRequiredParts').modal('hide');
-                            location.reload();
+                            shDataTable();
                         });
                     } else {
                         Swal.fire({
@@ -2766,7 +2832,8 @@ $(document).on('click', '.actPrevention', function () {
         
                 // กำหนดค่า prevenLength เป็นจำนวนแถวที่ได้รับจาก API
                 prevenLength = data.length;
-        
+                addedRowsCount = 0;
+                $('#checkPrevention').empty();
                 // Loop through data and populate the form
                 $.each(data, function(index, item) {
                     var newDiv = $('<div class="row" data-repeater-item=""></div>'); // สร้าง div ใหม่สำหรับแต่ละแถว
@@ -2786,7 +2853,7 @@ $(document).on('click', '.actPrevention', function () {
                                                 <input type="date" id="inpSchedule-' + (index + 1) + '" class="form-control" value="' + item.ipr_schedule + '" />\
                                             </div>');
 
-                    var deleteButton = $('<div class="mb-3 col-lg-12 col-xl-3">\
+                    var deleteButton = $('<div class="mb-3 col-lg-6 col-xl-3">\
                                             <button class="btn btn-label-danger mt-4 delete-row" data-repeater-delete>\
                                                 <i class="bx bx-x me-1"></i>\
                                                 <span class="align-middle">Delete</span>\
@@ -2807,7 +2874,7 @@ $(document).on('click', '.actPrevention', function () {
                 });
         
                 // คำนวณค่า maxElements จาก prevenLength
-                maxElements = 5 - prevenLength;
+                maxElements = 6 - prevenLength;
 
 
             } else {
@@ -2821,8 +2888,68 @@ $(document).on('click', '.actPrevention', function () {
     });
 });
 
+function deleteRow(row) {
+    // ลบแถวที่มีปุ่มถูกคลิกซึ่งอยู่ในหน่วยของ div ที่มี class="row"
+    row.closest('[data-repeater-item]').remove();
+    
+    // ลดจำนวนแถวที่ถูกเพิ่มขึ้นไปแล้ว
+    addedRowsCount--;
+
+    // เรียกใช้ฟังก์ชัน updateMaxElements() เพื่ออัพเดตค่า maxElements
+    updateMaxElements();
+}
+
+$(document).on('click', '[data-repeater-create-f]', function () {
+    // เรียกใช้ฟังก์ชัน appendRow()
+    appendRow();
+});
 
 
+function appendRow() {
+    // เช็คว่าจำนวนแถวที่ถูกเพิ่มมาแล้วไม่เกิน 5 แถว
+    if (addedRowsCount < 5) {
+        var newDiv = $('<div class="row" data-repeater-item=""></div>'); // สร้าง div ใหม่สำหรับแต่ละแถว
+        // สร้าง input fields และ delete button
+        var inputSuggestions = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                    <label class="form-label" for="inpSuggestions-' + (addedRowsCount + 1) + '">ข้อเสนอแนะ</label>\
+                                    <input type="text" id="inpSuggestions-' + (addedRowsCount + 1) + '" class="form-control" placeholder="Enter suggestion" value="" />\
+                                </div>');
+
+        var inputOperated = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                    <label class="form-label" for="inpOperated-' + (addedRowsCount + 1) + '">ดำเนินการโดย</label>\
+                                    <input type="text" id="inpOperated-' + (addedRowsCount + 1) + '" class="form-control" placeholder="Enter operator" value="" />\
+                                </div>');
+
+        var inputSchedule = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                    <label class="form-label" for="inpSchedule-' + (addedRowsCount + 1) + '">กำหนดการเสร็จ</label>\
+                                    <input type="date" id="inpSchedule-' + (addedRowsCount + 1) + '" class="form-control" value="" />\
+                                </div>');
+
+        var deleteButton = $('<div class="mb-3 col-lg-6 col-xl-3">\
+                                <button class="btn btn-label-danger mt-4 delete-row" data-repeater-delete>\
+                                    <i class="bx bx-x me-1"></i>\
+                                    <span class="align-middle">Delete</span>\
+                                </button>\
+                            </div>');
+
+        // Append each input field and delete button to the new row div
+        newDiv.append(inputSuggestions);
+        newDiv.append(inputOperated);
+        newDiv.append(inputSchedule);
+        newDiv.append(deleteButton);
+
+        // Append the new row to the checkPrevention div
+        $('#checkPrevention').append(newDiv);
+
+        // เพิ่มจำนวนแถวที่ถูกเพิ่มจากข้อมูลที่ได้จาก API
+        addedRowsCount++;
+    } else {
+        alert('You can only add up to 5 rows.');
+    }
+}
+$(document).on('click', '.delete-row', function() {
+    $(this).closest('[data-repeater-item]').remove(); // ลบแถวที่คลิกปุ่มลบอยู่
+});
 
 
 
@@ -2836,80 +2963,128 @@ formRepeater.on('submit', function(e) {
     e.preventDefault();
 });
 
-formRepeater.repeater({
-    show: function() {
-        // Check if the maximum number of elements is reached
-        if (row <= maxElements) {
-            var fromControl = $(this).find('.form-control, .form-select');
-            var formLabel = $(this).find('.form-label');
 
-            fromControl.each(function(i) {
-                var id = 'form-repeater-' + row + '-' + col;
-                $(fromControl[i]).attr('id', id);
-                $(formLabel[i]).attr('for', id);
-                col++;
-            });
-
-            row++;
-
-            // Clone the first repeater item and append it to the repeater list
-            var clonedItem = $('[data-repeater-item]').first().clone(true);
-            $(this).find('[data-repeater-list="group-a"]').append(clonedItem);
-
-            $(this).slideDown();
-        } else {
-            alert('Maximum number of elements reached (5).');
-        }
-    },
-
-    hide: function(e) {
-        confirm('Are you sure you want to delete this element?') && $(this).slideUp(e);
-        row--; // Decrement row count when an element is removed
-    }
-});
 
 
 var allValues;
 
-function getAllRowDataPrevention()  {
+function getAllRowDataPrevention() {
     allValues = [];
-  
+
     // Iterate through each repeated form element
-    formRepeater.find("[data-repeater-list='group-a'] [data-repeater-item]").each(function() {
+    formRepeater.find("[data-repeater-list='group-a'] [data-repeater-item]").each(function(index) {
         var formValues = {};
-  
+
         // Flag to determine if all input values are null or empty
         var allValuesNull = true;
-  
-        // Iterate through each text input field within the repeated form element
-        $(this).find(".form-control").each(function() {
-            var fieldName = $(this).attr("id");
-            var fieldValue = $(this).val().trim(); // Remove leading and trailing whitespaces
-  
-            // Check if the value is not null or empty
-            if (fieldValue !== null && fieldValue !== "") {
-                allValuesNull = false;
+
+        // Skip the first row (index 0)
+        if (index !== 0) {
+            // Iterate through each text input field within the repeated form element
+            $(this).find(".form-control").each(function() {
+                var fieldName = $(this).attr("id");
+                var fieldValue = $(this).val().trim(); // Remove leading and trailing whitespaces
+
+                // Check if the value is not null or empty
+                if (fieldValue !== null && fieldValue !== "") {
+                    allValuesNull = false;
+                }
+
+                formValues[fieldName] = fieldValue;
+            });
+
+            // If any input has a non-null or non-empty value, add the row's values to the array
+            if (!allValuesNull) {
+                allValues.push(formValues);
             }
-  
-            formValues[fieldName] = fieldValue;
-        });
-  
-        // If any input has a non-null or non-empty value, add the row's values to the array
-        if (!allValuesNull) {
-            allValues.push(formValues);
         }
     });
-  
+
     // Log or do something with allValues
     console.log(allValues);
 }
+
+
+
+function deleteRow(row) {
+    // ลบแถวที่มีปุ่มถูกคลิกซึ่งอยู่ในหน่วยของ div ที่มี class="row"
+    row.closest('.row').remove();
+    
+    // ลดจำนวนแถวที่ถูกเพิ่มขึ้นไปแล้ว
+    addedRowsCount--;
+
+    // เรียกใช้ฟังก์ชัน updateMaxElements() เพื่ออัพเดตค่า maxElements
+    updateMaxElements();
+}
+
+function updateMaxElements() {
+    // คำนวณค่า maxElements ที่เหลืออยู่ตามจำนวนแถวที่ถูกเพิ่มมาแล้ว
+    maxElements = 5 - addedRowsCount;
+}
+
+
 
 //-------------------------- Save Prevention ----------------------------
 
 $('#btnSavePrevention').on('click', function () {
 getAllRowDataPrevention();
+var PervenDataArrayString = JSON.stringify(allValues);
 console.log(allValues);
-// ส่งข้อมูลที่ได้รับมาไปที่ API
+
+Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to save Change?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, save!'
+}).then((result) => {
+
+    if (result.isConfirmed) {
+        var url = API_URL + 'Ticket_control/save_prevention';
+        const formData = new FormData()
+        formData.append('ist_Id', ist_Id);
+        formData.append('PreventionallValues', PervenDataArrayString);
+
+        $.ajax({
+            url: base_url('TicketControl/callApiSavePrevention'),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            dataType: 'json',
+            success: function (res) {
+                
+                if (res.result == 1) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        html: 'Save Ticket success',
+                        timer: 2500,
+                    }).then(() => {
+                        $('#mdlEdit').modal('hide');
+                        location.reload();
+
+                    });
+                } else if (res.result == 2) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Add Fail!!',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: 'A system error has occurred.',
+                    });
+                }
+            }
+        });
+    }
+});
 });
 
 
@@ -3063,7 +3238,7 @@ console.log(allValues);
 //               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append('<label class="form-label" for="inpSuggestions-' + (index + 1) + '">ข้อเสนอแนะ</label>').append(suggestionInput),
 //               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append('<label class="form-label" for="inpOperated-' + (index + 1) + '">ดำเนินการโดย</label>').append(operatedInput),
 //               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append('<label class="form-label" for="inpSchedule-' + (index + 1) + '">กำหนดการเสร็จ</label>').append(scheduleInput),
-//               $('<div class="mb-3 col-lg-12 col-xl-3"></div>').append(deleteButton)
+//               $('<div class="mb-3 col-lg-6 col-xl-3"></div>').append(deleteButton)
 //           );
     
 //           repeaterList.append(repeaterItem); // เพิ่ม repeater item ลงใน repeater list
@@ -3133,7 +3308,7 @@ $(document).on('click', '.actAddworker', function () {
                             timer: 2500,
                         }).then(() => {
                             $('#mdlMngWorker').modal('hide');
-                            location.reload();
+                            shDataTable();
                         });
                     } else {
                         Swal.fire({
@@ -3235,7 +3410,7 @@ $(document).on('click', '.actSubmit', function () {
                                         title: 'Success!',
                                         html: 'Ticket submitted successfully.',
                                     }).then(() => {
-                                        location.reload();
+                                        shDataTable();
                                     });
                                 } else {
                                     // Display error message or handle other cases
