@@ -2265,7 +2265,10 @@ progress {
 }
 .dataTables_scrollBody{
   overflow: visible !important;
+
+  /* overflow: scroll; */
 }
+
 .table-responsive {
   overflow-x: visible;
   -webkit-overflow-scrolling: touch;

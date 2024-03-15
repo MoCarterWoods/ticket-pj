@@ -59,7 +59,7 @@ $(document).ready(function() {
                 </div>
               </td>
               <td class="text-center">
-              <button type="button" class="btnDetail btn rounded-pill btn-primary" data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnDetail" onclick="openModal()">View Detail</button>
+              <button type="button" class="btnDetail btn rounded-pill btn-primary" data-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnDetail">View Detail</button>
             </td>
             
             </tr>
@@ -101,9 +101,6 @@ $(document).ready(function() {
     }
     return avatarHtml;
   }
-  function openModal() {
-    $('#mdlEdit').modal('show');
-}
 
 
 
@@ -169,7 +166,7 @@ $(document).on('click', '#btnSearch', function () {
                 </div>
               </td>
               <td class="text-center">
-              <button type="button" class="btnDetail btn rounded-pill btn-primary" data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnDetail" onclick="openModal()">View Detail</button>
+              <a href="http://192.168.161.219/ticketMaintenance/TicketHistory/testDoc/${btoa(item.ist_id)}" target="_blank"><button type="button" class="btnDetail btn rounded-pill btn-primary" data-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnDetail" onclick="openModal()">View Detail</button></a>
             </td>
             
             </tr>
@@ -192,5 +189,23 @@ $(document).on('click', '#btnSearch', function () {
       error: function (xhr, status, error) {
           console.error('Error:', error);
       }
+  });
+});
+
+
+
+$(document).on('click', '.btnDetail', function() {
+  var ist_Id = $(this).attr('data-id');
+  var url = API_URL + "Ticket_History/show_pdf";
+  var url2 = 'http://192.168.161.219/ticketMaintenance/TicketHistory/testDoc'
+
+  $.ajax({
+    url: url2,
+    type: 'POST',
+    data: {
+      ist_Id: ist_Id
+    },
+    dataType: 'json',
+
   });
 });

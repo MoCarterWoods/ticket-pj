@@ -547,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 checkboxLabel.classList.add('form-check-label', 'custom-option-content');
                 checkboxLabel.setAttribute('for', `customCheckpb${i}`);
                 checkboxLabel.innerHTML = `
-                    <input class="form-check-input" type="checkbox" value="${item.mpc_id}" id="customCheckpb${i}" />
+                    <input class="form-check-input customCheckpb" type="checkbox" value="${item.mpc_id}" id="customCheckpb${i}" />
                     <span class="custom-option-header">
                         <span class="h5 mb-0">${item.mpc_name_eng}</span>
                     </span>
@@ -636,7 +636,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 checkboxLabel.classList.add('form-check-label', 'custom-option-content');
                 checkboxLabel.setAttribute('for', `customCheckins${i}`);
                 checkboxLabel.innerHTML = `
-                    <input class="form-check-input" type="checkbox" value="${item.mim_id}" id="customCheckins${i}" />
+                    <input class="form-check-input chkInspec" type="checkbox" value="${item.mim_id}" id="customCheckins${i}" />
                     <span class="custom-option-header">
                         <span class="h5 mb-0">${item.mim_name_eng}</span>
                     </span>
@@ -657,18 +657,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    // เรียกใช้งาน API
+    // เรียกใช้งาน API เพื่อดึงข้อมูล troublecheck1
     fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_trouble1')
         .then(response => response.json()) // แปลงข้อมูลเป็น JSON
         .then(data => {
             // วนลูปผ่านข้อมูลและแสดงใน HTML
             const chkBoxTroubleElement = document.getElementById('chkBoxTrouble1');
             data.forEach(item => {
-                // สร้าง element div ใหม่
+                // สร้าง element div และ radio button
                 const div = document.createElement('div');
                 div.classList.add('col');
-
-                // สร้าง element radio button
                 const radioDiv = document.createElement('div');
                 radioDiv.classList.add('col', 'form-check', 'custom-option', 'custom-option-basic');
                 const radioLabel = document.createElement('label');
@@ -676,7 +674,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const radioId = `troublecheck${item.mt_id}`; // สร้าง id สำหรับ radio button
                 radioLabel.setAttribute('for', radioId);
                 radioLabel.innerHTML = `
-                    <input name="troublecheck" class="form-check-input" type="radio" value="${item.mt_id}" id="${radioId}" />
+                    <input name="troublecheck1" class="form-check-input" type="radio" value="${item.mt_id}" id="${radioId}" />
                     <span class="custom-option-header">
                         <span class="fw-medium">${item.mt_name_thai}</span>
                     </span>
@@ -691,32 +689,31 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
-    // เรียกใช้งาน API
+    // เรียกใช้งาน API เพื่อดึงข้อมูล troublecheck2
     fetch('http://127.0.0.1/api/Issue_Ticket/chkBox_trouble2')
         .then(response => response.json()) // แปลงข้อมูลเป็น JSON
         .then(data => {
             // วนลูปผ่านข้อมูลและแสดงใน HTML
             const chkBoxTroubleElement = document.getElementById('chkBoxTrouble2');
             data.forEach(item => {
-                // สร้าง element div ใหม่
+                // สร้าง element div และ radio button
                 const div = document.createElement('div');
                 div.classList.add('col');
-
-                // สร้าง element radio button
                 const radioDiv = document.createElement('div');
                 radioDiv.classList.add('col', 'form-check', 'custom-option', 'custom-option-basic');
                 const radioLabel = document.createElement('label');
                 radioLabel.classList.add('form-check-label', 'custom-option-content');
-                const radioId = `troublecheck${item.mt_id}`; // สร้าง id สำหรับ radio button
+                const radioId = `chkTrobdt${item.mt_id}`; // สร้าง id สำหรับ radio button
                 radioLabel.setAttribute('for', radioId);
                 radioLabel.innerHTML = `
-                    <input name="troublecheck2" class="form-check-input" type="radio" value="${item.mt_id}" id="${radioId}" />
+                    <input name="troublecheck2" class="form-check-input detailTrob2" type="radio" value="${item.mt_id}" id="${radioId}" />
                     <span class="custom-option-header">
                         <span class="fw-medium">${item.mt_name_thai}</span>
                     </span>
                     <span class="custom-option-body">
-                        <input type="text" class="form-control" id="text${radioId}" placeholder="Enter detail" />
+                        <input type="text" class="form-control detailTrob2" id="detailTrob2${item.mt_id}" placeholder="Enter detail" />
                     </span>
                 `;
                 radioDiv.appendChild(radioLabel);
@@ -728,6 +725,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('เกิดข้อผิดพลาดในการเรียก API:', error);
         });
 });
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1287,13 +1285,23 @@ $(document).ready(function () {
         var ProbCon = $('#SelProblem').val();
         var ProbConDetail = $('#mdetailprdlm').val();
         
-        var PbCheck1 = $('#customCheckpb1').prop('checked');
-        var PbCheck2 = $('#customCheckpb2').prop('checked');
-        var PbCheck3 = $('#customCheckpb3').prop('checked');
 
-        var PbCheckval1 = PbCheck1 ? $('#customCheckpb1').val() : '';
-        var PbCheckval2 = PbCheck2 ? $('#customCheckpb2').val() : '';
-        var PbCheckval3 = PbCheck3 ? $('#customCheckpb3').val() : '';
+        var checkedValuesPB = [];
+
+        // Loop through checkboxes to get checked values
+        $('.customCheckpb:checked').each(function() {
+            checkedValuesPB.push($(this).val());
+        });
+
+
+
+        var StopDate = $('#inpDate').val();
+        var InpRequester = $('#inpRequester').val();
+        var InpTimeRq = $('#inpTimeRequester').val();
+        var InpApprove = $('#inpApprove').val();
+        var InpTimeApp = $('#inpTimeApprove').val();
+
+
 
 
 
@@ -1303,31 +1311,35 @@ $(document).ready(function () {
         var InspecMethod = $('#SelInspec').val();
         var InspecDetail = $('#mdetailinsprc').val();
 
-        var InsCheck1 = $('#customCheckins1').prop('checked');
-        var InsCheck2 = $('#customCheckins2').prop('checked');
-        var InsCheck3 = $('#customCheckins3').prop('checked');
+        var checkedValuesInspec = []; 
 
-        var InsCheckval1 = InsCheck1 ? $('#customCheckins1').val() : '';
-        var InsCheckval2 = InsCheck2 ? $('#customCheckins2').val() : '';
-        var InsCheckval3 = InsCheck3 ? $('#customCheckins3').val() : '';
+        $('.chkInspec:checked').each(function() {
+            checkedValuesInspec.push($(this).val());
+        });
+
 
 
         // ------------ Trouble Shooting ---------------
         var Trouble = $('#SelTbAc').val();
         var TroubleDetail = $('#mdetailtbac').val();
-        var TroubleDetail3 = $('#texttroublecheck12').val();
-        var TroubleDetail4 = $('#texttroublecheck13').val();
+
+        var checkedValuesTrob1 = [];
+        var checkedValuesTrob2 = [];
+        // Loop through checkboxes and input text of troublecheck1
+        $('input[name="troublecheck1"]:checked').each(function() {
+            checkedValuesTrob1.push($(this).val());
+        });
+
+        // Loop through checkboxes and input text of troublecheck2
+        $('input[name="troublecheck2"]:checked').each(function() {
+            var checkboxVal = $(this).val();
+            var mt_id = $(this).attr('id').replace('chkTrobdt', '');
+            var detailVal = $('#detailTrob2' + mt_id).val();
+            var obj = { checkbox: checkboxVal, detail: detailVal };
+            checkedValuesTrob2.push(obj);
+        });
 
 
-        var TbCheck1 = $('#troublecheck10').prop('checked');
-        var TbCheck2 = $('#troublecheck11').prop('checked');
-        var TbCheck3 = $('#troublecheck12').prop('checked');
-        var TbCheck4 = $('#troublecheck13').prop('checked');
-
-        var TroubleCheckval1 = TbCheck1 ? $('#troublecheck10').val() : '';
-        var TroubleCheckval2 = TbCheck2 ? $('#troublecheck11').val() : '';
-        var TroubleCheckval3 = TbCheck3 ? $('#troublecheck12').val() : '';
-        var TroubleCheckval4 = TbCheck4 ? $('#troublecheck13').val() : '';
 
         // ------------ Required Parts ---------------
         
@@ -1337,30 +1349,15 @@ $(document).ready(function () {
         // ------------ Analyze problem -----------------
         var AnalyzDetail = $('#mdetailAnalyz').val();
 
-        var Checked1 = $('#Check1').prop('checked');
-        var Checked2 = $('#Check2').prop('checked');
-        var Checked3 = $('#Check3').prop('checked');
-        var Checked4 = $('#Check4').prop('checked');
-        var Checked5 = $('#Check5').prop('checked');
-        var Checked6 = $('#Check6').prop('checked');
-        var Checked7 = $('#Check7').prop('checked');
-        var Checked8 = $('#Check8').prop('checked');
-        var Checked9 = $('#Check9').prop('checked');
-        var Checked10 = $('#Check10').prop('checked');
-        var Checked11 = $('#Check11').prop('checked');
+        var checkboxanalyz = [];
+        $('[id^="Check"]').each(function() {
+            if ($(this).prop('checked')) {
+                checkboxanalyz.push($(this).val());
+            }
+        });
+
         var Detailcheck11 = $('#adddtInput').val();
 
-        var Checkval1 = Checked1 ? $('#Check1').val() : '';
-        var Checkval2 = Checked2 ? $('#Check2').val() : '';
-        var Checkval3 = Checked3 ? $('#Check3').val() : '';
-        var Checkval4 = Checked4 ? $('#Check4').val() : '';
-        var Checkval5 = Checked5 ? $('#Check5').val() : '';
-        var Checkval6 = Checked6 ? $('#Check6').val() : '';
-        var Checkval7 = Checked7 ? $('#Check7').val() : '';
-        var Checkval8 = Checked8 ? $('#Check8').val() : '';
-        var Checkval9 = Checked9 ? $('#Check9').val() : '';
-        var Checkval10 = Checked10 ? $('#Check10').val() : '';
-        var Checkval11 = Checked11 ? $('#Check11').val() : '';
 
 
 
@@ -1373,20 +1370,27 @@ $(document).ready(function () {
         // ------------ End Required Parts ---------------
 
         // ------------ Delivery Equipment -----------------
-        var Detaildelivery = $('#additionalInput1').val();
-        var deliveryChecked1 = $('#Check-de1').prop('checked');
-        var deliveryChecked2 = $('#Check-de2').prop('checked');
-        var deliveryChecked3 = $('#Check-de3').prop('checked');
-        var deliveryChecked4 = $('#Check-de4').prop('checked');
-        var deliveryChecked5 = $('#Check-de5').prop('checked');
-        var deliveryChecked6 = $('#Check-de6').prop('checked');
 
-        var deliveryCheckval1 = deliveryChecked1 ? $('#Check-de1').val() : '';
-        var deliveryCheckval2 = deliveryChecked2 ? $('#Check-de2').val() : '';
-        var deliveryCheckval3 = deliveryChecked3 ? $('#Check-de3').val() : '';
-        var deliveryCheckval4 = deliveryChecked4 ? $('#Check-de4').val() : '';
-        var deliveryCheckval5 = deliveryChecked5 ? $('#Check-de5').val() : '';
-        var deliveryCheckval6 = deliveryChecked6 ? $('#Check-de6').val() : '';
+        var checkboxDeliver = [];
+        var detailDeliver = [];
+      
+    // เก็บค่า Checkbox ที่ถูกเลือกและ Detail ของ Checkbox 1
+    $('[id^="Check-de"]').each(function() {
+        if ($(this).prop('checked')) {
+            var checkboxId = $(this).attr('id');
+            var detailId = checkboxId.replace('Check-de', 'additionalInput');
+            checkboxDeliver.push($(this).val());
+            // เช็คว่าเป็น Checkbox ที่ 1 หรือไม่
+            if (checkboxId === 'Check-de1') {
+                // เก็บ Detail ของ Checkbox 1 เพียงอันเดียว
+                detailDeliver.push($('#' + detailId).val());
+            } else {
+                // สำหรับ Checkbox อื่น ๆ ให้เพิ่ม Detail เป็นค่าว่าง
+                detailDeliver.push('');
+            }
+        }
+    });
+
 
         // ------------ End Delivery Equipment -----------------
 
@@ -1394,10 +1398,6 @@ $(document).ready(function () {
 
 
         // แสดงผลลัพธ์ใน cons11
-        console.log("TroubleCheckval4: " + TroubleCheckval4);
-        console.log("TroubleCheckval4: " + TroubleCheckval4);
-        console.log("TroubleCheckval4: " + TroubleCheckval4);
-        console.log("TroubleCheckval4: " + TroubleCheckval4);
 
 
         console.log("Area: " + Area);
@@ -1414,17 +1414,14 @@ $(document).ready(function () {
     
         console.log("ProbCon: " + ProbCon);
         console.log("ProbConDetail: " + ProbConDetail);
-        console.log("PbCheckval1: " + PbCheckval1);
-        console.log("PbCheckval2: " + PbCheckval2);
-        console.log("PbCheckval3: " + PbCheckval3);
+
         console.log("fileNamesPb: " + fileNamesPb);
 
 
         console.log("InspecMethod: " + InspecMethod);
         console.log("InspecDetail: " + InspecDetail);
-        console.log("InsCheckval1: " + InsCheckval1);
-        console.log("InsCheckval2: " + InsCheckval2);
-        console.log("InsCheckval3: " + InsCheckval3);
+
+
         console.log("fileNamesIns: " + fileNamesIns);
 
         console.log("Trouble: " + Trouble);
@@ -1438,30 +1435,10 @@ $(document).ready(function () {
         console.log('AnalyzDetail :', AnalyzDetail);
 
 
-        console.log('Checkval1 :', Checkval1);
-        console.log('Checkval2 :', Checkval2);
-        console.log('Checkval3 :', Checkval3);
-        console.log('Checkval4 :', Checkval4);
-        console.log('Checkval5 :', Checkval5);
-        console.log('Checkval6 :', Checkval6);
-        console.log('Checkval7 :', Checkval7);
-        console.log('Checkval8 :', Checkval8);
-        console.log('Checkval9 :', Checkval9);
-        console.log('Checkval10 :', Checkval10);
-        console.log('Checkval11 :', Checkval11);
         console.log('Detailcheck11 :', Detailcheck11);
         console.log('fileNamesAnalz :', fileNamesAnalz);
 
         console.log('PreventionallValues :', PervenDataArrayString);
-
-
-        console.log('Detaildelivery :', Detaildelivery);
-        console.log('deliveryCheckval1 :', deliveryCheckval1);
-        console.log('deliveryCheckval2 :', deliveryCheckval2);
-        console.log('deliveryCheckval3 :', deliveryCheckval3);
-        console.log('deliveryCheckval4 :', deliveryCheckval4);
-        console.log('deliveryCheckval5 :', deliveryCheckval5);
-        console.log('deliveryCheckval6 :', deliveryCheckval6);
 
 
        
@@ -1489,9 +1466,14 @@ $(document).ready(function () {
                     
                     formData.append('ProbCon', ProbCon);
                     formData.append('ProbConDetail', ProbConDetail);
-                    formData.append('PbCheckval1', PbCheckval1);
-                    formData.append('PbCheckval2', PbCheckval2);
-                    formData.append('PbCheckval3', PbCheckval3);
+                    formData.append('checkedValuesPB', JSON.stringify(checkedValuesPB));
+
+                    formData.append('StopDate', StopDate);
+                    formData.append('InpRequester', InpRequester);
+                    formData.append('InpTimeRq', InpTimeRq);
+                    formData.append('InpApprove', InpApprove);
+                    formData.append('InpTimeApp', InpTimeApp);
+
                     formData.append('fileNamesPb', fileNamesPb);
 
 
@@ -1499,9 +1481,9 @@ $(document).ready(function () {
 
                     formData.append('InspecMethod', InspecMethod);
                     formData.append('InspecDetail', InspecDetail);
-                    formData.append('InsCheckval1', InsCheckval1);
-                    formData.append('InsCheckval2', InsCheckval2);
-                    formData.append('InsCheckval3', InsCheckval3);
+
+                    formData.append('checkedValuesInspec', JSON.stringify(checkedValuesInspec));
+
                     formData.append('fileNamesIns', fileNamesIns);
 
 
@@ -1510,41 +1492,28 @@ $(document).ready(function () {
                     formData.append('TroubleDetail', TroubleDetail);
                     formData.append('fileNamesTroub', fileNamesTroub);
 
-                    formData.append('TroubleCheckval1', TroubleCheckval1);
-                    formData.append('TroubleCheckval2', TroubleCheckval2);
-                    formData.append('TroubleCheckval3', TroubleCheckval3);
-                    formData.append('TroubleCheckval4', TroubleCheckval4);
-                    formData.append('TroubleDetail3', TroubleDetail3);
-                    formData.append('TroubleDetail4', TroubleDetail4);
+                    formData.append('checkedValuesTrob1', JSON.stringify(checkedValuesTrob1));
+                    formData.append('checkedValuesTrob2', JSON.stringify(checkedValuesTrob2));    
 
 
                     formData.append('rowDataArray', rowDataArrayString);
 
 
                     formData.append('AnalyzDetail', AnalyzDetail);
-                    formData.append('Checkval1', Checkval1);
-                    formData.append('Checkval2', Checkval2);
-                    formData.append('Checkval3', Checkval3);
-                    formData.append('Checkval4', Checkval4);
-                    formData.append('Checkval5', Checkval5);
-                    formData.append('Checkval6', Checkval6);
-                    formData.append('Checkval7', Checkval7);
-                    formData.append('Checkval8', Checkval8);
-                    formData.append('Checkval9', Checkval9);
-                    formData.append('Checkval10', Checkval10);
-                    formData.append('Checkval11', Checkval11);
+                    checkboxanalyz.forEach(function(checkbox) {
+                        formData.append('checkboxanalyz[]', checkbox);
+                    });
                     formData.append('Detailcheck11', Detailcheck11);
                     formData.append('fileNamesAnalz', fileNamesAnalz);
 
                     formData.append('PreventionallValues', PervenDataArrayString);
 
-                    formData.append('Detaildelivery', Detaildelivery);
-                    formData.append('deliveryCheckval1', deliveryCheckval1);
-                    formData.append('deliveryCheckval2', deliveryCheckval2);
-                    formData.append('deliveryCheckval3', deliveryCheckval3);
-                    formData.append('deliveryCheckval4', deliveryCheckval4);
-                    formData.append('deliveryCheckval5', deliveryCheckval5);
-                    formData.append('deliveryCheckval6', deliveryCheckval6);
+                    checkboxDeliver.forEach(function(checkbox) {
+                        formData.append('checkboxdeliver[]', checkbox);
+                    });
+                    detailDeliver.forEach(function(detail, index) {
+                        formData.append('detaildeliver[]', detail);
+                    });
 
                     $.ajax({
                         url: base_url('IssueTicket/callApiSaveTicket'),

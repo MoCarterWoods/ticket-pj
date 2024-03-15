@@ -470,7 +470,7 @@
           <div class="row g-2">
             <div class="col mb-0">
               <label for="inpStock" class="form-label">เบิกจาก Stock</label>
-              <input type="date" id="inpStock" class="form-control">
+              <input type="datetime-local" id="inpStock" class="form-control">
             </div>
             <div class="col mb-0">
               <label for="inpStockqty" class="form-label">จำนวน</label>
@@ -481,7 +481,7 @@
           <div class="row g-2">
             <div class="col mb-0">
               <label for="inpOrder" class="form-label">สั่งซื้อ / เรียกเข้า</label>
-              <input type="date" id="inpOrder" class="form-control">
+              <input type="datetime-local" id="inpOrder" class="form-control">
             </div>
             <div class="col mb-0">
               <label for="inpOrderqty" class="form-label">จำนวน</label>
@@ -492,7 +492,7 @@
           <div class="row g-2">
             <div class="col mb-0">
               <label for="inpReceived" class="form-label">ได้รับของ / เข้าซ่อม</label>
-              <input type="date" id="inpReceived" class="form-control">
+              <input type="datetime-local" id="inpReceived" class="form-control">
             </div>
             <div class="col mb-0">
               <label for="inpReceivedqty" class="form-label">จำนวน</label>
@@ -557,7 +557,7 @@
           <div class="row g-2">
             <div class="col mb-0">
               <label for="editInpStock" class="form-label">เบิกจาก Stock</label>
-              <input type="date" id="editInpStock" class="form-control">
+              <input type="datetime-local" id="editInpStock" class="form-control">
             </div>
             <div class="col mb-0">
               <label for="editInpStockqty" class="form-label">จำนวน</label>
@@ -567,7 +567,7 @@
           <div class="row g-2">
             <div class="col mb-0">
               <label for="editInpOrder" class="form-label">สั่งซื้อ / เรียกเข้า</label>
-              <input type="date" id="editInpOrder" class="form-control">
+              <input type="datetime-local" id="editInpOrder" class="form-control">
             </div>
             <div class="col mb-0">
               <label for="editInpOrderqty" class="form-label">จำนวน</label>
@@ -577,7 +577,7 @@
           <div class="row g-2">
             <div class="col mb-0">
               <label for="editInpReceived" class="form-label">ได้รับของ / เข้าซ่อม</label>
-              <input type="date" id="editInpReceived" class="form-control">
+              <input type="datetime-local" id="editInpReceived" class="form-control">
             </div>
             <div class="col mb-0">
               <label for="editInpReceivedqty" class="form-label">จำนวน</label>
@@ -674,7 +674,7 @@
                     </div>
                     <div class="mb-3 col-lg-6 col-xl-3">
                       <label class="form-label" for="inpSchedule-1">กำหนดการเสร็จ</label>
-                      <input type="date" id="inpSchedule-1" class="form-control" value="">
+                      <input type="datetime-local" id="inpSchedule-1" class="form-control" value="">
                     </div>
                     <div class="mb-3 col-lg-12 col-xl-3">
                       <button class="btn btn-label-danger mt-4" data-repeater-delete=""> <i class="bx bx-x me-1"></i> <span class="align-middle">Delete</span> </button>

@@ -50,8 +50,8 @@ function shDataTable() {
                   if (swaEmpCodes.length > 4) {
                       const remainingCount = swaEmpCodes.length - 4;
                       avatarHtml += `
-                          <li style="font-size: 1.5rem; padding-left: 15px;">
-                              <span>+${remainingCount}</span>
+                          <li style="font-size: 1rem; padding-left: 15px;">
+                              <span>+${remainingCount} more</span>
                           </li>
                       `;
                   }
@@ -169,48 +169,59 @@ function viewAllData() {
                   if (swaEmpCodes.length > 4) {
                       const remainingCount = swaEmpCodes.length - 4;
                       avatarHtml += `
-                          <li style="font-size: 1.5rem; padding-left: 15px;">
-                              <span>+${remainingCount}</span>
+                          <li style="font-size: 1rem; padding-left: 15px;">
+                              <span>+${remainingCount} more</span>
                           </li>
                       `;
                   }
               }
                 html += `
-                    <tr>
-                        <td class="text-center">${index + 1}</td>
-                        <td class="text-center">${item.ist_line_cd == '' ? `${item.ist_area_other}` : `${item.ist_line_cd}`}</td>
-                        <td class="text-center">${item.mts_name === null ? '-' : item.mts_name}</td>
-                        <td class="text-center">
-                            <div class="text-center">${item.mjt_name_thai === null ? '-' : item.mjt_name_thai}</div>
-                            <div class="text-center">${item.mjt_name_eng === null ? '-' : item.mjt_name_eng}</div>
-                        </td>
-                        <td class="text-center">
-                            <div class="text-center"><small class="emp_post text-truncate text-muted">${item.ist_request_by}</small></div>
-                            <div class="text-center">${item.ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
-                        </td>
-                        <td class="text-center">
-                            <div class="d-flex flex-wrap align-items-center">
-                                <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${index}">
-                                    ${avatarHtml} <!-- Insert avatar HTML here -->
-                                </ul>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge bg-label-${item.ist_status_flg == 1 ? 'warning' : item.ist_status_flg == 3 ? 'info' : item.ist_status_flg == 5 ? 'primary' : item.ist_status_flg == 7 ? 'success' : item.ist_status_flg == 8 ? 'danger' : 'Unknown'}">
-                                ${item.ist_status_flg == 1 ? 'In Progress' : item.ist_status_flg == 3 ? 'Wait Accept' : item.ist_status_flg == 5 ? 'Wait Edit' : item.ist_status_flg == 7 ? 'Wait Approval' : item.ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
-                            </span>
-                        </td>
-                        <td class="text-center">
-                        <button type="button" class="btnAccept btn rounded-pill btn-primary" ${item.ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnAccept">Accept</button>
-                            <div class="btn-group">
-                            <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle btn-edit-drop" data-id="${item.ist_id}" data-bs-toggle="dropdown" aria-expanded="true" ${item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
-                            <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);z-index: 10000;" data-popper-placement="bottom-start" id="ulEdit_${ist_Id}">
-                            <!-- Populate this ul with data from another API -->
+                <tr>
+                    <td class="text-center">${index + 1}</td>
+                    <td class="text-center">${item.ist_line_cd == '' ? `${item.ist_area_other}` : `${item.ist_line_cd}`}</td>
+                    <td class="text-center">${item.mts_name === null ? '-' : item.mts_name}</td>
+                    <td class="text-center">
+                        <div class="text-center">${item.mjt_name_thai === null ? '-' : item.mjt_name_thai}</div>
+                        <div class="text-center">${item.mjt_name_eng === null ? '-' : item.mjt_name_eng}</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="text-center"><small class="emp_post text-truncate text-muted">${item.ist_request_by}</small></div>
+                        <div class="text-center">${item.ist_type == 1 ? 'APPLICATION' : 'WEBSITE'}</div>
+                    </td>
+                    <td class="text-center">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <ul class="list-unstyled w-50 me-2 d-flex align-items-center avatar-group mb-0" id="avatarGroup_${index}">
+                                ${avatarHtml} <!-- Insert avatar HTML here -->
                             </ul>
-                            </div>
-                            <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${item.ist_status_flg == 3 || item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${item.ist_id}" value="${item.ist_status_flg}" >Cancel</button>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge bg-label-${item.ist_status_flg == 1 ? 'warning' : item.ist_status_flg == 3 ? 'info' : item.ist_status_flg == 5 ? 'primary' : item.ist_status_flg == 7 ? 'success' : item.ist_status_flg == 8 ? 'danger' : 'Unknown'}">
+                            ${item.ist_status_flg == 1 ? 'In Progress' : item.ist_status_flg == 3 ? 'Wait Accept' : item.ist_status_flg == 5 ? 'Wait Edit' : item.ist_status_flg == 7 ? 'Wait Approval' : item.ist_status_flg == 8 ? 'Approval Deny' : 'Unknown'}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btnAccept btn rounded-pill btn-primary" ${item.ist_status_flg == 3 ? '' : 'style="display: none;"'} data-ac-id="${item.ist_id}" value="${item.ist_status_flg}" id="btnAccept">Accept</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-label-danger btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" ${item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'}>Edit</button>
+                            <ul class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 40px, 0px);z-index: 10000;" data-popper-placement="bottom-start">
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actEquipment" data-bs-toggle="modal" data-bs-target="#mdlEditEquipment" data-id="${item.ist_id}">Equipment ${item.equipment_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.equipment_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actJobtype" data-bs-toggle="modal" data-bs-target="#mdlJobtype" data-id="${item.ist_id}">Job Type ${item.jopType_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.jopType_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actProblem" data-bs-toggle="modal" data-bs-target="#mdlProblemcon" data-id="${item.ist_id}">Problem Condition ${item.problem_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.problem_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actInspec" data-bs-toggle="modal" data-bs-target="#mdlInspec" data-id="${item.ist_id}">Inspection ${item.inspection_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.inspection_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li> 
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actTroubleshooting" data-bs-toggle="modal" data-bs-target="#mdlTrobles" data-id="${item.ist_id}">Troubleshooting ${item.troubleshooting_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.troubleshooting_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actRequiredParts" data-bs-toggle="modal" data-bs-target="#mdlRequiredParts" data-id="${item.ist_id}">Required Parts ${item.rqPart_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.rqPart_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAnalyze" data-bs-toggle="modal" data-bs-target="#mdlAnalyze" data-id="${item.ist_id}">Analyze Problem ${item.analyze_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.analyze_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actPrevention" data-bs-toggle="modal" data-bs-target="#mdlPrevention" data-id="${item.ist_id}">Prevention ${item.prevention_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.prevention_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered  d-flex justify-content-between align-items-center actDelivery" data-bs-toggle="modal" data-bs-target="#mdlDelivery" data-id="${item.ist_id}">Delivery ${item.delivery_status == 1 ? `<i class='bx bxs-error text-warning' ></i>` : item.delivery_status == 3 ? `<i class='bx bxs-check-circle text-success'></i>` : `<i class='bx bxs-error text-warning' ></i>`}</a></li>
+                                <li><a class="dropdown-item btn-pointered d-flex justify-content-between align-items-center actAddworker" data-bs-toggle="modal" data-bs-target="#mdlMngWorker" data-id="${item.ist_id}">Manage Worker <i class='bx bxs-user-plus text-warning' ></i></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item btn-pointered actSubmit" id="btnSubmit" data-flag="${item.equipment_status},${item.jopType_status},${item.problem_status},${item.inspection_status},${item.troubleshooting_status},${item.rqPart_status},${item.analyze_status},${item.prevention_status},${item.delivery_status}" data-bs-toggle="modal" data-bs-target="#mdlSubmit" data-id="${item.ist_id}">Submit</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btnCancle btn rounded-pill btn-secondary" data-bs-toggle="modal" data-bs-target="#mdlCancle" ${item.ist_status_flg == 3 || item.ist_status_flg == 5 || item.ist_status_flg == 7 || item.ist_status_flg == 8 ? '' : 'style="display: none;"'} data-cc-id="${item.ist_id}" value="${item.ist_status_flg}" >Cancel</button>
+                    </td>
+                </tr>
                 `;
 
             });
@@ -2509,10 +2520,10 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
           var col13 = row.insertCell(12);
 
 
-          col1.innerHTML = `<label class="form-label">Name</label><input class="form-select" value="${selToolingrq.value}" disabled>`;
+          col1.innerHTML = `<label class="form-label">Name</label><input class="form-control" value="${selToolingrq.value}" disabled>`;
           col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${addMakerrq.value}" disabled>`;
           col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${addModelrq.value}" disabled>`;
-          col4.innerHTML = `<label class="form-label">Type</label><input class="form-select" value="${selTyperq.value}" disabled>`;
+          col4.innerHTML = `<label class="form-label">Type</label><input class="form-control" value="${selTyperq.value}" disabled>`;
           col5.innerHTML = `<label class="form-label">Qty</label><input type="number" class="form-control" value="${inpQTY.value}" disabled>`;
           col6.innerHTML = `<input type="date" class="form-control" value="${inpStock.value}" id="tdinpStock">`;
           col7.innerHTML = `<input type="number" class="form-control" value="${inpStockqty.value}">`;
@@ -2590,7 +2601,7 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
         col1.innerHTML = `<label class="form-label">Name</label><input type="text" class="form-control" value="${editedselToolingrq}" disabled>`;
         col2.innerHTML = `<label class="form-label">Maker</label><input type="text" class="form-control" value="${editedaddMakerrq}" disabled>`;
         col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${editedaddModelrq}" disabled>`;
-        col4.innerHTML = `<label class="form-label">Type</label><input class="form-select" value="${editselTyperq.value}" disabled>`;
+        col4.innerHTML = `<label class="form-label">Type</label><input class="form-control" value="${editselTyperq.value}" disabled>`;
         col5.innerHTML = `<label class="form-label">Qty</label><input type="number" class="form-control" value="${editedInpQTY}" disabled>`;
         col6.innerHTML = `<input type="date" class="form-control" value="${editedInpStock}" style="display:none">`;
         col7.innerHTML = `<input type="number" class="form-control" value="${editedInpStockqty}" style="display:none">`;
@@ -2686,10 +2697,10 @@ var selToolingrq, addMakerrq, addModelrq, inpQTY, inpStock, inpStockqty, inpOrde
               var col13 = row.insertCell(12);
   
               // กำหนดค่าของแต่ละคอลัมน์ด้วยข้อมูลที่ได้รับจาก API
-              col1.innerHTML = '<label class="form-label">Name</label><input class="form-select" value="' + item.irp_name + '" disabled>';
+              col1.innerHTML = '<label class="form-label">Name</label><input class="form-control" value="' + item.irp_name + '" disabled>';
               col2.innerHTML = '<label class="form-label">Maker</label><input type="text" class="form-control" value="' + item.irp_maker + '" disabled>';
               col3.innerHTML = '<label class="form-label">Model</label><input type="text" class="form-control" value="' + item.irp_model + '" disabled>';
-              col4.innerHTML = '<label class="form-label">Type</label><input class="form-select" value="' + item.irp_type + '" disabled>';
+              col4.innerHTML = '<label class="form-label">Type</label><input class="form-control" value="' + item.irp_type + '" disabled>';
               col5.innerHTML = '<label class="form-label">Qty</label><input type="number" class="form-control" value="' + item.irp_order_qty + '" disabled>';
               col6.innerHTML = '<input type="date" class="form-control" value="' + item.irp_order_time + '">';
               col7.innerHTML = '<input type="number" class="form-control" value="' + item.irp_qty + '">';

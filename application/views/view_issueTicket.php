@@ -245,7 +245,7 @@
                     </div>
 
                     <!-- Problem Con -->
-                    <div id="navs-pills-top-problem" class="content show active">
+                    <div id="navs-pills-top-problem" class="content">
                         <div class="content-header mb-3">
                             <h6 class="mb-0">Problem Condition</h6>
                             <small>สภาพปัญหา / แผน PM / สภาพปัญหาก่อนการปรับปรุง / Project</small>
@@ -303,28 +303,23 @@
                                                         <div class="row">
                                                             <div class="col">
                                                             <label for="inpDate" class="form-label">เวลาเริ่มหยุดผลิต</label>
-                                                                <input type="date" id="inpDate" class="form-control" value="">
+                                                                <input type="datetime-local" id="inpDate" class="form-control" value="">
                                                             </div>
                                                         </div>
-                                                        <div class="row mt-3">
-                                                            <div class=" col">
-                                                                <label for="inpTimeStop" class="form-label">Time</label>
-                                                                <input type="time" id="inpTimeStop" class="form-control" value="">
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
                                                     <div class="col">
                                                         <div class="row">
                                                             <div class="col">
                                                             <label for="inpRequester" class="form-label">ผู้ร้องขอการบำรุงรักษา</label>
-                                                                <input type="date" id="inpRequester" class="form-control" value="">
+                                                                <input type="text" id="inpRequester" class="form-control" value="">
                                                             </div>
                                                         </div>
                                                         <div class="row mt-3">
                                                             <div class=" col">
                                                                 <label for="inpTimeRequester" class="form-label">Time</label>
-                                                                <input type="time" id="inpTimeRequester" class="form-control" value="">
+                                                                <input type="datetime-local" id="inpTimeRequester" class="form-control" value="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -333,15 +328,16 @@
                                                         <div class="row">
                                                             <div class="col">
                                                             <label for="inpApprove" class="form-label">อนุมัติการเข้าบำรุงรักษา</label>
-                                                                <input type="date" id="inpApprove" class="form-control" value="">
+                                                                <input type="text" id="inpApprove" class="form-control" value="">
                                                             </div>
                                                         </div>
                                                         <div class="row mt-3">
                                                             <div class=" col">
                                                                 <label for="inpTimeApprove" class="form-label">Time</label>
-                                                                <input type="time" id="inpTimeApprove" class="form-control" value="">
+                                                                <input type="datetime-local" id="inpTimeApprove" class="form-control" value="">
                                                             </div>
                                                         </div>
+                                                    
                                                     </div>
 
                                             </div>
@@ -667,7 +663,7 @@
                                         <div class="row g-2">
                                             <div class="col mb-0">
                                                 <label for="editInpStock" class="form-label">เบิกจาก Stock</label>
-                                                <input type="date" id="editInpStock" class="form-control">
+                                                <input type="datetime-local" id="editInpStock" class="form-control">
                                             </div>
                                             <div class="col mb-0">
                                                 <label for="editInpStockqty" class="form-label">จำนวน</label>
@@ -677,7 +673,7 @@
                                         <div class="row g-2">
                                             <div class="col mb-0">
                                                 <label for="editInpOrder" class="form-label">สั่งซื้อ / เรียกเข้า</label>
-                                                <input type="date" id="editInpOrder" class="form-control">
+                                                <input type="datetime-local" id="editInpOrder" class="form-control">
                                             </div>
                                             <div class="col mb-0">
                                                 <label for="editInpOrderqty" class="form-label">จำนวน</label>
@@ -687,7 +683,7 @@
                                         <div class="row g-2">
                                             <div class="col mb-0">
                                                 <label for="editInpReceived" class="form-label">ได้รับของ / เข้าซ่อม</label>
-                                                <input type="date" id="editInpReceived" class="form-control">
+                                                <input type="datetime-local" id="editInpReceived" class="form-control">
                                             </div>
                                             <div class="col mb-0">
                                                 <label for="editInpReceivedqty" class="form-label">จำนวน</label>
@@ -1010,11 +1006,11 @@
             col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${addModelrq.value}" disabled>`;
             col4.innerHTML = `<label class="form-label">Type</label><input class="form-select" value="${selTyperq.value}" disabled>`;
             col5.innerHTML = `<label class="form-label">Qty</label><input type="number" class="form-control" value="${inpQTY.value}" disabled>`;
-            col6.innerHTML = `<input type="date" class="form-control" value="${inpStock.value}" id="tdinpStock">`;
+            col6.innerHTML = `<input type="datetime-local" class="form-control" value="${inpStock.value}" id="tdinpStock">`;
             col7.innerHTML = `<input type="number" class="form-control" value="${inpStockqty.value}">`;
-            col8.innerHTML = `<input type="date" class="form-control" value="${inpOrder.value}">`;
+            col8.innerHTML = `<input type="datetime-local" class="form-control" value="${inpOrder.value}">`;
             col9.innerHTML = `<input type="number" class="form-control" value="${inpOrderqty.value}">`;
-            col10.innerHTML = `<input type="date" class="form-control" value="${inpReceived.value}">`;
+            col10.innerHTML = `<input type="datetime-local" class="form-control" value="${inpReceived.value}">`;
             col11.innerHTML = `<input type="number" class="form-control" value="${inpReceivedqty.value}">`;
             col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
               col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
@@ -1153,11 +1149,11 @@
         col3.innerHTML = `<label class="form-label">Model</label><input type="text" class="form-control" value="${editedaddModelrq}" disabled>`;
         col4.innerHTML = `<label class="form-label">Type</label><input class="form-select" value="${editselTyperq.value}" disabled>`;
         col5.innerHTML = `<label class="form-label">Qty</label><input type="number" class="form-control" value="${editedInpQTY}" disabled>`;
-        col6.innerHTML = `<input type="date" class="form-control" value="${editedInpStock}" style="display:none">`;
+        col6.innerHTML = `<input type="datetime-local" class="form-control" value="${editedInpStock}" style="display:none">`;
         col7.innerHTML = `<input type="number" class="form-control" value="${editedInpStockqty}" style="display:none">`;
-        col8.innerHTML = `<input type="date" class="form-control" value="${editedInpOrder}" style="display:none">`;
+        col8.innerHTML = `<input type="datetime-local" class="form-control" value="${editedInpOrder}" style="display:none">`;
         col9.innerHTML = `<input type="number" class="form-control" value="${editedInpOrderqty}" style="display:none">`;
-        col10.innerHTML = `<input type="date" class="form-control" value="${editedInpReceived}" style="display:none">`;
+        col10.innerHTML = `<input type="datetime-local" class="form-control" value="${editedInpReceived}" style="display:none">`;
         col11.innerHTML = `<input type="number" class="form-control" value="${editedInpReceivedqty}" style="display:none">`;
         col12.innerHTML = '<button class="btn btn-label-success mt-4" data-repeater-delete="" onclick="openEditModal(this)"></i><span class="align-middle"><i class="bx bx-edit-alt me-1" style="font-size: 25px;"></i></span></button>';
               col13.innerHTML = '<button class="btn btn-label-danger mt-4" data-repeater-delete="" onclick="deleted(this)"><span class="align-middle"><i class="bx bx-trash me-1" style="font-size: 25px;"></i></span></button>';
